@@ -9,17 +9,17 @@ import { FaFacebook } from 'react-icons/fa';
 const SignupButtons = () => {
 	return (
 		<div className={classes.buttons}>
-			<button onClick={() => signIn('google')}>
+			<button className={classes.google} onClick={() => signIn('google')}>
 				<FaGoogle />
-				<span>Google</span>
+				<span>Sign with Google</span>
 			</button>
-			<button onClick={() => signIn('github')}>
+			<button className={classes.github} onClick={() => signIn('github')}>
 				<FaGithub />
-				<span>Github</span>
+				<span>Sign with Github</span>
 			</button>
-			<button onClick={() => signIn('facebook')}>
+			<button className={classes.facebook} onClick={() => signIn('facebook')}>
 				<FaFacebook />
-				<span>Facebook</span>
+				<span>Sign with Facebook</span>
 			</button>
 		</div>
 	);
