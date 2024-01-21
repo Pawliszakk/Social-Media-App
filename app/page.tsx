@@ -1,31 +1,19 @@
-'use client';
-
 import SignInBtn from '@/components/Auth/SignInBtn';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
+import Component from '@/components/Component';
+import { cookies } from 'next/headers';
+import { permanentRedirect } from 'next/navigation';
 
 export default function Home() {
-	const { data: session, status } = useSession();
+	const token = cookies().get('token');
 
-	const userImage = session?.user?.image;
-
-	if (session) {
+	if (token) {
 		return (
 			<main>
-				<h1>Logged as {session?.user?.name}</h1>
-				<Image
-					src={`${userImage ? userImage : '/default.jpg'}`}
-					width={300}
-					height={300}
-				/>
+				<h1>Zaloguj sie</h1>
 				<SignInBtn />
 			</main>
 		);
+	} else {
+		permanentRedirect('/login');
 	}
-	return (
-		<main>
-			<h1>Social Media App</h1>
-			<SignInBtn />
-		</main>
-	);
 }

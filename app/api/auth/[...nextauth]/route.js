@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
-export const handler = NextAuth({
+export const authOptions = {
 	providers: [
 		GithubProvider({
 			clientId: process.env.GITHUB_ID,
@@ -13,6 +13,20 @@ export const handler = NextAuth({
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 		}),
 	],
-});
+	callbacks: {
+		async signIn({ user, account }) {
+			// await test();
+			console.log('zalogowany');
+			const isAllowedToSignIn = true;
+			if (isAllowedToSignIn) {
+				return true;
+			}
+		},
+
+		async jwt({ token }) {},
+	},
+};
+
+export const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
