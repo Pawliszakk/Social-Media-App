@@ -1,3 +1,3 @@
 export default function Home() {
-	return <h1>App</h1>;
+	return <h1>Social Media App</h1>;
 }
