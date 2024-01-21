@@ -1,15 +1,15 @@
-import SignInBtn from '@/components/Auth/SignInBtn';
-import { cookies } from 'next/headers';
+import LogoutBtn from '@/components/Auth/Buttons/Logout';
+import { getServerSession } from 'next-auth';
 import { permanentRedirect } from 'next/navigation';
 
-export default function Home() {
-	const token = cookies().get('token');
+export default async function Home() {
+	const session = await getServerSession();
 
-	if (token) {
+	if (session) {
 		return (
 			<main>
-				<h1>Zaloguj sie</h1>
-				<SignInBtn />
+				<h1>Masz dostęp do aplikacji</h1>
+				<LogoutBtn />
 			</main>
 		);
 	} else {
