@@ -1,0 +1,21 @@
+.buttons {
+	button {
+		min-height: 60px;
+		display: block;
+		width: 100%;
+		margin: 1rem 0;
+		cursor: pointer;
+		padding: 0.5em 1em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 2rem;
+		border-radius: 0.5rem;
+		span {
+			flex-grow: 1;
+		}
+        svg{
+            font-size: 3rem;
+        }
+	}
+}

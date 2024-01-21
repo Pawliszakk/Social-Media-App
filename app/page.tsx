@@ -1,5 +1,4 @@
 import SignInBtn from '@/components/Auth/SignInBtn';
-import Component from '@/components/Component';
 import { cookies } from 'next/headers';
 import { permanentRedirect } from 'next/navigation';
 
@@ -14,6 +13,6 @@ export default function Home() {
 			</main>
 		);
 	} else {
-		permanentRedirect('/login');
+		permanentRedirect('/auth/login');
 	}
 }
