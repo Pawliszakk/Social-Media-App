@@ -21,6 +21,7 @@ const SignupButtons = () => {
 				<FaFacebook />
 				<span>Sign with Facebook</span>
 			</button>
+			<hr />
 		</div>
 	);
 };

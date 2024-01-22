@@ -1,7 +1,6 @@
 .buttons {
 	button {
 		min-height: 60px;
-		display: block;
 		width: 100%;
 		margin: 1.5rem 0;
 		cursor: pointer;
@@ -38,6 +37,22 @@
 		color: #fff;
 		&:hover {
 			background-color: #035ad3;
+		}
+	}
+	hr {
+		position: relative;
+		margin: 3rem auto;
+		border: none;
+		border-top: 1px solid rgba(0, 0, 0, 0.2);
+		overflow: visible;
+		&::before {
+			position: relative;
+			content: 'or';
+			top: -0.7rem;
+			padding: 0 0.7em;
+			font-size: 1.5rem;
+			background-color: #fff;
+			color: rgba(0, 0, 0, 0.4);
 		}
 	}
 }
