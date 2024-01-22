@@ -4,7 +4,9 @@ import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { isUserInDatabase } from '@/lib/actions/login/isUserInDatabase';
-import { createUser } from '@/lib/actions/login/createUser';
+import { createUserByProvider } from '@/lib/actions/login/createUserByProvider';
+import { createUserByCredentials } from '@/lib/actions/login/createUserByCredentials';
+import { NULL } from 'sass';
 
 export const authOptions = {
 	providers: [
@@ -21,47 +23,47 @@ export const authOptions = {
 			clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
 		}),
 		CredentialsProvider({
-			name: 'Credentials',
-			credentials: {
-				email: {
-					label: 'E-mail',
-					type: 'email',
-					placeholder: 'Enter your email address',
-					required: true,
-				},
-				password: {
-					label: 'Password',
-					type: 'password',
-					placeholder: 'Enter your password...',
-					required: true,
-				},
-			},
+			id: 'loginCredentials',
+			name: 'login Credentials',
 			async authorize(credentials, req) {
 				const { email, password } = credentials;
-				console.log(`email: ${email} password: ${password}     (authorize)`);
-				return false;
+
+				console.log('Login');
+
+				const user = { email, password };
+
+				return true;
+			},
+		}),
+		CredentialsProvider({
+			id: 'signupCredentials',
+			name: 'SecondCredentials',
+			async authorize(credentials, req) {
+				const { name, email, password } = credentials;
+
+				console.log('signup');
+
+				const user = { name, email, password };
+
+				return user;
 			},
 		}),
 	],
 	callbacks: {
 		async signIn({ user, account }) {
+			// console.log(account);
+			if (user && account.type === 'credentials') {
+				return true;
+			}
 			const isUser = await isUserInDatabase(user.email);
-			
 			let isCreatedUser;
 			if (!isUser) {
-				isCreatedUser = await createUser(user, account.provider);
+				isCreatedUser = await createUserByProvider(user, account.provider);
 			}
 
-			if (isUser || isCreatedUser) {
-				const isAllowedToSignIn = true;
-				if (isAllowedToSignIn) {
-					return true;
-				}
+			if ((isUser && isUser.provider === account.provider) || isCreatedUser) {
+				return true;
 			}
-		},
-
-		async jwt({ token }) {
-			return token;
 		},
 	},
 };

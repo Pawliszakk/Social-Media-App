@@ -1,11 +1,11 @@
 import { getDate } from '@/lib/utils/getDate';
 import { User } from '../Models/user';
 
-export async function createUser(
-	user: { name: string; email: string; image: string; password?: string },
+export async function createUserByProvider(
+	user: { name: string; email: string; image: string },
 	provider: string
 ) {
-	const { name, email, image, password } = user;
+	const { name, email, image } = user;
 
 	// DODANIE WALIDACJI HASŁA
 
@@ -15,7 +15,6 @@ export async function createUser(
 		image,
 		date: getDate(),
 		provider,
-		...(password && { password }),
 	});
 
 	try {

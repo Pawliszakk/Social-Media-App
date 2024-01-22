@@ -13,6 +13,7 @@ export async function isUserInDatabase(email: string) {
 	if (!user || user.length === 0) {
 		return false;
 	}
-	
-	return true;
+	const provider = user[0].provider;
+
+	return { provider };
 }

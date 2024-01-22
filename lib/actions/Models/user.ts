@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const UserSchema = new mongoose.Schema({
 	email: { type: String, required: true },
 	name: { type: String, required: true },
-	image: { type: String, required: true },
+	image: { type: String, required: false, default: '/assets/defaultUser.jpg' },
 	//Add default user image
 	sex: { type: String, required: true, default: 'other' },
 	private: { type: Boolean, required: true, default: false },

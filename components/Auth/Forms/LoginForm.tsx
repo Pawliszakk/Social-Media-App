@@ -14,7 +14,7 @@ const LoginForm = () => {
 		},
 		validationSchema: LoginSchema,
 		onSubmit: (values) => {
-			signIn('credentials', {
+			signIn('loginCredentials', {
 				...values,
 			});
 		},

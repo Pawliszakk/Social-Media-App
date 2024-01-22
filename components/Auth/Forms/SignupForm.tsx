@@ -3,17 +3,18 @@ import { SignupSchema } from '@/lib/validation/validation';
 import Input from './Input';
 import { useFormik } from 'formik';
 import SubmitButton from '../Buttons/SubmitButton';
+import { signIn } from 'next-auth/react';
 
 const SignupForm = () => {
 	const formik = useFormik({
 		initialValues: {
-			name: '',
-			email: '',
-			password: '',
+			name: 'Oskaroo',
+			email: 'test@example.com',
+			password: 'Examplepassword1!',
 		},
 		validationSchema: SignupSchema,
 		onSubmit: (values) => {
-			console.log(values);
+			signIn('signupCredentials', { ...values });
 		},
 	});
 
