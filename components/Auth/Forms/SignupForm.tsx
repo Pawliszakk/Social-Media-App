@@ -2,6 +2,7 @@
 import { SignupSchema } from '@/lib/validation/validation';
 import Input from './Input';
 import { useFormik } from 'formik';
+import SubmitButton from '../Buttons/SubmitButton';
 
 const SignupForm = () => {
 	const formik = useFormik({
@@ -47,7 +48,7 @@ const SignupForm = () => {
 				touched={touched.password}
 				field={getFieldProps('password')}
 			/>
-			<button type="submit">Signup with credentials</button>
+			<SubmitButton>Signup with credentials</SubmitButton>
 		</form>
 	);
 };

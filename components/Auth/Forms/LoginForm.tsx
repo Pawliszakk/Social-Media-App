@@ -3,6 +3,7 @@
 import { useFormik } from 'formik';
 import { LoginSchema } from '@/lib/validation/validation';
 import Input from './Input';
+import SubmitButton from '../Buttons/SubmitButton';
 
 const LoginForm = () => {
 	const formik = useFormik({
@@ -38,7 +39,7 @@ const LoginForm = () => {
 				touched={touched.password}
 				field={getFieldProps('password')}
 			/>
-			<button type="submit">Login with credentials</button>
+			<SubmitButton>Login with credentials</SubmitButton>
 		</form>
 	);
 };
