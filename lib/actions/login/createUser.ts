@@ -13,10 +13,7 @@ export async function createUser(
 		email,
 		name,
 		image,
-		sex: 'other',
-		private: false,
 		date: getDate(),
-		theme: 'light',
 		provider,
 		...(password && { password }),
 	});
@@ -27,6 +24,5 @@ export async function createUser(
 	} catch (err) {
 		throw new Error('Failed to create a user');
 	}
-
 	return false;
 }
