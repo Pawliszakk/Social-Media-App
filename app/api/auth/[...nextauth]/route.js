@@ -26,7 +26,10 @@ export const authOptions = {
 			async authorize(credentials, req) {
 				const { email, password } = credentials;
 
-				//LOGIC TO SIGNUP USER WITH CREDENTIALS
+				//LOGIC TO LOGIN USER WITH CREDENTIALS
+				//VALIDATE DATA INPUTS
+				//CHECK IF USER IS IN DB WITH THAT EMAIL, IF PROVIDER IS CREDENTIALS
+				//CHECK PASSWORD, IF PASSWORD IS VALID THEN RETURN USER
 
 				return false;
 			},
@@ -38,7 +41,10 @@ export const authOptions = {
 				const { name, email, password } = credentials;
 
 				//LOGIC TO SIGNUP USER WITH CREDENTIALS
-
+				//CHECK IF USER IS IN DB, IF IS, CHECK WITH WHAT PROVIDER
+				//VALIDATE DATA INPUTS
+				//HASH PASSWORD
+				//SAVE USER AND RETURN USER
 				return false;
 			},
 		}),
