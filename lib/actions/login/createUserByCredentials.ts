@@ -1,5 +1,5 @@
-import { getDate } from '@/lib/utils/getDate';
 import { User } from '../Models/user';
+import { getDate } from '../utils/getDate';
 var bcrypt = require('bcryptjs');
 
 export async function createUserByCredentials(

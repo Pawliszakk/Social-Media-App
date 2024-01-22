@@ -3,10 +3,8 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { isUserInDatabase } from '@/lib/actions/login/isUserInDatabase';
 import { createUserByProvider } from '@/lib/actions/login/createUserByProvider';
-import { createUserByCredentials } from '@/lib/actions/login/createUserByCredentials';
-import { NULL } from 'sass';
+import { isUserInDatabase } from '@/lib/actions/utils/isUserInDatabase';
 
 export const authOptions = {
 	providers: [
@@ -51,16 +49,16 @@ export const authOptions = {
 				return true;
 			}
 			const user = await isUserInDatabase(userData.email);
+			let isUserCreated = false;
+			if (!user) {
+				isUserCreated = await createUserByProvider(userData, account.provider);
+			}
 
-			if (user.provider !== account.provider) {
+			if (user && user.provider !== account.provider) {
 				console.log('zly provider');
 				//HANDLE BAD CHOOSED PROVIDER FOR LOGGING IN FOR THAT ACCOUNT
 			}
 
-			let isUserCreated;
-			if (!user) {
-				isUserCreated = await createUserByProvider(user, account.provider);
-			}
 			if ((user && user.provider === account.provider) || isUserCreated) {
 				return true;
 			}
