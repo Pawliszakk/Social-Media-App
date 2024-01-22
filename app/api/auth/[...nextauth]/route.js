@@ -24,44 +24,44 @@ export const authOptions = {
 		}),
 		CredentialsProvider({
 			id: 'loginCredentials',
-			name: 'login Credentials',
+			name: 'login credentials',
 			async authorize(credentials, req) {
 				const { email, password } = credentials;
 
-				console.log('Login');
+				//LOGIC TO SIGNUP USER WITH CREDENTIALS
 
-				const user = { email, password };
-
-				return true;
+				return false;
 			},
 		}),
 		CredentialsProvider({
 			id: 'signupCredentials',
-			name: 'SecondCredentials',
+			name: 'signup credentials',
 			async authorize(credentials, req) {
 				const { name, email, password } = credentials;
 
-				console.log('signup');
+				//LOGIC TO SIGNUP USER WITH CREDENTIALS
 
-				const user = { name, email, password };
-
-				return user;
+				return false;
 			},
 		}),
 	],
 	callbacks: {
-		async signIn({ user, account }) {
-			// console.log(account);
-			if (user && account.type === 'credentials') {
+		async signIn({ user: userData, account }) {
+			if (userData && account.type === 'credentials') {
 				return true;
 			}
-			const isUser = await isUserInDatabase(user.email);
-			let isCreatedUser;
-			if (!isUser) {
-				isCreatedUser = await createUserByProvider(user, account.provider);
+			const user = await isUserInDatabase(userData.email);
+
+			if (user.provider !== account.provider) {
+				console.log('zly provider');
+				//HANDLE BAD CHOOSED PROVIDER FOR LOGGING IN FOR THAT ACCOUNT
 			}
 
-			if ((isUser && isUser.provider === account.provider) || isCreatedUser) {
+			let isUserCreated;
+			if (!user) {
+				isUserCreated = await createUserByProvider(user, account.provider);
+			}
+			if ((user && user.provider === account.provider) || isUserCreated) {
 				return true;
 			}
 		},
