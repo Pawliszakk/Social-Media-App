@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { LoginSchema } from '@/lib/validation/validation';
 import Input from './Input';
 import SubmitButton from '../Buttons/SubmitButton';
+import { signIn } from 'next-auth/react';
 
 const LoginForm = () => {
 	const formik = useFormik({
@@ -13,7 +14,9 @@ const LoginForm = () => {
 		},
 		validationSchema: LoginSchema,
 		onSubmit: (values) => {
-			console.log(values);
+			signIn('credentials', {
+				...values,
+			});
 		},
 	});
 

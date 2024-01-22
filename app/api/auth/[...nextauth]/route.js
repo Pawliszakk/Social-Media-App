@@ -3,6 +3,8 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { isUserInDatabase } from '@/lib/actions/login/isUserInDatabase';
+import { createUser } from '@/lib/actions/login/createUser';
 
 export const authOptions = {
 	providers: [
@@ -36,17 +38,25 @@ export const authOptions = {
 			},
 			async authorize(credentials, req) {
 				const { email, password } = credentials;
-				console.log(email);
-				console.log(password);
+				console.log(`email: ${email} password: ${password}     (authorize)`);
+				return false;
 			},
 		}),
 	],
 	callbacks: {
 		async signIn({ user, account }) {
-			// await test();
-			const isAllowedToSignIn = true;
-			if (isAllowedToSignIn) {
-				return true;
+			const isUser = await isUserInDatabase(user.email);
+			
+			let isCreatedUser;
+			if (!isUser) {
+				isCreatedUser = await createUser(user, account.provider);
+			}
+
+			if (isUser || isCreatedUser) {
+				const isAllowedToSignIn = true;
+				if (isAllowedToSignIn) {
+					return true;
+				}
 			}
 		},
 

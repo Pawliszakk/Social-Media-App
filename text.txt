@@ -1,0 +1,36 @@
+//GOOGLE 
+
+{
+  id: '117724849441961331372',
+  name: 'Pawliszakk',
+  email: 'oskar.pawliszak1@o2.pl',
+  image: 'https://lh3.googleusercontent.com/a/ACg8ocIy2w4eUAqTTnATuOO2dMJd0MUVRoeKauDl17Wy8bG9Wh4=s96-c'
+}
+{
+  provider: 'google',
+  type: 'oauth',
+  providerAccountId: '117724849441961331372',
+  access_token: 'ya29.a0AfB_byCDkSc0dtYvQM_vWk2kWgsOGGKyEfMBzY3VpfCqnG39nA3FcgxwnPlfnCw1SNVUZAieTLPzlUmtRIdQk_VhiSkx8thLCD6p2lR2H7ejMauVVtxN39U7sXX3QIHs34Q4R-Q_BV9DFDragRV9e9dZytRgh0e03xUaCgYKAaoSARMSFQHGX2MiJxCd9JIcLPH4Z0jiYC3HpA0170',
+  expires_at: 1705953551,
+  scope: 'https://www.googleapis.com/auth/userinfo.profile openid https://www.googleapis.com/auth/userinfo.email',
+  token_type: 'Bearer',
+  id_token: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4YTYzYmM0NzY3Zjg1NTBhNTMyZGM2MzBjZjdlYjQ5ZmYzOTdlN2MiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3Mzc0OTc5NTA1MjItZWhwMmExZjhmMDJic2J2MGMwcGFwb3BpcDRucWpsZmIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI3Mzc0OTc5NTA1MjItZWhwMmExZjhmMDJic2J2MGMwcGFwb3BpcDRucWpsZmIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTc3MjQ4NDk0NDE5NjEzMzEzNzIiLCJlbWFpbCI6Im9za2FyLnBhd2xpc3phazFAbzIucGwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6Im96djVfWW84emk1anU0Q1p2Q1NIREEiLCJuYW1lIjoiUGF3bGlzemFrayIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NJeTJ3NGVVQXFUVG5BVHVPTzJkTUpkME1VVlJvZUthdURsMTdXeThiRzlXaDQ9czk2LWMiLCJnaXZlbl9uYW1lIjoiUGF3bGlzemFrayIsImxvY2FsZSI6InBsIiwiaWF0IjoxNzA1OTQ5OTUwLCJleHAiOjE3MDU5NTM1NTB9.ijbCGTUSEsNuOxpk1n7w2vrK8bTXJpgh7_wlA6bdmxPim6LlYGzaWTK4B4UO0KdwhU4cEsPxj7lx2rLeLbt-a1khOXdEcAojlp2DVPklj0uOzQTFt8C6lCxVR-QGPtHHPsh9NzapZ3UI02mQ5oxQedh4T3JARDtq7U8v4oqMpk-y1M5C4PR_13uuYPUAUfQKbk3lLtMWsdfxIFOdYUnybvgpHgTQSaUWjyGagCqoqi-2wJa5MfjFuLtMfdHLcW3WBsZjWX30Zyd7WcXZMcG6x_yKelo2NR26ACVL_cX3asy7qjoDzTwAMmIxJSd6kNaZjV2XZJG_RQBgk97HJf55XA'
+}
+
+//GITHUB
+{
+  id: '118575646',
+  name: 'PawliszakDev',
+  email: 'oskar.pawliszak1@o2.pl',
+  image: 'https://avatars.githubusercontent.com/u/118575646?v=4'
+}
+{
+  provider: 'github',
+  type: 'oauth',
+  providerAccountId: '118575646',
+  access_token: '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',
+  token_type: 'bearer',
+  scope: 'read:user,user:email'
+}
+
+
