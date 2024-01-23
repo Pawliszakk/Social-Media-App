@@ -1,7 +1,7 @@
 import SignupButtons from '@/components/Auth/Buttons/SignupButtons';
 import FormCard from '@/components/Auth/Forms/FormCard';
 import LoginForm from '@/components/Auth/Forms/LoginForm';
-import ErrorMessage from '@/components/Auth/Forms/errorMessage';
+import ErrorMessage from '@/components/Auth/Forms/ErrorMessage';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import { permanentRedirect } from 'next/navigation';

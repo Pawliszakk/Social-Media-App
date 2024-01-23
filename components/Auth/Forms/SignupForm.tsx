@@ -4,8 +4,10 @@ import Input from './Input';
 import { useFormik } from 'formik';
 import SubmitButton from '../Buttons/SubmitButton';
 import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 
 const SignupForm = () => {
+	const [isLoading, setIsLoading] = useState(false);
 	const formik = useFormik({
 		initialValues: {
 			name: 'Oskaroo',
@@ -14,6 +16,7 @@ const SignupForm = () => {
 		},
 		validationSchema: SignupSchema,
 		onSubmit: (values) => {
+			setIsLoading(true);
 			signIn('signupCredentials', { ...values });
 		},
 	});
@@ -49,7 +52,7 @@ const SignupForm = () => {
 				touched={touched.password}
 				field={getFieldProps('password')}
 			/>
-			<SubmitButton>Signup with credentials</SubmitButton>
+			<SubmitButton loading={isLoading}>Signup with credentials</SubmitButton>
 		</form>
 	);
 };

@@ -5,8 +5,11 @@ import { LoginSchema } from '@/lib/validation/validation';
 import Input from './Input';
 import SubmitButton from '../Buttons/SubmitButton';
 import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 
 const LoginForm = () => {
+	const [isLoading, setIsLoading] = useState(false);
+
 	const formik = useFormik({
 		initialValues: {
 			email: 'test@example.com',
@@ -14,6 +17,7 @@ const LoginForm = () => {
 		},
 		validationSchema: LoginSchema,
 		onSubmit: (values) => {
+			setIsLoading(true);
 			signIn('loginCredentials', {
 				...values,
 			});
@@ -42,7 +46,7 @@ const LoginForm = () => {
 				touched={touched.password}
 				field={getFieldProps('password')}
 			/>
-			<SubmitButton>Login with credentials</SubmitButton>
+			<SubmitButton loading={isLoading}>Login with credentials</SubmitButton>
 		</form>
 	);
 };

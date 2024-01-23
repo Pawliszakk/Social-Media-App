@@ -13,7 +13,12 @@
 	border-radius: 0.5rem;
 	transition: background-color 0.3s;
 	border-color: rgba(0, 0, 0, 0.2);
+	overflow: hidden;
 	&:hover {
 		background-color: #f5dede;
+	}
+	&:disabled {
+		background-color: #8a8a8a;
+		cursor: not-allowed;
 	}
 }
