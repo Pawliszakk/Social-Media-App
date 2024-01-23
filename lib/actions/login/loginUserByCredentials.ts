@@ -1,32 +1,22 @@
-import { User } from '../Models/user';
+import { connectToDatabase } from '../utils/connectToDatabase';
+import { isUserInDatabase } from '../utils/isUserInDatabase';
+import { validateInputs } from '../utils/validateInputs';
 var bcrypt = require('bcryptjs');
 
 export async function loginUserByCredentials(email: string, password: string) {
-	const isEmailValid = email.match(
-		/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-	);
-
-	const passwordIsValid =
-		password.trim().length >= 8 && password.trim().length <= 20;
-
-	if (!isEmailValid || !passwordIsValid) {
+	const isInputsValid = validateInputs(email, password);
+	if (!isInputsValid) {
 		return false;
 	}
 
-	let user;
-	try {
-		user = await User.findOne({ email });
-	} catch (e) {
-		console.log(e);
-	}
+	await connectToDatabase();
 
-	if (!user || user.length === 0) {
+	const user = await isUserInDatabase(email);
+
+	if (!user || user.length === 0 || user.provider !== 'credentials') {
 		return false;
 	}
 
-	if (user.provider !== 'credentials') {
-		return false;
-	}
 	let isPasswordCorrect = false;
 	try {
 		isPasswordCorrect = await bcrypt.compare(password, user.password);
@@ -34,5 +24,7 @@ export async function loginUserByCredentials(email: string, password: string) {
 		console.log(e);
 	}
 
-	return user;
+	if (isPasswordCorrect) {
+		return user;
+	}
 }

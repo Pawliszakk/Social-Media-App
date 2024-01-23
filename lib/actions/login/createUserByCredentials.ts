@@ -1,5 +1,8 @@
 import { User } from '../Models/user';
+import { connectToDatabase } from '../utils/connectToDatabase';
 import { getDate } from '../utils/getDate';
+import { isUserInDatabase } from '../utils/isUserInDatabase';
+import { validateInputs } from '../utils/validateInputs';
 var bcrypt = require('bcryptjs');
 
 export async function createUserByCredentials(
@@ -7,29 +10,17 @@ export async function createUserByCredentials(
 	email: string,
 	password: string
 ) {
-	const nameIsValid = name.trim().length >= 5 && name.trim().length <= 20;
-	const emailIsValid = email.match(
-		/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-	);
-	const passwordIsValid =
-		password.trim().length >= 8 &&
-		password.trim().length <= 20 &&
-		/[A-Z]/.test(password) &&
-		/[0-9]/.test(password) &&
-		/[^A-Za-z0-9]/.test(password);
+	const isInputsValid = validateInputs(email, password, name);
 
-	if (!nameIsValid || !emailIsValid || !passwordIsValid) {
+	if (!isInputsValid) {
 		return false;
 	}
 
-	let isUserInDatabase;
-	try {
-		isUserInDatabase = await User.findOne({ email });
-	} catch (e) {
-		console.log(e);
-	}
+	await connectToDatabase();
 
-	if (isUserInDatabase) {
+	const user = await isUserInDatabase(email);
+
+	if (user) {
 		return false;
 	}
 
@@ -47,12 +38,12 @@ export async function createUserByCredentials(
 		password: hashedPassword,
 	});
 
-	let user;
+	let createdUser;
 	try {
-		user = await newUser.save();
+		createdUser = await newUser.save();
 	} catch (err) {
 		console.log(err);
 	}
 
-	return user;
+	return createdUser;
 }

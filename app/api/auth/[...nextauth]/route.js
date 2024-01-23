@@ -25,32 +25,16 @@ export const authOptions = {
 		CredentialsProvider({
 			id: 'loginCredentials',
 			name: 'login credentials',
-			async authorize(credentials, req) {
-				const { email, password } = credentials;
-
+			async authorize({ email, password }) {
 				const user = await loginUserByCredentials(email, password);
-
-				//LOGIC TO LOGIN USER WITH CREDENTIALS
-				//VALIDATE DATA INPUTS
-				//CHECK IF USER IS IN DB WITH THAT EMAIL, IF PROVIDER IS CREDENTIALS
-				//CHECK PASSWORD, IF PASSWORD IS VALID THEN RETURN USER
 				return user;
 			},
 		}),
 		CredentialsProvider({
 			id: 'signupCredentials',
 			name: 'signup credentials',
-			async authorize(credentials, req) {
-				const { name, email, password } = credentials;
-
+			async authorize({ name, email, password }) {
 				const user = await createUserByCredentials(name, email, password);
-
-				//LOGIC TO SIGNUP USER WITH CREDENTIALS
-				//CHECK IF USER IS IN DB, IF IS, CHECK WITH WHAT PROVIDER
-				//VALIDATE DATA INPUTS
-				//HASH PASSWORD
-				//SAVE USER AND RETURN USER
-
 				return user;
 			},
 		}),
