@@ -24,7 +24,7 @@ export async function createUserByCredentials(
 
 	if (user) {
 		throw new Error(
-			'User is already created for that account, please try logging in with another provider or credentials'
+			'User is already created for that account, please try logging in with another authentication provider or credentials'
 		);
 	}
 
