@@ -13,15 +13,26 @@ export async function loginUserByCredentials(email: string, password: string) {
 
 	const user = await isUserInDatabase(email);
 
-	if (!user || user.length === 0 || user.provider !== 'credentials') {
-		return false;
+	if (!user) {
+		throw new Error(
+			'No user was found for that email address, please create an account'
+		);
+	}
+
+	if (user.provider !== 'credentials') {
+		throw new Error('Try to login with another authentication provider');
 	}
 
 	let isPasswordCorrect = false;
 	try {
 		isPasswordCorrect = await bcrypt.compare(password, user.password);
 	} catch (e) {
-		console.log(e);
+		throw new Error('Something went wrong, please try again later');
+	}
+	if (!isPasswordCorrect) {
+		throw new Error(
+			'Password is incorrect, please try again with correct credentials'
+		);
 	}
 
 	if (isPasswordCorrect) {

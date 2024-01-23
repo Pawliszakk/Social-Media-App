@@ -8,7 +8,7 @@ export async function isUserInDatabase(email: string) {
 	try {
 		user = await User.findOne({ email });
 	} catch (e) {
-		throw new Error('Cannot log you in, please try again later');
+		throw new Error('Something went wrong, please try again later');
 	}
 	if (!user || user.length === 0) {
 		return false;

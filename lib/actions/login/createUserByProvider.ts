@@ -15,11 +15,13 @@ export async function createUserByProvider(
 		provider,
 	});
 
+	let createdUser;
 	try {
-		await newUser.save();
-		return true;
-	} catch (err) {
-		console.log(err);
+		createdUser = await newUser.save();
+	} catch (e) {
+		throw new Error('Failed to create user, please try again later');
 	}
-	return false;
+	if (createdUser) {
+		return createdUser;
+	}
 }

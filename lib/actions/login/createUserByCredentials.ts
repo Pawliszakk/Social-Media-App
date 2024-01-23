@@ -13,7 +13,9 @@ export async function createUserByCredentials(
 	const isInputsValid = validateInputs(email, password, name);
 
 	if (!isInputsValid) {
-		return false;
+		throw new Error(
+			'Invalid input data, please try again with correct credentials'
+		);
 	}
 
 	await connectToDatabase();
@@ -21,15 +23,18 @@ export async function createUserByCredentials(
 	const user = await isUserInDatabase(email);
 
 	if (user) {
-		return false;
+		throw new Error(
+			'User is already created for that account, please try logging in with another provider or credentials'
+		);
 	}
 
 	let hashedPassword;
 	try {
 		hashedPassword = await bcrypt.hash(password, 12);
 	} catch (e) {
-		console.log(e);
+		throw new Error('Failed to create user, please try again later');
 	}
+
 	const newUser = new User({
 		email,
 		name,
@@ -41,8 +46,8 @@ export async function createUserByCredentials(
 	let createdUser;
 	try {
 		createdUser = await newUser.save();
-	} catch (err) {
-		console.log(err);
+	} catch (e) {
+		throw new Error('Failed to create user, please try again later');
 	}
 
 	return createdUser;

@@ -26,16 +26,14 @@ export const authOptions = {
 			id: 'loginCredentials',
 			name: 'login credentials',
 			async authorize({ email, password }) {
-				const user = await loginUserByCredentials(email, password);
-				return user;
+				return await loginUserByCredentials(email, password);
 			},
 		}),
 		CredentialsProvider({
 			id: 'signupCredentials',
 			name: 'signup credentials',
 			async authorize({ name, email, password }) {
-				const user = await createUserByCredentials(name, email, password);
-				return user;
+				return await createUserByCredentials(name, email, password);
 			},
 		}),
 	],
@@ -45,20 +43,25 @@ export const authOptions = {
 				return true;
 			}
 			const user = await isUserInDatabase(userData.email);
+
 			let isUserCreated = false;
 			if (!user) {
 				isUserCreated = await createUserByProvider(userData, account.provider);
 			}
 
 			if (user && user.provider !== account.provider) {
-				console.log('zly provider');
-				//HANDLE BAD CHOOSED PROVIDER FOR LOGGING IN FOR THAT ACCOUNT
+				throw new Error('Invalid provider for this account');
 			}
 
 			if ((user && user.provider === account.provider) || isUserCreated) {
 				return true;
 			}
 		},
+	},
+	pages: {
+		signIn: '/auth/login',
+		signOut: '/',
+		error: '/auth/login/',
 	},
 };
 
