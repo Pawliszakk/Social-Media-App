@@ -1,19 +1,24 @@
 import LogoutBtn from '@/components/Auth/Buttons/Logout';
 import { getServerSession } from 'next-auth';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import { permanentRedirect } from 'next/navigation';
 
 export default async function Home() {
 	const session = await getServerSession();
 
-	const user = cookies().get('user');
-
-	console.log(user);
-
 	if (session) {
+		const name = cookies().get('name');
+		const image = cookies().get('image');
 		return (
 			<main>
-				<h1>Masz dostęp do aplikacji</h1>
+				<h1>Cześć {`${name!.value}`}, zalogowano cię pomyślnie</h1>
+				<Image
+					src={`${image!.value}`}
+					width={100}
+					height={100}
+					alt={`User image of ${name!.value}`}
+				/>
 				<LogoutBtn />
 			</main>
 		);

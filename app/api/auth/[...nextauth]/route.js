@@ -3,11 +3,10 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { createUserByProvider } from '@/lib/actions/login/createUserByProvider';
-import { isUserInDatabase } from '@/lib/actions/utils/isUserInDatabase';
 import { loginUserByCredentials } from '@/lib/actions/login/loginUserByCredentials';
 import { createUserByCredentials } from '@/lib/actions/login/createUserByCredentials';
-import { cookies } from 'next/headers';
+import { deleteLoginCookies } from '@/lib/actions/cookiesHandler';
+import { signUserByProvider } from '@/lib/actions/login/signUserByProvider';
 
 export const authOptions = {
 	providers: [
@@ -25,47 +24,35 @@ export const authOptions = {
 		}),
 		CredentialsProvider({
 			id: 'loginCredentials',
-			name: 'login credentials',
 			async authorize({ email, password }) {
 				return await loginUserByCredentials(email, password);
 			},
 		}),
 		CredentialsProvider({
 			id: 'signupCredentials',
-			name: 'signup credentials',
 			async authorize({ name, email, password }) {
 				return await createUserByCredentials(name, email, password);
 			},
 		}),
 	],
 	callbacks: {
-		async signIn({ user: userData, account }) {
-			if (userData && account.type === 'credentials') {
+		async signIn({ user, account }) {
+			if (user && account.type === 'credentials') {
 				return true;
 			}
-			const user = await isUserInDatabase(userData.email);
 
-			let isUserCreated = false;
-			if (!user) {
-				isUserCreated = await createUserByProvider(userData, account.provider);
-			}
-
-			if (user && user.provider !== account.provider) {
-				throw new Error('Invalid provider for this account');
-			}
-
-			if ((user && user.provider === account.provider) || isUserCreated) {
-				return true;
-			}
+			return await signUserByProvider(user, account.provider);
 		},
-		async signOut() {
-			console.log('SIGNOUT');
-			cookies().delete('user');
+		async redirect({ url }) {
+			if (url === process.env.NEXTAUTH_URL) {
+				deleteLoginCookies();
+			}
+			return '/auth/login';
 		},
 	},
 	pages: {
 		signIn: '/auth/login',
-		signOut: '/',
+		signOut: '/auth/login',
 		error: '/auth/login/',
 	},
 };

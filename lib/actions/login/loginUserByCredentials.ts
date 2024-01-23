@@ -1,4 +1,6 @@
-import { cookies } from 'next/headers';
+'use server';
+
+import { setLoginCookies } from '../cookiesHandler';
 import { connectToDatabase } from '../utils/connectToDatabase';
 import { isUserInDatabase } from '../utils/isUserInDatabase';
 import { validateInputs } from '../utils/validateInputs';
@@ -36,23 +38,8 @@ export async function loginUserByCredentials(email: string, password: string) {
 		);
 	}
 
-	// const userData: any = {
-	// 	userId: user.id,
-	// 	email: user.email,
-	// 	name: user.name,
-	// 	image: user.image,
-	// 	sex: user.sex,
-	// 	private: user.private,
-	// 	date: user.date,
-	// 	theme: user.theme,
-	// 	provider: user.provider,
-	// };
-
-	// cookies().set('user', userData.userId);
-
-	//	USTAWIANIE DANYCH W COOKIESACH
-
 	if (isPasswordCorrect) {
+		setLoginCookies(user);
 		return user;
 	}
 }

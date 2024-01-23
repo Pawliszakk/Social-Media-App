@@ -1,4 +1,7 @@
+'use server';
+
 import { User } from '../Models/user';
+import { setLoginCookies } from '../cookiesHandler';
 import { connectToDatabase } from '../utils/connectToDatabase';
 import { getDate } from '../utils/getDate';
 import { isUserInDatabase } from '../utils/isUserInDatabase';
@@ -50,21 +53,8 @@ export async function createUserByCredentials(
 		throw new Error('Failed to create user, please try again later');
 	}
 
-	// const userData: any = {
-	// 	userId: user.id,
-	// 	email: user.email,
-	// 	name: user.name,
-	// 	image: user.image,
-	// 	sex: user.sex,
-	// 	private: user.private,
-	// 	date: user.date,
-	// 	theme: user.theme,
-	// 	provider: user.provider,
-	// };
-
-	// cookies().set('user', userData.userId);
-
-	//	USTAWIANIE DANYCH W COOKIESACH
-
-	return createdUser;
+	if (createdUser) {
+		setLoginCookies(createdUser);
+		return createdUser;
+	}
 }
