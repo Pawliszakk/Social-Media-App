@@ -4,9 +4,15 @@
 	background-color: #fff;
 	padding: 3rem 2rem;
 	border-radius: 1rem;
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	p {
+		color: rgba(0, 0, 0, 0.7);
 		font-size: 1.4rem;
 		margin-top: 2rem;
+	}
+	h1 {
+		font-size: 3rem;
+		color: rgba(0, 0, 0, 0.7);
 	}
 }
 

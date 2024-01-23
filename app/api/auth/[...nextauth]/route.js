@@ -7,6 +7,7 @@ import { createUserByProvider } from '@/lib/actions/login/createUserByProvider';
 import { isUserInDatabase } from '@/lib/actions/utils/isUserInDatabase';
 import { loginUserByCredentials } from '@/lib/actions/login/loginUserByCredentials';
 import { createUserByCredentials } from '@/lib/actions/login/createUserByCredentials';
+import { cookies } from 'next/headers';
 
 export const authOptions = {
 	providers: [
@@ -56,6 +57,10 @@ export const authOptions = {
 			if ((user && user.provider === account.provider) || isUserCreated) {
 				return true;
 			}
+		},
+		async signOut() {
+			console.log('SIGNOUT');
+			cookies().delete('user');
 		},
 	},
 	pages: {

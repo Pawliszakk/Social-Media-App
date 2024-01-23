@@ -12,12 +12,13 @@ export default async function SignupPage() {
 	}
 	return (
 		<div>
-			<h1>SignupPage</h1>
 			<FormCard>
+				<h1>Sign up</h1>
+
 				<SignupButtons />
 				<SignupForm />
 				<p>
-					Already have an account?
+					Already have an account?{' '}
 					<Link href="/auth/login">Go to login page</Link>
 				</p>
 			</FormCard>

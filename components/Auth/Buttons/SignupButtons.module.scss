@@ -18,6 +18,9 @@
 		svg {
 			font-size: 3rem;
 		}
+		&:disabled {
+			cursor: not-allowed;
+		}
 	}
 	.google {
 		background-color: #fff;

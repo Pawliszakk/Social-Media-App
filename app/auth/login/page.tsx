@@ -19,14 +19,13 @@ export default async function LoginPage({
 
 	return (
 		<div>
-			<h1>LoginPage</h1>
-
 			<FormCard>
+				<h1>Login</h1>
 				<SignupButtons />
 				<LoginForm />
 				{error && <ErrorMessage message={error} />}
 				<p>
-					Don't have an account?
+					Don't have an account?{' '}
 					<Link href="/auth/signup">Go to Signup page</Link>
 				</p>
 			</FormCard>

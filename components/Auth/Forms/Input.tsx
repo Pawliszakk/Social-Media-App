@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { FieldInputProps } from 'formik';
 
 import classes from './Input.module.scss';
-import { BiErrorCircle } from 'react-icons/bi';
 import { IoEyeSharp, IoEyeOff } from 'react-icons/io5';
 
 interface InputProps {
@@ -52,11 +51,7 @@ const Input: React.FC<InputProps> = ({
 					<IoEyeSharp onClick={passwordVisibilityHandler} />
 				)}
 			</div>
-			{isError ? (
-				<p>
-					{error} <BiErrorCircle />
-				</p>
-			) : null}
+			{isError ? <p>{error}</p> : null}
 		</div>
 	);
 };
