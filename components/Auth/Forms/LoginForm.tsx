@@ -9,8 +9,8 @@ import { signIn } from 'next-auth/react';
 const LoginForm = () => {
 	const formik = useFormik({
 		initialValues: {
-			email: '',
-			password: '',
+			email: 'test@example.com',
+			password: 'Examplepassword1!',
 		},
 		validationSchema: LoginSchema,
 		onSubmit: (values) => {

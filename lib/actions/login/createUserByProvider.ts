@@ -6,7 +6,6 @@ export async function createUserByProvider(
 	provider: string
 ) {
 	const { name, email, image } = user;
-	// DODANIE WALIDACJI HASŁA
 
 	const newUser = new User({
 		email,
