@@ -1,13 +1,15 @@
-import LogoutBtn from '@/components/Auth/Buttons/Logout';
 import { getServerSession } from 'next-auth';
-import { cookies } from 'next/headers';
-import Image from 'next/image';
+
 import { permanentRedirect } from 'next/navigation';
+import Image from 'next/image';
+import { cookies } from 'next/headers';
 
 export default async function Home() {
 	const session = await getServerSession();
 
-	if (session) {
+	if (!session) {
+		permanentRedirect('/auth/login');
+	} else {
 		const name = cookies().get('name');
 		const image = cookies().get('image');
 		return (
@@ -19,10 +21,7 @@ export default async function Home() {
 					height={100}
 					alt={`User image of ${name!.value}`}
 				/>
-				<LogoutBtn />
 			</main>
 		);
-	} else {
-		permanentRedirect('/auth/login');
 	}
 }
