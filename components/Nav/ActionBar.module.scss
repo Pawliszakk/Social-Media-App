@@ -13,20 +13,6 @@
 		justify-content: space-around;
 		align-items: center;
 	}
-	.option {
-		cursor: pointer;
-		img {
-			border-radius: 50%;
-		}
-		svg {
-			font-size: 3rem;
-			cursor: pointer;
-			color: #000;
-		}
-		span {
-			display: none;
-		}
-	}
 }
 
 @media (min-width: 768px) {
@@ -40,19 +26,6 @@
 			height: 100%;
 			flex-direction: column;
 			align-items: space-around;
-		}
-		.option {
-			min-height: 60px;
-			border-radius: 5px;
-			padding-left: 1em;
-			width: 100%;
-			transition: background-color 0.2s ease-in-out;
-			&:hover {
-				background-color: rgb(226, 226, 226);
-			}
-			svg {
-				font-size: 3.5rem;
-			}
 		}
 	}
 }
@@ -70,28 +43,6 @@
 			height: 50%;
 			align-items: flex-start;
 			padding: 0 2em;
-			.option {
-				display: flex;
-				justify-content: flex-start;
-				align-items: center;
-				button {
-					outline: none;
-					border: none;
-				}
-				a {
-					span {
-						text-decoration: none;
-						color: rgba(0, 0, 0, 0.8);
-					}
-				}
-				span {
-					display: block;
-					padding-left: 1em;
-					font-size: 1.6rem;
-					text-decoration: none;
-					color: rgba(0, 0, 0, 0.8);
-				}
-			}
 		}
 	}
 }

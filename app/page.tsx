@@ -4,7 +4,11 @@ import { permanentRedirect } from 'next/navigation';
 import Image from 'next/image';
 import { cookies } from 'next/headers';
 
-export default async function Home() {
+export default async function Home({
+	searchParams,
+}: {
+	searchParams: { create: string };
+}) {
 	const session = await getServerSession();
 
 	if (!session) {
@@ -12,6 +16,9 @@ export default async function Home() {
 	} else {
 		const name = cookies().get('name');
 		const image = cookies().get('image');
+
+		const create = searchParams.create;
+
 		return (
 			<main>
 				<h1>Cześć {`${name!.value}`}, zalogowano cię pomyślnie</h1>
@@ -21,6 +28,8 @@ export default async function Home() {
 					height={100}
 					alt={`User image of ${name!.value}`}
 				/>
+
+				{create && <p>Ktoś tu chce tworzyć postaaa</p>}
 			</main>
 		);
 	}

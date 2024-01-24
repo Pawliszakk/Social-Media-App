@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import NextAuthProvider from '@/lib/auth/NextAuthProvider';
 import { getServerSession } from 'next-auth';
 import ActionBar from '@/components/Nav/ActionBar';
+import NextAuthProvider from '@/components/Auth/NextAuthProvider';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',

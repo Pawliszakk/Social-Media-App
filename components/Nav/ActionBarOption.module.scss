@@ -1,0 +1,48 @@
+.option {
+	cursor: pointer;
+	img {
+		border-radius: 50%;
+	}
+	svg {
+		font-size: 3rem;
+		cursor: pointer;
+		color: #000;
+	}
+	span {
+		display: none;
+	}
+    &.active{
+        font-weight: bold;
+    }
+}
+@media (min-width: 768px) {
+	.option {
+		min-height: 60px;
+		border-radius: 5px;
+		width: 100%;
+		transition: background-color 0.2s ease-in-out;
+		&:hover {
+			background-color: rgb(226, 226, 226);
+		}
+		svg {
+			font-size: 3.5rem;
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.option {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding-left: 1em;
+		color: #000;
+		text-decoration: none;
+
+		span {
+			display: block;
+			padding-left: 1em;
+			font-size: 1.6rem;
+		}
+	}
+}

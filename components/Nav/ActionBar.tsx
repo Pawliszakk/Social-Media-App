@@ -5,15 +5,30 @@ import { IoMdAddCircleOutline } from 'react-icons/io';
 import { IoSearchSharp } from 'react-icons/io5';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { MdLogout } from 'react-icons/md';
-import Image from 'next/image';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
-import LogoutBtn from '../Auth/Buttons/Logout';
+import ActionBarOption from './ActionBarOption';
 
 const ActionBar = () => {
 	const image = cookies().get('image');
 	const name = cookies().get('name');
 	const userId = cookies().get('userId');
+
+	const menuOptions = [
+		{ href: '/', icon: <IoMdHome />, text: 'Home Page' },
+		{ href: '/?search=true', icon: <IoSearchSharp />, text: 'Search' },
+		{ href: '/explore', icon: <MdOutlineExplore />, text: 'Explore' },
+		{ href: '/?create=true', icon: <IoMdAddCircleOutline />, text: 'Create' },
+		{ href: '/settings', icon: <IoSettingsOutline />, text: 'Settings' },
+		{
+			href: `/profile/${userId!.value}`,
+			icon: <IoSettingsOutline />,
+			text: 'Profile',
+			image: image?.value,
+			avatar: true,
+			name: name?.value,
+		},
+		{ icon: <MdLogout />, text: 'Logout', logout: true },
+	];
 
 	return (
 		<header className={classes.header}>
@@ -22,38 +37,18 @@ const ActionBar = () => {
 			</div>
 
 			<nav>
-				<Link href="/app" className={classes.option}>
-					<IoMdHome /> <span>Home Page</span>
-				</Link>
-
-				<Link href="/app?search=true" className={classes.option}>
-					<IoSearchSharp /> <span>Search</span>
-				</Link>
-
-				<Link href="/app/explore" className={classes.option}>
-					<MdOutlineExplore /> <span>Explore</span>
-				</Link>
-
-				<Link href="/app?create=true" className={classes.option}>
-					<IoMdAddCircleOutline /> <span>Create</span>
-				</Link>
-
-				<Link href="/app/settings" className={classes.option}>
-					<IoSettingsOutline /> <span>Settings</span>
-				</Link>
-
-				<Link href={`/app/${userId!.value}`} className={classes.option}>
-					<Image
-						src={image ? image.value : '/assets/defaultUser.jpg'}
-						width={40}
-						height={40}
-						alt={`Profile picture of ${name!.value}`}
+				{menuOptions.map((option, i) => (
+					<ActionBarOption
+						key={i}
+						href={option.href}
+						icon={option.icon}
+						text={option.text}
+						avatar={option.avatar}
+						image={option.image}
+						name={option.name}
+						logout={option.logout}
 					/>
-					<span style={{ textDecoration: 'none' }}>Profile</span>
-				</Link>
-				<LogoutBtn className={classes.option}>
-					<MdLogout /> <span>Logout</span>
-				</LogoutBtn>
+				))}
 			</nav>
 		</header>
 	);
