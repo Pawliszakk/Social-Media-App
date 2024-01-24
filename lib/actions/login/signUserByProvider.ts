@@ -7,9 +7,10 @@ import { isUserInDatabase } from '../utils/isUserInDatabase';
 
 export async function signUserByProvider(
 	userData: { name: string; email: string; image: string },
-	provider: string
+	provider: string,
 ) {
 	const { name, email, image } = userData;
+
 
 	const user = await isUserInDatabase(email);
 

@@ -25,7 +25,7 @@ export default async function LoginPage({
 				<LoginForm />
 				{error && <ErrorMessage message={error} />}
 				<p>
-					Don't have an account?{' '}
+					Don&apos;t have an account?{' '}
 					<Link href="/auth/signup">Go to Signup page</Link>
 				</p>
 			</FormCard>

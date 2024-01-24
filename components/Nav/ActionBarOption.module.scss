@@ -11,9 +11,12 @@
 	span {
 		display: none;
 	}
-    &.active{
-        font-weight: bold;
-    }
+	&.active {
+		font-weight: bold;
+		img {
+			border: 4px solid rgba(0, 0, 0, 0.5);
+		}
+	}
 }
 @media (min-width: 768px) {
 	.option {
