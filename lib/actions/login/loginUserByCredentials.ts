@@ -1,7 +1,7 @@
 'use server';
 
-import { setLoginCookies } from '../cookiesHandler';
 import { connectToDatabase } from '../utils/connectToDatabase';
+import { setLoginCookies } from '../utils/cookiesHandler';
 import { isUserInDatabase } from '../utils/isUserInDatabase';
 import { validateInputs } from '../utils/validateInputs';
 var bcrypt = require('bcryptjs');

@@ -1,7 +1,7 @@
 'use server';
 
 import { User } from '../Models/user';
-import { setLoginCookies } from '../cookiesHandler';
+import { setLoginCookies } from '../utils/cookiesHandler';
 import { getDate } from '../utils/getDate';
 import { isUserInDatabase } from '../utils/isUserInDatabase';
 

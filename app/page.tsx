@@ -1,36 +1,32 @@
-import { getServerSession } from 'next-auth';
-
-import { permanentRedirect } from 'next/navigation';
 import Image from 'next/image';
 import { cookies } from 'next/headers';
+import { checkSession } from '@/lib/actions/utils/checkSession';
 
 export default async function Home({
 	searchParams,
 }: {
-	searchParams: { create: string };
+	searchParams: { create: string; search: string };
 }) {
-	const session = await getServerSession();
+	await checkSession();
 
-	if (!session) {
-		permanentRedirect('/auth/login');
-	} else {
-		const name = cookies().get('name');
-		const image = cookies().get('image');
+	const name = cookies().get('name');
+	const image = cookies().get('image');
 
-		const create = searchParams.create;
+	const create = searchParams.create;
+	const search = searchParams.search;
 
-		return (
-			<main>
-				<h1>Cześć {`${name!.value}`}, zalogowano cię pomyślnie</h1>
-				<Image
-					src={`${image!.value}`}
-					width={100}
-					height={100}
-					alt={`User image of ${name!.value}`}
-				/>
+	return (
+		<main>
+			<h1>Cześć {`${name!.value}`}, zalogowano cię pomyślnie</h1>
+			<Image
+				src={`${image!.value}`}
+				width={100}
+				height={100}
+				alt={`User image of ${name!.value}`}
+			/>
 
-				{create && <p>Ktoś tu chce tworzyć postaaa</p>}
-			</main>
-		);
-	}
+			{create && <p>Ktoś tu chce tworzyć postaaa</p>}
+			{search && <p>Ktoś tu chce kogoś poszukać</p>}
+		</main>
+	);
 }
