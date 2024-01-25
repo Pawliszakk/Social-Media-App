@@ -3,10 +3,35 @@
 	padding: 0;
 	margin: 0;
 }
-:root {
+html {
 	font-size: 62.5%;
+}
+
+:root {
+	--primary-background: #fff;
+	--border-light: 1px solid rgba(42, 12, 12, 0.2);
+	--border-medium: 1px solid rgba(42,12,12,0.6)
+	--text-light: rgba(0, 0, 0, 0.7);
+	--text-normal: rgb(0, 0, 0);
+	--option-hover: rgb(226, 226, 226);
+	--avatar-border:4px solid rgba(0, 0, 0, 0.5);
+	--radius-light: 5px;
+	--radius-medium: 10px;
+	--radius-circle: 50%;
+}
+
+[data-theme='dark'] {
+	--primary-background: #000;
+	--border-light: 1px solid rgba(206, 200, 200, 0.2);
+	--text-light: rgba(255, 255, 255, 0.7);
+	--text-normal: rgb(255, 255, 255);
+	--option-hover: rgb(24, 22, 22);
+	--avatar-border:4px solid rgba(255, 255, 255, 0.5);
+
 }
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	text-align: center;
+	background-color: var(--primary-background);
+	color: var(--text-normal);
 }

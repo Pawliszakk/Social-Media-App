@@ -3,6 +3,7 @@ import './globals.css';
 import { getServerSession } from 'next-auth';
 import ActionBar from '@/components/Nav/ActionBar';
 import NextAuthProvider from '@/components/Auth/NextAuthProvider';
+import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -16,9 +17,14 @@ export default async function RootLayout({
 }>) {
 	const session = await getServerSession();
 
+	let theme;
+	if (session) {
+		theme = cookies().get('theme')!.value;
+	}
+
 	return (
 		<html lang="en">
-			<body>
+			<body data-theme={theme}>
 				<div>
 					{session && <ActionBar />}
 					<NextAuthProvider>{children}</NextAuthProvider>
