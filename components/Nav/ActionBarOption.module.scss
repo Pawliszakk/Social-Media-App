@@ -45,10 +45,15 @@
 		padding-left: 1em;
 		text-decoration: none;
 		color: var(--text-light);
+		font-size: 1.8rem;
 		span {
 			display: block;
 			padding-left: 1em;
-			font-size: 1.6rem;
 		}
+	}
+}
+@media (min-width: 1400px) {
+	.option {
+		font-size: 2rem;
 	}
 }
