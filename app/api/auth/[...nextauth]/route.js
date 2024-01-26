@@ -41,7 +41,6 @@ export const authOptions = {
 			if (user && account.type === 'credentials') {
 				return true;
 			}
-
 			return await signUserByProvider(user, account.provider);
 		},
 		async redirect({ url }) {

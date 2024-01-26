@@ -24,9 +24,8 @@ export default async function Home({
 				alt={`User image of ${name!.value}`}
 			/>
 
-			{create && <p>Tworzenie posta</p>}
+			{create && <p>Ktoś tu chce tworzyć posta</p>}
 			{search && <p>Szukanie osób</p>}
-			<div style={{ height: '420vh' }}></div>
 		</main>
 	);
 }
