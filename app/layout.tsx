@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import classes from './layout.module.scss';
 import { getServerSession } from 'next-auth';
 import ActionBar from '@/components/Nav/ActionBar';
 import NextAuthProvider from '@/components/Auth/NextAuthProvider';
@@ -27,7 +28,9 @@ export default async function RootLayout({
 			<body data-theme={theme}>
 				<div>
 					{session && <ActionBar />}
-					<NextAuthProvider>{children}</NextAuthProvider>
+					<main className={session ? classes.main : ''}>
+						<NextAuthProvider>{children}</NextAuthProvider>
+					</main>
 				</div>
 			</body>
 		</html>

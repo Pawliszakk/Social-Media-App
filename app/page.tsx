@@ -15,7 +15,7 @@ export default async function Home({
 	const create = searchParams.create;
 	const search = searchParams.search;
 	return (
-		<main>
+		<>
 			<h1>Cześć {`${name!.value}`}, zalogowano cię pomyślnie</h1>
 			<Image
 				src={`${image!.value}`}
@@ -26,6 +26,6 @@ export default async function Home({
 
 			{create && <p>Ktoś tu chce tworzyć posta</p>}
 			{search && <p>Szukanie osób</p>}
-		</main>
+		</>
 	);
 }
