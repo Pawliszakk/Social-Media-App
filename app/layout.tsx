@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth';
 import ActionBar from '@/components/Nav/ActionBar';
 import NextAuthProvider from '@/components/Auth/NextAuthProvider';
 import { cookies } from 'next/headers';
+import Footer from '@/components/Footer/Footer';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -31,6 +32,7 @@ export default async function RootLayout({
 					<main className={session ? classes.main : ''}>
 						<NextAuthProvider>{children}</NextAuthProvider>
 					</main>
+					{/* <Footer /> */}
 				</div>
 			</body>
 		</html>

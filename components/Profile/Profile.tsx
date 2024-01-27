@@ -5,7 +5,7 @@ interface ProfileProps {
 	user: {
 		name: string;
 		image: string;
-		isPrivate: boolean;
+		private: boolean;
 		posts: string[];
 		followers: string[];
 		following: string[];
@@ -13,6 +13,8 @@ interface ProfileProps {
 }
 
 const Profile: React.FC<ProfileProps> = ({ user }) => {
+	const isPrivate = user.private;
+
 	return (
 		<div className={classes.box}>
 			<ProfileInfo
@@ -25,7 +27,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
 
 			<hr />
 
-			{user.isPrivate ? (
+			{isPrivate ? (
 				<div>
 					<p>
 						To konto jest prywatne, zaobserwuj jezeli chcesz wyświetlić zdjęcia
