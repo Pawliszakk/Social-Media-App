@@ -4,9 +4,18 @@ import Image from 'next/image';
 interface ProfileInfoProps {
 	name: string;
 	image: string;
+	posts: string[];
+	followers: string[];
+	following: string[];
 }
 
-const ProfileInfo: React.FC<ProfileInfoProps> = ({ name, image }) => {
+const ProfileInfo: React.FC<ProfileInfoProps> = ({
+	name,
+	image,
+	posts,
+	followers,
+	following,
+}) => {
 	return (
 		<div className={classes.box}>
 			<Image
@@ -26,17 +35,17 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ name, image }) => {
 				<div className={classes.data}>
 					<div>
 						<p>
-							Posty: <span>2</span>
+							Posty: <span>{posts.length}</span>
 						</p>
 					</div>
 					<div>
 						<p>
-							Obserwujący: <span>748</span>
+							Obserwujący: <span>{followers.length}</span>
 						</p>
 					</div>
 					<div>
 						<p>
-							Obserwowani: <span>532</span>
+							Obserwowani: <span>{following.length}</span>
 						</p>
 					</div>
 				</div>

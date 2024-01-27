@@ -9,6 +9,9 @@ export default async function ProfilePage({
 	const { userId } = params;
 
 	const user = await getUserProfile(userId);
+	if (!user) {
+		throw new Error('Sorry, that site is unreachable');
+	}
 
-	return <Profile name={user.name} image={user.image} isPrivate={user.private} />;
+	return <Profile user={user} />;
 }

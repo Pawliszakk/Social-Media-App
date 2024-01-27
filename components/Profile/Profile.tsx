@@ -2,19 +2,30 @@ import classes from './Profile.module.scss';
 import ProfileInfo from './ProfileInfo';
 
 interface ProfileProps {
-	name: string;
-	image: string;
-	isPrivate: boolean;
+	user: {
+		name: string;
+		image: string;
+		isPrivate: boolean;
+		posts: string[];
+		followers: string[];
+		following: string[];
+	};
 }
 
-const Profile: React.FC<ProfileProps> = ({ name, image, isPrivate }) => {
+const Profile: React.FC<ProfileProps> = ({ user }) => {
 	return (
 		<div className={classes.box}>
-			<ProfileInfo name={name} image={image} />
+			<ProfileInfo
+				name={user.name}
+				image={user.image}
+				posts={user.posts}
+				followers={user.followers}
+				following={user.following}
+			/>
 
 			<hr />
 
-			{isPrivate ? (
+			{user.isPrivate ? (
 				<div>
 					<p>
 						To konto jest prywatne, zaobserwuj jezeli chcesz wyświetlić zdjęcia

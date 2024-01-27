@@ -7,7 +7,7 @@ export async function getUserProfile(userId: string) {
 	let user;
 	try {
 		user = await User.findOne({ _id: userId }).select(
-			'-email -password -_id -date -provider -theme -__v -sex'
+			'-email -password -_id  -provider -theme -__v -sex -savedPosts'
 		);
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
@@ -16,6 +16,5 @@ export async function getUserProfile(userId: string) {
 	if (!user) {
 		return false;
 	}
-
 	return user;
 }
