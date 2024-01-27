@@ -6,7 +6,8 @@ const CommentSchema = new mongoose.Schema({
 	content: { type: String, required: true },
 	likes: { type: Number, default: 0 },
 	date: { type: String, required: true },
-	// answers: '[id odpowiedzi do komentarza]',
+	answers: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Answer' }],
+
 });
 
 export const Comment =

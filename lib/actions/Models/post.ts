@@ -6,8 +6,8 @@ const PostSchema = new mongoose.Schema({
 	commenting: { type: Boolean, required: true },
 	archived: { type: Boolean, required: true },
 	date: { type: String, required: true },
-	// likes: ['id użytkowników co polubili post'],
-	// comments: ['id komentarzy posta'],
+	likes: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
+	comments: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Comment' }],
 });
 
 export const Post = mongoose.models.Post || mongoose.model('Post', PostSchema);
