@@ -1,3 +1,4 @@
+import Posts from './Posts';
 import classes from './Profile.module.scss';
 import ProfileInfo from './ProfileInfo';
 
@@ -35,9 +36,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
 					</p>
 				</div>
 			) : (
-				<div>
-					<p>Posty</p>
-				</div>
+				<Posts posts={user.posts} />
 			)}
 		</div>
 	);

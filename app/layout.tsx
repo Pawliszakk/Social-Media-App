@@ -18,7 +18,6 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const session = await getServerSession();
-
 	let theme;
 	if (session) {
 		theme = cookies().get('theme')!.value;

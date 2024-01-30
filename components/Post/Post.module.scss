@@ -1,0 +1,93 @@
+.post {
+	margin: auto;
+	max-width: 450px;
+	hr {
+		width: 90%;
+		margin: 3rem auto;
+		background-color: var(--border-light);
+	}
+	.author {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			img {
+				margin-left: 5px;
+				border-radius: var(--radius-circle);
+				width: 40px;
+				height: 40px;
+			}
+			a {
+				margin-left: 5px;
+				text-decoration: none;
+				color: var(--text);
+				font-size: 1.4rem;
+				font-weight: bold;
+			}
+		}
+		button {
+			font-size: 2.5rem;
+			font-weight: bold;
+			border: none;
+			cursor: pointer;
+			padding: 1.5rem;
+			background-color: transparent;
+		}
+	}
+
+	.images {
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			cursor: pointer;
+		}
+	}
+
+	.actions {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		svg {
+			font-size: 3rem;
+			margin: 3px 10px;
+			cursor: pointer;
+		}
+	}
+	.likes,
+	.description,
+	.comments,
+	.addComment {
+		text-align: left;
+		padding-left: 1em;
+		font-size: 1.3rem;
+		margin: 0.5em 0;
+	}
+	.likes {
+		font-weight: bold;
+		font-size: 1.4rem;
+	}
+
+	.comments {
+		p {
+			color: var(--text-light);
+		}
+	}
+
+	.description {
+		a {
+			font-weight: bold;
+			text-decoration: none;
+			color: var(--text);
+		}
+	}
+	.addComment {
+		textarea {
+			border: none;
+			padding: 0.5em 0 0.5em 0;
+		}
+	}
+}

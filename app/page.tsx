@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { cookies } from 'next/headers';
 import { checkSession } from '@/lib/actions/utils/checkSession';
+import Post from '@/components/Post/Post';
 
 export default async function Home({
 	searchParams,
@@ -23,6 +24,10 @@ export default async function Home({
 				height={100}
 				alt={`User image of ${name!.value}`}
 			/>
+
+			<Post image="/assets/post1.jpg" />
+			<Post image="/assets/post2.jpg" />
+			<Post image="/assets/post3.jpg" />
 
 			{create && <p>Ktoś tu chce tworzyć posta</p>}
 			{search && <p>Szukanie osób</p>}
