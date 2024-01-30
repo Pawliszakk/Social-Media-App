@@ -8,31 +8,33 @@
 		font-size: 1rem;
 		padding: 1em;
 	}
-	.photo {
-		min-height: 300px;
+	.user {
+		display: flex;
+		align-items: center;
+		padding: 1em;
+		img {
+			border-radius: var(--radius-circle);
+			width: 50px;
+			height: 50px;
+		}
+		span {
+			margin-left: 1em;
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+	}
+	.form {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		flex-direction: column;
-		svg {
-			font-size: 6rem;
-		}
-		p {
-			font-size: 1.6rem;
-		}
-		button {
-			margin-top: 2rem;
-			background-color: var(--primary-button);
-			color: #fff;
-			border-radius: var(--radius-light);
+
+		textarea {
+			justify-self: flex-start;
+			resize: none;
+			padding: 1em;
+			height: 150px;
+			outline: none;
 			border: none;
-			padding: 0.5em 1em;
-			font-size: 1.6rem;
-			cursor: pointer;
-			transition: background-color 0.3s ease-in-out;
-			&:hover {
-				background-color: var(--primary-button-hover);
-			}
 		}
 	}
 }
@@ -42,18 +44,6 @@
 		max-width: 700px;
 		header {
 			font-size: 1.6rem;
-		}
-		.photo {
-			min-height: 500px;
-			svg {
-				font-size: 10rem;
-			}
-			p {
-				font-size: 2rem;
-			}
-			button {
-				font-size: 2rem;
-			}
 		}
 	}
 }

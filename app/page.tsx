@@ -9,6 +9,7 @@ export default async function Home({
 }) {
 	await checkSession();
 
+
 	const search = searchParams.search;
 	return (
 		<>
