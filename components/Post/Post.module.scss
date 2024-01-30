@@ -1,6 +1,6 @@
 .post {
 	margin: auto;
-	max-width: 450px;
+	max-width: 600px;
 	hr {
 		width: 90%;
 		margin: 3rem auto;
@@ -21,11 +21,15 @@
 				height: 40px;
 			}
 			a {
-				margin-left: 5px;
+				margin-left: 1em;
 				text-decoration: none;
 				color: var(--text);
 				font-size: 1.4rem;
 				font-weight: bold;
+			}
+			span {
+				margin-left: 2em;
+				color: var(--text-light);
 			}
 		}
 		button {
@@ -53,7 +57,7 @@
 		align-items: center;
 		svg {
 			font-size: 3rem;
-			margin: 3px 10px;
+			margin: 0.5rem 0;
 			cursor: pointer;
 		}
 	}
@@ -62,17 +66,20 @@
 	.comments,
 	.addComment {
 		text-align: left;
-		padding-left: 1em;
 		font-size: 1.3rem;
 		margin: 0.5em 0;
 	}
 	.likes {
-		font-weight: bold;
-		font-size: 1.4rem;
+		p {
+			font-weight: bold;
+			margin: 1em 0;
+			font-size: 1.4rem;
+		}
 	}
 
 	.comments {
 		p {
+			margin: 1em 0;
 			color: var(--text-light);
 		}
 	}

@@ -21,13 +21,13 @@ const Post = (props: { image: string }) => {
 
 	return (
 		<article className={classes.post}>
-			<hr />
 			<div className={classes.author}>
 				<div className={classes.image}>
 					<Image src={avatar!.value} width={100} height={100} alt="user" />
 					<Link href="/profile/65b45a4e03170ff2ca0f64ec">
 						{name!.value}
 					</Link>{' '}
+					<span>17-03-2024</span>
 				</div>
 				<div>
 					<button>...</button>
@@ -73,6 +73,7 @@ const Post = (props: { image: string }) => {
 					></textarea>
 				</form>
 			</div>
+			<hr />
 		</article>
 	);
 };
