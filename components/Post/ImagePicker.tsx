@@ -39,7 +39,6 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ label, name }) => {
 		<div className={classes.picker}>
 			<div>
 				<input
-					className={classes.input}
 					type="file"
 					id={name}
 					accept="image/png, image/jpeg"
@@ -48,29 +47,29 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ label, name }) => {
 					onChange={handleImageChange}
 				/>
 				{!pickedImage && (
-					<>
+					<div className={classes.action}>
 						{' '}
 						<IoIosImages />
 						<button onClick={handlePickClick} type="button">
 							Select Image
 						</button>
-					</>
+					</div>
 				)}
 			</div>
-			<div className={classes.preview}>
-				{!pickedImage && <p>No image picked yet</p>}
-				{pickedImage && (
-					<div className={classes.image}>
+			{pickedImage && (
+				<>
+					{' '}
+					<div className={classes.preview}>
 						<Image
 							src={pickedImage}
 							alt="The image selected by the user"
 							width={300}
 							height={300}
 						/>
-						<button>X</button>
 					</div>
-				)}
-			</div>
+					<button type="submit">Share post</button>
+				</>
+			)}
 		</div>
 	);
 };

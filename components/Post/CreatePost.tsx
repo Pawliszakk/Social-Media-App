@@ -1,8 +1,7 @@
-'use client';
-
 import classes from './CreatePost.module.scss';
 import Image from 'next/image';
 import ImagePicker from './ImagePicker';
+import { createPost } from '@/lib/actions/post/post';
 
 interface CreatePostProps {
 	image: string;
@@ -10,6 +9,16 @@ interface CreatePostProps {
 }
 
 const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
+	async function sharePost(formData: any) {
+		'use server';
+		//DODAĆ COMMENTING
+		const description = formData.get('description');
+
+		const image = formData.get('image');
+
+		createPost(description, image);
+	}
+
 	return (
 		<div className={classes.post}>
 			<header>
@@ -26,12 +35,14 @@ const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 				<span>{name}</span>
 			</div>
 
-			<div className={classes.form}>
-				<form>
-					<textarea name="" id="" placeholder="Write a caption..."></textarea>
-					<ImagePicker label="Choose image for your post" name="image" />
-				</form>
-			</div>
+			<form action={sharePost}>
+				<textarea
+					name="description"
+					id="description"
+					placeholder="Write a caption..."
+				></textarea>
+				<ImagePicker label="Choose image for your post" name="image" />
+			</form>
 		</div>
 	);
 };

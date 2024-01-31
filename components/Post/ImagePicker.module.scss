@@ -1,16 +1,29 @@
 .picker {
-	margin: 0 auto;
 	svg {
 		font-size: 6rem;
 	}
-	p {
-		font-size: 1.6rem;
-	}
-	.input {
+
+	input {
 		display: none;
 	}
+
+	.action {
+		margin: 2rem 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+
+	.preview {
+		position: relative;
+		img {
+			width: 100%;
+			object-fit: contain;
+		}
+	}
 	button {
-		margin-top: 2rem;
+		margin: 2rem 0;
 		background-color: var(--primary-button);
 		color: #fff;
 		border-radius: var(--radius-light);
@@ -21,14 +34,6 @@
 		transition: background-color 0.3s ease-in-out;
 		&:hover {
 			background-color: var(--primary-button-hover);
-		}
-	}
-	.preview {
-		.image {
-			position: relative;
-            button{
-                position: absolute;
-            }
 		}
 	}
 }

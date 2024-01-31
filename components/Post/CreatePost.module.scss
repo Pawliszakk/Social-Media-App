@@ -23,19 +23,20 @@
 			font-weight: bold;
 		}
 	}
-	.form {
+	form {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
+		flex-direction: column;
 		textarea {
-			justify-self: flex-start;
+			align-self: flex-start;
 			resize: none;
 			padding: 1em;
-			height: 150px;
+			height: 100px;
 			outline: none;
 			border: none;
 		}
+	
 	}
 }
 
