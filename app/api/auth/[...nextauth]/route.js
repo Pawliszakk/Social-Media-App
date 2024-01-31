@@ -42,10 +42,7 @@ export const authOptions = {
 			}
 			return await signUserByProvider(user, account.provider);
 		},
-		async redirect({ url }) {
-			if (url === process.env.NEXTAUTH_URL) {
-				deleteLoginCookies();
-			}
+		async redirect() {
 			return '/auth/login';
 		},
 	},

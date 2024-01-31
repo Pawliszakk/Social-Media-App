@@ -5,21 +5,17 @@ import { createPost } from '@/lib/actions/post/post';
 import SwitchInput from '../UI/SwitchInput';
 
 interface CreatePostProps {
-	image: string;
-	name: string;
+	image: string | null | undefined;
+	name: string | null | undefined;
 }
 
 const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 	async function sharePost(formData: any) {
 		'use server';
-		//DODAĆ COMMENTING
 
 		const description = formData.get('description');
-
 		const image = formData.get('image');
-
 		const commenting = formData.get('commenting');
-
 		const hideLikesCount = formData.get('hideLikesCount');
 
 		createPost(description, image, commenting, hideLikesCount);
@@ -33,7 +29,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 
 			<div className={classes.user}>
 				<Image
-					src={image}
+					src={`${image}`}
 					width={100}
 					height={100}
 					alt={`Profile image of ${name}`}

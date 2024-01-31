@@ -9,7 +9,7 @@ export const getSessionData = async () => {
 	const session = await getServerSession();
 
 	if (!session) {
-		permanentRedirect('/');
+		return { session: null, user: null };
 	}
 
 	const name = session.user?.name;
@@ -26,5 +26,13 @@ export const getSessionData = async () => {
 		throw new Error('Something went wrong, please try again later');
 	}
 
-	return { session, name, email, image, userId: user.id, theme: user.theme };
+	const userData = {
+		name,
+		email,
+		image,
+		userId: user.id,
+		theme: user.theme,
+	};
+
+	return { session, user: userData };
 };

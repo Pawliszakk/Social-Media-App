@@ -1,12 +1,8 @@
 import CreatePost from '@/components/Post/CreatePost';
-import { checkSession } from '@/lib/actions/utils/checkSession';
-import { cookies } from 'next/headers';
+import { getSessionData } from '@/lib/actions/utils/getSessionData';
 
 export default async function createPage() {
-	await checkSession();
-
-	const image = cookies().get('image')!.value;
-	const name = cookies().get('name')!.value;
+	const { image, name } = await getSessionData();
 
 	return <CreatePost image={image} name={name} />;
 }
