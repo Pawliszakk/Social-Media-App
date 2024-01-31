@@ -6,6 +6,8 @@ import { connectToDatabase } from '../utils/connectToDatabase';
 import mongoose from 'mongoose';
 import { Post } from '../Models/post';
 import { getDate } from '../utils/getDate';
+const { v4: uuidv4 } = require('uuid');
+import fs from 'node:fs';
 import xss from 'xss';
 
 interface ImageFile {
@@ -51,25 +53,31 @@ export async function createPost(
 	if (!user) {
 		throw new Error('Failed to create a post, please try again later');
 	}
+	const extension = image.name.split('.').pop();
+	const imageId = uuidv4();
+	const fileName = `${imageId}.${extension}`;
+	const stream = fs.createWriteStream(`public/images/${fileName}`);
+
 	//DODANIE DODAWANIA ZDJĘCIA DO S3 BUCKET
 	//TWORZENIE I ZAPISYWANIE LINKU DO ZDJECIA ZA POMOCĄ UUID
-	const createdPost = new Post({
-		author: user.id,
-		commenting: !commenting,
-		hideLikesCount: !!hideLikesCount,
-		description: sanitizedDescription,
-		image: 'imageeee',
-		date: getDate(),
-	});
 
-	try {
-		const sess = await mongoose.startSession();
-		sess.startTransaction();
-		await createdPost.save({ session: sess });
-		user.posts.push(createdPost._id);
-		await user.save({ session: sess });
-		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error('Failed to create a post, please try again later');
-	}
+	// const createdPost = new Post({
+	// 	author: user.id,
+	// 	commenting: !commenting,
+	// 	hideLikesCount: !!hideLikesCount,
+	// 	description: sanitizedDescription,
+	// 	image: 'imageeee',
+	// 	date: getDate(),
+	// });
+
+	// try {
+	// 	const sess = await mongoose.startSession();
+	// 	sess.startTransaction();
+	// 	await createdPost.save({ session: sess });
+	// 	user.posts.push(createdPost._id);
+	// 	await user.save({ session: sess });
+	// 	await sess.commitTransaction();
+	// } catch (e) {
+	// 	throw new Error('Failed to create a post, please try again later');
+	// }
 }
