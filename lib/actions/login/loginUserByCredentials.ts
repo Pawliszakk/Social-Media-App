@@ -1,7 +1,6 @@
 'use server';
 
 import { connectToDatabase } from '../utils/connectToDatabase';
-import { setLoginCookies } from '../utils/cookiesHandler';
 import { isUserInDatabase } from '../utils/isUserInDatabase';
 import { validateInputs } from '../utils/validateInputs';
 var bcrypt = require('bcryptjs');
@@ -39,7 +38,6 @@ export async function loginUserByCredentials(email: string, password: string) {
 	}
 
 	if (isPasswordCorrect) {
-		setLoginCookies(user);
 		return user;
 	}
 }

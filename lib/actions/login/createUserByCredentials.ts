@@ -2,7 +2,6 @@
 
 import { User } from '../Models/user';
 import { connectToDatabase } from '../utils/connectToDatabase';
-import { setLoginCookies } from '../utils/cookiesHandler';
 import { getDate } from '../utils/getDate';
 import { isUserInDatabase } from '../utils/isUserInDatabase';
 import { validateInputs } from '../utils/validateInputs';
@@ -54,7 +53,6 @@ export async function createUserByCredentials(
 	}
 
 	if (createdUser) {
-		setLoginCookies(createdUser);
 		return createdUser;
 	}
 }

@@ -5,14 +5,15 @@ import { IoMdAddCircleOutline } from 'react-icons/io';
 import { IoSearchSharp } from 'react-icons/io5';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { MdLogout } from 'react-icons/md';
-import { cookies } from 'next/headers';
 import ActionBarOption from './ActionBarOption';
 
-const ActionBar = () => {
-	const image = cookies().get('image');
-	const name = cookies().get('name');
-	const userId = cookies().get('userId');
+interface ActionBarProps {
+	name: string | null | undefined;
+	image: string | null | undefined;
+	userId: string | null | undefined;
+}
 
+const ActionBar: React.FC<ActionBarProps> = ({ name, image, userId }) => {
 	const menuOptions = [
 		{ href: '/', icon: <IoMdHome />, text: 'Home Page' },
 		{ href: '/?search=true', icon: <IoSearchSharp />, text: 'Search' },
@@ -20,12 +21,12 @@ const ActionBar = () => {
 		{ href: '/create', icon: <IoMdAddCircleOutline />, text: 'Create' },
 		{ href: '/settings', icon: <IoSettingsOutline />, text: 'Settings' },
 		{
-			href: `/profile/${userId!.value}`,
+			href: `/profile/${userId}`,
 			icon: <IoSettingsOutline />,
 			text: 'Profile',
-			image: image?.value,
+			image: image,
 			avatar: true,
-			name: name?.value,
+			name: name,
 		},
 		{ icon: <MdLogout />, text: 'Logout', logout: true },
 	];

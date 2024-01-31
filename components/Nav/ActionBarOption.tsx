@@ -12,8 +12,8 @@ interface ActionBarOptionProps {
 	text: string;
 	avatar?: boolean;
 	logout?: boolean;
-	image?: string;
-	name?: string;
+	image?: string | null | undefined;
+	name?: string | null | undefined;
 }
 
 const ActionBarOption: React.FC<ActionBarOptionProps> = ({

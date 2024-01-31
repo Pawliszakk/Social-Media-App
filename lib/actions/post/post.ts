@@ -51,7 +51,8 @@ export async function createPost(
 	if (!user) {
 		throw new Error('Failed to create a post, please try again later');
 	}
-
+	//DODANIE DODAWANIA ZDJĘCIA DO S3 BUCKET
+	//TWORZENIE I ZAPISYWANIE LINKU DO ZDJECIA ZA POMOCĄ UUID
 	const createdPost = new Post({
 		author: user.id,
 		commenting: !commenting,

@@ -1,16 +1,14 @@
 'use server';
 
 import { User } from '../Models/user';
-import { setLoginCookies } from '../utils/cookiesHandler';
 import { getDate } from '../utils/getDate';
 import { isUserInDatabase } from '../utils/isUserInDatabase';
 
 export async function signUserByProvider(
 	userData: { name: string; email: string; image: string },
-	provider: string,
+	provider: string
 ) {
 	const { name, email, image } = userData;
-
 
 	const user = await isUserInDatabase(email);
 
@@ -20,7 +18,6 @@ export async function signUserByProvider(
 		throw new Error('Invalid provider for this account');
 	}
 	if (user && isProviderCorrect) {
-		setLoginCookies(user);
 		return user;
 	}
 
@@ -40,7 +37,6 @@ export async function signUserByProvider(
 			throw new Error('Failed to create user, please try again later');
 		}
 		if (createdUser) {
-			setLoginCookies(createdUser);
 			return createdUser;
 		}
 	}

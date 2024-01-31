@@ -7,7 +7,6 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { loginUserByCredentials } from '@/lib/actions/login/loginUserByCredentials';
 import { createUserByCredentials } from '@/lib/actions/login/createUserByCredentials';
 import { signUserByProvider } from '@/lib/actions/login/signUserByProvider';
-import { deleteLoginCookies } from '@/lib/actions/utils/cookiesHandler';
 
 export const authOptions = {
 	providers: [

@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import classes from './Post.module.scss';
-import { cookies } from 'next/headers';
 import { PiChatCircleTextThin } from 'react-icons/pi';
 import { CiHeart } from 'react-icons/ci';
 import { CiSaveDown1 } from 'react-icons/ci';
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+import { getSessionData } from '@/lib/actions/utils/getSessionData';
 
 interface PostProps {
 	id: string;
@@ -15,18 +16,17 @@ interface PostProps {
 	comments: string[];
 }
 
-const Post = (props: { image: string }) => {
-	const name = cookies().get('name');
-	const avatar = cookies().get('image');
+const Post = async (props: { image: string }) => {
+	//DANE POBRANE Z POSTÓW
+
+	const { name, email, image, userId } = await getSessionData();
 
 	return (
 		<article className={classes.post}>
 			<div className={classes.author}>
 				<div className={classes.image}>
-					<Image src={avatar!.value} width={100} height={100} alt="user" />
-					<Link href="/profile/65b45a4e03170ff2ca0f64ec">
-						{name!.value}
-					</Link>{' '}
+					<Image src={`${image}`} width={100} height={100} alt="user" />
+					<Link href="/profile/65b45a4e03170ff2ca0f64ec">{name}</Link>{' '}
 					<span>17-03-2024</span>
 				</div>
 				<div>
@@ -53,7 +53,7 @@ const Post = (props: { image: string }) => {
 
 			<div className={classes.description}>
 				<p>
-					<Link href="/profile/65b45a4e03170ff2ca0f64ec">{name!.value}</Link>{' '}
+					<Link href="/profile/65b45a4e03170ff2ca0f64ec">{name}</Link>{' '}
 					Description to that post
 				</p>
 			</div>
