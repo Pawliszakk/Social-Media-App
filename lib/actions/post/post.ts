@@ -6,6 +6,7 @@ import { connectToDatabase } from '../utils/connectToDatabase';
 import mongoose from 'mongoose';
 import { Post } from '../Models/post';
 import { getDate } from '../utils/getDate';
+import xss from 'xss';
 
 interface ImageFile {
 	size: number;
@@ -22,10 +23,12 @@ export async function createPost(
 ) {
 	const session = await getServerSession();
 
+	const sanitizedDescription = xss(description);
+
 	if (!image) {
 		throw new Error('Please attach an image to your post');
 	}
-	if (description.trim().length > 200) {
+	if (sanitizedDescription.trim().length > 200) {
 		throw new Error(
 			'Please provide shorter description of your post. Maximum is 200 characters'
 		);
@@ -53,7 +56,8 @@ export async function createPost(
 		author: user.id,
 		commenting: !commenting,
 		hideLikesCount: !!hideLikesCount,
-		description,
+		description: sanitizedDescription,
+		image: 'imageeee',
 		date: getDate(),
 	});
 
@@ -65,6 +69,6 @@ export async function createPost(
 		await user.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e) {
-		throw new Error('Failed to create post, please try again later');
+		throw new Error('Failed to create a post, please try again later');
 	}
 }
