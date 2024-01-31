@@ -2,6 +2,7 @@ import classes from './CreatePost.module.scss';
 import Image from 'next/image';
 import ImagePicker from './ImagePicker';
 import { createPost } from '@/lib/actions/post/post';
+import SwitchInput from '../UI/SwitchInput';
 
 interface CreatePostProps {
 	image: string;
@@ -12,11 +13,16 @@ const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 	async function sharePost(formData: any) {
 		'use server';
 		//DODAĆ COMMENTING
+
 		const description = formData.get('description');
 
 		const image = formData.get('image');
 
-		createPost(description, image);
+		const commenting = formData.get('commenting');
+
+		const hideLikesCount = formData.get('hideLikesCount');
+
+		createPost(description, image, commenting, hideLikesCount);
 	}
 
 	return (
@@ -41,6 +47,11 @@ const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 					id="description"
 					placeholder="Write a caption..."
 				></textarea>
+				<SwitchInput name="commenting" label="Turn off comments" />
+				<SwitchInput
+					name="hideLikesCount"
+					label="Hide like counts on this post"
+				/>
 				<ImagePicker label="Choose image for your post" name="image" />
 			</form>
 		</div>

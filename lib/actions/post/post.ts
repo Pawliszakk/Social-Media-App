@@ -14,11 +14,24 @@ interface ImageFile {
 	lastModified: number;
 }
 
-export async function createPost(description: string, image: ImageFile) {
+export async function createPost(
+	description: string,
+	image: ImageFile,
+	commenting: string,
+	hideLikesCount: string
+) {
 	const session = await getServerSession();
 
 	if (!image) {
 		throw new Error('Please attach an image to your post');
+	}
+	if (description.trim().length > 200) {
+		throw new Error(
+			'Please provide shorter description of your post. Maximum is 200 characters'
+		);
+	}
+	if (!session) {
+		throw new Error('Failed to create a post, please try again later');
 	}
 
 	await connectToDatabase();
@@ -38,7 +51,9 @@ export async function createPost(description: string, image: ImageFile) {
 
 	const createdPost = new Post({
 		author: user.id,
-		commenting: true,
+		commenting: !commenting,
+		hideLikesCount: !!hideLikesCount,
+		description,
 		date: getDate(),
 	});
 
