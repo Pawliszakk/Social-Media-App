@@ -4,14 +4,16 @@ import { useRef, useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 import classes from './ImagePicker.module.scss';
 import { IoIosImages } from 'react-icons/io';
+import { useFormStatus } from 'react-dom';
+import Spinner from '../UI/Spinner';
 
 interface ImagePickerProps {
-	label: string;
 	name: string;
 }
 
-const ImagePicker: React.FC<ImagePickerProps> = ({ label, name }) => {
+const ImagePicker: React.FC<ImagePickerProps> = ({ name }) => {
 	const [pickedImage, setPickedImage] = useState<string | null>();
+	const { pending } = useFormStatus();
 	const imageInputRef = useRef<HTMLInputElement>(null)!;
 
 	const handlePickClick = () => imageInputRef.current?.click();
@@ -67,7 +69,11 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ label, name }) => {
 							height={300}
 						/>
 					</div>
-					<button type="submit">Share post</button>
+					{pending ? (
+						<Spinner className={classes.spinner} />
+					) : (
+						<button type="submit">Share post</button>
+					)}
 				</>
 			)}
 		</div>

@@ -23,7 +23,8 @@
 		}
 	}
 	button {
-		margin: 2rem 0;
+		display: block;
+		margin: 2rem auto;
 		background-color: var(--primary-button);
 		color: #fff;
 		border-radius: var(--radius-light);
@@ -35,5 +36,9 @@
 		&:hover {
 			background-color: var(--primary-button-hover);
 		}
+	}
+	.spinner {
+		margin: 1rem auto;
+		border-top: 5px solid var(--primary-button);
 	}
 }

@@ -1,7 +1,13 @@
 import classes from './Spinner.module.scss';
 
-const Spinner = () => {
-	return <div className={classes.spinner}></div>;
+interface SpinnerProps {
+	className?: string;
+}
+
+const Spinner: React.FC<SpinnerProps> = ({ className }) => {
+	return (
+		<div className={`${classes.spinner} ${className ? className : ''}`}></div>
+	);
 };
 
 export default Spinner;

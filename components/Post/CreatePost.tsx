@@ -1,9 +1,11 @@
+'use client';
 import Image from 'next/image';
 
 import classes from './CreatePost.module.scss';
 import ImagePicker from './ImagePicker';
-import { createPost } from '@/lib/actions/post/createPost';
 import SwitchInput from '../UI/SwitchInput';
+import { useFormState } from 'react-dom';
+import { createPost } from '@/lib/actions/post/createPost';
 
 interface CreatePostProps {
 	image: string | null | undefined;
@@ -11,16 +13,7 @@ interface CreatePostProps {
 }
 
 const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
-	async function sharePost(formData: any) {
-		'use server';
-
-		const description = formData.get('description');
-		const image = formData.get('image');
-		const commenting = formData.get('commenting');
-		const hideLikesCount = formData.get('hideLikesCount');
-
-		createPost(description, image, commenting, hideLikesCount);
-	}
+	const [state, formAction] = useFormState(createPost, { message: '' });
 
 	return (
 		<div className={classes.post}>
@@ -38,7 +31,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 				<span>{name}</span>
 			</div>
 
-			<form action={sharePost}>
+			<form action={formAction}>
 				<textarea
 					name="description"
 					id="description"
@@ -49,7 +42,8 @@ const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 					name="hideLikesCount"
 					label="Hide like counts on this post"
 				/>
-				<ImagePicker label="Choose image for your post" name="image" />
+				<ImagePicker name="image" />
+				{state!.message && <p>{state!.message}</p>}
 			</form>
 		</div>
 	);
