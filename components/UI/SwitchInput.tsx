@@ -10,7 +10,6 @@ const SwitchInput: React.FC<SwitchInputProps> = ({ name, label }) => {
 		<label htmlFor={name} className={classes.label}>
 			{label}
 			<div className={classes.switch}>
-				{' '}
 				<input type="checkbox" name={name} id={name} />
 				<span></span>
 			</div>

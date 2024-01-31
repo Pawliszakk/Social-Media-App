@@ -10,7 +10,7 @@ export async function isUserInDatabase(email: string) {
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
-	if (!user || user.length === 0) {
+	if (!user) {
 		return false;
 	}
 

@@ -1,18 +1,18 @@
 'use client';
-import { SignupSchema } from '@/lib/validation/validation';
-import Input from './Input';
-import { useFormik } from 'formik';
-import SubmitButton from '../Buttons/SubmitButton';
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
+import { useFormik } from 'formik';
+import { SignupSchema } from '@/lib/validation/validation';
+import { signIn } from 'next-auth/react';
+import Input from './Input';
+import SubmitButton from '../Buttons/SubmitButton';
 
 const SignupForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const formik = useFormik({
 		initialValues: {
-			name: 'Oskaroo',
-			email: 'test@example.com',
-			password: 'Examplepassword1!',
+			name: '',
+			email: '',
+			password: '',
 		},
 		validationSchema: SignupSchema,
 		onSubmit: (values) => {

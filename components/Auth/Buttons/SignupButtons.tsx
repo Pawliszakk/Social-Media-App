@@ -1,6 +1,7 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
+
 import classes from './SignupButtons.module.scss';
 import { FaGoogle } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';

@@ -1,5 +1,6 @@
 'use client';
 import { signOut } from 'next-auth/react';
+
 import classes from './Logout.module.scss';
 interface LogoutBtnProps {
 	children: React.ReactNode | string;

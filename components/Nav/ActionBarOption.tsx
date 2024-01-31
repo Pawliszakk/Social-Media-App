@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
-import classes from './ActionBarOption.module.scss';
-import Image from 'next/image';
-import LogoutBtn from '../Auth/Buttons/Logout';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import classes from './ActionBarOption.module.scss';
+import LogoutBtn from '../Auth/Buttons/Logout';
 
 interface ActionBarOptionProps {
 	href?: string;

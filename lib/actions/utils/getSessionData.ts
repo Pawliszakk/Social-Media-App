@@ -1,7 +1,6 @@
 'use server';
 
 import { getServerSession } from 'next-auth';
-import { permanentRedirect } from 'next/navigation';
 import { User } from '../Models/user';
 import { connectToDatabase } from './connectToDatabase';
 
@@ -26,6 +25,9 @@ export const getSessionData = async () => {
 		throw new Error('Something went wrong, please try again later');
 	}
 
+	if (!user) {
+		throw new Error('Something went wrong, please try again later');
+	}
 	const userData = {
 		name,
 		email,

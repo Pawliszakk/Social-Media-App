@@ -4,8 +4,6 @@ import { PiChatCircleTextThin } from 'react-icons/pi';
 import { CiHeart } from 'react-icons/ci';
 import { CiSaveDown1 } from 'react-icons/ci';
 import Link from 'next/link';
-import { getServerSession } from 'next-auth';
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
 
 interface PostProps {
 	id: string;

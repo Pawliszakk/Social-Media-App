@@ -1,7 +1,8 @@
-import classes from './CreatePost.module.scss';
 import Image from 'next/image';
+
+import classes from './CreatePost.module.scss';
 import ImagePicker from './ImagePicker';
-import { createPost } from '@/lib/actions/post/post';
+import { createPost } from '@/lib/actions/post/createPost';
 import SwitchInput from '../UI/SwitchInput';
 
 interface CreatePostProps {

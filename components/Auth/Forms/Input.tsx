@@ -24,6 +24,7 @@ const Input: React.FC<InputProps> = ({
 	touched,
 }) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+	
 	const isPassword = type === 'password';
 
 	const isError = touched && error;

@@ -1,5 +1,5 @@
-import Spinner from '@/components/UI/Spinner';
 import classes from './SubmitButton.module.scss';
+import Spinner from '@/components/UI/Spinner';
 
 interface SubmitButtonProps {
 	children: string;

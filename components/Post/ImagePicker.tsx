@@ -1,9 +1,9 @@
 'use client';
 
-import { IoIosImages } from 'react-icons/io';
-import classes from './ImagePicker.module.scss';
 import { useRef, useState, ChangeEvent } from 'react';
 import Image from 'next/image';
+import classes from './ImagePicker.module.scss';
+import { IoIosImages } from 'react-icons/io';
 
 interface ImagePickerProps {
 	label: string;
