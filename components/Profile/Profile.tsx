@@ -1,6 +1,6 @@
-import Posts from './Posts';
 import classes from './Profile.module.scss';
 import ProfileInfo from './ProfileInfo';
+import ProfilePost from './ProfilePost';
 
 interface ProfileProps {
 	user: {
@@ -15,7 +15,6 @@ interface ProfileProps {
 
 const Profile: React.FC<ProfileProps> = ({ user }) => {
 	const isPrivate = user.private;
-
 	return (
 		<div className={classes.box}>
 			<ProfileInfo
@@ -36,7 +35,20 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
 					</p>
 				</div>
 			) : (
-				<Posts posts={user.posts} />
+				<div className={classes.posts}>
+					{user.posts.map((p: any) => (
+						<ProfilePost
+							key={p.id}
+							postId={p.id}
+							hideLikesCount={p.hideLikesCount}
+							archived={p.archived}
+							likes={p.likes}
+							comments={p.comments}
+							image={p.image}
+							author={user.name}
+						/>
+					))}
+				</div>
 			)}
 		</div>
 	);

@@ -6,9 +6,11 @@ export async function getUserProfile(userId: string) {
 
 	let user;
 	try {
-		user = await User.findOne({ _id: userId }).select(
-			'-email -password -_id  -provider -theme -__v -sex -savedPosts -closeFriends'
-		);
+		user = await User.findOne({ _id: userId })
+			.select(
+				'-email -password -_id  -provider -theme -__v -sex -savedPosts -closeFriends'
+			)
+			.populate('posts');
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}

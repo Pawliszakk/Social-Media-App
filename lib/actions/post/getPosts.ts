@@ -9,6 +9,6 @@ export async function getPosts() {
 	} catch (e) {
 		throw new Error('Failed to fetch posts');
 	}
-
+	posts.reverse();
 	return posts;
 }
