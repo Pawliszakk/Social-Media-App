@@ -17,6 +17,12 @@ const nextConfig = {
 				port: '',
 				pathname: '/**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com',
+				port: '',
+				pathname: '/**',
+			},
 		],
 	},
 };

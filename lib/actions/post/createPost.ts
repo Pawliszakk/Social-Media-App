@@ -9,6 +9,12 @@ import { getDate } from '../utils/getDate';
 const { v4: uuidv4 } = require('uuid');
 import xss from 'xss';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
+import { S3 } from '@aws-sdk/client-s3';
+
+const s3 = new S3({
+	region: 'eu-central-1',
+});
 
 interface ImageFile {
 	size: number;
@@ -68,10 +74,20 @@ export async function createPost(prevState: any, formData: any) {
 	const extension = image.name.split('.').pop();
 	const imageId = uuidv4();
 	const fileName = `${imageId}.${extension}`;
-	// const bufferedImage = await image.arrayBuffer();
+	const bufferedImage = await image.arrayBuffer();
 
-	//DODANIE DODAWANIA ZDJĘCIA DO S3 BUCKET
-	//TWORZENIE I ZAPISYWANIE LINKU DO ZDJECIA ZA POMOCĄ UUID
+	try {
+		await s3.putObject({
+			Bucket: 'next-14-aws-oskar-bucket',
+			Key: fileName,
+			Body: Buffer.from(bufferedImage),
+			ContentType: image.type,
+		});
+	} catch (e) {
+		return {
+			message: 'Creating post failed, please try again later',
+		};
+	}
 
 	const createdPost = new Post({
 		author: user.id,
@@ -94,6 +110,6 @@ export async function createPost(prevState: any, formData: any) {
 			message: 'Something went wrong, please try again later',
 		};
 	}
-
+	revalidatePath('/', 'layout');
 	redirect('/');
 }
