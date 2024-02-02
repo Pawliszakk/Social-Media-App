@@ -1,6 +1,6 @@
-import CreatePost from '@/components/Post/CreatePost';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import { permanentRedirect } from 'next/navigation';
+import CreatePost from '@/components/Post/Create/CreatePost';
 
 export default async function createPage() {
 	const { session, user } = await getSessionData();

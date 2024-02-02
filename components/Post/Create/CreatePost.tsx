@@ -3,9 +3,9 @@ import Image from 'next/image';
 
 import classes from './CreatePost.module.scss';
 import ImagePicker from './ImagePicker';
-import SwitchInput from '../UI/SwitchInput';
 import { useFormState } from 'react-dom';
 import { createPost } from '@/lib/actions/post/createPost';
+import SwitchInput from '@/components/UI/SwitchInput';
 
 interface CreatePostProps {
 	image: string | null | undefined;

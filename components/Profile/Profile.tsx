@@ -1,8 +1,8 @@
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import classes from './Profile.module.scss';
 import ProfileInfo from './ProfileInfo';
-import ProfilePost from './ProfilePost';
 import { CiLock } from 'react-icons/ci';
+import PostTile from '../Post/Tile/PostTile';
 interface ProfileProps {
 	user: {
 		id: string;
@@ -21,7 +21,7 @@ const Profile: React.FC<ProfileProps> = async ({ user }) => {
 	let isPrivate = user.private;
 
 	const isLoggedUserProfile = session.user?.userId === user.id;
-	
+
 	if (isLoggedUserProfile) {
 		isPrivate = false;
 	}
@@ -50,8 +50,8 @@ const Profile: React.FC<ProfileProps> = async ({ user }) => {
 					<hr />
 
 					<div className={classes.posts}>
-						{user.posts.map((p: any) => (
-							<ProfilePost
+						{user.posts.reverse().map((p: any) => (
+							<PostTile
 								key={p.id}
 								postId={p.id}
 								hideLikesCount={p.hideLikesCount}

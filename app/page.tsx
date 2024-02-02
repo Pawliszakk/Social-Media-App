@@ -4,13 +4,14 @@ import PostsVariant from '@/components/Home/PostsVariant';
 import { getPosts } from '@/lib/actions/post/getPosts';
 import { Suspense } from 'react';
 import Spinner from '@/components/UI/Spinner';
+import { getSessionData } from '@/lib/actions/utils/getSessionData';
 
 export default async function Home({
 	searchParams,
 }: {
 	searchParams: { create: string; search: string };
 }) {
-	await checkSession();
+	const { session, user } = await getSessionData();
 
 	const search = searchParams.search;
 

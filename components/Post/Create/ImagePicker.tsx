@@ -5,7 +5,7 @@ import Image from 'next/image';
 import classes from './ImagePicker.module.scss';
 import { IoIosImages } from 'react-icons/io';
 import { useFormStatus } from 'react-dom';
-import Spinner from '../UI/Spinner';
+import Spinner from '@/components/UI/Spinner';
 
 const ImagePicker = ({ name }: { name: string }) => {
 	const [pickedImage, setPickedImage] = useState<string | null>();

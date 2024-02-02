@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import classes from './ProfilePost.module.scss';
+import classes from './PostTile.module.scss';
 import Image from 'next/image';
 import { FaHeart } from 'react-icons/fa';
 import { FaComment } from 'react-icons/fa';
 
-interface ProfilePostProps {
+interface PostTileProps {
 	postId: string;
 	hideLikesCount: boolean;
 	archived: boolean;
@@ -14,7 +14,7 @@ interface ProfilePostProps {
 	author: string;
 }
 
-const ProfilePost: React.FC<ProfilePostProps> = ({
+const PostTile: React.FC<PostTileProps> = ({
 	postId,
 	hideLikesCount,
 	archived,
@@ -45,4 +45,4 @@ const ProfilePost: React.FC<ProfilePostProps> = ({
 	);
 };
 
-export default ProfilePost;
+export default PostTile;
