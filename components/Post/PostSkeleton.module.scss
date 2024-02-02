@@ -1,0 +1,70 @@
+.post {
+	margin: auto;
+	max-width: 600px;
+	hr {
+		width: 90%;
+		margin: 3rem auto;
+	}
+	.author {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.avatar {
+				margin-left: 5px;
+				border-radius: var(--radius-circle);
+				width: 40px;
+				height: 40px;
+				animation: skeleton-loading 1s linear infinite alternate;
+			}
+
+			.date {
+				display: block;
+				width: 100px;
+				height: 20px;
+				margin-left: 2em;
+				border-radius: var(--radius-medium);
+				animation: skeleton-loading 1s linear infinite alternate;
+			}
+		}
+		.btn {
+			width: 100px;
+			height: 20px;
+			border-radius: var(--radius-medium);
+			animation: skeleton-loading 1s linear infinite alternate;
+		}
+	}
+
+	.images {
+		margin-top: 1rem;
+		height: 500px;
+		border-radius: var(--radius-medium);
+		animation: skeleton-loading 1s linear infinite alternate;
+	}
+
+	.actions {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		div {
+			margin-top: 1.5rem;
+			height: 20px;
+			width: 100px;
+
+			border-radius: var(--radius-medium);
+			animation: skeleton-loading 1s linear infinite alternate;
+		}
+	}
+}
+
+@keyframes skeleton-loading {
+	from {
+		background-color: rgb(163, 184, 194);
+	}
+	to {
+		background-color: rgb(240, 243, 245);
+	}
+}

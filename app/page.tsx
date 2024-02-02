@@ -5,6 +5,7 @@ import { getPosts } from '@/lib/actions/post/getPosts';
 import { Suspense } from 'react';
 import Spinner from '@/components/UI/Spinner';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
+import PostSkeleton from '@/components/Post/PostSkeleton';
 
 export default async function Home({
 	searchParams,
@@ -25,7 +26,7 @@ export default async function Home({
 			<PostsVariant />
 
 			<Suspense fallback={<Spinner />}>
-				{' '}
+				<PostSkeleton />
 				{posts.map((post) => (
 					<Post
 						key={post.id}
