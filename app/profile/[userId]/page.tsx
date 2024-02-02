@@ -1,5 +1,7 @@
 import Profile from '@/components/Profile/Profile';
+import Spinner from '@/components/UI/Spinner';
 import { getUserProfile } from '@/lib/actions/user/getUserProfile';
+import { Suspense } from 'react';
 
 export default async function ProfilePage({
 	params,
@@ -13,5 +15,9 @@ export default async function ProfilePage({
 		throw new Error('Sorry, that site is unreachable');
 	}
 
-	return <Profile user={user} />;
+	return (
+		<Suspense fallback={<Spinner />}>
+			<Profile user={user} />
+		</Suspense>
+	);
 }

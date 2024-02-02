@@ -7,11 +7,7 @@ import { IoIosImages } from 'react-icons/io';
 import { useFormStatus } from 'react-dom';
 import Spinner from '../UI/Spinner';
 
-interface ImagePickerProps {
-	name: string;
-}
-
-const ImagePicker: React.FC<ImagePickerProps> = ({ name }) => {
+const ImagePicker = ({ name }: { name: string }) => {
 	const [pickedImage, setPickedImage] = useState<string | null>();
 	const { pending } = useFormStatus();
 	const imageInputRef = useRef<HTMLInputElement>(null)!;
@@ -49,7 +45,6 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ name }) => {
 				/>
 				{!pickedImage && (
 					<div className={classes.action}>
-						{' '}
 						<IoIosImages />
 						<button onClick={handlePickClick} type="button">
 							Select Image
@@ -59,7 +54,6 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ name }) => {
 			</div>
 			{pickedImage && (
 				<>
-					{' '}
 					<div className={classes.preview}>
 						<Image
 							src={pickedImage}
@@ -68,7 +62,6 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ name }) => {
 							height={300}
 						/>
 						<div className={classes.delete}>
-							{' '}
 							<button onClick={() => setPickedImage(null)}>X</button>
 						</div>
 					</div>
