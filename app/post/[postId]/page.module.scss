@@ -1,0 +1,13 @@
+.box {
+	margin: 5rem auto;
+	display: flex;
+	justify-content: space-between;
+	max-height: 600px;
+	max-width: 1000px;
+	border: var(--border-light);
+	border-radius: var(--radius-light);
+	overflow: hidden;
+	.panel {
+		flex-grow: 1;
+	}
+}

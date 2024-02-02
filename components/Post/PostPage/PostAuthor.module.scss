@@ -1,0 +1,33 @@
+.author {
+	padding: 1em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: var(--border-light);
+	.image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		img {
+			border-radius: var(--radius-circle);
+		}
+		span {
+			margin-left: 1em;
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+	}
+}
+.description {
+	display: flex;
+	align-items: center;
+	padding: 1em;
+	img {
+		display: block;
+		border-radius: var(--radius-circle);
+	}
+	p {
+		margin-left: 1em;
+		font-size: 1.2rem;
+	}
+}
