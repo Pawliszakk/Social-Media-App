@@ -1,7 +1,7 @@
 import classes from './Profile.module.scss';
 import ProfileInfo from './ProfileInfo';
 import ProfilePost from './ProfilePost';
-
+import { CiLock } from 'react-icons/ci';
 interface ProfileProps {
 	user: {
 		name: string;
@@ -14,7 +14,7 @@ interface ProfileProps {
 }
 
 const Profile: React.FC<ProfileProps> = ({ user }) => {
-	const isPrivate = user.private;
+	const isPrivate = true;
 	return (
 		<div className={classes.box}>
 			<ProfileInfo
@@ -25,30 +25,35 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
 				following={user.following}
 			/>
 
-			<hr />
-
 			{isPrivate ? (
-				<div>
-					<p>
-						To konto jest prywatne, zaobserwuj jezeli chcesz wyświetlić zdjęcia
-						i filmy
-					</p>
+				<div className={classes.private}>
+					<div className={classes.icon}>
+						<CiLock />
+					</div>
+					<div>
+						<p>This Account is Private</p>
+						<p>Follow to see their posts.</p>
+					</div>
 				</div>
 			) : (
-				<div className={classes.posts}>
-					{user.posts.map((p: any) => (
-						<ProfilePost
-							key={p.id}
-							postId={p.id}
-							hideLikesCount={p.hideLikesCount}
-							archived={p.archived}
-							likes={p.likes}
-							comments={p.comments}
-							image={p.image}
-							author={user.name}
-						/>
-					))}
-				</div>
+				<>
+					<hr />
+
+					<div className={classes.posts}>
+						{user.posts.map((p: any) => (
+							<ProfilePost
+								key={p.id}
+								postId={p.id}
+								hideLikesCount={p.hideLikesCount}
+								archived={p.archived}
+								likes={p.likes}
+								comments={p.comments}
+								image={p.image}
+								author={user.name}
+							/>
+						))}
+					</div>
+				</>
 			)}
 		</div>
 	);

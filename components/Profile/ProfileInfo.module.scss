@@ -4,6 +4,8 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	color: var(--text-normal);
+
 	img {
 		width: 70px;
 		height: 70px;
@@ -22,7 +24,7 @@
 			outline: none;
 			border: none;
 			font-weight: bold;
-			color: var(--text);
+			color: #000;
 			cursor: pointer;
 		}
 	}
