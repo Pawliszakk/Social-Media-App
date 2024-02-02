@@ -6,7 +6,6 @@ import { connectToDatabase } from './connectToDatabase';
 
 export const getSessionData = async () => {
 	const session = await getServerSession();
-
 	if (!session) {
 		return { session: null, user: null };
 	}

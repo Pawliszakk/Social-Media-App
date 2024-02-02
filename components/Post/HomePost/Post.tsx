@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import classes from './Post.module.scss';
-import { PiChatCircleTextThin } from 'react-icons/pi';
-import { CiHeart } from 'react-icons/ci';
+import { FiMessageCircle } from 'react-icons/fi';
+import { FaRegHeart } from 'react-icons/fa';
 import { CiSaveDown1 } from 'react-icons/ci';
 import Link from 'next/link';
 
@@ -45,15 +45,15 @@ const Post: React.FC<PostProps> = async ({
 			<div className={classes.images}>
 				<Image
 					src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${image}`}
-					width={400}
-					height={400}
+					width={600}
+					height={600}
 					alt={`Post of ${author.name} user`}
 				/>
 			</div>
 			<div className={classes.actions}>
 				<div>
-					<CiHeart />
-					<PiChatCircleTextThin />
+					<FaRegHeart />
+					<FiMessageCircle />
 				</div>
 				<div>
 					<CiSaveDown1 />

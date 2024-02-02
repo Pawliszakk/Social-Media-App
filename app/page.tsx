@@ -1,11 +1,10 @@
-import { checkSession } from '@/lib/actions/utils/checkSession';
-import Post from '@/components/Post/Post';
 import PostsVariant from '@/components/Home/PostsVariant';
 import { getPosts } from '@/lib/actions/post/getPosts';
 import { Suspense } from 'react';
-import Spinner from '@/components/UI/Spinner';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
-import PostSkeleton from '@/components/Post/PostSkeleton';
+import { permanentRedirect } from 'next/navigation';
+import Post from '@/components/Post/HomePost/Post';
+import PostSkeleton from '@/components/Post/HomePost/PostSkeleton';
 
 export default async function Home({
 	searchParams,
@@ -13,20 +12,27 @@ export default async function Home({
 	searchParams: { create: string; search: string };
 }) {
 	const { session, user } = await getSessionData();
-
+	if (!session) {
+		permanentRedirect('/auth/login');
+	}
 	const search = searchParams.search;
 
 	const posts = await getPosts();
-
-	//AS A SUSPENSE ADD A SKELETON LOADING
 
 	return (
 		<>
 			{search && <p>Szukanie osób</p>}
 			<PostsVariant />
 
-			<Suspense fallback={<Spinner />}>
-				<PostSkeleton />
+			<Suspense
+				fallback={
+					<>
+						<PostSkeleton />
+						<PostSkeleton />
+						<PostSkeleton />
+					</>
+				}
+			>
 				{posts.map((post) => (
 					<Post
 						key={post.id}
