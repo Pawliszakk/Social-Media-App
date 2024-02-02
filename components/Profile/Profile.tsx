@@ -1,9 +1,11 @@
+import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import classes from './Profile.module.scss';
 import ProfileInfo from './ProfileInfo';
 import ProfilePost from './ProfilePost';
 import { CiLock } from 'react-icons/ci';
 interface ProfileProps {
 	user: {
+		id: string;
 		name: string;
 		image: string;
 		private: boolean;
@@ -13,8 +15,16 @@ interface ProfileProps {
 	};
 }
 
-const Profile: React.FC<ProfileProps> = ({ user }) => {
-	const isPrivate = true;
+const Profile: React.FC<ProfileProps> = async ({ user }) => {
+	const session = await getSessionData();
+
+	let isPrivate = user.private;
+
+	const isLoggedUserProfile = session.user?.userId === user.id;
+	
+	if (isLoggedUserProfile) {
+		isPrivate = false;
+	}
 	return (
 		<div className={classes.box}>
 			<ProfileInfo

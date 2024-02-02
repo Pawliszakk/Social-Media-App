@@ -7,8 +7,8 @@ export default async function ProfilePage({
 	params: { userId: string };
 }) {
 	const { userId } = params;
-
 	const user = await getUserProfile(userId);
+
 	if (!user) {
 		throw new Error('Sorry, that site is unreachable');
 	}
