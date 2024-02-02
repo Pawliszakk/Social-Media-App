@@ -67,6 +67,10 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ name }) => {
 							width={300}
 							height={300}
 						/>
+						<div className={classes.delete}>
+							{' '}
+							<button onClick={() => setPickedImage(null)}>X</button>
+						</div>
 					</div>
 					{pending ? (
 						<Spinner className={classes.spinner} />
