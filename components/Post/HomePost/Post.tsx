@@ -1,10 +1,11 @@
-import Image from 'next/image';
 import classes from './Post.module.scss';
-import { FiMessageCircle } from 'react-icons/fi';
-import { FaRegHeart } from 'react-icons/fa';
-import { CiSaveDown1 } from 'react-icons/ci';
 import Link from 'next/link';
-import { BsThreeDots } from 'react-icons/bs';
+import PostAuthor from '../PostPage/PostAuthor';
+import PostImages from '../PostPage/PostImages';
+import PostActions from '../PostPage/PostActions';
+import { savePost } from '@/lib/actions/post/savePost';
+import { likePost, unLikePost } from '@/lib/actions/post/likePost';
+import PostLikes from '../PostPage/PostLikes';
 
 interface PostProps {
 	postId: string;
@@ -17,6 +18,11 @@ interface PostProps {
 	likes: string[] | [];
 	comments: string[] | [];
 	author: { id: string; name: string; image: string };
+	isUserAuthor: boolean;
+	isUserFollowingAuthor: boolean;
+	userId: string;
+	isUserLikingPost: boolean;
+	isUserSavedPost: boolean;
 }
 
 const Post: React.FC<PostProps> = async ({
@@ -30,43 +36,34 @@ const Post: React.FC<PostProps> = async ({
 	likes,
 	comments,
 	author,
+	isUserAuthor,
+	isUserFollowingAuthor,
+	userId,
+	isUserLikingPost,
+	isUserSavedPost,
 }) => {
 	return (
 		<article className={classes.post}>
-			<div className={classes.author}>
-				<div className={classes.image}>
-					<Image src={author.image} width={100} height={100} alt="user" />
-					<Link href={`/profile/${author.id}`}>{author.name}</Link>{' '}
-					<span>{date}</span>
-				</div>
-				<div>
-					<button>
-						<BsThreeDots />
-					</button>
-				</div>
-			</div>
-			<div className={classes.images}>
-				<Image
-					src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${image}`}
-					width={600}
-					height={600}
-					alt={`Post of ${author.name} user`}
-				/>
-			</div>
-			<div className={classes.actions}>
-				<div>
-					<FaRegHeart />
-					<FiMessageCircle />
-				</div>
-				<div>
-					<CiSaveDown1 />
-				</div>
-			</div>
-			<div className={classes.likes}>
-				<p>
-					<span>{likes.length}</span> Likes
-				</p>
-			</div>
+			<PostAuthor
+				image={author.image}
+				name={author.name}
+				authorId={author.id}
+				date={date}
+				home
+				isUserAuthor={isUserAuthor}
+				isUserFollowingAuthor={isUserFollowingAuthor}
+				description={description}
+			/>
+			<PostImages images={image} author={author.name} />
+			<PostActions
+				likePost={isUserLikingPost ? unLikePost : likePost}
+				savePost={savePost}
+				userId={userId}
+				postId={postId}
+				isUserLikingPost={isUserLikingPost}
+				isUserSavedPost={isUserSavedPost}
+			/>
+			<PostLikes likes={likes} date={date} />
 
 			<div className={classes.description}>
 				<p>

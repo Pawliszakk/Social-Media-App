@@ -7,41 +7,6 @@
 		margin: 3rem auto;
 		background-color: var(--border-light);
 	}
-	.author {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		.image {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			img {
-				margin-left: 5px;
-				border-radius: var(--radius-circle);
-				width: 40px;
-				height: 40px;
-			}
-			a {
-				margin-left: 1em;
-				text-decoration: none;
-				color: var(--text);
-				font-size: 1.4rem;
-				font-weight: bold;
-			}
-			span {
-				margin-left: 2em;
-				color: var(--text-light);
-			}
-		}
-		button {
-			font-size: 2.5rem;
-			font-weight: bold;
-			border: none;
-			cursor: pointer;
-			padding: 1.5rem;
-			background-color: transparent;
-		}
-	}
 
 	.images {
 		max-height: 600px;

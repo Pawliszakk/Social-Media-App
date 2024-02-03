@@ -48,7 +48,8 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 					description={post.description}
 					authorId={post.author.id}
 					date={post.date}
-					isFollowingAuthor={isUserFollowingAuthor}
+					isUserFollowingAuthor={isUserFollowingAuthor}
+					isUserAuthor={isUserAuthor}
 				/>
 
 				<PostComments isCommenting={post.commenting} />
