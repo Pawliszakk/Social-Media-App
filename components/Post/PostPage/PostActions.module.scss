@@ -1,0 +1,10 @@
+.actions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	svg {
+		font-size: 3rem;
+		margin: 0.5rem 0.3em;
+		cursor: pointer;
+	}
+}

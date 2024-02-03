@@ -8,6 +8,8 @@ import PostAddComment from '@/components/Post/PostPage/PostAddComment';
 import PostImages from '@/components/Post/PostPage/PostImages';
 import PostLikes from '@/components/Post/PostPage/PostLikes';
 import PostActions from '@/components/Post/PostPage/PostActions';
+import { likePost } from '@/lib/actions/post/likePost';
+import { savePost } from '@/lib/actions/post/savePost';
 
 const postPage = async ({ params }: { params: { postId: string } }) => {
 	const { session, user } = await getSessionData();
@@ -39,7 +41,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 
 				<PostComments isCommenting={post.commenting} />
 
-				<PostActions />
+				<PostActions likePost={likePost} savePost={savePost} />
 				<PostLikes likes={post.likes} date={post.date} />
 
 				{post.commenting && (
