@@ -34,6 +34,8 @@ export const getSessionData = async () => {
 		userId: user.id,
 		theme: user.theme,
 		likedPosts: user.likedPosts,
+		following: user.following,
+		savedPosts: user.savedPosts,
 	};
 
 	return { session, user: userData };

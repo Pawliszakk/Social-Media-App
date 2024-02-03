@@ -11,7 +11,11 @@
 		display: flex;
 	}
 	.liked {
-		color: tomato;
+		color: rgb(205, 49, 21);
+		animation: scaleUp 0.3s ease-in-out;
+	}
+	.saved {
+		color: rgb(72, 108, 19);
 		animation: scaleUp 0.3s ease-in-out;
 	}
 }

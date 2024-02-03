@@ -8,6 +8,7 @@ interface PostAuthorProps {
 	description: string;
 	date: string;
 	authorId: string;
+	isFollowingAuthor: boolean;
 }
 
 const PostAuthor: React.FC<PostAuthorProps> = ({
@@ -16,17 +17,19 @@ const PostAuthor: React.FC<PostAuthorProps> = ({
 	description,
 	authorId,
 	date,
+	isFollowingAuthor,
 }) => {
 	return (
 		<>
 			{' '}
 			<div className={classes.author}>
-				<div className={classes.image}>
+				<Link href={`/profile/${authorId}`} className={classes.image}>
+					{' '}
 					<Image src={image} width={50} height={50} alt={`${name} avatar`} />
 					<span>
-						{name} {'<If followed>'}
+						{name} {isFollowingAuthor ? 'Followuje' : 'Nie followuje'}
 					</span>
-				</div>
+				</Link>
 				<button className={classes.button}>
 					<BsThreeDots />
 				</button>

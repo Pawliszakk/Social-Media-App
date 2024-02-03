@@ -29,6 +29,14 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 	const isUserLikingPost = user.likedPosts.find(
 		(id: string) => id.toString() === post.id
 	);
+	const isUserFollowingAuthor = user.following.find(
+		(id: string) => id.toString() === post.author.id
+	);
+
+	const isUserSavedPost = user.savedPosts.find(
+		(id: string) => id.toString() === post.id
+	);
+
 	return (
 		<div className={classes.box}>
 			<PostImages images={post.image} author={post.author.name} />
@@ -40,6 +48,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 					description={post.description}
 					authorId={post.author.id}
 					date={post.date}
+					isFollowingAuthor={isUserFollowingAuthor}
 				/>
 
 				<PostComments isCommenting={post.commenting} />
@@ -50,6 +59,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 					userId={user.userId}
 					postId={post.id}
 					isUserLikingPost={!!isUserLikingPost}
+					isUserSavedPost={!!isUserSavedPost}
 				/>
 				<PostLikes likes={post.likes} date={post.date} />
 

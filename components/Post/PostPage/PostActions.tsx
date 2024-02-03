@@ -1,16 +1,16 @@
 'use client';
 import classes from './PostActions.module.scss';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { FiMessageCircle } from 'react-icons/fi';
-import { CiSaveDown1 } from 'react-icons/ci';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { MdOutlineCollectionsBookmark } from 'react-icons/md';
 interface PostActionsProps {
 	likePost: (postId: string, userId: string) => void;
-	savePost: () => void;
+	savePost: (postId: string, userId: string) => void;
 	userId: string;
 	postId: string;
 	isUserLikingPost: boolean;
+	isUserSavedPost: boolean;
 }
 
 const PostActions: React.FC<PostActionsProps> = ({
@@ -19,40 +19,50 @@ const PostActions: React.FC<PostActionsProps> = ({
 	postId,
 	userId,
 	isUserLikingPost,
+	isUserSavedPost,
 }) => {
 	const [isLiked, setIsLiked] = useState(isUserLikingPost);
+	const [isSaved, setIsSaved] = useState(isUserSavedPost);
 
-	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+	const [isLikingDisabled, setIsLikingDisabled] = useState(false);
+	const [isSavingDisabled, setIsSavingDisabled] = useState(false);
 
 	const handleLikeClick = async () => {
 		try {
-			if (!isButtonDisabled) {
-				setIsButtonDisabled(true);
-
+			if (!isLikingDisabled) {
+				setIsLikingDisabled(true);
 				setIsLiked((prev) => !prev);
 				await likePost(postId, userId);
-
-				setIsButtonDisabled(false);
+				setIsLikingDisabled(false);
 			}
 		} catch (error) {
-			setIsButtonDisabled(false);
+			setIsLikingDisabled(false);
+		}
+	};
+	const handleSaveClick = async () => {
+		try {
+			if (!isSavingDisabled) {
+				setIsSavingDisabled(true);
+				setIsSaved((prev) => !prev);
+				await savePost(postId, userId);
+				setIsSavingDisabled(false);
+			}
+		} catch (error) {
+			setIsSavingDisabled(false);
 		}
 	};
 
 	return (
 		<div className={classes.actions}>
 			<div>
-				<motion.div
-					className={isLiked ? classes.liked : ''}
-					onClick={handleLikeClick}
-				>
-					<FaRegHeart />
-				</motion.div>
+				<div className={isLiked ? classes.liked : ''} onClick={handleLikeClick}>
+					{isLiked ? <FaHeart /> : <FaRegHeart />}
+				</div>
 
 				<FiMessageCircle />
 			</div>
-			<div>
-				<CiSaveDown1 onClick={() => savePost()} />
+			<div className={isSaved ? classes.saved : ''}>
+				<MdOutlineCollectionsBookmark onClick={handleSaveClick} />
 			</div>
 		</div>
 	);
