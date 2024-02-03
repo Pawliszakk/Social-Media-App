@@ -33,6 +33,7 @@ export const getSessionData = async () => {
 		image,
 		userId: user.id,
 		theme: user.theme,
+		likedPosts: user.likedPosts,
 	};
 
 	return { session, user: userData };

@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema({
 	provider: { type: String, required: true },
 	password: { type: String, required: false },
 	posts: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Post' }],
+	likedPosts: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Post' }],
 	followers: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
 	following: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
 	closeFriends: [

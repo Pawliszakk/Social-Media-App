@@ -7,4 +7,23 @@
 		margin: 0.5rem 0.3em;
 		cursor: pointer;
 	}
+	div {
+		display: flex;
+	}
+	.liked {
+		color: tomato;
+		animation: scaleUp 0.3s ease-in-out;
+	}
+}
+
+@keyframes scaleUp {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.4);
+	}
+	100% {
+		transform: scale(1);
+	}
 }

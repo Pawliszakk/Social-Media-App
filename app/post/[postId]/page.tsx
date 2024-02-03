@@ -8,7 +8,7 @@ import PostAddComment from '@/components/Post/PostPage/PostAddComment';
 import PostImages from '@/components/Post/PostPage/PostImages';
 import PostLikes from '@/components/Post/PostPage/PostLikes';
 import PostActions from '@/components/Post/PostPage/PostActions';
-import { likePost } from '@/lib/actions/post/likePost';
+import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 import { savePost } from '@/lib/actions/post/savePost';
 
 const postPage = async ({ params }: { params: { postId: string } }) => {
@@ -26,6 +26,9 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 		permanentRedirect(`/profile/${postAuthor}`);
 	}
 
+	const isUserLikingPost = user.likedPosts.find(
+		(id: string) => id.toString() === post.id
+	);
 	return (
 		<div className={classes.box}>
 			<PostImages images={post.image} author={post.author.name} />
@@ -41,7 +44,13 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 
 				<PostComments isCommenting={post.commenting} />
 
-				<PostActions likePost={likePost} savePost={savePost} />
+				<PostActions
+					likePost={isUserLikingPost ? unLikePost : likePost}
+					savePost={savePost}
+					userId={user.userId}
+					postId={post.id}
+					isUserLikingPost={!!isUserLikingPost}
+				/>
 				<PostLikes likes={post.likes} date={post.date} />
 
 				{post.commenting && (
