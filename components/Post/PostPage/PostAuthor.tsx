@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import classes from './PostAuthor.module.scss';
 import Link from 'next/link';
-
+import { BsThreeDots } from 'react-icons/bs';
 interface PostAuthorProps {
 	image: string;
 	name: string;
@@ -27,7 +27,9 @@ const PostAuthor: React.FC<PostAuthorProps> = ({
 						{name} {'<If followed>'}
 					</span>
 				</div>
-				<button className={classes.button}>...</button>
+				<button className={classes.button}>
+					<BsThreeDots />
+				</button>
 			</div>
 			{description !== '' ? (
 				<>

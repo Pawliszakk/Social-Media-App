@@ -4,6 +4,7 @@ import { FiMessageCircle } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
 import { CiSaveDown1 } from 'react-icons/ci';
 import Link from 'next/link';
+import { BsThreeDots } from 'react-icons/bs';
 
 interface PostProps {
 	postId: string;
@@ -39,7 +40,9 @@ const Post: React.FC<PostProps> = async ({
 					<span>{date}</span>
 				</div>
 				<div>
-					<button>...</button>
+					<button>
+						<BsThreeDots />
+					</button>
 				</div>
 			</div>
 			<div className={classes.images}>

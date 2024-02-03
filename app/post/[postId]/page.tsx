@@ -1,14 +1,13 @@
 import { getPostById } from '@/lib/actions/post/getPostById';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import { permanentRedirect } from 'next/navigation';
-import { FaRegHeart } from 'react-icons/fa';
-import { FiMessageCircle } from 'react-icons/fi';
-import { CiSaveDown1 } from 'react-icons/ci';
 import classes from './page.module.scss';
-import Image from 'next/image';
 import PostAuthor from '@/components/Post/PostPage/PostAuthor';
 import PostComments from '@/components/Post/PostPage/PostComments';
 import PostAddComment from '@/components/Post/PostPage/PostAddComment';
+import PostImages from '@/components/Post/PostPage/PostImages';
+import PostLikes from '@/components/Post/PostPage/PostLikes';
+import PostActions from '@/components/Post/PostPage/PostActions';
 
 const postPage = async ({ params }: { params: { postId: string } }) => {
 	const { session, user } = await getSessionData();
@@ -25,16 +24,10 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 		permanentRedirect(`/profile/${postAuthor}`);
 	}
 
-	//CHECK IF COMMENTING IS SET TO ON
-
 	return (
 		<div className={classes.box}>
-			<Image
-				src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${post.image}`}
-				width={600}
-				height={600}
-				alt={`Post of ${post.author.name} user`}
-			/>
+			<PostImages images={post.image} author={post.author.name} />
+
 			<div className={classes.panel}>
 				<PostAuthor
 					name={post.author.name}
@@ -46,21 +39,8 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 
 				<PostComments isCommenting={post.commenting} />
 
-				<div className={classes.actions}>
-					<div>
-						<FaRegHeart />
-						<FiMessageCircle />
-					</div>
-					<div>
-						<CiSaveDown1 />
-					</div>
-				</div>
-				<div className={classes.likes}>
-					<p>
-						<span>{post.likes.length}</span> Likes
-					</p>
-					<p className={classes.date}>{post.date}</p>
-				</div>
+				<PostActions />
+				<PostLikes likes={post.likes} date={post.date} />
 
 				{post.commenting && (
 					<PostAddComment
