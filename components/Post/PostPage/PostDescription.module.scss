@@ -1,0 +1,23 @@
+.description {
+	display: flex;
+	align-items: center;
+	&.postPage {
+		padding: 1em;
+		p {
+			margin-left: 1em;
+		}
+	}
+
+	img {
+		display: block;
+		border-radius: var(--radius-circle);
+	}
+	p {
+		font-size: 1.2rem;
+		a {
+			text-decoration: none;
+			color: var(--text-normal);
+			font-weight: bold;
+		}
+	}
+}
