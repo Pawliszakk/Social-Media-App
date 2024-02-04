@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import classes from './PostImages.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import LikeAnimation from './LikeAnimation';
 interface PostImagesProps {
 	images: string | string[];
-	author: string;
+	authorName: string;
 	isUserLikingPost: boolean;
 	likePost: () => void;
 }
@@ -39,7 +39,7 @@ const PostImages: React.FC<PostImagesProps> = (props) => {
 				src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${props.images}`}
 				width={600}
 				height={600}
-				alt={`Post of ${props.author} user`}
+				alt={`Post of ${props.authorName} user`}
 			/>
 			{isLikeAnimation && <LikeAnimation />}
 		</div>

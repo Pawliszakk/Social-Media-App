@@ -5,14 +5,11 @@ import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import { permanentRedirect } from 'next/navigation';
 import PostFallback from '@/components/Post/HomePost/PostFallback';
 import PostAuthor from '@/components/Post/PostPage/PostAuthor';
-import PostImages from '@/components/Post/PostPage/PostImages';
-import PostActions from '@/components/Post/PostPage/PostActions';
-import PostLikes from '@/components/Post/PostPage/PostLikes';
 import PostDescription from '@/components/Post/PostPage/PostDescription';
 import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 import classes from './page.module.scss';
 import { savePost } from '@/lib/actions/post/savePost';
-import PostComponent from '@/components/Post/PostPage/PostComponent';
+import PostComponent from '@/components/Post/HomePost/PostComponent';
 
 export default async function Home({
 	searchParams,
@@ -34,14 +31,14 @@ export default async function Home({
 			<Suspense fallback={<PostFallback />}>
 				{posts.map((post) => {
 					const isUserAuthor = post.author.id === user.userId;
-					const isUserFollowingAuthor = !!user.following.find(
+					const isUserFollowingAuthor = user.following.find(
 						(id: string) => id.toString() === post.author.id
 					);
-					const isUserLikingPost = !!user.likedPosts.find(
+					const isUserLikingPost = user.likedPosts.find(
 						(id: string) => id.toString() === post.id
 					);
 
-					const isUserSavedPost = !!user.savedPosts.find(
+					const isUserSavedPost = user.savedPosts.find(
 						(id: string) => id.toString() === post.id
 					);
 					return (
@@ -51,19 +48,19 @@ export default async function Home({
 								name={post.author.name}
 								authorId={post.author.id}
 								date={post.date}
-								isUserAuthor={isUserAuthor}
-								isUserFollowingAuthor={isUserFollowingAuthor}
+								isUserAuthor={!!isUserAuthor}
+								isUserFollowingAuthor={!!isUserFollowingAuthor}
 							/>
 							<PostComponent
 								images={post.image}
-								postAuthor={post.author.name}
-								isUserLikingPost={isUserLikingPost}
+								authorName={post.author.name}
+								isUserLikingPost={!!isUserLikingPost}
 								likePost={likePost}
 								unLikePost={unLikePost}
 								postId={post.id}
 								userId={user.userId}
 								savePost={savePost}
-								isUserSavedPost={isUserSavedPost}
+								isUserSavedPost={!!isUserSavedPost}
 								date={post.date}
 								likes={post.likes}
 							/>

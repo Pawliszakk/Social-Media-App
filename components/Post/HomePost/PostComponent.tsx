@@ -1,22 +1,21 @@
 'use client';
 import { useState } from 'react';
-import PostActions from './PostActions';
-import PostImages from './PostImages';
-import PostLikes from './PostLikes';
-import { likePost } from '@/lib/actions/post/likePost';
+import PostImages from '../PostPage/PostImages';
+import PostActions from '../PostPage/PostActions';
+import PostLikes from '../PostPage/PostLikes';
 
 interface PostComponentProps {
 	images: string | string[];
-	postAuthor: string;
+	authorName: string;
 	isUserLikingPost: boolean;
-	likePost: (postId: string, userId: string) => void;
-	unLikePost: (postId: string, userId: string) => void;
 	postId: string;
 	userId: string;
-	savePost: (postId: string, userId: string) => void;
 	isUserSavedPost: boolean;
 	date: string;
 	likes: string[] | [];
+	likePost: (postId: string, userId: string) => void;
+	unLikePost: (postId: string, userId: string) => void;
+	savePost: (postId: string, userId: string) => void;
 }
 
 const PostComponent: React.FC<PostComponentProps> = (props) => {
@@ -25,17 +24,15 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 		props.isUserLikingPost
 	);
 
-
-
-	const likePostHandler = async () => {
+	const likePostHandler = () => {
 		if (!isUserLikingPost) {
 			setLikesCount((prev) => prev + 1);
 			setIsUserLikingPost(true);
-			await props.likePost(props.postId, props.userId);
+			props.likePost(props.postId, props.userId);
 		} else {
 			setLikesCount((prev) => prev - 1);
 			setIsUserLikingPost(false);
-			await props.unLikePost(props.postId, props.userId);
+			props.unLikePost(props.postId, props.userId);
 		}
 	};
 
@@ -43,7 +40,7 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 		<>
 			<PostImages
 				images={props.images}
-				author={props.postAuthor}
+				authorName={props.authorName}
 				isUserLikingPost={isUserLikingPost}
 				likePost={likePostHandler}
 			/>

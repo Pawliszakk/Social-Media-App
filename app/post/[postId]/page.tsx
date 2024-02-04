@@ -1,22 +1,17 @@
 import { getPostById } from '@/lib/actions/post/getPostById';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import { permanentRedirect } from 'next/navigation';
-import classes from './page.module.scss';
-import PostAuthor from '@/components/Post/PostPage/PostAuthor';
-import PostComments from '@/components/Post/PostPage/PostComments';
-import PostAddComment from '@/components/Post/PostPage/PostAddComment';
-import PostImages from '@/components/Post/PostPage/PostImages';
-import PostLikes from '@/components/Post/PostPage/PostLikes';
-import PostActions from '@/components/Post/PostPage/PostActions';
+
 import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 import { savePost } from '@/lib/actions/post/savePost';
-import PostDescription from '@/components/Post/PostPage/PostDescription';
+import PostPage from '@/components/Post/PostPage/PostPage';
 
 const postPage = async ({ params }: { params: { postId: string } }) => {
 	const { session, user } = await getSessionData();
 	if (!session) {
 		permanentRedirect('/auth/login');
 	}
+
 	const { post, isUserAllowedToView, isUserAuthor } = await getPostById(
 		params.postId,
 		user?.userId
@@ -37,48 +32,30 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 	const isUserSavedPost = user.savedPosts.find(
 		(id: string) => id.toString() === post.id
 	);
-
+	const author = {
+		name: post.author.name,
+		id: post.author._id.toString(),
+		image: post.author.image,
+	};
 	return (
-		<div className={classes.box}>
-			<PostImages images={post.image} author={post.author.name} />
-
-			<div className={classes.panel}>
-				<PostAuthor
-					name={post.author.name}
-					image={post.author.image}
-					authorId={post.author.id}
-					date={post.date}
-					isUserFollowingAuthor={isUserFollowingAuthor}
-					isUserAuthor={isUserAuthor}
-				/>
-				<PostDescription
-					image={post.author.image}
-					description={post.description}
-					authorId={post.author.id}
-					authorName={post.author.name}
-				/>
-
-				<PostComments isCommenting={post.commenting} />
-
-				<PostActions
-					likePost={isUserLikingPost ? unLikePost : likePost}
-					savePost={savePost}
-					userId={user.userId}
-					postId={post.id}
-					isUserLikingPost={!!isUserLikingPost}
-					isUserSavedPost={!!isUserSavedPost}
-				/>
-				<PostLikes likes={post.likes} date={post.date} />
-
-				{post.commenting && (
-					<PostAddComment
-						name={user.name}
-						image={user.image}
-						userId={user.userId}
-					/>
-				)}
-			</div>
-		</div>
+		<PostPage
+			images={post.image}
+			author={author}
+			isUserLikingPost={!!isUserLikingPost}
+			likePost={likePost}
+			unLikePost={unLikePost}
+			postId={post.id}
+			userId={user.userId}
+			savePost={savePost}
+			isUserSavedPost={!!isUserSavedPost}
+			date={post.date}
+			likes={post.likes}
+			isUserAuthor={!!isUserAuthor}
+			isUserFollowingAuthor={!!isUserFollowingAuthor}
+			commenting={post.commenting}
+			user={{ name: user.name, image: user.image, userId: user.userId }}
+			description={post.description}
+		/>
 	);
 };
 
