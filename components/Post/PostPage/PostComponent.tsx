@@ -24,6 +24,9 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 	const [isUserLikingPost, setIsUserLikingPost] = useState(
 		props.isUserLikingPost
 	);
+
+
+
 	const likePostHandler = async () => {
 		if (!isUserLikingPost) {
 			setLikesCount((prev) => prev + 1);
@@ -52,7 +55,7 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 				isUserLikingPost={isUserLikingPost}
 				isUserSavedPost={props.isUserSavedPost}
 			/>
-			<PostLikes likes={likesCount} date={props.date} />{' '}
+			<PostLikes likes={likesCount} date={props.date} />
 		</>
 	);
 };

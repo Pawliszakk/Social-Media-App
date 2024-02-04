@@ -12,22 +12,26 @@ interface PostImagesProps {
 }
 
 const PostImages: React.FC<PostImagesProps> = (props) => {
-	const [isLikeComponent, setIsLikeComponent] = useState(false);
+	const [isLikeAnimation, setIsLikeAnimation] = useState(false);
+	const [likeTimeout, setLikeTimeout] = useState<NodeJS.Timeout | null>(null);
 
 	const handleDoubleClick = () => {
-		setIsLikeComponent(true);
-		if (props.isUserLikingPost) {
-			return;
-		} else {
+		setIsLikeAnimation(true);
+
+		if (!props.isUserLikingPost) {
 			props.likePost();
 		}
-	};
 
-	useEffect(() => {
-		setTimeout(() => {
-			setIsLikeComponent(false);
+		if (likeTimeout !== null) {
+			clearTimeout(likeTimeout);
+		}
+
+		const newTimeout = setTimeout(() => {
+			setIsLikeAnimation(false);
 		}, 1000);
-	}, [isLikeComponent]);
+
+		setLikeTimeout(newTimeout);
+	};
 
 	return (
 		<div className={classes.images} onDoubleClick={handleDoubleClick}>
@@ -37,7 +41,7 @@ const PostImages: React.FC<PostImagesProps> = (props) => {
 				height={600}
 				alt={`Post of ${props.author} user`}
 			/>
-			{isLikeComponent && <LikeAnimation />}
+			{isLikeAnimation && <LikeAnimation />}
 		</div>
 	);
 };

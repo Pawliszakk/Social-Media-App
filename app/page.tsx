@@ -67,23 +67,6 @@ export default async function Home({
 								date={post.date}
 								likes={post.likes}
 							/>
-							{/* <PostImages
-								images={post.image}
-								author={post.author.name}
-								isUserLikingPost={isUserLikingPost}
-								likePost={likePost}
-								postId={post.id}
-								userId={user.userId}
-							/>
-							<PostActions
-								likePost={isUserLikingPost ? unLikePost : likePost}
-								savePost={savePost}
-								userId={user.userId}
-								postId={post.id}
-								isUserLikingPost={isUserLikingPost}
-								isUserSavedPost={isUserSavedPost}
-							/>
-							<PostLikes likes={post.likes} date={post.date} /> */}
 
 							<PostDescription
 								description={post.description}
