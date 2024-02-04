@@ -11,21 +11,21 @@ interface PostAuthorProps {
 	isUserAuthor: boolean;
 }
 
-const PostAuthor: React.FC<PostAuthorProps> = ({
-	image,
-	name,
-	authorId,
-	date,
-	isUserFollowingAuthor,
-}) => {
+const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 	return (
 		<div className={classes.author}>
-			<Link href={`/profile/${authorId}`} className={classes.image}>
-				<Image src={image} width={50} height={50} alt={`${name} avatar`} />
+			<Link href={`/profile/${props.authorId}`} className={classes.image}>
+				<Image
+					src={props.image}
+					width={50}
+					height={50}
+					alt={`${props.name} avatar`}
+				/>
 				<span>
-					{name} {isUserFollowingAuthor ? 'Following' : 'Not Following'}
+					{props.name}{' '}
+					{props.isUserFollowingAuthor ? 'Following' : 'Not Following'}
 				</span>
-				<span>{date}</span>
+				<span>{props.date}</span>
 			</Link>
 			<button className={classes.button}>
 				<BsThreeDots />

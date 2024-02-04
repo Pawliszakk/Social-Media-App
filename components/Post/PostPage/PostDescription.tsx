@@ -10,31 +10,28 @@ interface PostDescriptionProps {
 	home?: boolean;
 }
 
-const PostDescription: React.FC<PostDescriptionProps> = ({
-	image,
-	authorName,
-	authorId,
-	description,
-	home,
-}) => {
+const PostDescription: React.FC<PostDescriptionProps> = (props) => {
 	return (
 		<>
-			{description !== '' && (
+			{props.description !== '' && (
 				<div
-					className={`${classes.description} ${home ? '' : classes.postPage}`}
+					className={`${classes.description} ${
+						props.home ? '' : classes.postPage
+					}`}
 				>
-					{!home && (
-						<Link href={`/profile/${authorId}`}>
+					{!props.home && (
+						<Link href={`/profile/${props.authorId}`}>
 							<Image
-								src={`${image}`}
+								src={`${props.image}`}
 								width={50}
 								height={50}
-								alt={`${authorName} profile picture`}
+								alt={`${props.authorName} profile picture`}
 							/>
 						</Link>
 					)}
 					<p>
-						<Link href={`/profile/${authorId}`}>{authorName}</Link> description
+						<Link href={`/profile/${props.authorId}`}>{props.authorName}</Link>{' '}
+						description
 					</p>
 				</div>
 			)}

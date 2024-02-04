@@ -1,17 +1,17 @@
 import classes from './PostLikes.module.scss';
 
 interface PostLikesProps {
-	likes: string[] | [];
+	likes: number;
 	date: string;
 }
 
-const PostLikes: React.FC<PostLikesProps> = ({ likes, date }) => {
+const PostLikes: React.FC<PostLikesProps> = (props) => {
 	return (
 		<div className={classes.likes}>
 			<p>
-				<span>{likes.length}</span> Likes
+				<span>{props.likes}</span> Likes
 			</p>
-			<p className={classes.date}>{date}</p>
+			<p className={classes.date}>{props.date}</p>
 		</div>
 	);
 };

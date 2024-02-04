@@ -5,7 +5,7 @@ import { FiMessageCircle } from 'react-icons/fi';
 import { useState } from 'react';
 import { MdOutlineCollectionsBookmark } from 'react-icons/md';
 interface PostActionsProps {
-	likePost: (postId: string, userId: string) => void;
+	likePost: () => void;
 	savePost: (postId: string, userId: string) => void;
 	userId: string;
 	postId: string;
@@ -13,38 +13,21 @@ interface PostActionsProps {
 	isUserSavedPost: boolean;
 }
 
-const PostActions: React.FC<PostActionsProps> = ({
-	likePost,
-	savePost,
-	postId,
-	userId,
-	isUserLikingPost,
-	isUserSavedPost,
-}) => {
-	const [isLiked, setIsLiked] = useState(isUserLikingPost);
-	const [isSaved, setIsSaved] = useState(isUserSavedPost);
+const PostActions: React.FC<PostActionsProps> = (props) => {
+	const [isSaved, setIsSaved] = useState(props.isUserSavedPost);
 
-	const [isLikingDisabled, setIsLikingDisabled] = useState(false);
 	const [isSavingDisabled, setIsSavingDisabled] = useState(false);
 
-	const handleLikeClick = async () => {
-		try {
-			if (!isLikingDisabled) {
-				setIsLikingDisabled(true);
-				setIsLiked((prev) => !prev);
-				await likePost(postId, userId);
-				setIsLikingDisabled(false);
-			}
-		} catch (error) {
-			setIsLikingDisabled(false);
-		}
+	const handleLikeClick = () => {
+		props.likePost();
 	};
+
 	const handleSaveClick = async () => {
 		try {
 			if (!isSavingDisabled) {
 				setIsSavingDisabled(true);
 				setIsSaved((prev) => !prev);
-				await savePost(postId, userId);
+				await props.savePost(props.postId, props.userId);
 				setIsSavingDisabled(false);
 			}
 		} catch (error) {
@@ -55,8 +38,11 @@ const PostActions: React.FC<PostActionsProps> = ({
 	return (
 		<div className={classes.actions}>
 			<div>
-				<div className={isLiked ? classes.liked : ''} onClick={handleLikeClick}>
-					{isLiked ? <FaHeart /> : <FaRegHeart />}
+				<div
+					className={props.isUserLikingPost ? classes.liked : ''}
+					onClick={handleLikeClick}
+				>
+					{props.isUserLikingPost ? <FaHeart /> : <FaRegHeart />}
 				</div>
 
 				<FiMessageCircle />
