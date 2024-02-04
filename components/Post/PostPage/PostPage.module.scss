@@ -1,13 +1,27 @@
 .box {
 	margin: 5rem auto;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	max-height: 600px;
-	max-width: 1000px;
-	border: var(--border-light);
+	max-width: 500px;
+	width: 80%;
 	border-radius: var(--radius-light);
 	overflow: hidden;
 	.panel {
 		flex-grow: 1;
+		border: var(--border-light);
+	}
+}
+@media (min-width: 1200px) {
+	.box {
+		flex-direction: row;
+		width: 800px;
+		max-width: none;
+		max-height: 600px;
+	}
+}
+@media (min-width: 1400px) {
+	.box {
+		width: 1100px;
 	}
 }

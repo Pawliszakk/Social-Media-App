@@ -41,12 +41,10 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 
 	const likePostHandler = () => {
 		if (!isUserLikingPost) {
-			console.log('liking');
 			setLikesCount((prev) => prev + 1);
 			setIsUserLikingPost(true);
 			props.likePost(props.postId, props.userId);
 		} else {
-			console.log('unliking');
 			setLikesCount((prev) => prev - 1);
 			setIsUserLikingPost(false);
 			props.unLikePost(props.postId, props.userId);

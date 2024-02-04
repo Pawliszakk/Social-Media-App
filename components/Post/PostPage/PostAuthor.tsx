@@ -27,7 +27,7 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 				</span>
 				<span>{props.date}</span>
 			</Link>
-			<button className={classes.button}>
+			<button>
 				<BsThreeDots />
 			</button>
 		</div>
