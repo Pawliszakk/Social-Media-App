@@ -24,6 +24,7 @@ export default async function RootLayout({
 		<html lang="en">
 			<body data-theme={user ? user.theme : ''}>
 				<div>
+					<div id="overlay-root"></div>
 					{session && (
 						<ActionBar
 							name={user.name}

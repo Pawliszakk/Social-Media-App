@@ -1,7 +1,8 @@
+'use client';
 import Image from 'next/image';
 import classes from './PostAuthor.module.scss';
 import Link from 'next/link';
-import { BsThreeDots } from 'react-icons/bs';
+import SettingsButton from './SettingsButton';
 interface PostAuthorProps {
 	image: string;
 	name: string;
@@ -27,9 +28,7 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 				</span>
 				<span>{props.date}</span>
 			</Link>
-			<button>
-				<BsThreeDots />
-			</button>
+			<SettingsButton />
 		</div>
 	);
 };

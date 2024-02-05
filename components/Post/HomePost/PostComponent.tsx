@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import PostImages from '../PostPage/PostImages';
+import PostImages from '../PostPage/Images/PostImages';
 import PostActions from '../PostPage/PostActions';
-import PostLikes from '../PostPage/PostLikes';
+import PostLikes from '../PostPage/Likes/PostLikes';
 
 interface PostComponentProps {
 	images: string | string[];

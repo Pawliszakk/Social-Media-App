@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import classes from './PostImages.module.scss';
 import { useState } from 'react';
-import LikeAnimation from './LikeAnimation';
+import LikeAnimation from '../Likes/LikeAnimation';
 interface PostImagesProps {
 	images: string | string[];
 	authorName: string;

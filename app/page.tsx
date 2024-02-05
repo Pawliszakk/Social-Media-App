@@ -4,12 +4,12 @@ import { Suspense } from 'react';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import { permanentRedirect } from 'next/navigation';
 import PostFallback from '@/components/Post/HomePost/PostFallback';
-import PostAuthor from '@/components/Post/PostPage/PostAuthor';
 import PostDescription from '@/components/Post/PostPage/PostDescription';
 import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 import classes from './page.module.scss';
 import { savePost } from '@/lib/actions/post/savePost';
 import PostComponent from '@/components/Post/HomePost/PostComponent';
+import PostAuthor from '@/components/Post/PostPage/Author/PostAuthor';
 
 export default async function Home({
 	searchParams,

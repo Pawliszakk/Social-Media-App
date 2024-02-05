@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import PostActions from './PostActions';
-import PostAuthor from './PostAuthor';
-import PostComments from './PostComments';
 import PostDescription from './PostDescription';
-import PostImages from './PostImages';
-import PostLikes from './PostLikes';
-import PostAddComment from './PostAddComment';
 import classes from './PostPage.module.scss';
+import PostImages from './Images/PostImages';
+import PostAuthor from './Author/PostAuthor';
+import PostComments from './Comments/PostComments';
+import PostLikes from './Likes/PostLikes';
+import PostAddComment from './Comments/PostAddComment';
 
 interface PostPageProps {
 	images: string | string[];
