@@ -1,12 +1,8 @@
-export const Actions = {
-	DELETE: 'delete',
-	EDIT: 'edit',
-	HIDE_LIKE_COUNT: 'hideLikeCount',
-	SHOW_LIKE_COUNT: 'showLikeCount',
-	HIDE_COMMENTING: 'hideCommenting',
-	SHOW_COMMENTING: 'showCommenting',
-	ARCHIVE: 'archive',
-	UNFOLLOW: 'unFollow',
-	FOLLOW: 'follow',
-	ABOUT: 'about',
-};
+export const DELETE = 'delete';
+export const EDIT = 'edit';
+export const SWITCH_LIKE_COUNT = 'switchLikeCount';
+export const SWITCH_COMMENTING = 'switchCommenting';
+export const ARCHIVE = 'archive';
+export const UNFOLLOW = 'unFollow';
+export const FOLLOW = 'follow';
+export const ABOUT = 'about';

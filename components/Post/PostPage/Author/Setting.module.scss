@@ -1,0 +1,20 @@
+.setting {
+	text-align: center;
+	padding: 1.5rem 3rem;
+	font-size: 1.7rem;
+	border-bottom: var(--border-light);
+	width: 100%;
+	cursor: pointer;
+	&.loading {
+		cursor: wait;
+	}
+	&.red {
+		color: rgb(187, 48, 24);
+		font-weight: bold;
+	}
+	.spinner {
+		margin: 0 auto;
+		height: 20px;
+		width: 20px;
+	}
+}

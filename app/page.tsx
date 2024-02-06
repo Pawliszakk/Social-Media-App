@@ -10,6 +10,11 @@ import classes from './page.module.scss';
 import { savePost } from '@/lib/actions/post/savePost';
 import PostComponent from '@/components/Post/HomePost/PostComponent';
 import PostAuthor from '@/components/Post/PostPage/Author/PostAuthor';
+import PostSettings from '@/components/Post/PostPage/Author/PostSettings';
+import { deletePost } from '@/lib/actions/post/deletePost';
+import { switchCommenting } from '@/lib/actions/post/switchCommenting';
+import { switchLiking } from '@/lib/actions/post/switchLiking';
+import { archivePost } from '@/lib/actions/post/archivePost';
 
 export default async function Home({
 	searchParams,
@@ -49,9 +54,23 @@ export default async function Home({
 								name={post.author.name}
 								authorId={post.author.id}
 								date={post.date}
-								isUserAuthor={!!isUserAuthor}
 								isUserFollowingAuthor={!!isUserFollowingAuthor}
-							/>
+								isUserAuthor={isUserAuthor}
+							>
+								<PostSettings
+									isUserFollowingAuthor={!!isUserFollowingAuthor}
+									isUserAuthor={!!isUserAuthor}
+									deletePost={deletePost}
+									switchCommenting={switchCommenting}
+									switchLiking={switchLiking}
+									archivePost={archivePost}
+									postId={post.id.toString()}
+									userId={user.userId}
+									commenting={post.commenting}
+									hideLikesCount={post.hideLikesCount}
+									authorId={post.author.id}
+								/>
+							</PostAuthor>
 							<PostComponent
 								images={post.image}
 								authorName={post.author.name}

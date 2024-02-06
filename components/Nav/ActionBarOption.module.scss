@@ -1,4 +1,7 @@
 .option {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	cursor: pointer;
 	img {
 		margin-top: 5px;
@@ -43,18 +46,13 @@
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		padding-left: 1em;
+		padding-left: 0.5em;
 		text-decoration: none;
 		color: var(--text-light);
 		font-size: 1.8rem;
 		span {
 			display: block;
-			padding-left: 1em;
+			padding-left: 0.6em;
 		}
-	}
-}
-@media (min-width: 1400px) {
-	.option {
-		font-size: 2rem;
 	}
 }

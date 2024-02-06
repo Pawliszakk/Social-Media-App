@@ -8,25 +8,30 @@ interface PostAuthorProps {
 	date: string;
 	authorId: string;
 	isUserFollowingAuthor: boolean;
+	isUserAuthor: boolean;
 	children: React.ReactNode;
 }
 
 const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 	return (
 		<div className={classes.author}>
-			<Link href={`/profile/${props.authorId}`} className={classes.image}>
-				<Image
-					src={props.image}
-					width={50}
-					height={50}
-					alt={`${props.name} avatar`}
-				/>
-				<span>
-					{props.name}{' '}
-					{props.isUserFollowingAuthor ? 'Following' : 'Not Following'}
-				</span>
+			<div className={classes.user}>
+				<Link href={`/profile/${props.authorId}`} className={classes.image}>
+					<Image
+						src={props.image}
+						width={50}
+						height={50}
+						alt={`${props.name} avatar`}
+					/>
+				</Link>
+				<Link href={`/profile/${props.authorId}`}>
+					<span>{props.name}</span>
+				</Link>
+				{!props.isUserAuthor && (
+					<span>{props.isUserFollowingAuthor ? 'Unfollow' : 'Follow'} </span>
+				)}
 				<span>{props.date}</span>
-			</Link>
+			</div>
 			{props.children}
 		</div>
 	);

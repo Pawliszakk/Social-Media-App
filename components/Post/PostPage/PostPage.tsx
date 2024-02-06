@@ -11,12 +11,9 @@ import PostLikes from './Likes/PostLikes';
 import PostAddComment from './Comments/PostAddComment';
 import PostSettings from './Author/PostSettings';
 import { deletePost } from '@/lib/actions/post/deletePost';
-import {
-	turnOffCommenting,
-	turnOnCommenting,
-} from '@/lib/actions/post/switchCommenting';
-import { hideLiking, showLiking } from '@/lib/actions/post/switchLiking';
+import { switchLiking } from '@/lib/actions/post/switchLiking';
 import { archivePost } from '@/lib/actions/post/archivePost';
+import { switchCommenting } from '@/lib/actions/post/switchCommenting';
 
 interface PostPageProps {
 	images: string | string[];
@@ -80,15 +77,14 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 						isUserAuthor={props.isUserAuthor}
 						isUserFollowingAuthor={props.isUserFollowingAuthor}
 						deletePost={deletePost}
-						turnOnCommenting={turnOnCommenting}
-						turnOffCommenting={turnOffCommenting}
+						switchCommenting={switchCommenting}
 						archivePost={archivePost}
-						showLiking={showLiking}
-						hideLiking={hideLiking}
 						postId={props.postId}
 						userId={props.userId}
 						commenting={props.commenting}
 						hideLikesCount={props.hideLikesCount}
+						switchLiking={switchLiking}
+						authorId={props.author.id}
 					/>
 				</PostAuthor>
 				<PostDescription

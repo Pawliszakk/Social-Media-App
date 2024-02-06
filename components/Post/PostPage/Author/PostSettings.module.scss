@@ -15,19 +15,8 @@
 	z-index: 200;
 	color: var(--text-light);
 	border: var(--border-light);
+
 	ul {
 		list-style-type: none;
-		li {
-			text-align: center;
-			padding: 1.5rem 3rem;
-			font-size: 1.7rem;
-			border-bottom: var(--border-light);
-			width: 100%;
-			cursor: pointer;
-		}
-	}
-	.red {
-		color: rgb(187, 48, 24);
-		font-weight: bold;
 	}
 }
