@@ -5,9 +5,16 @@ import Backdrop from '@/components/UI/Backdrop';
 
 interface PostSettingsProps {
 	closeSettings: () => void;
+	isUserAuthor: boolean;
 }
 
 const PostSettings: React.FC<PostSettingsProps> = (props) => {
+	const handleClick = (
+		event: React.MouseEvent<HTMLLIElement | HTMLDivElement>
+	) => {
+		event.stopPropagation();
+	};
+
 	return (
 		<Portal>
 			<Backdrop onClose={props.closeSettings}>
@@ -16,11 +23,11 @@ const PostSettings: React.FC<PostSettingsProps> = (props) => {
 					className={classes.settings}
 				>
 					<ul>
-						<li>Opcja1</li>
-						<li>Opcja2</li>
-						<li>Opcja3</li>
-						<li>Opcja3</li>
-						<li onClick={props.closeSettings}>Cancel</li>
+						<li onClick={handleClick}>Delete</li>
+						<li onClick={handleClick}>Edit</li>
+						<li onClick={handleClick}>Hide like count to others</li>
+						<li onClick={handleClick}>Turn off commenting</li>
+						<li onClick={() => props.closeSettings()}>Cancel</li>
 					</ul>
 				</motion.div>
 			</Backdrop>

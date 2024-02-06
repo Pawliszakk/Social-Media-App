@@ -1,4 +1,3 @@
-'use client';
 import Image from 'next/image';
 import classes from './PostAuthor.module.scss';
 import Link from 'next/link';
@@ -28,7 +27,10 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 				</span>
 				<span>{props.date}</span>
 			</Link>
-			<SettingsButton />
+			<SettingsButton
+				isUserAuthor={props.isUserAuthor}
+				isUserFollowingAuthor={props.isUserFollowingAuthor}
+			/>
 		</div>
 	);
 };

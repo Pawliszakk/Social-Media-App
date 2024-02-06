@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import classes from './Backdrop.module.scss';
 import { motion } from 'framer-motion';
 
@@ -7,6 +8,14 @@ interface BackdropProps {
 }
 
 const Backdrop: React.FC<BackdropProps> = (props) => {
+	useEffect(() => {
+		document.body.style.overflow = 'hidden';
+
+		return () => {
+			document.body.style.overflow = 'auto';
+		};
+	}, []);
+
 	return (
 		<motion.div
 			animate={{ opacity: [0, 1] }}

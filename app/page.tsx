@@ -29,7 +29,7 @@ export default async function Home({
 			<PostsVariant />
 
 			<Suspense fallback={<PostFallback />}>
-				{posts.map((post, i) => {
+				{posts.map((post) => {
 					const isUserAuthor = post.author.id === user.userId;
 					const isUserFollowingAuthor = user.following.find(
 						(id: string) => id.toString() === post.author.id
@@ -41,9 +41,6 @@ export default async function Home({
 					const isUserSavedPost = user.savedPosts.find(
 						(id: string) => id.toString() === post.id
 					);
-					if (i !== 0) {
-						return;
-					}
 
 					return (
 						<article className={classes.post} key={post.id}>

@@ -24,8 +24,6 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 		props.isUserLikingPost
 	);
 
-	console.log(props);
-
 	const likePostHandler = () => {
 		if (!isUserLikingPost) {
 			setLikesCount((prev) => prev + 1);

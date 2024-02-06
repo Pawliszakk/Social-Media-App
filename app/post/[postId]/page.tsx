@@ -49,7 +49,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 			savePost={savePost}
 			isUserSavedPost={!!isUserSavedPost}
 			date={post.date}
-			likes={post.likes}
+			likes={post.likes.map((like: string) => like.toString())}
 			isUserAuthor={!!isUserAuthor}
 			isUserFollowingAuthor={!!isUserFollowingAuthor}
 			commenting={post.commenting}
