@@ -68,6 +68,8 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 					date={props.date}
 					isUserFollowingAuthor={props.isUserFollowingAuthor}
 					isUserAuthor={props.isUserAuthor}
+					userId={props.userId}
+					postId={props.postId}
 				/>
 				<PostDescription
 					image={props.author.image}

@@ -1,18 +1,33 @@
+.button {
+	outline: none;
+	border: none;
+	background-color: transparent;
+	font-size: 2rem;
+	padding: 1rem;
+	cursor: pointer;
+	color: var(--text-normal);
+}
 .settings {
 	background-color: var(--primary-background);
 	border-radius: var(--radius-medium);
 	width: 90%;
 	max-width: 500px;
 	z-index: 200;
+	color: var(--text-light);
+	border: var(--border-light);
 	ul {
 		list-style-type: none;
 		li {
 			text-align: center;
-			padding: 1rem 3rem;
-			font-size: 1.6rem;
+			padding: 1.5rem 3rem;
+			font-size: 1.7rem;
 			border-bottom: var(--border-light);
 			width: 100%;
 			cursor: pointer;
 		}
+	}
+	.red {
+		color: rgb(187, 48, 24);
+		font-weight: bold;
 	}
 }
