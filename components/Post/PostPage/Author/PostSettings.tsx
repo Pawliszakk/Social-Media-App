@@ -28,7 +28,7 @@ const PostSettings: React.FC<PostSettingsProps> = (props) => {
 	const [isSettings, setIsSettings] = useState(false);
 
 	const { isUserAuthor, isUserFollowingAuthor } = props;
-	const handleClick = (
+	const handleClick = async (
 		event: React.MouseEvent<HTMLLIElement | HTMLDivElement>,
 		action: string
 	) => {
@@ -41,17 +41,21 @@ const PostSettings: React.FC<PostSettingsProps> = (props) => {
 				console.log('Edit action');
 				break;
 			case Actions.HIDE_LIKE_COUNT:
-				props.hideLiking(props.postId, props.userId);
+				await props.hideLiking(props.postId, props.userId);
+				setIsSettings(false);
 				break;
 			case Actions.SHOW_LIKE_COUNT:
-				props.showLiking(props.postId, props.userId);
+				await props.showLiking(props.postId, props.userId);
+				setIsSettings(false);
 				break;
 			case Actions.HIDE_COMMENTING:
-				props.turnOffCommenting(props.postId, props.userId);
-
+				await props.turnOffCommenting(props.postId, props.userId);
+				setIsSettings(false);
 				break;
 			case Actions.SHOW_COMMENTING:
-				props.turnOnCommenting(props.postId, props.userId);
+				await props.turnOnCommenting(props.postId, props.userId);
+				setIsSettings(false);
+
 				break;
 			case Actions.ARCHIVE:
 				props.archivePost(props.postId, props.userId);

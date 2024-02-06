@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { Post } from '../Models/post';
+import { permanentRedirect } from 'next/navigation';
 
 export async function archivePost(postId: string, userId: string) {
 	let post;
@@ -10,7 +11,6 @@ export async function archivePost(postId: string, userId: string) {
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
-
 
 	post.archived = true;
 
@@ -22,6 +22,7 @@ export async function archivePost(postId: string, userId: string) {
 	revalidatePath(`/post/${postId}`);
 	revalidatePath(`/profile/${userId}`);
 	revalidatePath(`/`);
+	permanentRedirect(`/profile/${userId}`);
 }
 export async function showArchivedPost(postId: string, userId: string) {
 	let post;
@@ -42,4 +43,5 @@ export async function showArchivedPost(postId: string, userId: string) {
 	revalidatePath(`/post/${postId}`);
 	revalidatePath(`/profile/${userId}`);
 	revalidatePath(`/`);
+	permanentRedirect(`/profile/${userId}`);
 }

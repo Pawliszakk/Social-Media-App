@@ -14,10 +14,10 @@ export async function getUserProfile(userId: string) {
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
-
-	const filteredPosts = user.posts.filter((archived: boolean) => !archived);
+	const filteredPosts = user.posts.filter((post: any) => !post.archived);
 
 	user.posts = filteredPosts;
+	
 	if (!user) {
 		return false;
 	}
