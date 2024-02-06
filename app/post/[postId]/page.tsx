@@ -16,10 +16,8 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 		params.postId,
 		user?.userId
 	);
-	const postAuthor = post.author.toString();
-
 	if (!isUserAllowedToView) {
-		permanentRedirect(`/profile/${postAuthor}`);
+		permanentRedirect(`/profile/${post.author.id}`);
 	}
 
 	const isUserLikingPost = user.likedPosts.find(
@@ -55,6 +53,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 			commenting={post.commenting}
 			user={{ name: user.name, image: user.image, userId: user.userId }}
 			description={post.description}
+			hideLikesCount={post.hideLikesCount}
 		/>
 	);
 };

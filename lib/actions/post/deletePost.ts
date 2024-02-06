@@ -52,5 +52,8 @@ export async function deletePost(postId: string, userId: string) {
 		Key: post.image,
 	});
 	revalidatePath(`/post/${postId}`);
+	revalidatePath(`/profile/${userId}`);
+	revalidatePath(`/`);
+
 	permanentRedirect('/');
 }

@@ -15,6 +15,9 @@ export async function getUserProfile(userId: string) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
+	const filteredPosts = user.posts.filter((archived: boolean) => !archived);
+
+	user.posts = filteredPosts;
 	if (!user) {
 		return false;
 	}

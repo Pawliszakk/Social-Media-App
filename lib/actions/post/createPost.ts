@@ -16,16 +16,6 @@ const s3 = new S3({
 	region: 'eu-central-1',
 });
 
-interface ImageFile {
-	size: number;
-	type: string;
-	name: string;
-	lastModified: number;
-}
-// description: string,
-// image: ImageFile,
-// commenting: string,
-// hideLikesCount: string
 export async function createPost(prevState: any, formData: any) {
 	const session = await getServerSession();
 

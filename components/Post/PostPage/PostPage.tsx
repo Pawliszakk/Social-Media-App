@@ -9,6 +9,14 @@ import PostAuthor from './Author/PostAuthor';
 import PostComments from './Comments/PostComments';
 import PostLikes from './Likes/PostLikes';
 import PostAddComment from './Comments/PostAddComment';
+import PostSettings from './Author/PostSettings';
+import { deletePost } from '@/lib/actions/post/deletePost';
+import {
+	turnOffCommenting,
+	turnOnCommenting,
+} from '@/lib/actions/post/switchCommenting';
+import { hideLiking, showLiking } from '@/lib/actions/post/switchLiking';
+import { archivePost } from '@/lib/actions/post/archivePost';
 
 interface PostPageProps {
 	images: string | string[];
@@ -26,6 +34,7 @@ interface PostPageProps {
 	isUserFollowingAuthor: boolean;
 	commenting: boolean;
 	description: string;
+	hideLikesCount: boolean;
 	user: {
 		name: string | null | undefined;
 		image: string | null | undefined;
@@ -38,7 +47,6 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 	const [isUserLikingPost, setIsUserLikingPost] = useState(
 		props.isUserLikingPost
 	);
-
 	const likePostHandler = () => {
 		if (!isUserLikingPost) {
 			setLikesCount((prev) => prev + 1);
@@ -67,10 +75,22 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 					authorId={props.author.id}
 					date={props.date}
 					isUserFollowingAuthor={props.isUserFollowingAuthor}
-					isUserAuthor={props.isUserAuthor}
-					userId={props.userId}
-					postId={props.postId}
-				/>
+				>
+					<PostSettings
+						isUserAuthor={props.isUserAuthor}
+						isUserFollowingAuthor={props.isUserFollowingAuthor}
+						deletePost={deletePost}
+						turnOnCommenting={turnOnCommenting}
+						turnOffCommenting={turnOffCommenting}
+						archivePost={archivePost}
+						showLiking={showLiking}
+						hideLiking={hideLiking}
+						postId={props.postId}
+						userId={props.userId}
+						commenting={props.commenting}
+						hideLikesCount={props.hideLikesCount}
+					/>
+				</PostAuthor>
 				<PostDescription
 					image={props.author.image}
 					description={props.description}

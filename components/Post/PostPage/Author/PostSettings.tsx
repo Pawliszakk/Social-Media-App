@@ -5,12 +5,23 @@ import Portal from '@/lib/Portal/Portal';
 import { motion } from 'framer-motion';
 import Backdrop from '@/components/UI/Backdrop';
 import classes from './PostSettings.module.scss';
+import { Actions } from '@/lib/constants/settingsActions';
+import { turnOnCommenting } from '@/lib/actions/post/switchCommenting';
+
 interface PostSettingsProps {
 	isUserFollowingAuthor: boolean;
 	isUserAuthor: boolean;
 	deletePost: (postId: string, userId: string) => void;
+	turnOnCommenting: (postId: string, userId: string) => void;
+	turnOffCommenting: (postId: string, userId: string) => void;
+	hideLiking: (postId: string, userId: string) => void;
+	showLiking: (postId: string, userId: string) => void;
+	archivePost: (postId: string, userId: string) => void;
+
 	postId: string;
 	userId: string;
+	commenting: boolean;
+	hideLikesCount: boolean;
 }
 
 const PostSettings: React.FC<PostSettingsProps> = (props) => {
@@ -18,10 +29,45 @@ const PostSettings: React.FC<PostSettingsProps> = (props) => {
 
 	const { isUserAuthor, isUserFollowingAuthor } = props;
 	const handleClick = (
-		event: React.MouseEvent<HTMLLIElement | HTMLDivElement>
+		event: React.MouseEvent<HTMLLIElement | HTMLDivElement>,
+		action: string
 	) => {
 		event.stopPropagation();
-		props.deletePost(props.postId, props.userId);
+		switch (action) {
+			case Actions.DELETE:
+				props.deletePost(props.postId, props.userId);
+				break;
+			case Actions.EDIT:
+				console.log('Edit action');
+				break;
+			case Actions.HIDE_LIKE_COUNT:
+				props.hideLiking(props.postId, props.userId);
+				break;
+			case Actions.SHOW_LIKE_COUNT:
+				props.showLiking(props.postId, props.userId);
+				break;
+			case Actions.HIDE_COMMENTING:
+				props.turnOffCommenting(props.postId, props.userId);
+
+				break;
+			case Actions.SHOW_COMMENTING:
+				props.turnOnCommenting(props.postId, props.userId);
+				break;
+			case Actions.ARCHIVE:
+				props.archivePost(props.postId, props.userId);
+				break;
+			case Actions.UNFOLLOW:
+				console.log('Unfollow action');
+				break;
+			case Actions.FOLLOW:
+				console.log('Follow action');
+				break;
+			case Actions.ABOUT:
+				console.log('About action');
+				break;
+			default:
+				break;
+		}
 	};
 
 	return (
@@ -39,26 +85,62 @@ const PostSettings: React.FC<PostSettingsProps> = (props) => {
 							<ul>
 								{isUserAuthor && (
 									<>
-										<li onClick={handleClick} className={classes.red}>
+										<li
+											onClick={(e) => handleClick(e, Actions.DELETE)}
+											className={classes.red}
+										>
 											Delete
 										</li>
-										<li onClick={handleClick}>Edit</li>
-										<li onClick={handleClick}>Hide like count to others</li>
-										<li onClick={handleClick}>Turn off commenting</li>
-										<li onClick={handleClick}>Archive</li>
+										<li onClick={(e) => handleClick(e, Actions.EDIT)}>Edit</li>
+										{props.hideLikesCount ? (
+											<li
+												onClick={(e) => handleClick(e, Actions.SHOW_LIKE_COUNT)}
+											>
+												Show like count to others
+											</li>
+										) : (
+											<li
+												onClick={(e) => handleClick(e, Actions.HIDE_LIKE_COUNT)}
+											>
+												Hide like count to others
+											</li>
+										)}
+										{props.commenting ? (
+											<li
+												onClick={(e) => handleClick(e, Actions.HIDE_COMMENTING)}
+											>
+												Turn off commenting
+											</li>
+										) : (
+											<li
+												onClick={(e) => handleClick(e, Actions.SHOW_COMMENTING)}
+											>
+												Turn on commenting
+											</li>
+										)}
+										<li onClick={(e) => handleClick(e, Actions.ARCHIVE)}>
+											Archive
+										</li>
 									</>
 								)}
 
 								{!isUserAuthor && isUserFollowingAuthor && (
-									<li onClick={handleClick} className={classes.red}>
+									<li
+										onClick={(e) => handleClick(e, Actions.UNFOLLOW)}
+										className={classes.red}
+									>
 										Unfollow
 									</li>
 								)}
 								{!isUserAuthor && !isUserFollowingAuthor && (
-									<li onClick={handleClick}>Follow</li>
+									<li onClick={(e) => handleClick(e, Actions.FOLLOW)}>
+										Follow
+									</li>
 								)}
 
-								<li onClick={handleClick}>About this account</li>
+								<li onClick={(e) => handleClick(e, Actions.ABOUT)}>
+									About this account
+								</li>
 
 								<li onClick={() => setIsSettings(false)}>Cancel</li>
 							</ul>
