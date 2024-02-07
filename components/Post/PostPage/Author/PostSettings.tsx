@@ -1,10 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { BsThreeDots } from 'react-icons/bs';
-import Portal from '@/lib/Portal/Portal';
-import { motion } from 'framer-motion';
-import Backdrop from '@/components/UI/Backdrop';
-import classes from './PostSettings.module.scss';
 import {
 	DELETE,
 	EDIT,
@@ -17,7 +12,8 @@ import {
 } from '@/lib/constants/settingsActions';
 import Setting from './Setting';
 import AccountAbout from './AccountAbout';
-import { getAccountData } from '@/lib/actions/user/getAccountData';
+import SettingsBox from './SettingsBox';
+import SettingsButton from './SettingsButton';
 
 interface PostSettingsProps {
 	isUserFollowingAuthor: boolean;
@@ -65,7 +61,6 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 				await switchLiking(postId, userId);
 				setIsSettings(false);
 				break;
-
 			case SWITCH_COMMENTING:
 				await switchCommenting(postId, userId);
 				setIsSettings(false);
@@ -89,82 +84,63 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 
 	return (
 		<>
-			<button className={classes.button} onClick={() => setIsSettings(true)}>
-				<BsThreeDots />
-			</button>
+			<SettingsButton onClick={() => setIsSettings(true)} />
 			{isSettings && (
-				<Portal>
-					<Backdrop onClose={() => setIsSettings(false)}>
-						<motion.div
-							animate={{ scale: [1.5, 1], opacity: [0, 1] }}
-							className={classes.settings}
-						>
-							{!isAboutComponent && (
-								<ul>
-									{isUserAuthor && (
-										<>
-											<Setting onClick={(e) => handleClick(e, DELETE)} red>
-												Delete
-											</Setting>
-											<Setting onClick={(e) => handleClick(e, EDIT)}>
-												Edit
-											</Setting>
-											<Setting
-												onClick={(e) => handleClick(e, SWITCH_LIKE_COUNT)}
-											>
-												{hideLikesCount
-													? 'Show likes count'
-													: 'Hide likes count'}
-											</Setting>
-											<Setting
-												onClick={(e) => handleClick(e, SWITCH_COMMENTING)}
-											>
-												{commenting
-													? 'Turn off commenting'
-													: 'Turn on commenting'}
-											</Setting>
-											<Setting onClick={(e) => handleClick(e, ARCHIVE)}>
-												Archive
-											</Setting>
-										</>
-									)}
-
-									{!isUserAuthor && isUserFollowingAuthor && (
-										<Setting onClick={(e) => handleClick(e, UNFOLLOW)} red>
-											Unfollow
-										</Setting>
-									)}
-
-									{!isUserAuthor && !isUserFollowingAuthor && (
-										<Setting onClick={(e) => handleClick(e, FOLLOW)}>
-											Follow
-										</Setting>
-									)}
-
-									{!isUserAuthor && (
-										<Setting onClick={(e) => handleClick(e, ABOUT)}>
-											About this account
-										</Setting>
-									)}
-
-									<Setting onClick={() => setIsSettings(false)}>Cancel</Setting>
-								</ul>
+				<SettingsBox onClose={() => setIsSettings(false)}>
+					{!isAboutComponent && (
+						<ul>
+							{isUserAuthor && (
+								<>
+									<Setting onClick={(e) => handleClick(e, DELETE)} red>
+										Delete
+									</Setting>
+									<Setting onClick={(e) => handleClick(e, EDIT)}>Edit</Setting>
+									<Setting onClick={(e) => handleClick(e, SWITCH_LIKE_COUNT)}>
+										{hideLikesCount ? 'Show likes count' : 'Hide likes count'}
+									</Setting>
+									<Setting onClick={(e) => handleClick(e, SWITCH_COMMENTING)}>
+										{commenting ? 'Turn off commenting' : 'Turn on commenting'}
+									</Setting>
+									<Setting onClick={(e) => handleClick(e, ARCHIVE)}>
+										Archive
+									</Setting>
+								</>
 							)}
-							{isAboutComponent && (
-								<AccountAbout
-									userId={authorId}
-									onClose={(
-										e: React.MouseEvent<HTMLLIElement | HTMLDivElement>
-									) => {
-										e.stopPropagation();
-										setIsAboutComponent(false);
-										setIsSettings(false);
-									}}
-								/>
+
+							{!isUserAuthor && isUserFollowingAuthor && (
+								<Setting onClick={(e) => handleClick(e, UNFOLLOW)} red>
+									Unfollow
+								</Setting>
 							)}
-						</motion.div>
-					</Backdrop>
-				</Portal>
+
+							{!isUserAuthor && !isUserFollowingAuthor && (
+								<Setting onClick={(e) => handleClick(e, FOLLOW)}>
+									Follow
+								</Setting>
+							)}
+
+							{!isUserAuthor && (
+								<Setting onClick={(e) => handleClick(e, ABOUT)}>
+									About this account
+								</Setting>
+							)}
+
+							<Setting onClick={() => setIsSettings(false)}>Cancel</Setting>
+						</ul>
+					)}
+					{isAboutComponent && (
+						<AccountAbout
+							userId={authorId}
+							onClose={(
+								e: React.MouseEvent<HTMLLIElement | HTMLDivElement>
+							) => {
+								e.stopPropagation();
+								setIsAboutComponent(false);
+								setIsSettings(false);
+							}}
+						/>
+					)}
+				</SettingsBox>
 			)}
 		</>
 	);

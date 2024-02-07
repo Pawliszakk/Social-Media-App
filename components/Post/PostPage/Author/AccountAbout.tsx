@@ -26,7 +26,7 @@ const AccountAbout: React.FC<AccountAboutProps> = ({ userId, onClose }) => {
 		};
 
 		fetchUserData();
-	}, []);
+	}, [userId]);
 
 	return (
 		<div className={classes.about}>

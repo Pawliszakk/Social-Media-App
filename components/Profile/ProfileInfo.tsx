@@ -28,24 +28,24 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({
 			<div className={classes.info}>
 				<div className={classes.actions}>
 					<h2>{name}</h2>
-					<button>Obserwuj</button>
+					<button>Follow</button>
 					<button>...</button>
 				</div>
 
 				<div className={classes.data}>
 					<div>
 						<p>
-							Posty: <span>{posts.length}</span>
+							Posts: <span>{posts.length}</span>
 						</p>
 					</div>
 					<div>
 						<p>
-							Obserwujący: <span>{followers.length}</span>
+							followers: <span>{followers.length}</span>
 						</p>
 					</div>
 					<div>
 						<p>
-							Obserwowani: <span>{following.length}</span>
+							following: <span>{following.length}</span>
 						</p>
 					</div>
 				</div>

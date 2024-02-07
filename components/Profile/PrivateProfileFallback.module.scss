@@ -1,0 +1,25 @@
+.private {
+	max-width: 1200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: var(--border-light);
+	border-radius: var(--radius-light);
+	padding: 2rem;
+	margin: 2rem;
+	color: var(--text-normal);
+	.icon {
+		border: 3px solid var(--text-normal);
+		padding: 1em;
+		border-radius: var(--radius-circle);
+	}
+	svg {
+		display: block;
+		font-size: 4rem;
+	}
+	p {
+		margin: 1rem 0;
+		font-size: 1.4rem;
+	}
+}

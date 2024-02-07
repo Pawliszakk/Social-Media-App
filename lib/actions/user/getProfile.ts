@@ -1,7 +1,7 @@
 import { User } from '../Models/user';
 import { connectToDatabase } from '../utils/connectToDatabase';
 
-export async function getUserProfile(userId: string) {
+export async function getProfile(userId: string) {
 	await connectToDatabase();
 
 	let user;
