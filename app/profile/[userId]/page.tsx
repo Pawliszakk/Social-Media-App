@@ -32,14 +32,10 @@ export default async function ProfilePage({
 	if (!profile) {
 		throw new Error('Sorry, that site is unreachable');
 	}
-
-	// const isProfileUserProfile = profile.id === user!.userId;
-
-	// const isUserFollowingProfile = profile.followers.find(
-	// 	(id: string) => id === user!.userId
-	// );
-	//TO ADD SOON, WHEN FOLLOWING IS SET IN ACTIONS
-
+	const isUserFollowingProfile = profile.followers.find(
+		(id: string) => user!.userId
+	);
+	
 	return (
 		<Suspense fallback={<Spinner />}>
 			<div className={classes.box}>
@@ -49,6 +45,10 @@ export default async function ProfilePage({
 					posts={profile.posts}
 					followers={profile.followers}
 					following={profile.following}
+					profileId={profile._id.toString()}
+					isLoggedUserProfile={isLoggedUserProfile}
+					isUserFollowingProfile={!!isUserFollowingProfile}
+					userId={user?.userId}
 				/>
 
 				{profile.private ? (
