@@ -49,10 +49,8 @@
 			}
 		}
 	}
-}
 
-@media (min-width: 400px) {
-	.box {
+	@media (min-width: 400px) {
 		img {
 			width: 90px;
 			height: 90px;
@@ -76,10 +74,8 @@
 			}
 		}
 	}
-}
 
-@media (min-width: 576px) {
-	.box {
+	@media (min-width: 576px) {
 		max-width: 600px;
 		img {
 			width: 130px;
@@ -107,10 +103,8 @@
 			}
 		}
 	}
-}
 
-@media (min-width: 1400px) {
-	.box {
+	@media (min-width: 1400px) {
 		max-width: 1000px;
 		img {
 			width: 150px;

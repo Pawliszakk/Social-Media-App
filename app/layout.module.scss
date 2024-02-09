@@ -1,15 +1,11 @@
-@media (min-width: 768px) {
-	.main {
+.main {
+	@media (min-width: 768px) {
 		margin-left: 70px;
 	}
-}
-@media (min-width: 1200px) {
-	.main {
+	@media (min-width: 1200px) {
 		margin-left: 300px;
 	}
-}
-@media (min-width: 1400px) {
-	.main {
+	@media (min-width: 1400px) {
 		margin-left: 350px;
 	}
 }

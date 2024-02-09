@@ -9,10 +9,7 @@
 	align-items: center;
 	font-size: 10rem;
 	color: rgb(181, 42, 17);
-}
-
-@media (min-width: 576px) {
-	.like {
+	@media (min-width: 576px) {
 		font-size: 15rem;
 	}
 }

@@ -8,7 +8,7 @@ export async function getProfile(userId: string) {
 	try {
 		user = await User.findOne({ _id: userId })
 			.select(
-				'-email -password -provider -theme -__v -sex -savedPosts -closeFriends'
+				'-email -password -provider -theme -__v -sex -savedPosts -closeFriends -likedPosts'
 			)
 			.populate('posts');
 	} catch (e) {

@@ -25,9 +25,7 @@
 			color: var(--text-normal);
 		}
 	}
-}
-@media (min-width: 768px) {
-	.option {
+	@media (min-width: 768px) {
 		min-height: 60px;
 		border-radius: 5px;
 		width: 100%;
@@ -39,10 +37,8 @@
 			font-size: 3.5rem;
 		}
 	}
-}
 
-@media (min-width: 1200px) {
-	.option {
+	@media (min-width: 1200px) {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;

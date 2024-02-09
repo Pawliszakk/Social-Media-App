@@ -9,34 +9,26 @@
 	.shadow {
 		display: none;
 	}
-}
 
-@media (min-width: 400px) {
-	.post {
+	@media (min-width: 400px) {
 		img {
 			height: 130px;
 			width: 130px;
 		}
 	}
-}
-@media (min-width: 576px) {
-	.post {
+	@media (min-width: 576px) {
 		img {
 			height: 170px;
 			width: 170px;
 		}
 	}
-}
-@media (min-width: 768px) {
-	.post {
+	@media (min-width: 768px) {
 		img {
 			height: 180px;
 			width: 180px;
 		}
 	}
-}
-@media (min-width: 992px) {
-	.post {
+	@media (min-width: 992px) {
 		img {
 			height: 250px;
 			width: 250px;
@@ -70,9 +62,7 @@
 			opacity: 1;
 		}
 	}
-}
-@media (min-width: 1200px) {
-	.post {
+	@media (min-width: 1200px) {
 		img {
 			height: 300px;
 			width: 300px;

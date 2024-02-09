@@ -1,13 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import classes from './layout.module.scss';
-import { getServerSession } from 'next-auth';
 import ActionBar from '@/components/Nav/ActionBar';
 import NextAuthProvider from '@/components/Auth/NextAuthProvider';
-import Footer from '@/components/Footer/Footer';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
-import { checkSession } from '@/lib/actions/utils/checkSession';
-import { permanentRedirect } from 'next/navigation';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',

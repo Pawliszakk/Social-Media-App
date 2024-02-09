@@ -6,6 +6,7 @@ import ProfileInfo from '@/components/Profile/ProfileInfo';
 import PostTile from '@/components/Post/Tile/PostTile';
 import PrivateProfileFallback from '@/components/Profile/PrivateProfileFallback';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
+import getLoggedUserProfile from '@/lib/actions/user/getLoggedUserProfile';
 
 export default async function ProfilePage({
 	params,
@@ -15,19 +16,29 @@ export default async function ProfilePage({
 	const { session, user } = await getSessionData();
 
 	const { userId } = params;
-	const profile = await getProfile(userId);
 
+	const isLoggedUserProfile = userId === user?.userId;
+
+	let profile: any;
+
+	if (isLoggedUserProfile) {
+		if (!session) {
+			throw new Error('Authorization failed');
+		}
+		profile = await getLoggedUserProfile(userId);
+	} else {
+		profile = await getProfile(userId);
+	}
 	if (!profile) {
 		throw new Error('Sorry, that site is unreachable');
 	}
 
-	const isProfileUserProfile = profile.id === user!.userId;
+	// const isProfileUserProfile = profile.id === user!.userId;
 
-	const isUserFollowingProfile = profile.followers.find(
-		(id: string) => id === user!.userId
-	);
-
-	console.log(profile);
+	// const isUserFollowingProfile = profile.followers.find(
+	// 	(id: string) => id === user!.userId
+	// );
+	//TO ADD SOON, WHEN FOLLOWING IS SET IN ACTIONS
 
 	return (
 		<Suspense fallback={<Spinner />}>

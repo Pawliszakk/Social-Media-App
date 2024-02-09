@@ -15,10 +15,7 @@
 		align-items: center;
 	}
 	z-index: 3;
-}
-
-@media (min-width: 768px) {
-	.header {
+	@media (min-width: 768px) {
 		top: 0;
 		left: 0;
 		border-right: var(--border-light);
@@ -30,10 +27,8 @@
 			align-items: space-around;
 		}
 	}
-}
 
-@media (min-width: 1200px) {
-	.header {
+	@media (min-width: 1200px) {
 		width: 300px;
 		.logo {
 			display: block;
@@ -47,9 +42,7 @@
 			padding: 0 2em;
 		}
 	}
-}
-@media (min-width: 1400px) {
-	.header {
+	@media (min-width: 1400px) {
 		width: 350px;
 	}
 }

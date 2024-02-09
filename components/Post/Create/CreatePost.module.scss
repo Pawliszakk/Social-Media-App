@@ -42,10 +42,7 @@
 			margin: 1rem 0;
 		}
 	}
-}
-
-@media (min-width: 768px) {
-	.post {
+	@media (min-width: 768px) {
 		max-width: 600px;
 		header {
 			font-size: 1.6rem;

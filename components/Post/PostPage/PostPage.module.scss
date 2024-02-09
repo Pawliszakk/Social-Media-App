@@ -12,17 +12,13 @@
 		flex-grow: 1;
 		border: var(--border-light);
 	}
-}
-@media (min-width: 1200px) {
-	.box {
+	@media (min-width: 1200px) {
 		flex-direction: row;
 		width: 800px;
 		max-width: none;
 		max-height: 600px;
 	}
-}
-@media (min-width: 1400px) {
-	.box {
+	@media (min-width: 1400px) {
 		width: 1100px;
 	}
 }

@@ -15,11 +15,7 @@
 		flex-wrap: wrap;
 		gap: 1px;
 	}
-
-}
-
-@media (min-width: 768px) {
-	.box {
+	@media (min-width: 768px) {
 		.posts {
 			gap: 1rem;
 		}
