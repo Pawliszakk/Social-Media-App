@@ -70,7 +70,7 @@ export default async function ProfilePage({
 					isProfilePrivate={profile.private}
 					followingStatus={followingStatus}
 				/>
-				{isLoggedUserProfile || !profile.private ? (
+				{isLoggedUserProfile || isUserFollowingProfile || !profile.private ? (
 					<>
 						<hr />
 
