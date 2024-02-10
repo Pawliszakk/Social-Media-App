@@ -4,6 +4,11 @@
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: var(--border-light);
+	.followSpan {
+		cursor: pointer;
+		color: var(--primary-button);
+	}
+
 	.user {
 		display: flex;
 		justify-content: center;

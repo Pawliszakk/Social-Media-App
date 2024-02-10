@@ -21,7 +21,6 @@ const FollowSpan: React.FC<FollowSpanProps> = (props) => {
 			setIsFollowing(true);
 		}
 	};
-
 	return (
 		<span onClick={spanClickHandler} className={classes.followSpan}>
 			{isFollowing ? 'Following' : 'Follow'}

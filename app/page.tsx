@@ -47,7 +47,6 @@ export default async function Home({
 					const isUserSavedPost = user.savedPosts.find(
 						(id: string) => id.toString() === post.id
 					);
-
 					return (
 						<article className={classes.post} key={post.id}>
 							<PostAuthor
@@ -58,6 +57,8 @@ export default async function Home({
 								date={post.date}
 								isUserFollowingAuthor={!!isUserFollowingAuthor}
 								isUserAuthor={isUserAuthor}
+								followUser={followUser}
+								unFollowUser={unFollowUser}
 							>
 								<PostSettings
 									isUserFollowingAuthor={!!isUserFollowingAuthor}

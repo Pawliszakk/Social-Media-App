@@ -1,14 +1,17 @@
+'use client';
 import Image from 'next/image';
 import classes from './PostAuthor.module.scss';
 import Link from 'next/link';
-import FollowSpan from './FollowSpan';
-import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
+import { useState } from 'react';
+import Spinner from '@/components/UI/Spinner';
 
 interface PostAuthorProps {
 	image: string;
 	name: string;
 	date: string;
 	authorId: string;
+	followUser: (userId: string, userToFollow: string) => void;
+	unFollowUser: (userId: string, userToFollow: string) => void;
 	userId: string;
 	isUserFollowingAuthor: boolean;
 	isUserAuthor: boolean;
@@ -16,13 +19,15 @@ interface PostAuthorProps {
 }
 
 const PostAuthor: React.FC<PostAuthorProps> = (props) => {
-	const handleFollow = async () => {
-		'use server';
-		followUser(props.userId, props.authorId);
-	};
-	const handleUnFollow = async () => {
-		'use server';
-		unFollowUser(props.userId, props.authorId);
+	const [isLoading, setIsLoading] = useState(false);
+	const spanClickHandler = async () => {
+		setIsLoading(true);
+		if (props.isUserFollowingAuthor) {
+			await props.unFollowUser(props.userId, props.authorId);
+		} else {
+			await props.followUser(props.userId, props.authorId);
+		}
+		setIsLoading(false);
 	};
 
 	return (
@@ -40,11 +45,15 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 					<span>{props.name}</span>
 				</Link>
 				{!props.isUserAuthor && (
-					<FollowSpan
-						follow={handleFollow}
-						unFollow={handleUnFollow}
-						isUserFollowingAuthor={props.isUserFollowingAuthor}
-					/>
+					<span onClick={spanClickHandler} className={classes.followSpan}>
+						{isLoading ? (
+							<Spinner />
+						) : props.isUserFollowingAuthor ? (
+							'Following'
+						) : (
+							'Follow'
+						)}
+					</span>
 				)}
 				<span>{props.date}</span>
 			</div>
