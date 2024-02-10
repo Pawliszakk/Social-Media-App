@@ -5,7 +5,6 @@ import { User } from '../Models/user';
 import { revalidatePath } from 'next/cache';
 
 export async function followUser(userId: string, userToFollowId: string) {
-	console.log('follows');
 	let user;
 	try {
 		user = await User.findOne({ _id: userId }).select('following');
@@ -44,8 +43,6 @@ export async function followUser(userId: string, userToFollowId: string) {
 }
 
 export async function unFollowUser(userId: string, userToUnfollowId: string) {
-	console.log('unfollows');
-
 	let user;
 	try {
 		user = await User.findOne({ _id: userId }).select('following');

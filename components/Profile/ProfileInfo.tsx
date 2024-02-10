@@ -44,6 +44,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 					postsLength={props.posts.length}
 					follow={followHandler}
 					unFollow={unFollowHandler}
+					profileId={props.profileId}
 				/>
 			</div>
 		</div>
