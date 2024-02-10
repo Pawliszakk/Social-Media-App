@@ -10,11 +10,12 @@ import classes from './page.module.scss';
 import { savePost } from '@/lib/actions/post/savePost';
 import PostComponent from '@/components/Post/HomePost/PostComponent';
 import PostAuthor from '@/components/Post/PostPage/Author/PostAuthor';
-import PostSettings from '@/components/Post/PostPage/Author/PostSettings';
 import { deletePost } from '@/lib/actions/post/deletePost';
 import { switchCommenting } from '@/lib/actions/post/switchCommenting';
 import { switchLiking } from '@/lib/actions/post/switchLiking';
 import { archivePost } from '@/lib/actions/post/archivePost';
+import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
+import PostSettings from '@/components/Post/Settings/PostSettings';
 
 export default async function Home({
 	searchParams,
@@ -53,6 +54,7 @@ export default async function Home({
 								image={post.author.image}
 								name={post.author.name}
 								authorId={post.author.id}
+								userId={user.userId}
 								date={post.date}
 								isUserFollowingAuthor={!!isUserFollowingAuthor}
 								isUserAuthor={isUserAuthor}
@@ -69,6 +71,8 @@ export default async function Home({
 									commenting={post.commenting}
 									hideLikesCount={post.hideLikesCount}
 									authorId={post.author.id}
+									follow={followUser}
+									unFollow={unFollowUser}
 								/>
 							</PostAuthor>
 							<PostComponent

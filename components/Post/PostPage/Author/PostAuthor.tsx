@@ -1,18 +1,30 @@
 import Image from 'next/image';
 import classes from './PostAuthor.module.scss';
 import Link from 'next/link';
+import FollowSpan from './FollowSpan';
+import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 
 interface PostAuthorProps {
 	image: string;
 	name: string;
 	date: string;
 	authorId: string;
+	userId: string;
 	isUserFollowingAuthor: boolean;
 	isUserAuthor: boolean;
 	children: React.ReactNode;
 }
 
 const PostAuthor: React.FC<PostAuthorProps> = (props) => {
+	const handleFollow = async () => {
+		'use server';
+		followUser(props.userId, props.authorId);
+	};
+	const handleUnFollow = async () => {
+		'use server';
+		unFollowUser(props.userId, props.authorId);
+	};
+
 	return (
 		<div className={classes.author}>
 			<div className={classes.user}>
@@ -28,7 +40,11 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 					<span>{props.name}</span>
 				</Link>
 				{!props.isUserAuthor && (
-					<span>{props.isUserFollowingAuthor ? 'Unfollow' : 'Follow'} </span>
+					<FollowSpan
+						follow={handleFollow}
+						unFollow={handleUnFollow}
+						isUserFollowingAuthor={props.isUserFollowingAuthor}
+					/>
 				)}
 				<span>{props.date}</span>
 			</div>

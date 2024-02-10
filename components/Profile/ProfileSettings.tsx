@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import SettingsBox from '../Post/PostPage/Author/SettingsBox';
-import SettingsButton from '../Post/PostPage/Author/SettingsButton';
-import Setting from '../Post/PostPage/Author/Setting';
-import AccountAbout from '../Post/PostPage/Author/AccountAbout';
+import SettingsButton from '../UI/Settings/SettingsButton';
+import SettingsBox from '../UI/Settings/SettingsBox';
+import Setting from '../UI/Settings/Setting';
+import AccountAbout from '../UI/Settings/AccountAbout';
 
 interface ProfileSettingsProps {
 	profileId: string;
@@ -38,6 +38,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 							<Setting onClick={() => console.log('test')} red>
 								Block
 							</Setting>
+							{/* WARUNEK */}
 							<Setting onClick={() => console.log('test')} red>
 								Unfollow
 							</Setting>

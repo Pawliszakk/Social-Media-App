@@ -3,7 +3,6 @@ import { useState } from 'react';
 import classes from './ProfileActions.module.scss';
 import Link from 'next/link';
 import Spinner from '../UI/Spinner';
-import SettingsButton from '../Post/PostPage/Author/SettingsButton';
 import Counters from './Counters';
 import ProfileSettings from './ProfileSettings';
 interface ProfileActionsProps {
