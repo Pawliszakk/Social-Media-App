@@ -72,8 +72,8 @@ export default async function Home({
 									commenting={post.commenting}
 									hideLikesCount={post.hideLikesCount}
 									authorId={post.author.id}
-									follow={followUser}
-									unFollow={unFollowUser}
+									followUser={followUser}
+									unFollowUser={unFollowUser}
 								/>
 							</PostAuthor>
 							<PostComponent

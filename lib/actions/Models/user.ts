@@ -22,6 +22,12 @@ const UserSchema = new mongoose.Schema({
 	blockedUsers: [
 		{ type: mongoose.Types.ObjectId, required: true, ref: 'User' },
 	],
+	sentFollowRequests: [
+		{ type: mongoose.Types.ObjectId, required: true, ref: 'followRequest' },
+	],
+	recievedFollowRequests: [
+		{ type: mongoose.Types.ObjectId, required: true, ref: 'followRequest' },
+	],
 });
 
 export const User = mongoose.models.User || mongoose.model('User', UserSchema);

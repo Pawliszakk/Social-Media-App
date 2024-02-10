@@ -5,12 +5,12 @@ import { FiMessageCircle } from 'react-icons/fi';
 import { useState } from 'react';
 import { MdOutlineCollectionsBookmark } from 'react-icons/md';
 interface PostActionsProps {
-	likePost: () => void;
-	savePost: (postId: string, userId: string) => void;
 	userId: string;
 	postId: string;
 	isUserLikingPost: boolean;
 	isUserSavedPost: boolean;
+	likePost: () => void;
+	savePost: (postId: string, userId: string) => void;
 }
 
 const PostActions: React.FC<PostActionsProps> = (props) => {

@@ -4,9 +4,9 @@ import { useState } from 'react';
 import classes from './FollowSpan.module.scss';
 
 interface FollowSpanProps {
+	isUserFollowingAuthor: boolean;
 	follow: () => void;
 	unFollow: () => void;
-	isUserFollowingAuthor: boolean;
 }
 
 const FollowSpan: React.FC<FollowSpanProps> = (props) => {

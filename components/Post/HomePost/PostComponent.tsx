@@ -5,14 +5,14 @@ import PostActions from '../PostPage/PostActions';
 import PostLikes from '../PostPage/Likes/PostLikes';
 
 interface PostComponentProps {
-	images: string | string[];
 	authorName: string;
-	isUserLikingPost: boolean;
 	postId: string;
 	userId: string;
-	isUserSavedPost: boolean;
 	date: string;
+	images: string | string[];
 	likes: string[] | [];
+	isUserLikingPost: boolean;
+	isUserSavedPost: boolean;
 	likePost: (postId: string, userId: string) => void;
 	unLikePost: (postId: string, userId: string) => void;
 	savePost: (postId: string, userId: string) => void;

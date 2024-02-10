@@ -19,7 +19,7 @@ export const getSessionData = async () => {
 	let user;
 
 	try {
-		user = await User.findOne({ email });
+		user = await User.findOne({ email }).populate('sentFollowRequests');
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
@@ -36,6 +36,8 @@ export const getSessionData = async () => {
 		likedPosts: user.likedPosts,
 		following: user.following,
 		savedPosts: user.savedPosts,
+		sentFollowRequests: user.sentFollowRequests,
+		recievedFollowRequests: user.recievedFollowRequests,
 	};
 
 	return { session, user: userData };

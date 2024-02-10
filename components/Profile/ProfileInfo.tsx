@@ -1,8 +1,8 @@
 import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
+import { deleteFollowRequest } from '@/lib/actions/user/sendFollowRequest';
 import ProfileActions from './ProfileActions';
 import classes from './ProfileInfo.module.scss';
 import Image from 'next/image';
-
 interface ProfileInfoProps {
 	name: string;
 	profileId: string;
@@ -13,16 +13,25 @@ interface ProfileInfoProps {
 	isLoggedUserProfile: boolean;
 	userId: string;
 	isUserFollowingProfile: boolean;
+	isProfilePrivate: boolean;
+	followingStatus: any;
 }
 
 const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 	const followHandler = async () => {
 		'use server';
-		followUser(props.userId, props.profileId);
+		const res = await followUser(props.userId, props.profileId);
+		return res;
 	};
 	const unFollowHandler = async () => {
 		'use server';
-		unFollowUser(props.userId, props.profileId);
+		const res = await unFollowUser(props.userId, props.profileId);
+		return res;
+	};
+	const deleteRequestHandler = async () => {
+		'use server';
+		const res = await deleteFollowRequest(props.userId, props.profileId);
+		return res;
 	};
 
 	return (
@@ -44,7 +53,9 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 					postsLength={props.posts.length}
 					follow={followHandler}
 					unFollow={unFollowHandler}
+					deleteFollowRequest={deleteRequestHandler}
 					profileId={props.profileId}
+					followingStatus={props.followingStatus}
 				/>
 			</div>
 		</div>

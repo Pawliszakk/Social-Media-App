@@ -16,19 +16,19 @@ import AccountAbout from '@/components/UI/Settings/AccountAbout';
 import Setting from '@/components/UI/Settings/Setting';
 
 interface PostSettingsProps {
+	postId: string;
+	authorId: string;
+	userId: string;
 	isUserFollowingAuthor: boolean;
 	isUserAuthor: boolean;
+	commenting: boolean;
+	hideLikesCount: boolean;
 	deletePost: (postId: string, userId: string) => void;
 	switchCommenting: (postId: string, userId: string) => void;
 	switchLiking: (postId: string, userId: string) => void;
 	archivePost: (postId: string, userId: string) => void;
-	follow: (userId: string, userToFollowId: string) => void;
-	unFollow: (userId: string, userToUnFollowId: string) => void;
-	postId: string;
-	authorId: string;
-	userId: string;
-	commenting: boolean;
-	hideLikesCount: boolean;
+	followUser: (userId: string, userToFollowId: string) => void;
+	unFollowUser: (userId: string, userToUnFollowId: string) => void;
 }
 
 const PostSettings: React.FC<PostSettingsProps> = ({
@@ -43,8 +43,8 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 	userId,
 	commenting,
 	hideLikesCount,
-	follow,
-	unFollow,
+	followUser,
+	unFollowUser,
 }) => {
 	const [isSettings, setIsSettings] = useState(false);
 	const [isAboutComponent, setIsAboutComponent] = useState(false);
@@ -73,11 +73,11 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 				archivePost(postId, userId);
 				break;
 			case UNFOLLOW:
-				await unFollow(userId, authorId);
+				await unFollowUser(userId, authorId);
 				setIsSettings(false);
 				break;
 			case FOLLOW:
-				await follow(userId, authorId);
+				await followUser(userId, authorId);
 				setIsSettings(false);
 				break;
 			case ABOUT:

@@ -6,16 +6,16 @@ import { useState } from 'react';
 import Spinner from '@/components/UI/Spinner';
 
 interface PostAuthorProps {
+	children: React.ReactNode;
 	image: string;
 	name: string;
 	date: string;
 	authorId: string;
+	userId: string;
+	isUserAuthor: boolean;
+	isUserFollowingAuthor: boolean;
 	followUser: (userId: string, userToFollow: string) => void;
 	unFollowUser: (userId: string, userToFollow: string) => void;
-	userId: string;
-	isUserFollowingAuthor: boolean;
-	isUserAuthor: boolean;
-	children: React.ReactNode;
 }
 
 const PostAuthor: React.FC<PostAuthorProps> = (props) => {

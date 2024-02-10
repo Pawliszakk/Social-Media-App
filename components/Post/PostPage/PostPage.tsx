@@ -9,29 +9,30 @@ import PostAuthor from './Author/PostAuthor';
 import PostComments from './Comments/PostComments';
 import PostLikes from './Likes/PostLikes';
 import PostAddComment from './Comments/PostAddComment';
-import PostSettings from './Author/PostSettings';
 import { deletePost } from '@/lib/actions/post/deletePost';
 import { switchLiking } from '@/lib/actions/post/switchLiking';
 import { archivePost } from '@/lib/actions/post/archivePost';
 import { switchCommenting } from '@/lib/actions/post/switchCommenting';
+import PostSettings from '../Settings/PostSettings';
+import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 
 interface PostPageProps {
-	images: string | string[];
-	author: { name: string; id: string; image: string };
-	isUserLikingPost: boolean;
-	likePost: (postId: string, userId: string) => void;
-	unLikePost: (postId: string, userId: string) => void;
 	postId: string;
 	userId: string;
-	savePost: (postId: string, userId: string) => void;
-	isUserSavedPost: boolean;
 	date: string;
-	isUserAuthor: boolean;
+	description: string;
+	author: { name: string; id: string; image: string };
 	likes: string[] | [];
+	images: string | string[];
+	isUserLikingPost: boolean;
+	isUserSavedPost: boolean;
+	isUserAuthor: boolean;
 	isUserFollowingAuthor: boolean;
 	commenting: boolean;
-	description: string;
 	hideLikesCount: boolean;
+	unLikePost: (postId: string, userId: string) => void;
+	savePost: (postId: string, userId: string) => void;
+	likePost: (postId: string, userId: string) => void;
 	user: {
 		name: string | null | undefined;
 		image: string | null | undefined;
@@ -69,13 +70,17 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 				<PostAuthor
 					name={props.author.name}
 					image={props.author.image}
-					authorId={props.author.id}
 					date={props.date}
+					authorId={props.author.id}
+					followUser={followUser}
+					unFollowUser={unFollowUser}
 					isUserFollowingAuthor={props.isUserFollowingAuthor}
+					isUserAuthor={props.isUserAuthor}
+					userId={props.userId}
 				>
 					<PostSettings
-						isUserAuthor={props.isUserAuthor}
 						isUserFollowingAuthor={props.isUserFollowingAuthor}
+						isUserAuthor={props.isUserAuthor}
 						deletePost={deletePost}
 						switchCommenting={switchCommenting}
 						archivePost={archivePost}
@@ -85,6 +90,8 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 						hideLikesCount={props.hideLikesCount}
 						switchLiking={switchLiking}
 						authorId={props.author.id}
+						followUser={followUser}
+						unFollowUser={unFollowUser}
 					/>
 				</PostAuthor>
 				<PostDescription

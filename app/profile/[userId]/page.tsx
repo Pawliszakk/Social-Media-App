@@ -7,6 +7,11 @@ import PostTile from '@/components/Post/Tile/PostTile';
 import PrivateProfileFallback from '@/components/Profile/PrivateProfileFallback';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import getLoggedUserProfile from '@/lib/actions/user/getLoggedUserProfile';
+import {
+	FOLLOWING,
+	NOTFOLLOWING,
+	REQUESTED,
+} from '@/lib/constants/followingStatus';
 
 export default async function ProfilePage({
 	params,
@@ -18,13 +23,13 @@ export default async function ProfilePage({
 	const { userId } = params;
 
 	const isLoggedUserProfile = userId === user?.userId;
-
 	let profile: any;
 
 	if (isLoggedUserProfile) {
 		if (!session) {
 			throw new Error('Authorization failed');
 		}
+
 		profile = await getLoggedUserProfile(userId);
 	} else {
 		profile = await getProfile(userId);
@@ -35,7 +40,20 @@ export default async function ProfilePage({
 	const isUserFollowingProfile = profile.followers.find(
 		(id: string) => user!.userId
 	);
-	
+
+	const isProfileRequestedToFollow = user?.sentFollowRequests.find(
+		(el: any) => el.reciever.toString() === profile.id
+	);
+	let followingStatus;
+	if (isUserFollowingProfile) {
+		followingStatus = FOLLOWING;
+	}
+	if (!isUserFollowingProfile) {
+		followingStatus = NOTFOLLOWING;
+	}
+	if (!!isProfileRequestedToFollow) {
+		followingStatus = REQUESTED;
+	}
 	return (
 		<Suspense fallback={<Spinner />}>
 			<div className={classes.box}>
@@ -49,31 +67,31 @@ export default async function ProfilePage({
 					isLoggedUserProfile={isLoggedUserProfile}
 					isUserFollowingProfile={!!isUserFollowingProfile}
 					userId={user?.userId}
+					isProfilePrivate={profile.private}
+					followingStatus={followingStatus}
 				/>
-
-				{profile.private ? (
-					<PrivateProfileFallback />
-				) : (
+				{isLoggedUserProfile || !profile.private ? (
 					<>
 						<hr />
 
 						<div className={classes.posts}>
-							{profile.posts.reverse().map((p: any) => {
-								return (
-									<PostTile
-										key={p.id}
-										postId={p.id}
-										hideLikesCount={p.hideLikesCount}
-										archived={p.archived}
-										likes={p.likes}
-										comments={p.comments}
-										image={p.image}
-										author={profile.name}
-									/>
-								);
-							})}
+							{profile.posts.reverse().map((post: any) => (
+								<PostTile
+									key={post.id}
+									postId={post.id}
+									hideLikesCount={post.hideLikesCount}
+									commenting={post.commenting}
+									archived={post.archived}
+									likes={post.likes}
+									comments={post.comments}
+									image={post.image}
+									author={profile.name}
+								/>
+							))}
 						</div>
 					</>
+				) : (
+					<PrivateProfileFallback />
 				)}
 			</div>
 		</Suspense>

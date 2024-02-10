@@ -6,18 +6,20 @@ import { FaComment } from 'react-icons/fa';
 
 interface PostTileProps {
 	postId: string;
-	hideLikesCount: boolean;
-	archived: boolean;
 	likes: string[] | [];
 	comments: string[] | [];
 	image: string;
 	author: string;
+	commenting: boolean;
+	hideLikesCount: boolean;
+	archived: boolean;
 }
 
 const PostTile: React.FC<PostTileProps> = ({
 	postId,
 	hideLikesCount,
 	archived,
+	commenting,
 	likes,
 	comments,
 	image,
@@ -32,14 +34,18 @@ const PostTile: React.FC<PostTileProps> = ({
 					height={300}
 					alt={`${author} post`}
 				/>
-				<div className={classes.shadow}>
-					<div>
-						<FaHeart /> <span>{likes.length}</span>
+				{!hideLikesCount && (
+					<div className={classes.shadow}>
+						<div>
+							<FaHeart /> <span>{likes.length}</span>
+						</div>
+						{commenting && (
+							<div>
+								<FaComment /> <span>{comments.length}</span>
+							</div>
+						)}
 					</div>
-					<div>
-						<FaComment /> <span>{comments.length}</span>
-					</div>
-				</div>
+				)}
 			</Link>
 		</div>
 	);

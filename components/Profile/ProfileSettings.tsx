@@ -38,10 +38,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 							<Setting onClick={() => console.log('test')} red>
 								Block
 							</Setting>
-							{/* WARUNEK */}
-							<Setting onClick={() => console.log('test')} red>
-								Unfollow
-							</Setting>
+
 							<Setting onClick={() => console.log('test')}>
 								Add to close friends list
 							</Setting>

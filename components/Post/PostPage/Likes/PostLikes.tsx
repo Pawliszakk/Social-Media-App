@@ -1,8 +1,8 @@
 import classes from './PostLikes.module.scss';
 
 interface PostLikesProps {
-	likes: number;
 	date: string;
+	likes: number;
 }
 
 const PostLikes: React.FC<PostLikesProps> = (props) => {

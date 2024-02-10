@@ -7,13 +7,13 @@ import classes from './ActionBarOption.module.scss';
 import LogoutBtn from '../Auth/Buttons/Logout';
 
 interface ActionBarOptionProps {
-	href?: string;
 	icon: React.ReactNode;
+	href?: string;
 	text: string;
+	name?: string | null | undefined;
+	image?: string | null | undefined;
 	avatar?: boolean;
 	logout?: boolean;
-	image?: string | null | undefined;
-	name?: string | null | undefined;
 }
 
 const ActionBarOption: React.FC<ActionBarOptionProps> = ({
