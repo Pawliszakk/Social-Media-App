@@ -12,7 +12,7 @@ export async function getSavedPosts(userId: string) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
-	const posts = user.savedPosts;
+	const posts = user.savedPosts.reverse();
 	const name = user.name;
 
 	return { posts, name };

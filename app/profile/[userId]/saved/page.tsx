@@ -31,8 +31,6 @@ export default async function ProfilePage({
 		authorName = name;
 	}
 
-	console.log(savedPosts);
-	console.log(authorName);
 	return (
 		<Suspense fallback={<Spinner />}>
 			<Posts posts={savedPosts} authorName={authorName} />

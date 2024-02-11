@@ -25,18 +25,18 @@ export default async function ProfilePage({
 			userId
 		);
 	}
-	let posts;
+	let profilePosts;
 	let authorName;
 	if (isUserAllowedToViewPosts || isLoggedUserProfile) {
-		const profile = await getProfilePosts(userId);
-		posts = profile.posts;
-		authorName = profile.name;
+		const { posts, name } = await getProfilePosts(userId);
+		profilePosts = posts;
+		authorName = name;
 	}
 
 	return (
 		<Suspense fallback={<Spinner />}>
 			{isUserAllowedToViewPosts || isLoggedUserProfile ? (
-				<Posts posts={posts} authorName={authorName} />
+				<Posts posts={profilePosts} authorName={authorName} />
 			) : (
 				<PrivateProfileFallback />
 			)}
