@@ -25,6 +25,7 @@ export default async function ExplorePage() {
 							comments={p.comments}
 							image={p.image}
 							author={p.author}
+							commenting={p.commenting}
 						/>
 					))}
 				</div>

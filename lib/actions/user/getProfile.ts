@@ -14,7 +14,7 @@ export async function getProfile(userId: string) {
 	}
 	const filteredPosts = user.posts.filter((post: any) => !post.archived);
 
-	user.posts = filteredPosts;
+	user.posts = filteredPosts.reverse();
 
 	if (!user) {
 		return false;

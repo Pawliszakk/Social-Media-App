@@ -1,0 +1,19 @@
+.box {
+	hr {
+		margin: 0 auto;
+		width: 80%;
+	}
+	.posts {
+		margin: 3rem;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1px;
+		@media (min-width: 768px) {
+			gap: 1rem;
+		}
+	}
+
+	
+}

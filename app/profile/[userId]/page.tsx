@@ -3,7 +3,6 @@ import { getProfile } from '@/lib/actions/user/getProfile';
 import { Suspense } from 'react';
 import classes from './page.module.scss';
 import ProfileInfo from '@/components/Profile/ProfileInfo';
-import PostTile from '@/components/Post/Tile/PostTile';
 import PrivateProfileFallback from '@/components/Profile/PrivateProfileFallback';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import getLoggedUserProfile from '@/lib/actions/user/getLoggedUserProfile';
@@ -12,6 +11,8 @@ import {
 	NOTFOLLOWING,
 	REQUESTED,
 } from '@/lib/constants/followingStatus';
+import LoggedUserPosts from '@/components/Profile/LoggedUserPosts';
+import ProfilePosts from '@/components/Profile/ProfilePosts';
 
 export default async function ProfilePage({
 	params,
@@ -54,6 +55,8 @@ export default async function ProfilePage({
 	if (!!isProfileRequestedToFollow) {
 		followingStatus = REQUESTED;
 	}
+
+	const isUserAllowedToViewPosts = !profile.private || isUserFollowingProfile;
 	return (
 		<Suspense fallback={<Spinner />}>
 			<div className={classes.box}>
@@ -70,28 +73,20 @@ export default async function ProfilePage({
 					isProfilePrivate={profile.private}
 					followingStatus={followingStatus}
 				/>
-				{isLoggedUserProfile || isUserFollowingProfile || !profile.private ? (
-					<>
-						<hr />
 
-						<div className={classes.posts}>
-							{profile.posts.reverse().map((post: any) => (
-								<PostTile
-									key={post.id}
-									postId={post.id}
-									hideLikesCount={post.hideLikesCount}
-									commenting={post.commenting}
-									archived={post.archived}
-									likes={post.likes}
-									comments={post.comments}
-									image={post.image}
-									author={profile.name}
-								/>
-							))}
-						</div>
-					</>
+				{!isLoggedUserProfile && isUserAllowedToViewPosts ? (
+					<ProfilePosts posts={profile.posts} authorName={profile.name} />
 				) : (
-					<PrivateProfileFallback />
+					!isLoggedUserProfile && <PrivateProfileFallback />
+				)}
+
+				{isLoggedUserProfile && (
+					<LoggedUserPosts
+						posts={profile.posts}
+						savedPosts={profile.savedPosts}
+						authorName={profile.name}
+						profileId={profile._id.toString()}
+					/>
 				)}
 			</div>
 		</Suspense>

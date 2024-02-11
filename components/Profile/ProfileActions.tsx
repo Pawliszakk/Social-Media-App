@@ -91,7 +91,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 					<>
 						<button
 							className={`${classes.action} ${
-								followingStatus !== FOLLOWING ? classes.follow : ''
+								followingStatus === NOTFOLLOWING ? classes.follow : ''
 							}`}
 							onClick={followHandler}
 							disabled={isLoading}

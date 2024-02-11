@@ -1,0 +1,19 @@
+.options {
+	margin: 1rem auto;
+	max-width: 300px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	.option {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: none;
+		color: var(--text-light);
+		font-weight: bold;
+		font-size: 1.6rem;
+		svg {
+			margin-right: 0.3em;
+		}
+	}
+}
