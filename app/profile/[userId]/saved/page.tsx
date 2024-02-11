@@ -6,6 +6,8 @@ import { getProfilePosts } from '@/lib/actions/user/getProfilePosts';
 import { checkIfUserIsAllowedToViewPosts } from '@/lib/actions/user/checkIfUserIsAllowedToViewPosts';
 import Posts from '@/components/Profile/Posts/Posts';
 import PrivateProfileFallback from '@/components/Profile/Posts/PrivateProfileFallback';
+import { permanentRedirect } from 'next/navigation';
+import { getSavedPosts } from '@/lib/actions/user/getSavedPosts';
 
 export default async function ProfilePage({
 	params,
@@ -18,28 +20,22 @@ export default async function ProfilePage({
 
 	const isLoggedUserProfile = userId === user?.userId;
 
-	let isUserAllowedToViewPosts;
 	if (!isLoggedUserProfile) {
-		isUserAllowedToViewPosts = await checkIfUserIsAllowedToViewPosts(
-			user?.userId,
-			userId
-		);
+		permanentRedirect(`/profile/${userId}`);
 	}
-	let posts;
+	let savedPosts;
 	let authorName;
-	if (isUserAllowedToViewPosts || isLoggedUserProfile) {
-		const profile = await getProfilePosts(userId);
-		posts = profile.posts;
-		authorName = profile.name;
+	if (isLoggedUserProfile) {
+		const { posts, name } = await getSavedPosts(userId);
+		savedPosts = posts;
+		authorName = name;
 	}
 
+	console.log(savedPosts);
+	console.log(authorName);
 	return (
 		<Suspense fallback={<Spinner />}>
-			{isUserAllowedToViewPosts || isLoggedUserProfile ? (
-				<Posts posts={posts} authorName={authorName} />
-			) : (
-				<PrivateProfileFallback />
-			)}
+			<Posts posts={savedPosts} authorName={authorName} />
 		</Suspense>
 	);
 }
