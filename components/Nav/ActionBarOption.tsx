@@ -35,7 +35,8 @@ const ActionBarOption: React.FC<ActionBarOptionProps> = ({
 	const classNames = `${classes.option} ${active ? classes.active : null}`;
 
 	const isProfileChanged = imageType === 'provider';
-	const avatarToShow: string = isProfileChanged
+
+	const avatarToShow: string = !isProfileChanged
 		? `https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${image}`
 		: image!;
 

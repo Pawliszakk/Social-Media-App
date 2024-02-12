@@ -30,7 +30,7 @@ export const getSessionData = async () => {
 	const userData = {
 		name,
 		email,
-		image,
+		image: user.image,
 		imageType: user.imageType,
 		userId: user.id,
 		theme: user.theme,
@@ -40,6 +40,5 @@ export const getSessionData = async () => {
 		sentFollowRequests: user.sentFollowRequests,
 		recievedFollowRequests: user.recievedFollowRequests,
 	};
-
 	return { session, user: userData };
 };
