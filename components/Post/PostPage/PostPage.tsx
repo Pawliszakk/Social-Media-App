@@ -21,7 +21,7 @@ interface PostPageProps {
 	userId: string;
 	date: string;
 	description: string;
-	author: { name: string; id: string; image: string };
+	author: { name: string; id: string; image: string; imageType: string };
 	likes: string[] | [];
 	images: string | string[];
 	isUserLikingPost: boolean;
@@ -70,6 +70,7 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 				<PostAuthor
 					name={props.author.name}
 					image={props.author.image}
+					imageType={props.author.imageType}
 					date={props.date}
 					authorId={props.author.id}
 					followUser={followUser}

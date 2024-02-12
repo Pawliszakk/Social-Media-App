@@ -8,6 +8,7 @@ import Spinner from '@/components/UI/Spinner';
 interface PostAuthorProps {
 	children: React.ReactNode;
 	image: string;
+	imageType: string;
 	name: string;
 	date: string;
 	authorId: string;
@@ -35,7 +36,11 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 			<div className={classes.user}>
 				<Link href={`/profile/${props.authorId}`} className={classes.image}>
 					<Image
-						src={props.image}
+						src={
+							props.imageType === 'provider'
+								? props.image
+								: `https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${props.image}`
+						}
 						width={50}
 						height={50}
 						alt={`${props.name} avatar`}

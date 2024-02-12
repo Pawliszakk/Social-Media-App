@@ -16,7 +16,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 	const [state, formAction] = useFormState(createPost, { message: '' });
 
 	return (
-		<div className={classes.post}>
+		<div className={classes.createPost}>
 			<header>
 				<h1>Create new post</h1>
 			</header>

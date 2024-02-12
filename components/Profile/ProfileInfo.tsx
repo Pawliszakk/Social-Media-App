@@ -3,10 +3,12 @@ import { deleteFollowRequest } from '@/lib/actions/user/sendFollowRequest';
 import ProfileActions from './ProfileActions';
 import classes from './ProfileInfo.module.scss';
 import Image from 'next/image';
+import LoggedUserImage from './LoggedUserImage';
 interface ProfileInfoProps {
 	name: string;
 	profileId: string;
 	image: string;
+	imageType: string;
 	posts: string[];
 	followers: string[];
 	following: string[];
@@ -33,15 +35,22 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 		const res = await deleteFollowRequest(props.userId, props.profileId);
 		return res;
 	};
-
 	return (
 		<div className={classes.box}>
-			<Image
-				src={props.image}
-				width={200}
-				height={200}
-				alt={`${props.name} Profile picture`}
-			/>
+			{props.isLoggedUserProfile ? (
+				<LoggedUserImage
+					image={props.image}
+					name={props.name}
+					imageType={props.imageType}
+				/>
+			) : (
+				<Image
+					src={props.image}
+					width={200}
+					height={200}
+					alt={`${props.name} Profile picture`}
+				/>
+			)}
 
 			<div className={classes.info}>
 				<ProfileActions

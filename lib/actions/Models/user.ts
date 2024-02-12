@@ -5,6 +5,7 @@ const UserSchema = new mongoose.Schema({
 	name: { type: String, required: true },
 	bio: { type: String, required: false, default: '' },
 	image: { type: String, required: false, default: '/assets/defaultUser.jpg' },
+	imageType: { type: String, required: true, default: 'provider' },
 	sex: { type: String, required: true, default: 'other' },
 	private: { type: Boolean, required: true, default: false },
 	date: { type: String, required: true },

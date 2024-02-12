@@ -57,27 +57,26 @@ export default async function RootLayout({
 	}
 
 	return (
-		<Suspense fallback={<Spinner />}>
-			<div className={classes.box}>
-				<ProfileInfo
-					name={profile.name}
-					image={profile.image}
-					posts={profile.posts}
-					followers={profile.followers}
-					following={profile.following}
-					profileId={profile._id.toString()}
-					isLoggedUserProfile={isLoggedUserProfile}
-					isUserFollowingProfile={!!isUserFollowingProfile}
-					userId={user?.userId}
-					isProfilePrivate={profile.private}
-					followingStatus={followingStatus}
-				/>
+		<div className={classes.box}>
+			<ProfileInfo
+				name={profile.name}
+				image={profile.image}
+				posts={profile.posts}
+				followers={profile.followers}
+				following={profile.following}
+				profileId={profile._id.toString()}
+				isLoggedUserProfile={isLoggedUserProfile}
+				isUserFollowingProfile={!!isUserFollowingProfile}
+				userId={user?.userId}
+				isProfilePrivate={profile.private}
+				followingStatus={followingStatus}
+				imageType={profile.imageType}
+			/>
 
-				<div className={classes.divider}></div>
+			<div className={classes.divider}></div>
 
-				{isLoggedUserProfile && <PostsLinks profileId={profile.id} />}
-				{children}
-			</div>
-		</Suspense>
+			{isLoggedUserProfile && <PostsLinks profileId={profile.id} />}
+			{children}
+		</div>
 	);
 }

@@ -11,10 +11,16 @@ import ActionBarOption from './ActionBarOption';
 interface ActionBarProps {
 	name: string | null | undefined;
 	image: string | null | undefined;
+	imageType: string;
 	userId: string | null | undefined;
 }
 
-const ActionBar: React.FC<ActionBarProps> = ({ name, image, userId }) => {
+const ActionBar: React.FC<ActionBarProps> = ({
+	name,
+	image,
+	userId,
+	imageType,
+}) => {
 	const menuOptions = [
 		{ href: '/', icon: <IoMdHome />, text: 'Home Page' },
 		{ href: '/?search=true', icon: <IoSearchSharp />, text: 'Search' },
@@ -31,7 +37,6 @@ const ActionBar: React.FC<ActionBarProps> = ({ name, image, userId }) => {
 		},
 		{ icon: <MdLogout />, text: 'Logout', logout: true },
 	];
-
 	return (
 		<header className={classes.header}>
 			<div className={classes.logo}>{/* <h1>{'<Logo Aplikacji> '}</h1> */}</div>

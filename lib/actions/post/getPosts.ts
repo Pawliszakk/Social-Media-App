@@ -8,17 +8,16 @@ export async function getPosts() {
 	try {
 		posts = await Post.find({ archived: false }).populate(
 			'author',
-			'id name image private'
+			'id name image private imageType'
 		);
 	} catch (e) {
 		throw new Error('Failed to fetch posts');
 	}
-
 	const filteredPosts = posts.filter(
 		(post) => !post.author.private && !post.archive
 	);
 
 	filteredPosts.reverse();
-	
+
 	return filteredPosts;
 }
