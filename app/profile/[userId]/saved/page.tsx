@@ -1,11 +1,5 @@
-import Spinner from '@/components/UI/Spinner';
-import { Suspense } from 'react';
-
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
-import { getProfilePosts } from '@/lib/actions/user/getProfilePosts';
-import { checkIfUserIsAllowedToViewPosts } from '@/lib/actions/user/checkIfUserIsAllowedToViewPosts';
 import Posts from '@/components/Profile/Posts/Posts';
-import PrivateProfileFallback from '@/components/Profile/Posts/PrivateProfileFallback';
 import { permanentRedirect } from 'next/navigation';
 import { getSavedPosts } from '@/lib/actions/user/getSavedPosts';
 
@@ -31,9 +25,5 @@ export default async function ProfilePage({
 		authorName = name;
 	}
 
-	return (
-		<Suspense fallback={<Spinner />}>
-			<Posts posts={savedPosts} authorName={authorName} />
-		</Suspense>
-	);
+	return <Posts posts={savedPosts} authorName={authorName} />;
 }

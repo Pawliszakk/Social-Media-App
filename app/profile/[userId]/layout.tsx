@@ -72,10 +72,12 @@ export default async function RootLayout({
 					isProfilePrivate={profile.private}
 					followingStatus={followingStatus}
 				/>
+
+				<div className={classes.divider}></div>
+
+				{isLoggedUserProfile && <PostsLinks profileId={profile.id} />}
+				{children}
 			</div>
-			<hr />
-			{isLoggedUserProfile && <PostsLinks profileId={profile.id} />}
-			{children}
 		</Suspense>
 	);
 }

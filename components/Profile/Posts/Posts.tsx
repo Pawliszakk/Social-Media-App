@@ -7,6 +7,8 @@ interface PostsProps {
 }
 
 const Posts: React.FC<PostsProps> = (props) => {
+	const warunek = true;
+
 	return (
 		<PostsBox>
 			{props.posts.map((p: any) => (

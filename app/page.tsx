@@ -34,89 +34,87 @@ export default async function Home({
 			{search && <p>Szukanie osób</p>}
 			<PostsVariant />
 
-			<Suspense fallback={<PostFallback />}>
-				{posts.map((post) => {
-					const isUserAuthor = post.author.id === user.userId;
-					const isUserFollowingAuthor = user.following.find(
-						(id: string) => id.toString() === post.author.id
-					);
-					const isUserLikingPost = user.likedPosts.find(
-						(id: string) => id.toString() === post.id
-					);
+			{posts.map((post) => {
+				const isUserAuthor = post.author.id === user.userId;
+				const isUserFollowingAuthor = user.following.find(
+					(id: string) => id.toString() === post.author.id
+				);
+				const isUserLikingPost = user.likedPosts.find(
+					(id: string) => id.toString() === post.id
+				);
 
-					const isUserSavedPost = user.savedPosts.find(
-						(id: string) => id.toString() === post.id
-					);
-					return (
-						<article className={classes.post} key={post.id}>
-							<PostAuthor
-								image={post.author.image}
-								name={post.author.name}
-								authorId={post.author.id}
-								userId={user.userId}
-								date={post.date}
+				const isUserSavedPost = user.savedPosts.find(
+					(id: string) => id.toString() === post.id
+				);
+				return (
+					<article className={classes.post} key={post.id}>
+						<PostAuthor
+							image={post.author.image}
+							name={post.author.name}
+							authorId={post.author.id}
+							userId={user.userId}
+							date={post.date}
+							isUserFollowingAuthor={!!isUserFollowingAuthor}
+							isUserAuthor={isUserAuthor}
+							followUser={followUser}
+							unFollowUser={unFollowUser}
+						>
+							<PostSettings
 								isUserFollowingAuthor={!!isUserFollowingAuthor}
-								isUserAuthor={isUserAuthor}
+								isUserAuthor={!!isUserAuthor}
+								deletePost={deletePost}
+								switchCommenting={switchCommenting}
+								switchLiking={switchLiking}
+								archivePost={archivePost}
+								postId={post.id.toString()}
+								userId={user.userId}
+								commenting={post.commenting}
+								hideLikesCount={post.hideLikesCount}
+								authorId={post.author.id}
 								followUser={followUser}
 								unFollowUser={unFollowUser}
-							>
-								<PostSettings
-									isUserFollowingAuthor={!!isUserFollowingAuthor}
-									isUserAuthor={!!isUserAuthor}
-									deletePost={deletePost}
-									switchCommenting={switchCommenting}
-									switchLiking={switchLiking}
-									archivePost={archivePost}
-									postId={post.id.toString()}
-									userId={user.userId}
-									commenting={post.commenting}
-									hideLikesCount={post.hideLikesCount}
-									authorId={post.author.id}
-									followUser={followUser}
-									unFollowUser={unFollowUser}
-								/>
-							</PostAuthor>
-							<PostComponent
-								images={post.image}
-								authorName={post.author.name}
-								isUserLikingPost={!!isUserLikingPost}
-								likePost={likePost}
-								unLikePost={unLikePost}
-								postId={post.id}
-								userId={user.userId}
-								savePost={savePost}
-								isUserSavedPost={!!isUserSavedPost}
-								date={post.date}
-								likes={post.likes.map((like: string) => like.toString())}
 							/>
+						</PostAuthor>
+						<PostComponent
+							images={post.image}
+							authorName={post.author.name}
+							isUserLikingPost={!!isUserLikingPost}
+							likePost={likePost}
+							unLikePost={unLikePost}
+							postId={post.id}
+							userId={user.userId}
+							savePost={savePost}
+							isUserSavedPost={!!isUserSavedPost}
+							date={post.date}
+							likes={post.likes.map((like: string) => like.toString())}
+						/>
 
-							<PostDescription
-								description={post.description}
-								authorName={post.author.name}
-								authorId={post.author.id}
-								home
-							/>
+						<PostDescription
+							description={post.description}
+							authorName={post.author.name}
+							authorId={post.author.id}
+							home
+						/>
 
-							<div className={classes.comments}>
-								<p>View all {post.comments.length} comments</p>
-							</div>
+						<div className={classes.comments}>
+							<p>View all {post.comments.length} comments</p>
+						</div>
 
-							<div className={classes.addComment}>
-								<form action="">
-									<textarea
-										name=""
-										id=""
-										// cols="30"
-										// rows="1"
-										placeholder="Add comment..."
-									></textarea>
-								</form>
-							</div>
-							<hr />
-						</article>
-					);
-				})}
-			</Suspense>
+						<div className={classes.addComment}>
+							<form action="">
+								<textarea
+									name=""
+									id=""
+									// cols="30"
+									// rows="1"
+									placeholder="Add comment..."
+								></textarea>
+							</form>
+						</div>
+						<hr />
+					</article>
+				);
+			})}
 		</>
 	);
 }

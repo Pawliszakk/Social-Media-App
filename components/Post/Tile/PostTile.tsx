@@ -26,7 +26,7 @@ const PostTile: React.FC<PostTileProps> = ({
 	author,
 }) => {
 	return (
-		<div className={classes.post}>
+		<div className={classes.tile}>
 			<Link href={`/post/${postId}`}>
 				<Image
 					src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${image}`}

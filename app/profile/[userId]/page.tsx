@@ -1,6 +1,3 @@
-import Spinner from '@/components/UI/Spinner';
-import { Suspense } from 'react';
-
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import { getProfilePosts } from '@/lib/actions/user/getProfilePosts';
 import { checkIfUserIsAllowedToViewPosts } from '@/lib/actions/user/checkIfUserIsAllowedToViewPosts';
@@ -34,12 +31,12 @@ export default async function ProfilePage({
 	}
 
 	return (
-		<Suspense fallback={<Spinner />}>
+		<>
 			{isUserAllowedToViewPosts || isLoggedUserProfile ? (
 				<Posts posts={profilePosts} authorName={authorName} />
 			) : (
 				<PrivateProfileFallback />
 			)}
-		</Suspense>
+		</>
 	);
 }

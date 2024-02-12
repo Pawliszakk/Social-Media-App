@@ -1,4 +1,10 @@
 .box {
 	max-width: 1000px;
 	margin: 0 auto;
+	.divider {
+		width: 90%;
+		margin: 0 auto;
+		height: 2px;
+		background-color: var(--divider-color);
+	}
 }
