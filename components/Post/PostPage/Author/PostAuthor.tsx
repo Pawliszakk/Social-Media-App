@@ -1,9 +1,9 @@
 'use client';
-import Image from 'next/image';
 import classes from './PostAuthor.module.scss';
 import Link from 'next/link';
 import { useState } from 'react';
 import Spinner from '@/components/UI/Spinner';
+import ProfileImage from '@/components/UI/User/ProfileImage';
 
 interface PostAuthorProps {
 	children: React.ReactNode;
@@ -30,20 +30,14 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 		}
 		setIsLoading(false);
 	};
-
 	return (
 		<div className={classes.author}>
 			<div className={classes.user}>
 				<Link href={`/profile/${props.authorId}`} className={classes.image}>
-					<Image
-						src={
-							props.imageType === 'provider'
-								? props.image
-								: `https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${props.image}`
-						}
-						width={50}
-						height={50}
-						alt={`${props.name} avatar`}
+					<ProfileImage
+						image={props.image}
+						name={props.name}
+						imageType={props.imageType}
 					/>
 				</Link>
 				<Link href={`/profile/${props.authorId}`}>

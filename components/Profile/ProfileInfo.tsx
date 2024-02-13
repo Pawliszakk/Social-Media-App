@@ -4,6 +4,7 @@ import ProfileActions from './ProfileActions';
 import classes from './ProfileInfo.module.scss';
 import Image from 'next/image';
 import LoggedUserImage from './LoggedUserImage';
+import ProfileImage from '../UI/User/ProfileImage';
 interface ProfileInfoProps {
 	name: string;
 	profileId: string;
@@ -44,11 +45,11 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 					imageType={props.imageType}
 				/>
 			) : (
-				<Image
-					src={props.image}
-					width={200}
-					height={200}
-					alt={`${props.name} Profile picture`}
+				<ProfileImage
+					image={props.image}
+					name={props.name}
+					imageType={props.imageType}
+					profile
 				/>
 			)}
 

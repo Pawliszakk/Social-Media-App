@@ -34,6 +34,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 		name: post.author.name,
 		id: post.author._id.toString(),
 		image: post.author.image,
+		imageType: post.author.imageType,
 	};
 	return (
 		<PostPage
@@ -51,7 +52,12 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 			isUserAuthor={!!isUserAuthor}
 			isUserFollowingAuthor={!!isUserFollowingAuthor}
 			commenting={post.commenting}
-			user={{ name: user.name, image: user.image, userId: user.userId }}
+			user={{
+				name: user.name,
+				image: user.image,
+				userId: user.userId,
+				imageType: user.imageType,
+			}}
 			description={post.description}
 			hideLikesCount={post.hideLikesCount}
 		/>

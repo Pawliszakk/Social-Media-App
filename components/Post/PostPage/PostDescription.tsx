@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import classes from './PostDescription.module.scss';
 import Link from 'next/link';
+import ProfileImage from '@/components/UI/User/ProfileImage';
 
 interface PostDescriptionProps {
 	image?: string;
+	imageType?: string;
 	authorName: string;
 	authorId: string;
 	description: string;
@@ -21,11 +23,10 @@ const PostDescription: React.FC<PostDescriptionProps> = (props) => {
 				>
 					{!props.home && (
 						<Link href={`/profile/${props.authorId}`}>
-							<Image
-								src={`${props.image}`}
-								width={50}
-								height={50}
-								alt={`${props.authorName} profile picture`}
+							<ProfileImage
+								image={props.image}
+								imageType={props.imageType}
+								name={props.authorName}
 							/>
 						</Link>
 					)}

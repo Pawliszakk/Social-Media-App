@@ -1,18 +1,19 @@
 'use client';
-import Image from 'next/image';
 
 import classes from './CreatePost.module.scss';
 import ImagePicker from './ImagePicker';
 import { useFormState } from 'react-dom';
 import { createPost } from '@/lib/actions/post/createPost';
 import SwitchInput from '@/components/UI/SwitchInput';
+import ProfileImage from '@/components/UI/User/ProfileImage';
 
 interface CreatePostProps {
+	imageType: string | null | undefined;
 	image: string | null | undefined;
 	name: string | null | undefined;
 }
 
-const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
+const CreatePost: React.FC<CreatePostProps> = ({ image, name, imageType }) => {
 	const [state, formAction] = useFormState(createPost, { message: '' });
 
 	return (
@@ -22,12 +23,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ image, name }) => {
 			</header>
 
 			<div className={classes.user}>
-				<Image
-					src={`${image}`}
-					width={100}
-					height={100}
-					alt={`Profile image of ${name}`}
-				/>
+				<ProfileImage image={image} name={name} imageType={imageType} />
 				<span>{name}</span>
 			</div>
 

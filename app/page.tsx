@@ -27,7 +27,6 @@ export default async function Home({
 		permanentRedirect('/auth/login');
 	}
 	const search = searchParams.search;
-
 	const posts = await getPosts();
 	return (
 		<>

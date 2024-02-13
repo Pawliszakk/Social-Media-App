@@ -1,9 +1,10 @@
 'use client';
+import { ChangeEvent, useRef, useState } from 'react';
 import { changeProfileImage } from '@/lib/actions/user/changeProfileImage';
 import Image from 'next/image';
-import { ChangeEvent, useRef } from 'react';
-import { useFormState } from 'react-dom';
-
+import classes from './LoggedUserImage.module.scss';
+import Spinner from '../UI/Spinner';
+import ProfileImage from '../UI/User/ProfileImage';
 interface LoggedUserImageProps {
 	image: string;
 	name: string;
@@ -11,35 +12,32 @@ interface LoggedUserImageProps {
 }
 
 const LoggedUserImage: React.FC<LoggedUserImageProps> = (props) => {
-	const [state, formAction] = useFormState(changeProfileImage, { message: '' });
+	const [isLoading, setIsLoading] = useState(false);
 	const imageInputRef = useRef<HTMLInputElement>(null)!;
-	const submitButtonRef = useRef<HTMLInputElement>(null)!;
-
 	const handlePickClick = () => imageInputRef.current?.click();
 
-	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+		setIsLoading(true);
 		const file = e.target.files![0];
 		if (!file) {
+			setIsLoading(false);
 			return;
 		}
-		submitButtonRef?.current?.click();
+		const formData = new FormData();
+		formData.append('image', file);
+		await changeProfileImage(formData);
+		setIsLoading(false);
 	};
 
 	return (
-		<>
-			<Image
-				src={
-					props.imageType === 'provider'
-						? props.image
-						: `https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${props.image}`
-				}
-				style={{ cursor: 'pointer' }}
-				width={200}
-				height={200}
-				alt={`${props.name} Profile picture`}
-				onClick={handlePickClick}
+		<div className={classes.image} onClick={handlePickClick}>
+			<ProfileImage
+				image={props.image}
+				name={props.name}
+				imageType={props.imageType}
+				profile
 			/>
-			<form action={formAction}>
+			<form>
 				<input
 					type="file"
 					accept="image/png, image/jpeg"
@@ -47,15 +45,14 @@ const LoggedUserImage: React.FC<LoggedUserImageProps> = (props) => {
 					name="image"
 					onChange={handleImageChange}
 					ref={imageInputRef}
-					style={{ display: 'none' }}
-				/>
-				<input
-					type="submit"
-					ref={submitButtonRef}
-					style={{ display: 'none' }}
 				/>
 			</form>
-		</>
+			{isLoading && (
+				<div className={classes.loading}>
+					<Spinner />
+				</div>
+			)}
+		</div>
 	);
 };
 

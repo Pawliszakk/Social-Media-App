@@ -7,7 +7,7 @@ export async function getPostById(postId: string, userId: string) {
 	try {
 		post = await Post.findOne({ _id: postId }).populate(
 			'author',
-			'id name image private'
+			'id name image private imageType'
 		);
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');

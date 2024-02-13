@@ -52,6 +52,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 						image={option.image}
 						name={option.name}
 						logout={option.logout}
+						imageType={imageType}
 					/>
 				))}
 			</nav>

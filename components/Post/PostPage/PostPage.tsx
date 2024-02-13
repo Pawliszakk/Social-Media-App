@@ -37,6 +37,7 @@ interface PostPageProps {
 		name: string | null | undefined;
 		image: string | null | undefined;
 		userId: string | null | undefined;
+		imageType: string | null | undefined;
 	};
 }
 
@@ -100,6 +101,7 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 					description={props.description}
 					authorId={props.author.id}
 					authorName={props.author.name}
+					imageType={props.author.imageType}
 				/>
 
 				<PostComments isCommenting={props.commenting} />
@@ -119,6 +121,7 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 						name={props.user.name}
 						image={props.user.image}
 						userId={props.user.userId}
+						imageType={props.user.imageType}
 					/>
 				)}
 			</div>

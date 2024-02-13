@@ -8,5 +8,11 @@ export default async function createPage() {
 		permanentRedirect('/auth/login');
 	}
 
-	return <CreatePost image={user.image} name={user.name} />;
+	return (
+		<CreatePost
+			image={user.image}
+			name={user.name}
+			imageType={user.imageType}
+		/>
+	);
 }

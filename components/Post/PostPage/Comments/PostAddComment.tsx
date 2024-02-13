@@ -1,20 +1,22 @@
-import Image from 'next/image';
+
 import classes from './PostAddComment.module.scss';
+import ProfileImage from '@/components/UI/User/ProfileImage';
 
 interface PostAddCommentProps {
 	image: string | null | undefined;
+	imageType: string | null | undefined;
 	name: string | null | undefined;
 	userId: string | null | undefined;
 }
 
-const PostAddComment: React.FC<PostAddCommentProps> = ({
-	image,
-	name,
-	userId,
-}) => {
+const PostAddComment: React.FC<PostAddCommentProps> = (props) => {
 	return (
 		<div className={classes.add}>
-			<Image src={`${image}`} width={50} height={50} alt={`${name} avatar`} />
+			<ProfileImage
+				image={props.image}
+				name={props.name}
+				imageType={props.imageType}
+			/>
 			<textarea name="addComment" id="" placeholder="add comment..."></textarea>
 		</div>
 	);
