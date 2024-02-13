@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import PostActions from './PostActions';
-import PostDescription from './PostDescription';
 import classes from './PostPage.module.scss';
 import PostImages from './Images/PostImages';
 import PostAuthor from './Author/PostAuthor';
@@ -15,6 +13,8 @@ import { archivePost } from '@/lib/actions/post/archivePost';
 import { switchCommenting } from '@/lib/actions/post/switchCommenting';
 import PostSettings from '../Settings/PostSettings';
 import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
+import PostDescription from './Description/PostDescription';
+import PostActions from './Actions/PostActions';
 
 interface PostPageProps {
 	postId: string;
