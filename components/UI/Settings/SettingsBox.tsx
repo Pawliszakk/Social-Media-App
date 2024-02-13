@@ -6,16 +6,18 @@ import Backdrop from '@/components/UI/Backdrop';
 const SettingsBox = ({
 	children,
 	onClose,
+	edit,
 }: {
 	children: React.ReactNode;
 	onClose: () => void;
+	edit?: boolean;
 }) => {
 	return (
 		<Portal>
 			<Backdrop onClose={onClose}>
 				<motion.div
 					animate={{ scale: [1.5, 1], opacity: [0, 1] }}
-					className={classes.settings}
+					className={`${classes.settings} ${edit ? classes.edit : ''}`}
 				>
 					{children}
 				</motion.div>

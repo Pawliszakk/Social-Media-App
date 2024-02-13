@@ -14,10 +14,14 @@ import SettingsButton from '@/components/UI/Settings/SettingsButton';
 import SettingsBox from '@/components/UI/Settings/SettingsBox';
 import AccountAbout from '@/components/UI/Settings/AccountAbout';
 import Setting from '@/components/UI/Settings/Setting';
-
+import EditPost from '../PostPage/Edit/EditPost';
 interface PostSettingsProps {
 	postId: string;
 	authorId: string;
+	images: string | string[];
+	authorName: string;
+	userImage: string;
+	userImageType: string;
 	userId: string;
 	isUserFollowingAuthor: boolean;
 	isUserAuthor: boolean;
@@ -45,9 +49,14 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 	hideLikesCount,
 	followUser,
 	unFollowUser,
+	images,
+	authorName,
+	userImage,
+	userImageType,
 }) => {
 	const [isSettings, setIsSettings] = useState(false);
 	const [isAboutComponent, setIsAboutComponent] = useState(false);
+	const [isEditComponent, setIsEditComponent] = useState(false);
 
 	const handleClick = async (
 		e: React.MouseEvent<HTMLLIElement | HTMLDivElement>,
@@ -59,7 +68,7 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 				deletePost(postId, userId);
 				break;
 			case EDIT:
-				console.log('Edit action');
+				setIsEditComponent(true);
 				break;
 			case SWITCH_LIKE_COUNT:
 				await switchLiking(postId, userId);
@@ -92,8 +101,11 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 		<>
 			<SettingsButton onClick={() => setIsSettings(true)} />
 			{isSettings && (
-				<SettingsBox onClose={() => setIsSettings(false)}>
-					{!isAboutComponent && (
+				<SettingsBox
+					edit={isEditComponent}
+					onClose={() => setIsSettings(false)}
+				>
+					{!isAboutComponent && !isEditComponent && (
 						<ul>
 							{isUserAuthor && (
 								<>
@@ -142,6 +154,21 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 							) => {
 								e.stopPropagation();
 								setIsAboutComponent(false);
+								setIsSettings(false);
+							}}
+						/>
+					)}
+					{isEditComponent && (
+						<EditPost
+							userImageType={userImageType}
+							userImage={userImage}
+							images={images}
+							authorName={authorName}
+							onClose={(
+								e: React.MouseEvent<HTMLLIElement | HTMLDivElement>
+							) => {
+								e.stopPropagation();
+								setIsEditComponent(false);
 								setIsSettings(false);
 							}}
 						/>

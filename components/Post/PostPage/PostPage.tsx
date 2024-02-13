@@ -11,10 +11,10 @@ import { deletePost } from '@/lib/actions/post/deletePost';
 import { switchLiking } from '@/lib/actions/post/switchLiking';
 import { archivePost } from '@/lib/actions/post/archivePost';
 import { switchCommenting } from '@/lib/actions/post/switchCommenting';
-import PostSettings from '../Settings/PostSettings';
 import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 import PostDescription from './Description/PostDescription';
 import PostActions from './Actions/PostActions';
+import PostSettings from '../Settings/PostSettings';
 
 interface PostPageProps {
 	postId: string;
@@ -94,6 +94,10 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 						authorId={props.author.id}
 						followUser={followUser}
 						unFollowUser={unFollowUser}
+						images={props.images}
+						authorName={props.author.name}
+						userImage={props.author.image}
+						userImageType={props.author.imageType}
 					/>
 				</PostAuthor>
 				<PostDescription

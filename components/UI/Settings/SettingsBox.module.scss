@@ -6,7 +6,10 @@
 	z-index: 200;
 	color: var(--text-light);
 	border: var(--border-light);
-
+	&.edit {
+		max-width: 900px;
+		margin: 2rem 0;
+	}
 	ul {
 		list-style-type: none;
 	}
