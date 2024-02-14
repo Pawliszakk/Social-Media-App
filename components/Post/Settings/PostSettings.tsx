@@ -58,11 +58,7 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 	const [isAboutComponent, setIsAboutComponent] = useState(false);
 	const [isEditComponent, setIsEditComponent] = useState(false);
 
-	const handleClick = async (
-		e: React.MouseEvent<HTMLLIElement | HTMLDivElement>,
-		action: string
-	) => {
-		e.stopPropagation();
+	const handleClick = async (action: string) => {
 		switch (action) {
 			case DELETE:
 				deletePost(postId, userId);
@@ -97,48 +93,53 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 		}
 	};
 
+	const closeSettingsHandler = () => {
+		if (isAboutComponent) {
+			setIsAboutComponent(false);
+		}
+		if (isEditComponent) {
+			setIsEditComponent(false);
+		}
+		setIsSettings(false);
+	};
+
 	return (
 		<>
 			<SettingsButton onClick={() => setIsSettings(true)} />
 			{isSettings && (
-				<SettingsBox
-					edit={isEditComponent}
-					onClose={() => setIsSettings(false)}
-				>
+				<SettingsBox edit={isEditComponent} onClose={closeSettingsHandler}>
 					{!isAboutComponent && !isEditComponent && (
 						<ul>
 							{isUserAuthor && (
 								<>
-									<Setting onClick={(e) => handleClick(e, DELETE)} red>
+									<Setting onClick={() => handleClick(DELETE)} red>
 										Delete
 									</Setting>
-									<Setting onClick={(e) => handleClick(e, EDIT)}>Edit</Setting>
-									<Setting onClick={(e) => handleClick(e, SWITCH_LIKE_COUNT)}>
+									<Setting onClick={() => handleClick(EDIT)}>Edit</Setting>
+									<Setting onClick={() => handleClick(SWITCH_LIKE_COUNT)}>
 										{hideLikesCount ? 'Show likes count' : 'Hide likes count'}
 									</Setting>
-									<Setting onClick={(e) => handleClick(e, SWITCH_COMMENTING)}>
+									<Setting onClick={() => handleClick(SWITCH_COMMENTING)}>
 										{commenting ? 'Turn off commenting' : 'Turn on commenting'}
 									</Setting>
-									<Setting onClick={(e) => handleClick(e, ARCHIVE)}>
+									<Setting onClick={() => handleClick(ARCHIVE)}>
 										Archive
 									</Setting>
 								</>
 							)}
 
 							{!isUserAuthor && isUserFollowingAuthor && (
-								<Setting onClick={(e) => handleClick(e, UNFOLLOW)} red>
+								<Setting onClick={() => handleClick(UNFOLLOW)} red>
 									Unfollow
 								</Setting>
 							)}
 
 							{!isUserAuthor && !isUserFollowingAuthor && (
-								<Setting onClick={(e) => handleClick(e, FOLLOW)}>
-									Follow
-								</Setting>
+								<Setting onClick={() => handleClick(FOLLOW)}>Follow</Setting>
 							)}
 
 							{!isUserAuthor && (
-								<Setting onClick={(e) => handleClick(e, ABOUT)}>
+								<Setting onClick={() => handleClick(ABOUT)}>
 									About this account
 								</Setting>
 							)}
@@ -147,16 +148,7 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 						</ul>
 					)}
 					{isAboutComponent && (
-						<AccountAbout
-							userId={authorId}
-							onClose={(
-								e: React.MouseEvent<HTMLLIElement | HTMLDivElement>
-							) => {
-								e.stopPropagation();
-								setIsAboutComponent(false);
-								setIsSettings(false);
-							}}
-						/>
+						<AccountAbout userId={authorId} onClose={closeSettingsHandler} />
 					)}
 					{isEditComponent && (
 						<EditPost
@@ -164,13 +156,7 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 							userImage={userImage}
 							images={images}
 							authorName={authorName}
-							onClose={(
-								e: React.MouseEvent<HTMLLIElement | HTMLDivElement>
-							) => {
-								e.stopPropagation();
-								setIsEditComponent(false);
-								setIsSettings(false);
-							}}
+							onClose={closeSettingsHandler}
 						/>
 					)}
 				</SettingsBox>

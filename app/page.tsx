@@ -74,6 +74,10 @@ export default async function Home({
 									authorId={post.author.id}
 									followUser={followUser}
 									unFollowUser={unFollowUser}
+									userImage={post.author.image}
+									userImageType={post.author.userImageType}
+									images={post.image}
+									authorName={post.author.name}
 								/>
 							</PostAuthor>
 							<PostComponent

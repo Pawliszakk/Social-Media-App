@@ -12,12 +12,19 @@ const SettingsBox = ({
 	onClose: () => void;
 	edit?: boolean;
 }) => {
+	const divClickHandler = (
+		e: React.MouseEvent<HTMLLIElement | HTMLDivElement>
+	) => {
+		e.stopPropagation();
+	};
+
 	return (
 		<Portal>
 			<Backdrop onClose={onClose}>
 				<motion.div
 					animate={{ scale: [1.5, 1], opacity: [0, 1] }}
 					className={`${classes.settings} ${edit ? classes.edit : ''}`}
+					onClick={divClickHandler}
 				>
 					{children}
 				</motion.div>

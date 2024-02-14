@@ -27,7 +27,6 @@ interface ProfileActionsProps {
 const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [followingStatus, setFollowingStatus] = useState(props.followingStatus);
-	const [buttonMsg, setButtonMsg] = useState(props.followingStatus);
 	const [followers, setFollowers] = useState(props.followersLength);
 
 	const followHandler = async () => {
@@ -43,7 +42,6 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 			if (res.ok) {
 				if (res.status === NOTFOLLOWING) {
 					setFollowingStatus(NOTFOLLOWING);
-					setButtonMsg('Follow');
 					setFollowers((prev) => prev - 1);
 				}
 			}
@@ -57,11 +55,9 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 			}
 			if (res.ok) {
 				if (res.status !== REQUESTED) {
-					setButtonMsg('Following');
 					setFollowingStatus(res.status);
 					setFollowers((prev) => prev + 1);
 				} else {
-					setButtonMsg('Requested');
 					setFollowingStatus(res.status);
 				}
 			}
@@ -74,13 +70,21 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 				return;
 			}
 			if (res.ok) {
-				setButtonMsg('Follow');
 				setFollowingStatus(res.status);
 			}
 		}
 
 		setIsLoading(false);
 	};
+
+	let buttonMessage;
+	if (followingStatus === FOLLOWING) {
+		buttonMessage = 'Unfollow';
+	} else if (followingStatus === NOTFOLLOWING) {
+		buttonMessage = 'Follow';
+	} else if (followingStatus === REQUESTED) {
+		buttonMessage = 'Requested';
+	}
 
 	return (
 		<>
@@ -96,7 +100,11 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 							onClick={followHandler}
 							disabled={isLoading}
 						>
-							{isLoading ? <Spinner className={classes.spinner} /> : buttonMsg}
+							{isLoading ? (
+								<Spinner className={classes.spinner} />
+							) : (
+								buttonMessage
+							)}
 						</button>
 						<ProfileSettings profileId={props.profileId} />
 					</>
@@ -104,7 +112,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 
 				{props.isLoggedUserProfile && (
 					<>
-						<Link className={classes.action} href="/settings">
+						<Link className={classes.action} href="/settings/edit">
 							Edit profile
 						</Link>
 						<Link className={classes.action} href="/archive">

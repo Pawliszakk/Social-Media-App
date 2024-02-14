@@ -3,9 +3,10 @@ import classes from './AccountAbout.module.scss';
 import { useEffect, useState } from 'react';
 import Spinner from '@/components/UI/Spinner';
 import { FaCalendarAlt } from 'react-icons/fa';
+import ProfileImage from '../User/ProfileImage';
 interface AccountAboutProps {
 	userId: string;
-	onClose: (e: React.MouseEvent<HTMLLIElement | HTMLDivElement>) => void;
+	onClose: () => void;
 }
 
 const AccountAbout: React.FC<AccountAboutProps> = ({ userId, onClose }) => {
@@ -13,6 +14,7 @@ const AccountAbout: React.FC<AccountAboutProps> = ({ userId, onClose }) => {
 		_id: string;
 		name: string;
 		image: string;
+		imageType: string;
 		date: string;
 	}>(null);
 
@@ -36,11 +38,10 @@ const AccountAbout: React.FC<AccountAboutProps> = ({ userId, onClose }) => {
 						<p>About this account</p>
 					</div>
 					<div className={classes.content}>
-						<Image
-							src={userData.image}
-							width={70}
-							height={70}
-							alt={`${userData.name} avatar`}
+						<ProfileImage
+							image={userData.image}
+							name={userData.name}
+							imageType={userData.imageType}
 						/>
 						<span>{userData.name}</span>
 						<p>

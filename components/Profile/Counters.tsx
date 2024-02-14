@@ -11,17 +11,17 @@ const Counters: React.FC<CountersProps> = (props) => {
 		<div className={classes.data}>
 			<div>
 				<p>
-					Posts: <span>{props.postsLength}</span>
+					<span>{props.postsLength}</span> posts
 				</p>
 			</div>
 			<div>
 				<p>
-					followers: <span>{props.followersLength}</span>
+					<span>{props.followersLength}</span> followers
 				</p>
 			</div>
 			<div>
 				<p>
-					following: <span>{props.followingLength}</span>
+					<span>{props.followingLength}</span> following
 				</p>
 			</div>
 		</div>

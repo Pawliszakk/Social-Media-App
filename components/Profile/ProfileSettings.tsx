@@ -51,10 +51,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 					{isAboutComponent && (
 						<AccountAbout
 							userId={props.profileId}
-							onClose={(
-								e: React.MouseEvent<HTMLLIElement | HTMLDivElement>
-							) => {
-								e.stopPropagation();
+							onClose={() => {
 								setIsAboutComponent(false);
 								setIsSettings(false);
 							}}
