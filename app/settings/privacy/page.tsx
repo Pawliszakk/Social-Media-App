@@ -1,12 +1,19 @@
+import Privacy from '@/components/Settings/Privacy/Privacy';
 import SettingPageBox from '@/components/Settings/SettingPageBox';
+import { getSessionData } from '@/lib/actions/utils/getSessionData';
 
 export default async function SettingsPage() {
+	const { session, user } = await getSessionData();
+
+	const isPrivate = user?.private;
+	const userId = user?.userId;
 	return (
 		<SettingPageBox
 			name="Privacy"
-			paragraph="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ex tempore exercitationem esse rerum eos fugiat nisi soluta provident nulla, eligendi optio voluptatem, libero velit nesciunt eius quidem magnam quas?"
+			paragraph="When your account is public, your profile and posts can be seen by anyone, on or off Instagram, even if they don&apos;t have an Instagram account.
+			When your account is private, only the followers you approve can see what you share, including your photos or videos on hashtag and location pages, and your followers and following lists"
 		>
-			setting
+			<Privacy isPrivate={isPrivate} userId={userId} />
 		</SettingPageBox>
 	);
 }

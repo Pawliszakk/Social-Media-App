@@ -26,7 +26,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 		{ href: '/?search=true', icon: <IoSearchSharp />, text: 'Search' },
 		{ href: '/explore', icon: <MdOutlineExplore />, text: 'Explore' },
 		{ href: '/create', icon: <IoMdAddCircleOutline />, text: 'Create' },
-		{ href: '/settings', icon: <IoSettingsOutline />, text: 'Settings' },
+		{ href: '/settings/edit', icon: <IoSettingsOutline />, text: 'Settings' },
 		{
 			href: `/profile/${userId}`,
 			icon: <IoSettingsOutline />,

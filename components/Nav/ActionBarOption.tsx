@@ -45,8 +45,8 @@ const ActionBarOption: React.FC<ActionBarOptionProps> = ({
 			<Link href={href} className={classNames}>
 				<Image
 					src={image ? `${avatarToShow}` : '/assets/defaultUser.jpg'}
-					width={40}
-					height={40}
+					width={35}
+					height={35}
 					alt={`Profile picture of ${name}`}
 				/>
 				<span>{text}</span>

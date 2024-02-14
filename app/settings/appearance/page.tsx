@@ -1,12 +1,19 @@
+import Appearance from '@/components/Settings/Appearanace/Appearance';
 import SettingPageBox from '@/components/Settings/SettingPageBox';
+import { getSessionData } from '@/lib/actions/utils/getSessionData';
 
-export default async function SettingsPage() {
+export default async function AppearancePage() {
+	const { session, user } = await getSessionData();
+
+	const isDark = user?.theme === 'dark';
+	const userId = user?.userId;
+
 	return (
 		<SettingPageBox
 			name="Appearance"
-			paragraph="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ex tempore exercitationem esse rerum eos fugiat nisi soluta provident nulla, eligendi optio voluptatem, libero velit nesciunt eius quidem magnam quas?"
+			paragraph="In this app you can switch between light and dark mode of application. You can switch in any moment and changes are reversible."
 		>
-			123
+			<Appearance isDark={isDark} userId={userId} />
 		</SettingPageBox>
 	);
 }

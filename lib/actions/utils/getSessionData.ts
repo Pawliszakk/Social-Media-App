@@ -12,12 +12,10 @@ export const getSessionData = async () => {
 
 	const name = session.user?.name;
 	const email = session.user?.email;
-	const image = session.user?.image;
 
 	await connectToDatabase();
 
 	let user;
-
 	try {
 		user = await User.findOne({ email }).populate('sentFollowRequests');
 	} catch (e) {
@@ -27,10 +25,12 @@ export const getSessionData = async () => {
 	if (!user) {
 		throw new Error('Something went wrong, please try again later');
 	}
+
 	const userData = {
 		name,
 		email,
 		image: user.image,
+		private: user.private,
 		imageType: user.imageType,
 		userId: user.id,
 		theme: user.theme,

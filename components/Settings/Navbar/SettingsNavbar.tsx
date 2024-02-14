@@ -7,7 +7,34 @@ import { LuHeartOff } from 'react-icons/lu';
 import { GiAlliedStar } from 'react-icons/gi';
 import { FiMessageCircle } from 'react-icons/fi';
 import { MdOutlineLightMode } from 'react-icons/md';
+import SettingLink from './SettingLink';
 const SettingsNavbar = () => {
+	const settingsLinks = [
+		{ href: 'edit', icon: <FaUserEdit />, text: 'Edit profile' },
+		{
+			href: 'privacy',
+			icon: <IoLockClosedOutline />,
+			text: 'Account privacy',
+		},
+		{
+			href: 'blocked_accounts',
+			icon: <MdOutlineDoNotDisturbAlt />,
+			text: 'Blocked accounts',
+		},
+		{ href: 'like_count', icon: <LuHeartOff />, text: 'Like counts' },
+		{
+			href: 'close_friends',
+			icon: <GiAlliedStar />,
+			text: 'Close friends',
+		},
+		{ href: 'comments', icon: <FiMessageCircle />, text: 'Comments' },
+		{
+			href: 'appearance',
+			icon: <MdOutlineLightMode />,
+			text: 'Switch appearance',
+		},
+	];
+
 	return (
 		<div className={classes.box}>
 			<div>
@@ -15,34 +42,9 @@ const SettingsNavbar = () => {
 			</div>
 
 			<div className={classes.options}>
-				<Link href="/settings/edit">
-					<FaUserEdit />
-					Edit profile
-				</Link>
-				<Link href="/settings/privacy">
-					<IoLockClosedOutline />
-					Account privacy
-				</Link>
-				<Link href="/settings/blocked_accounts">
-					<MdOutlineDoNotDisturbAlt />
-					Blocked accounts
-				</Link>
-				<Link href="/settings/like_count">
-					<LuHeartOff />
-					Like counts
-				</Link>
-				<Link href="/settings/close_friends">
-					<GiAlliedStar />
-					Close friends
-				</Link>
-				<Link href="/settings/comments">
-					<FiMessageCircle />
-					Comments
-				</Link>
-				<Link href="/settings/appearance">
-					<MdOutlineLightMode />
-					Switch appearance
-				</Link>
+				{settingsLinks.map((l) => (
+					<SettingLink key={l.href} href={l.href} icon={l.icon} text={l.text} />
+				))}
 			</div>
 		</div>
 	);
