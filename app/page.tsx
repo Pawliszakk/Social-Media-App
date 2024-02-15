@@ -27,7 +27,7 @@ export default async function Home({
 		permanentRedirect('/auth/login');
 	}
 	const search = searchParams.search;
-	const posts = await getPosts();
+	const posts = await getPosts(user.userId, user.blockedUsers);
 	return (
 		<>
 			{search && <p>Szukanie osób</p>}

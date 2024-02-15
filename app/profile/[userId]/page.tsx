@@ -19,9 +19,12 @@ export default async function ProfilePage({
 	let isUserBlockingProfile;
 	if (!isLoggedUserProfile) {
 		const res = await checkIfUserIsAllowedToViewPosts(user?.userId, userId);
+
 		isUserAllowedToViewPosts = res.isUserAllowedToViewPosts;
+
 		isUserBlockingProfile = res.isUserBlockingProfile;
 	}
+
 	let profilePosts;
 	let authorName;
 	if (isUserAllowedToViewPosts || isLoggedUserProfile) {
