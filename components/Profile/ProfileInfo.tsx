@@ -2,7 +2,6 @@ import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 import { deleteFollowRequest } from '@/lib/actions/user/sendFollowRequest';
 import ProfileActions from './ProfileActions';
 import classes from './ProfileInfo.module.scss';
-import Image from 'next/image';
 import LoggedUserImage from './LoggedUserImage';
 import ProfileImage from '../UI/User/ProfileImage';
 interface ProfileInfoProps {
@@ -10,11 +9,12 @@ interface ProfileInfoProps {
 	profileId: string;
 	image: string;
 	imageType: string;
+	userId: string;
 	posts: string[];
 	followers: string[];
 	following: string[];
 	isLoggedUserProfile: boolean;
-	userId: string;
+	isBlocked: boolean;
 	isUserFollowingProfile: boolean;
 	isProfilePrivate: boolean;
 	followingStatus: any;
@@ -66,6 +66,8 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 					deleteFollowRequest={deleteRequestHandler}
 					profileId={props.profileId}
 					followingStatus={props.followingStatus}
+					userId={props.userId}
+					isBlocked={props.isBlocked}
 				/>
 			</div>
 		</div>

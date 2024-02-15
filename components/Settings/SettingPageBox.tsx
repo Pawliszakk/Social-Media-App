@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import classes from './SettingPageBox.module.scss';
 
 interface SettingPageBoxProps {
@@ -10,7 +11,7 @@ const SettingPageBox: React.FC<SettingPageBoxProps> = (props) => {
 		<div className={classes.box}>
 			<h2>{props.name}</h2>
 			<p>{props.paragraph}</p>
-			<div>{props.children}</div>
+			{props.children}
 		</div>
 	);
 };

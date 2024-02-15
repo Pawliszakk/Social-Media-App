@@ -12,9 +12,11 @@ import {
 } from '@/lib/constants/followingStatus';
 interface ProfileActionsProps {
 	profileId: string;
+	userId: string;
 	name: string;
 	isLoggedUserProfile: boolean;
 	isUserFollowingProfile: boolean;
+	isBlocked: boolean;
 	postsLength: number;
 	followersLength: number;
 	followingLength: number;
@@ -106,7 +108,11 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 								buttonMessage
 							)}
 						</button>
-						<ProfileSettings profileId={props.profileId} />
+						<ProfileSettings
+							isBlocked={props.isBlocked}
+							profileId={props.profileId}
+							userId={props.userId}
+						/>
 					</>
 				)}
 

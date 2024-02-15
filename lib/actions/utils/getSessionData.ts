@@ -37,6 +37,7 @@ export const getSessionData = async () => {
 		likedPosts: user.likedPosts,
 		following: user.following,
 		savedPosts: user.savedPosts,
+		blockedUsers: user.blockedUsers,
 		sentFollowRequests: user.sentFollowRequests,
 		recievedFollowRequests: user.recievedFollowRequests,
 	};

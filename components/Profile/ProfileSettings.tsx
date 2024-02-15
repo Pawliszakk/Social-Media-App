@@ -5,23 +5,31 @@ import SettingsButton from '../UI/Settings/SettingsButton';
 import SettingsBox from '../UI/Settings/SettingsBox';
 import Setting from '../UI/Settings/Setting';
 import AccountAbout from '../UI/Settings/AccountAbout';
+import { ABOUT, BLOCK, UNBLOCK } from '@/lib/constants/profileActions';
+import { blockUser, unBlockUser } from '@/lib/actions/user/blockUser';
 
 interface ProfileSettingsProps {
 	profileId: string;
+	userId: string;
+	isBlocked: boolean;
 }
 
 const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 	const [isSettings, setIsSettings] = useState(false);
 	const [isAboutComponent, setIsAboutComponent] = useState(false);
 
-	const handleClick = async (
-		e: React.MouseEvent<HTMLLIElement | HTMLDivElement>,
-		action: string
-	) => {
-		e.stopPropagation();
+	const handleClick = async (action: string) => {
 		switch (action) {
-			case 'about':
+			case ABOUT:
 				setIsAboutComponent(true);
+				break;
+			case BLOCK:
+				await blockUser(props.userId, props.profileId);
+				setIsSettings(false);
+				break;
+			case UNBLOCK:
+				await unBlockUser(props.userId, props.profileId);
+				setIsSettings(false);
 				break;
 			default:
 				break;
@@ -35,14 +43,20 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 				<SettingsBox onClose={() => setIsSettings(false)}>
 					{!isAboutComponent && (
 						<ul>
-							<Setting onClick={() => console.log('test')} red>
-								Block
-							</Setting>
+							{props.isBlocked ? (
+								<Setting onClick={() => handleClick(UNBLOCK)} red>
+									Unblock
+								</Setting>
+							) : (
+								<Setting onClick={() => handleClick(BLOCK)} red>
+									Block
+								</Setting>
+							)}
 
 							<Setting onClick={() => console.log('test')}>
 								Add to close friends list
 							</Setting>
-							<Setting onClick={(e) => handleClick(e, 'about')}>
+							<Setting onClick={() => handleClick(ABOUT)}>
 								About this account
 							</Setting>
 							<Setting onClick={() => setIsSettings(false)}>Cancel</Setting>

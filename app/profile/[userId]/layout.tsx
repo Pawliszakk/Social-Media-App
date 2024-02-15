@@ -11,6 +11,7 @@ import {
 import { Suspense } from 'react';
 import classes from './layout.module.scss';
 import PostsLinks from '@/components/Profile/Posts/PostsLinks';
+import { permanentRedirect } from 'next/navigation';
 
 export default async function RootLayout({
 	children,
@@ -41,6 +42,17 @@ export default async function RootLayout({
 	const isUserFollowingProfile = profile.followers.find(
 		(id: string) => user!.userId
 	);
+	const isUserBlockingProfile = user?.blockedUsers.find(
+		(id: string) => id.toString() === profile.id
+	);
+
+	const isUserBlockedByProfile = profile.blockedUsers.find(
+		(id: string) => id.toString() === user!.userId
+	);
+
+	if (isUserBlockedByProfile && !isLoggedUserProfile) {
+		permanentRedirect('/');
+	}
 
 	const isProfileRequestedToFollow = user?.sentFollowRequests.find(
 		(el: any) => el.reciever.toString() === profile.id
@@ -71,6 +83,7 @@ export default async function RootLayout({
 				isProfilePrivate={profile.private}
 				followingStatus={followingStatus}
 				imageType={profile.imageType}
+				isBlocked={!!isUserBlockingProfile}
 			/>
 
 			<div className={classes.divider}></div>

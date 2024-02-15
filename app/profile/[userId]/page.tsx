@@ -16,11 +16,11 @@ export default async function ProfilePage({
 	const isLoggedUserProfile = userId === user?.userId;
 
 	let isUserAllowedToViewPosts;
+	let isUserBlockingProfile;
 	if (!isLoggedUserProfile) {
-		isUserAllowedToViewPosts = await checkIfUserIsAllowedToViewPosts(
-			user?.userId,
-			userId
-		);
+		const res = await checkIfUserIsAllowedToViewPosts(user?.userId, userId);
+		isUserAllowedToViewPosts = res.isUserAllowedToViewPosts;
+		isUserBlockingProfile = res.isUserBlockingProfile;
 	}
 	let profilePosts;
 	let authorName;
@@ -32,9 +32,10 @@ export default async function ProfilePage({
 
 	return (
 		<>
-			{isUserAllowedToViewPosts || isLoggedUserProfile ? (
+			{!isUserBlockingProfile &&
+			(isUserAllowedToViewPosts || isLoggedUserProfile) ? (
 				<Posts posts={profilePosts} authorName={authorName} />
-			) : (
+			) : isUserBlockingProfile ? null : (
 				<PrivateProfileFallback />
 			)}
 		</>
