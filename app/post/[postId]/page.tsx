@@ -14,7 +14,8 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 
 	const { post, isUserAllowedToView, isUserAuthor } = await getPostById(
 		params.postId,
-		user?.userId
+		user?.userId,
+		user?.blockedUsers
 	);
 	if (!isUserAllowedToView) {
 		permanentRedirect(`/profile/${post.author.id}`);
