@@ -1,7 +1,8 @@
 'use client';
-import SwitchInput from '@/components/UI/SwitchInput';
 import classes from './Appearance.module.scss';
 import { appearanceChange } from '@/lib/actions/user/settings/apeearanceChange';
+import { useEffect, useState } from 'react';
+import styles from '@/components/UI/SwitchInput.module.scss';
 
 interface AppearanceProps {
 	userId: string;
@@ -9,22 +10,38 @@ interface AppearanceProps {
 }
 
 const Appearance: React.FC<AppearanceProps> = (props) => {
-	const handleSwitchToggle = (isChecked: boolean) => {
-		const theme = isChecked ? 'dark' : 'light';
+	const [isDark, setIsDark] = useState(props.isDark);
 
-		document.body.setAttribute('data-theme', theme);
-		appearanceChange(theme, props.userId);
+	const handleSwitchToggle = (e: any) => {
+		const isChecked = e.target.checked;
+
+		document.body.setAttribute('data-theme', isChecked ? 'dark' : 'light');
+
+		setIsDark(isChecked);
 	};
+	useEffect(() => {
+		const changeAppearance = setTimeout(() => {
+			appearanceChange(isDark ? 'dark' : 'light', props.userId);
+		}, 500);
+
+		return () => clearTimeout(changeAppearance);
+	}, [isDark]);
 
 	return (
 		<div className={classes.box}>
 			<span>Dark theme</span>
-			<SwitchInput
-				name="theme"
-				label=""
-				onToggle={handleSwitchToggle}
-				isChecked={props.isDark}
-			/>
+			<label htmlFor="theme" className={styles.label}>
+				<div className={styles.switch}>
+					<input
+						type="checkbox"
+						name="theme"
+						id="theme"
+						onChange={handleSwitchToggle}
+						checked={isDark}
+					/>
+					<span></span>
+				</div>
+			</label>
 		</div>
 	);
 };

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import classes from './SwitchInput.module.scss';
 
 interface SwitchInputProps {
@@ -15,6 +15,9 @@ const SwitchInput: React.FC<SwitchInputProps> = (props) => {
 		setIsChecked(e.target.checked);
 		props.onToggle && props.onToggle(e.target.checked);
 	};
+	useEffect(() => {
+		setIsChecked(props.isChecked || false);
+	}, [props.isChecked]);
 	return (
 		<label htmlFor={props.name} className={classes.label}>
 			{props.label}

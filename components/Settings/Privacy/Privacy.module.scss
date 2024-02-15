@@ -3,7 +3,27 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
 	span {
 		font-size: 1.6rem;
+	}
+}
+.note {
+	border-bottom: var(--border-light);
+	padding: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	p {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		max-width: 300px;
+		font-size: 1.4rem;
+		color: var(--text-normal);
+		svg {
+			font-size: 5rem;
+			margin-right: 0.5em;
+		}
 	}
 }

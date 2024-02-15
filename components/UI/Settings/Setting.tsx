@@ -6,6 +6,7 @@ interface SettingProps {
 	onClick: ((e: any) => Promise<void>) | (() => void);
 	children: string;
 	red?: boolean;
+	blue?: boolean;
 }
 
 const Setting: React.FC<SettingProps> = (props) => {
@@ -21,9 +22,9 @@ const Setting: React.FC<SettingProps> = (props) => {
 	return (
 		<li
 			onClick={settingClickHandler}
-			className={`${classes.setting} ${props.red ? classes.red : ''} ${
-				isLoading ? classes.loading : ''
-			}`}
+			className={`${classes.setting} ${props.red ? classes.red : ''}  ${
+				props.blue ? classes.blue : ''
+			} ${isLoading ? classes.loading : ''}`}
 		>
 			{isLoading ? <Spinner className={classes.spinner} /> : props.children}
 		</li>

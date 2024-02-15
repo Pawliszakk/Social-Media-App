@@ -8,13 +8,19 @@ export async function privacyChange(privacy: boolean, userId: string) {
 	try {
 		user = await User.findOne({ _id: userId }).select('private');
 	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+		return { message: 'Something went wrong, please try again later' };
 	}
 	try {
 		user.private = privacy;
 		await user.save();
 	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+		return { message: 'Something went wrong, please try again later' };
 	}
+
 	revalidatePath('/', 'layout');
+	return {
+		message: `Successfully changed your profile privacy to ${
+			user.private ? 'private' : 'public'
+		}.`,
+	};
 }

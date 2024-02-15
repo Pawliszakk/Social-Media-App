@@ -12,6 +12,10 @@
 		color: rgb(187, 48, 24);
 		font-weight: bold;
 	}
+	&.blue {
+		color: var(--primary-button);
+		font-weight: bold;
+	}
 	.spinner {
 		margin: 0 auto;
 		height: 20px;
