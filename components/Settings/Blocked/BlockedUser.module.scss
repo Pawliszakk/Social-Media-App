@@ -1,0 +1,46 @@
+.box {
+	width: 100%;
+	margin: 1.5rem 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--text-color);
+	.user {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		span {
+			margin-left: 0.5em;
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+	}
+	button {
+		padding: 0.5em;
+		outline: none;
+		border: var(--border-light);
+		cursor: pointer;
+		text-decoration: none;
+		font-weight: bold;
+		border-radius: var(--radius-medium);
+		transition: background-color 0.3s;
+		color: #000;
+		font-size: 1.4rem;
+	}
+}
+
+.note {
+	padding: 3rem 5rem;
+	text-align: center;
+	border-bottom: var(--border-light);
+	span {
+		font-size: 2rem;
+		color: var(--text-normal);
+	}
+	p {
+		margin-top: 1rem;
+		font-size: 1.6rem;
+		line-height: 1.4;
+		color: var(--text-light);
+	}
+}

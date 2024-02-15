@@ -11,6 +11,13 @@ export async function blockUser(userId: string, userToBlockId: string) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
+	const isUserAlreadyBlocked = user.blockedUsers.find(
+		(id: string) => id.toString() === userToBlockId
+	);
+
+	if (!!isUserAlreadyBlocked) {
+		return;
+	}
 	try {
 		user.blockedUsers.push(userToBlockId);
 		await user.save();
@@ -28,7 +35,7 @@ export async function unBlockUser(userId: string, userToUnBlockId: string) {
 	}
 	try {
 		user.blockedUsers = user.blockedUsers.filter(
-			(id: string) => !userToUnBlockId
+			(id: string) => id.toString() !== userToUnBlockId
 		);
 		await user.save();
 	} catch (e) {
