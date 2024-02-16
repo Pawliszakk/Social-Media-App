@@ -4,7 +4,6 @@ import { getServerSession } from 'next-auth';
 import { User } from '../Models/user';
 import { connectToDatabase } from './connectToDatabase';
 import { permanentRedirect } from 'next/navigation';
-const mongoose = require('mongoose');
 
 export const getSessionData = async () => {
 	const session = await getServerSession();
@@ -40,6 +39,7 @@ export const getSessionData = async () => {
 		following: user.following,
 		savedPosts: user.savedPosts,
 		blockedUsers: user.blockedUsers,
+		closeFriends: user.closeFriends,
 		sentFollowRequests: user.sentFollowRequests,
 		recievedFollowRequests: user.recievedFollowRequests,
 	};

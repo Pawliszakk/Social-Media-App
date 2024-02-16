@@ -17,6 +17,7 @@ interface ProfileActionsProps {
 	isLoggedUserProfile: boolean;
 	isUserFollowingProfile: boolean;
 	isBlocked: boolean;
+	isCloseFriend: boolean;
 	postsLength: number;
 	followersLength: number;
 	followingLength: number;
@@ -80,12 +81,17 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 	};
 
 	let buttonMessage;
-	if (followingStatus === FOLLOWING) {
-		buttonMessage = 'Unfollow';
-	} else if (followingStatus === NOTFOLLOWING) {
-		buttonMessage = 'Follow';
-	} else if (followingStatus === REQUESTED) {
-		buttonMessage = 'Requested';
+
+	switch (followingStatus) {
+		case FOLLOWING:
+			buttonMessage = 'Unfollow';
+			break;
+		case NOTFOLLOWING:
+			buttonMessage = 'Follow';
+			break;
+		case REQUESTED:
+			buttonMessage = 'Requested';
+			break;
 	}
 
 	return (
@@ -112,6 +118,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 							isBlocked={props.isBlocked}
 							profileId={props.profileId}
 							userId={props.userId}
+							isCloseFriend={props.isCloseFriend}
 						/>
 					</>
 				)}

@@ -16,6 +16,7 @@ interface ProfileInfoProps {
 	isLoggedUserProfile: boolean;
 	isBlocked: boolean;
 	isUserFollowingProfile: boolean;
+	isCloseFriend: boolean;
 	isProfilePrivate: boolean;
 	followingStatus: any;
 }
@@ -68,6 +69,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 					followingStatus={props.followingStatus}
 					userId={props.userId}
 					isBlocked={props.isBlocked}
+					isCloseFriend={props.isCloseFriend}
 				/>
 			</div>
 		</div>

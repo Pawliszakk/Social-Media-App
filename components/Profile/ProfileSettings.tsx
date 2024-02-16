@@ -5,18 +5,30 @@ import SettingsButton from '../UI/Settings/SettingsButton';
 import SettingsBox from '../UI/Settings/SettingsBox';
 import Setting from '../UI/Settings/Setting';
 import AccountAbout from '../UI/Settings/AccountAbout';
-import { ABOUT, BLOCK, UNBLOCK } from '@/lib/constants/profileActions';
+import {
+	ABOUT,
+	ADD_CLOSE_FRIEND,
+	BLOCK,
+	REMOVE_CLOSE_FRIEND,
+	UNBLOCK,
+} from '@/lib/constants/profileActions';
 import { blockUser, unBlockUser } from '@/lib/actions/user/blockUser';
-
+import {
+	addCloseFriend,
+	removeCloseFriend,
+} from '@/lib/actions/user/addCloseFriend';
 interface ProfileSettingsProps {
 	profileId: string;
 	userId: string;
 	isBlocked: boolean;
+	isCloseFriend: boolean;
 }
 
 const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 	const [isSettings, setIsSettings] = useState(false);
 	const [isAboutComponent, setIsAboutComponent] = useState(false);
+
+	const { userId, profileId } = props;
 
 	const handleClick = async (action: string) => {
 		switch (action) {
@@ -24,11 +36,19 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 				setIsAboutComponent(true);
 				break;
 			case BLOCK:
-				await blockUser(props.userId, props.profileId);
+				await blockUser(userId, profileId);
 				setIsSettings(false);
 				break;
 			case UNBLOCK:
-				await unBlockUser(props.userId, props.profileId);
+				await unBlockUser(userId, profileId);
+				setIsSettings(false);
+				break;
+			case ADD_CLOSE_FRIEND:
+				await addCloseFriend(userId, profileId);
+				setIsSettings(false);
+				break;
+			case REMOVE_CLOSE_FRIEND:
+				await removeCloseFriend(userId, profileId);
 				setIsSettings(false);
 				break;
 			default:
@@ -53,9 +73,15 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 								</Setting>
 							)}
 
-							<Setting onClick={() => console.log('test')}>
-								Add to close friends list
-							</Setting>
+							{props.isCloseFriend ? (
+								<Setting onClick={() => handleClick(REMOVE_CLOSE_FRIEND)}>
+									Remove from close friends
+								</Setting>
+							) : (
+								<Setting onClick={() => handleClick(ADD_CLOSE_FRIEND)}>
+									Add to close friends
+								</Setting>
+							)}
 							<Setting onClick={() => handleClick(ABOUT)}>
 								About this account
 							</Setting>

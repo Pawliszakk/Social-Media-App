@@ -1,0 +1,40 @@
+.box {
+	margin: 1rem 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	padding: 1rem;
+	border-radius: var(--radius-light);
+	position: relative;
+	&.loading {
+		pointer-events: none;
+		background-color: var(--option-hover);
+		opacity: 0.6;
+		input {
+			display: none;
+		}
+	}
+	&:active {
+		background-color: var(--option-hover);
+	}
+	.spinner {
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.user {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		span {
+			margin-left: 0.5em;
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+	}
+	input {
+		width: 30px;
+		height: 30px;
+	}
+}

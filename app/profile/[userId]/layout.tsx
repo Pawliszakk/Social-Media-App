@@ -1,5 +1,4 @@
 import ProfileInfo from '@/components/Profile/ProfileInfo';
-import Spinner from '@/components/UI/Spinner';
 import getLoggedUserProfile from '@/lib/actions/user/getLoggedUserProfile';
 import { getProfile } from '@/lib/actions/user/getProfile';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
@@ -8,7 +7,6 @@ import {
 	NOTFOLLOWING,
 	REQUESTED,
 } from '@/lib/constants/followingStatus';
-import { Suspense } from 'react';
 import classes from './layout.module.scss';
 import PostsLinks from '@/components/Profile/Posts/PostsLinks';
 import { permanentRedirect } from 'next/navigation';
@@ -57,6 +55,11 @@ export default async function RootLayout({
 	const isProfileRequestedToFollow = user?.sentFollowRequests.find(
 		(el: any) => el.reciever.toString() === profile.id
 	);
+
+	const isProfileCloseFriend = user?.closeFriends.find(
+		(id: string) => id.toString() === profile.id
+	);
+
 	let followingStatus;
 	if (isUserFollowingProfile) {
 		followingStatus = FOLLOWING;
@@ -84,6 +87,7 @@ export default async function RootLayout({
 				followingStatus={followingStatus}
 				imageType={profile.imageType}
 				isBlocked={!!isUserBlockingProfile}
+				isCloseFriend={!!isProfileCloseFriend}
 			/>
 
 			<div className={classes.divider}></div>
