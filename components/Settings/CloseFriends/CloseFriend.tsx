@@ -53,7 +53,11 @@ const CloseFriend: React.FC<CloseFriendProps> = (props) => {
 				<span>{props.name}</span>
 			</div>
 			<div>
-				<input type="checkbox" checked={props.isCloseFriend} />
+				<input
+					type="checkbox"
+					checked={props.isCloseFriend}
+					onChange={() => {}}
+				/>
 			</div>
 			{isLoading && <Spinner className={classes.spinner} />}
 		</div>
