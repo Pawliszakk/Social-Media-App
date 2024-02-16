@@ -1,12 +1,18 @@
+import EditImage from '@/components/Settings/EditProfile/EditImage';
 import SettingPageBox from '@/components/Settings/SettingPageBox';
+import { getSessionData } from '@/lib/actions/utils/getSessionData';
 
 export default async function SettingsPage() {
+	const { session, user } = await getSessionData();
+
 	return (
-		<SettingPageBox
-			name="Edit"
-			paragraph="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ex tempore exercitationem esse rerum eos fugiat nisi soluta provident nulla, eligendi optio voluptatem, libero velit nesciunt eius quidem magnam quas?"
-		>
-			123
+		<SettingPageBox name="Edit profile" paragraph="">
+			<EditImage
+				image={user?.image}
+				imageType={user?.imageType}
+				userId={user?.userId}
+				name={user?.name}
+			/>
 		</SettingPageBox>
 	);
 }

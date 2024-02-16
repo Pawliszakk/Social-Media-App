@@ -1,0 +1,46 @@
+.box {
+	margin-top: 3rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--option-hover);
+	padding: 1rem;
+	border-radius: var(--radius-medium);
+	.image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		span {
+			margin-left: 1em;
+			font-weight: bold;
+			font-size: 1.4rem;
+		}
+	}
+	button {
+		color: #fff;
+		font-size: 1.4rem;
+		background-color: var(--primary-button);
+		padding: 0.5em 1em;
+		border: none;
+		font-weight: bold;
+		border-radius: var(--radius-light);
+		cursor: pointer;
+		transition: 0.1s ease-in-out;
+		&:hover {
+			background-color: var(--primary-button-hover);
+		}
+		&:active {
+			opacity: 0.8;
+		}
+	}
+}
+.note {
+	font-size: 2rem;
+	color: var(--text-normal);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: var(--border-light);
+	padding: 3rem 1rem;
+}

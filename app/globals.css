@@ -10,7 +10,7 @@
 	--border-medium: 1px solid rgba(42, 12, 12, 0.6);
 	--text-light: rgba(0, 0, 0, 0.7);
 	--text-normal: rgb(0, 0, 0);
-	--option-hover: rgb(226, 226, 226);
+	--option-hover: rgb(239, 239, 239);
 	--avatar-border: 3px solid rgba(0, 0, 0, 0.5);
 	--radius-light: 5px;
 	--radius-medium: 10px;
@@ -52,7 +52,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	background-color: var(--primary-background);
 }
-
 
 @keyframes skeleton-loading {
 	from {
