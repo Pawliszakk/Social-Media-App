@@ -15,7 +15,7 @@ export default async function SettingsPage() {
 		>
 			{!blockedUsers || blockedUsers.length === 0 ? (
 				<p style={{ textAlign: 'center', margin: '2rem' }}>
-					You haven't blocked anyone yet.
+					You haven&apos;t blocked anyone yet.
 				</p>
 			) : (
 				blockedUsers.map((user: any) => {
