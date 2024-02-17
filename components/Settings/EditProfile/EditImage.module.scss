@@ -17,6 +17,7 @@
 			font-size: 1.4rem;
 		}
 	}
+
 	button {
 		color: #fff;
 		font-size: 1.4rem;
@@ -33,6 +34,9 @@
 		&:active {
 			opacity: 0.8;
 		}
+	}
+	form {
+		display: none;
 	}
 }
 .note {

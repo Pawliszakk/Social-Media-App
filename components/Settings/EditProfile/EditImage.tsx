@@ -1,10 +1,11 @@
 'use client';
-import { useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import classes from './EditImage.module.scss';
 import ProfileImage from '@/components/UI/User/ProfileImage';
 import SettingsBox from '@/components/UI/Settings/SettingsBox';
 import Setting from '@/components/UI/Settings/Setting';
 import deleteCurrentAvatar from '@/lib/actions/user/deleteCurrentAvatar';
+import { changeProfileImage } from '@/lib/actions/user/changeProfileImage';
 
 interface EditImageProps {
 	userId: string;
@@ -21,18 +22,45 @@ const EditImage: React.FC<EditImageProps> = (props) => {
 		setIsModal(false);
 	};
 
-	return (
-		<div className={classes.box}>
-			<div className={classes.image} onClick={() => setIsModal(true)}>
-				<ProfileImage
-					image={props.image}
-					imageType={props.imageType}
-					name={props.name}
-				/>
-				<span>{props.name}</span>
-			</div>
+	const imageInputRef = useRef<HTMLInputElement>(null)!;
+	const handlePickClick = () => imageInputRef.current?.click();
 
-			<button onClick={() => setIsModal(true)}>Zmień zdjęcie</button>
+	const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files![0];
+		if (!file) {
+			setIsModal(false);
+			return;
+		}
+		const formData = new FormData();
+		formData.append('image', file);
+		await changeProfileImage(formData);
+		setIsModal(false);
+	};
+
+	return (
+		<>
+			<div className={classes.box}>
+				<div className={classes.image} onClick={() => setIsModal(true)}>
+					<ProfileImage
+						image={props.image}
+						imageType={props.imageType}
+						name={props.name}
+					/>
+					<span>{props.name}</span>
+				</div>
+				<button onClick={() => setIsModal(true)}>Change photo</button>
+
+				<form>
+					<input
+						type="file"
+						accept="image/png, image/jpeg"
+						id="image"
+						name="image"
+						onChange={handleImageChange}
+						ref={imageInputRef}
+					/>
+				</form>
+			</div>
 
 			{isModal && (
 				<SettingsBox onClose={() => setIsModal(false)}>
@@ -40,7 +68,7 @@ const EditImage: React.FC<EditImageProps> = (props) => {
 						<span>Change profile photo</span>
 					</div>
 					<ul>
-						<Setting blue onClick={() => console.log('dodaj zdjecie')}>
+						<Setting blue onClick={handlePickClick}>
 							Add photo
 						</Setting>
 						<Setting red onClick={deletePhotoHandler}>
@@ -50,7 +78,7 @@ const EditImage: React.FC<EditImageProps> = (props) => {
 					</ul>
 				</SettingsBox>
 			)}
-		</div>
+		</>
 	);
 };
 

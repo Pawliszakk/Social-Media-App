@@ -1,7 +1,6 @@
 'use client';
 import { ChangeEvent, useRef, useState } from 'react';
 import { changeProfileImage } from '@/lib/actions/user/changeProfileImage';
-import Image from 'next/image';
 import classes from './LoggedUserImage.module.scss';
 import Spinner from '../UI/Spinner';
 import ProfileImage from '../UI/User/ProfileImage';
