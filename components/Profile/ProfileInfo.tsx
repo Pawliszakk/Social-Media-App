@@ -44,6 +44,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 					image={props.image}
 					name={props.name}
 					imageType={props.imageType}
+					userId={props.userId}
 				/>
 			) : (
 				<ProfileImage
