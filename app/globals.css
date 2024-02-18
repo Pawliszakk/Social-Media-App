@@ -16,7 +16,7 @@
 	--radius-medium: 10px;
 	--radius-circle: 50%;
 	--primary-button: rgb(0, 149, 246);
-	--primary-button-hover: rgb(35, 62, 218);
+	--primary-button-hover: rgb(35, 62, 215);
 	--divider-color: rgba(0, 0, 0, 0.2);
 	--skeleton-loading: skeleton-loading 1s linear infinite alternate;
 }
