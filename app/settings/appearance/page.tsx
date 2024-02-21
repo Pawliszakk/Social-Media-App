@@ -11,7 +11,7 @@ export default async function AppearancePage() {
 	return (
 		<SettingPageBox
 			name="Appearance"
-			paragraph="In this app you can switch between light and dark mode of application. You can switch in any moment and changes are reversible."
+			paragraph="You can switch between light and dark mode of application. You can switch in any moment and changes are reversible."
 		>
 			<Appearance isDark={isDark} userId={userId} />
 		</SettingPageBox>
