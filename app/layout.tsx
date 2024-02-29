@@ -4,6 +4,7 @@ import classes from './layout.module.scss';
 import ActionBar from '@/components/Nav/ActionBar';
 import NextAuthProvider from '@/components/Auth/NextAuthProvider';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
+import Footer from '@/components/Footer/Footer';
 
 export const metadata: Metadata = {
 	title: 'Social Media App',
@@ -29,10 +30,12 @@ export default async function RootLayout({
 							imageType={user.imageType}
 						/>
 					)}
-					<main className={session ? classes.main : ''}>
-						<NextAuthProvider>{children}</NextAuthProvider>
-					</main>
-					{/* <Footer /> */}
+					<div className={session ? classes.main : ''}>
+						<main>
+							<NextAuthProvider>{children}</NextAuthProvider>
+						</main>
+						<Footer />
+					</div>
 				</div>
 			</body>
 		</html>
