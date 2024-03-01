@@ -39,7 +39,9 @@ const ActionBar: React.FC<ActionBarProps> = ({
 	];
 	return (
 		<header className={classes.header}>
-			<div className={classes.logo}>{/* <h1>{'<Logo Aplikacji> '}</h1> */}</div>
+			<div className={classes.logo}>
+				<h1>Logo aplikacji</h1>
+			</div>
 
 			<nav>
 				{menuOptions.map((option, i) => (

@@ -1,0 +1,73 @@
+.form {
+	margin-top: 3rem;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	label {
+		font-weight: bold;
+		font-size: 1.6rem;
+		padding: 2rem 0;
+	}
+	.textarea {
+		position: relative;
+		span {
+			position: absolute;
+			right: 30px;
+			bottom: 10px;
+			font-size: 1.2rem;
+			color: #000;
+			opacity: 0.7;
+		}
+	}
+	textarea,
+	select {
+		border-radius: var(--radius-light);
+		border: var(--border-light);
+		padding: 1rem;
+	}
+	textarea {
+		padding-right: 40px;
+		width: 100%;
+		resize: none;
+		overflow-y: scroll;
+	}
+	select {
+		padding: 1.5rem;
+		font-size: 1.8rem;
+		cursor: pointer;
+		&:hover {
+			background-color: var(--option-hover);
+		}
+	}
+	p {
+		color: var(--text-color);
+		opacity: 0.8;
+	}
+	button {
+		margin-top: 1rem;
+		background-color: var(--primary-button);
+		width: 30%;
+		align-self: flex-end;
+		cursor: pointer;
+		color: #fff;
+		padding: 1em 2em;
+		border-radius: var(--radius-medium);
+		border: none;
+		font-weight: bold;
+		font-size: 1.5rem;
+		transition: background-color 0.3s;
+		&:hover {
+			background-color: var(--primary-button-hover);
+		}
+		&:disabled {
+			pointer-events: none;
+			opacity: 0.4;
+		}
+	}
+	.result {
+		margin-top: 3rem;
+		text-align: center;
+		opacity: 1;
+		font-size: 1.8rem;
+	}
+}
