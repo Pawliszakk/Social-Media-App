@@ -88,6 +88,8 @@ export default async function RootLayout({
 				imageType={profile.imageType}
 				isBlocked={!!isUserBlockingProfile}
 				isCloseFriend={!!isProfileCloseFriend}
+				bio={profile.bio}
+				website={profile.website}
 			/>
 
 			<div className={classes.divider}></div>

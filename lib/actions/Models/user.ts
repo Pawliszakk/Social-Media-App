@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
 	image: { type: String, required: false, default: '/assets/defaultUser.jpg' },
 	imageType: { type: String, required: true, default: 'provider' },
 	sex: { type: String, required: true, default: 'other' },
+	website: { type: String, required: false, default: '' },
 	private: { type: Boolean, required: true, default: false },
 	date: { type: String, required: true },
 	theme: { type: String, required: true, default: 'light' },

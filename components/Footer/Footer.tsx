@@ -15,7 +15,12 @@ const Footer = () => {
 			>
 				Github Repo
 			</a>
-			<a href="https://github.com/Pawliszakk/Social-Media-App">Help</a>
+			<a href="https://github.com/Pawliszakk/Social-Media-App" target="_blank">
+				Help
+			</a>
+			<a href="https://todo-app-full-stack-dun.vercel.app/" target="_blank">
+				Task Pro App
+			</a>
 			<p>pawliszakDev {year} </p>
 		</footer>
 	);

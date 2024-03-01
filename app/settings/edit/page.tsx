@@ -6,9 +6,9 @@ import { getSessionData } from '@/lib/actions/utils/getSessionData';
 export default async function SettingsPage() {
 	const { session, user } = await getSessionData();
 
+	const website = user?.website;
 	const bio = user?.bio;
 	const sex = user?.sex;
-
 	return (
 		<SettingPageBox name="Edit profile" paragraph="">
 			<EditImage
@@ -17,7 +17,7 @@ export default async function SettingsPage() {
 				userId={user?.userId}
 				name={user?.name}
 			/>
-			<EditProfileForm bio={bio} sex={sex} />
+			<EditProfileForm bio={bio} sex={sex} website={website} />
 		</SettingPageBox>
 	);
 }

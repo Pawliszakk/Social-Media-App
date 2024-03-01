@@ -3,9 +3,11 @@
 import xss from 'xss';
 import { User } from '../../Models/user';
 import { getSessionData } from '../../utils/getSessionData';
+import { revalidatePath } from 'next/cache';
 
 export async function editProfile(prevState: any, formData: any) {
 	const session = await getSessionData();
+	const website = formData.get('website');
 	const bio = formData.get('bio');
 	const sex = formData.get('sex');
 	const sanitizedBio = xss(bio);
@@ -25,7 +27,7 @@ export async function editProfile(prevState: any, formData: any) {
 				'Something went wrong with editing your profile, please try again later.',
 		};
 	}
-
+	user.website = website;
 	user.bio = sanitizedBio;
 	user.sex = sex;
 	try {
@@ -38,4 +40,5 @@ export async function editProfile(prevState: any, formData: any) {
 	}
 
 	return { message: 'Your profile settings were updated.' };
+	revalidatePath('/', 'layout');
 }

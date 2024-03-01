@@ -7,6 +7,12 @@
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 1px;
+	p {
+		padding: 3rem 0;
+		font-size: 1.8rem;
+		width: 100%;
+		text-align: center;
+	}
 	@media (min-width: 768px) {
 		gap: 3px;
 	}

@@ -4,10 +4,13 @@ import ProfileActions from './ProfileActions';
 import classes from './ProfileInfo.module.scss';
 import LoggedUserImage from './LoggedUserImage';
 import ProfileImage from '../UI/User/ProfileImage';
+import ProfileBio from './ProfileBio';
 interface ProfileInfoProps {
 	name: string;
 	profileId: string;
 	image: string;
+	bio: string;
+	website: string;
 	imageType: string;
 	userId: string;
 	posts: string[];
@@ -72,6 +75,8 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 					isBlocked={props.isBlocked}
 					isCloseFriend={props.isCloseFriend}
 				/>
+
+				<ProfileBio bio={props.bio} website={props.website} />
 			</div>
 		</div>
 	);

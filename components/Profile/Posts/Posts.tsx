@@ -7,23 +7,25 @@ interface PostsProps {
 }
 
 const Posts: React.FC<PostsProps> = (props) => {
-	const warunek = true;
-
 	return (
 		<PostsBox>
-			{props.posts.map((p: any) => (
-				<PostTile
-					key={p.id}
-					postId={p.id}
-					likes={p.likes}
-					comments={p.comments}
-					image={p.image}
-					author={p.author}
-					commenting={p.commenting}
-					hideLikesCount={p.hideLikesCount}
-					archived={p.archived}
-				/>
-			))}
+			{props.posts.length === 0 || !props.posts ? (
+				<p>We found no posts.</p>
+			) : (
+				props.posts.map((p: any) => (
+					<PostTile
+						key={p.id}
+						postId={p.id}
+						likes={p.likes}
+						comments={p.comments}
+						image={p.image}
+						author={p.author}
+						commenting={p.commenting}
+						hideLikesCount={p.hideLikesCount}
+						archived={p.archived}
+					/>
+				))
+			)}
 		</PostsBox>
 	);
 };

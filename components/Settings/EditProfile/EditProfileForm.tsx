@@ -8,29 +8,43 @@ import classes from './EditProfileForm.module.scss';
 interface EditProfileFormProps {
 	bio: string;
 	sex: 'man' | 'woman' | 'other';
+	website: string;
 }
 
 const EditProfileForm: React.FC<EditProfileFormProps> = (props) => {
 	const [bio, setBio] = useState(props.bio);
 	const [sex, setSex] = useState(props.sex);
+	const [website, setWebsite] = useState(props.website);
 
 	const [state, formAction] = useFormState(editProfile, { message: '' });
 
 	const [isFormTouched, setIsFormTouched] = useState(false);
-	console.log(state);
 	const handleInputChange = (
-		e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>
+		e: React.ChangeEvent<
+			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+		>
 	) => {
 		if (e.target.name === 'bio') {
 			setBio(e.target.value);
 		} else if (e.target.name === 'sex') {
 			setSex(e.target.value as 'man' | 'woman' | 'other');
+		} else if (e.target.name === 'website') {
+			setWebsite(e.target.value);
 		}
 
 		setIsFormTouched(true);
 	};
 	return (
 		<form className={classes.form} action={formAction}>
+			<label htmlFor="website">Website</label>
+			<input
+				type="text"
+				name="website"
+				id="website"
+				placeholder="Please enter valid url to your website..."
+				onChange={handleInputChange}
+				value={website}
+			/>
 			<label htmlFor="bio">Biogram</label>
 			<div className={classes.textarea}>
 				<textarea
