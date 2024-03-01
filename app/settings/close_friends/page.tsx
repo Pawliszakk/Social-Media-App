@@ -29,21 +29,27 @@ export default async function SettingsPage() {
 	return (
 		<SettingPageBox
 			name="Close friends"
-			paragraph="Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ex tempore exercitationem esse rerum eos fugiat nisi soluta provident nulla, eligendi optio voluptatem, libero velit nesciunt eius quidem magnam quas?"
+			paragraph="Here you can manage your close friends list. We do not send notifications for editing the list of close friends."
 		>
-			{transformedFollowing.map((profile: any) => {
-				return (
-					<CloseFriend
-						key={profile.id}
-						image={profile.image}
-						imageType={profile.imageType}
-						name={profile.name}
-						profileId={profile.id}
-						isCloseFriend={profile.isCloseFriend}
-						userId={user?.userId}
-					/>
-				);
-			})}
+			{transformedFollowing.length === 0 || !transformedFollowing ? (
+				<p style={{ textAlign: 'center' }}>
+					We found no users you are currently following.
+				</p>
+			) : (
+				transformedFollowing.map((profile: any) => {
+					return (
+						<CloseFriend
+							key={profile.id}
+							image={profile.image}
+							imageType={profile.imageType}
+							name={profile.name}
+							profileId={profile.id}
+							isCloseFriend={profile.isCloseFriend}
+							userId={user?.userId}
+						/>
+					);
+				})
+			)}
 		</SettingPageBox>
 	);
 }

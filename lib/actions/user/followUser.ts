@@ -74,6 +74,9 @@ export async function unFollowUser(userId: string, userToUnfollowId: string) {
 	user.following = user.following.filter(
 		(id: string) => id.toString() !== userToUnfollowId
 	);
+	user.closeFriends = user.following.filter(
+		(id: string) => id.toString() !== userToUnfollowId
+	);
 	userToUnfollow.followers = userToUnfollow.followers.filter(
 		(id: string) => id.toString() !== userId
 	);
