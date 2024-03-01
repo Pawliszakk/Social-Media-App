@@ -11,7 +11,6 @@ export const getSessionData = async () => {
 		return { session: null, user: null };
 	}
 
-	const name = session.user?.name;
 	const email = session.user?.email;
 
 	await connectToDatabase();
@@ -28,7 +27,7 @@ export const getSessionData = async () => {
 	}
 
 	const userData = {
-		name,
+		name: user.name,
 		email,
 		image: user.image,
 		private: user.private,

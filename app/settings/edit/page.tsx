@@ -9,6 +9,9 @@ export default async function SettingsPage() {
 	const website = user?.website;
 	const bio = user?.bio;
 	const sex = user?.sex;
+	const name = user?.name;
+
+	console.log(name);
 	return (
 		<SettingPageBox name="Edit profile" paragraph="">
 			<EditImage
@@ -17,7 +20,7 @@ export default async function SettingsPage() {
 				userId={user?.userId}
 				name={user?.name}
 			/>
-			<EditProfileForm bio={bio} sex={sex} website={website} />
+			<EditProfileForm bio={bio} sex={sex} website={website} name={`${name}`} />
 		</SettingPageBox>
 	);
 }

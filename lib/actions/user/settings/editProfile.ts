@@ -7,30 +7,57 @@ import { revalidatePath } from 'next/cache';
 
 export async function editProfile(prevState: any, formData: any) {
 	const session = await getSessionData();
+
+	const name = formData.get('name');
 	const website = formData.get('website');
 	const bio = formData.get('bio');
 	const sex = formData.get('sex');
+
 	const sanitizedBio = xss(bio);
+
+	const isNameValid = name.trim().length !== 0;
 	const isBioValid = sanitizedBio.length < 150;
 	const isSexValid = sex === 'man' || sex === 'woman' || sex === 'other';
 
-	if (!isBioValid || !isSexValid) {
+	if (!isBioValid || !isSexValid || !isNameValid) {
 		return { message: 'Invalid input data.' };
 	}
 
 	let user;
 	try {
-		user = await User.findOne({ _id: session.user?.userId }).select('bio sex');
+		user = await User.findOne({ _id: session.user?.userId }).select(
+			'name bio sex'
+		);
 	} catch (e) {
 		return {
 			message:
 				'Something went wrong with editing your profile, please try again later.',
 		};
 	}
-	user.website = website;
-	user.bio = sanitizedBio;
-	user.sex = sex;
+
+	let userWithTheSameNickName;
 	try {
+		userWithTheSameNickName = await User.findOne({ name });
+	} catch (e) {
+		return {
+			message: 'Something went wrong, please try again later',
+		};
+	}
+	if (userWithTheSameNickName && userWithTheSameNickName.id !== user.id) {
+		return {
+			message: 'This name is already in use, choose different nickname',
+		};
+	}
+	if (userWithTheSameNickName && userWithTheSameNickName.id === user.id) {
+		return {
+			message: 'You cant change your name to your current name.',
+		};
+	}
+	try {
+		user.name = name;
+		user.website = website;
+		user.bio = sanitizedBio;
+		user.sex = sex;
 		await user.save();
 	} catch (e) {
 		return {
@@ -39,6 +66,6 @@ export async function editProfile(prevState: any, formData: any) {
 		};
 	}
 
-	return { message: 'Your profile settings were updated.' };
 	revalidatePath('/', 'layout');
+	return { message: 'Your profile settings were updated.' };
 }

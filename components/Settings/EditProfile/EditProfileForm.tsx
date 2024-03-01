@@ -9,10 +9,12 @@ interface EditProfileFormProps {
 	bio: string;
 	sex: 'man' | 'woman' | 'other';
 	website: string;
+	name: string;
 }
 
 const EditProfileForm: React.FC<EditProfileFormProps> = (props) => {
 	const [bio, setBio] = useState(props.bio);
+	const [nick, setNick] = useState(props.name);
 	const [sex, setSex] = useState(props.sex);
 	const [website, setWebsite] = useState(props.website);
 
@@ -24,18 +26,32 @@ const EditProfileForm: React.FC<EditProfileFormProps> = (props) => {
 			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 		>
 	) => {
-		if (e.target.name === 'bio') {
-			setBio(e.target.value);
-		} else if (e.target.name === 'sex') {
-			setSex(e.target.value as 'man' | 'woman' | 'other');
-		} else if (e.target.name === 'website') {
-			setWebsite(e.target.value);
+		const name = e.target.name;
+		const value = e.target.value;
+
+		if (name === 'bio') {
+			setBio(value);
+		} else if (name === 'sex') {
+			setSex(value as 'man' | 'woman' | 'other');
+		} else if (name === 'website') {
+			setWebsite(value);
+		} else if (name === 'name') {
+			setNick(value);
 		}
 
 		setIsFormTouched(true);
 	};
 	return (
 		<form className={classes.form} action={formAction}>
+			<label htmlFor="name">Name</label>
+			<input
+				type="text"
+				name="name"
+				id="name"
+				placeholder="Please enter your new nickname"
+				onChange={handleInputChange}
+				value={nick}
+			/>
 			<label htmlFor="website">Website</label>
 			<input
 				type="text"
