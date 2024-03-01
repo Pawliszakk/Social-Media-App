@@ -37,6 +37,7 @@ export const getSessionData = async () => {
 		website: user.website,
 		userId: user.id,
 		theme: user.theme,
+		showInSuggestions: user.showInSuggestions,
 		likedPosts: user.likedPosts,
 		following: user.following,
 		savedPosts: user.savedPosts,

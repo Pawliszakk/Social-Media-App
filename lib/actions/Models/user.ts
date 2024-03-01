@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
 	theme: { type: String, required: true, default: 'light' },
 	provider: { type: String, required: true },
 	password: { type: String, required: false },
+	showInSuggestions: { type: Boolean, required: false, default: true },
 	posts: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Post' }],
 	likedPosts: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Post' }],
 	followers: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],

@@ -4,21 +4,25 @@ import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import { editProfile } from '@/lib/actions/user/settings/editProfile';
 import classes from './EditProfileForm.module.scss';
+import SwitchInput from '@/components/UI/SwitchInput';
 
 interface EditProfileFormProps {
 	bio: string;
 	sex: 'man' | 'woman' | 'other';
 	website: string;
 	name: string;
+	showInSuggestions: boolean;
 }
 
 const EditProfileForm: React.FC<EditProfileFormProps> = (props) => {
+	const [state, formAction] = useFormState(editProfile, { message: '' });
 	const [bio, setBio] = useState(props.bio);
 	const [nick, setNick] = useState(props.name);
 	const [sex, setSex] = useState(props.sex);
 	const [website, setWebsite] = useState(props.website);
-
-	const [state, formAction] = useFormState(editProfile, { message: '' });
+	const [showInSuggestions, setShowInSuggestions] = useState(
+		props.showInSuggestions
+	);
 
 	const [isFormTouched, setIsFormTouched] = useState(false);
 	const handleInputChange = (
@@ -41,6 +45,12 @@ const EditProfileForm: React.FC<EditProfileFormProps> = (props) => {
 
 		setIsFormTouched(true);
 	};
+
+	const handleToggleChange = (isChecked: boolean) => {
+		setShowInSuggestions(isChecked);
+		setIsFormTouched(true);
+	};
+
 	return (
 		<form className={classes.form} action={formAction}>
 			<label htmlFor="name">Name</label>
@@ -79,6 +89,28 @@ const EditProfileForm: React.FC<EditProfileFormProps> = (props) => {
 				<option value="other">Other</option>
 			</select>
 			<p>This will not be part of your public profile.</p>
+
+			<label htmlFor="showInSuggestions">
+				Show account proposals in profiles
+			</label>
+
+			<div className={classes.suggestions}>
+				<div>
+					<h3>Show account proposals in profiles</h3>
+					<p>
+						Determine whether other people can see suggestions for similar
+						accounts in your profile and whether your account can be suggested
+						in other profiles.
+					</p>
+				</div>
+				<SwitchInput
+					label=""
+					name="showInSuggestions"
+					onToggle={handleToggleChange}
+					isChecked={showInSuggestions}
+				/>
+			</div>
+
 			<button type="submit" disabled={!isFormTouched || bio.length >= 150}>
 				Save Changes
 			</button>

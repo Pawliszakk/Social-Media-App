@@ -12,7 +12,7 @@ export async function editProfile(prevState: any, formData: any) {
 	const website = formData.get('website');
 	const bio = formData.get('bio');
 	const sex = formData.get('sex');
-
+	const showInSuggestions = formData.get('showInSuggestions');
 	const sanitizedBio = xss(bio);
 
 	const isNameValid = name.trim().length !== 0;
@@ -48,16 +48,13 @@ export async function editProfile(prevState: any, formData: any) {
 			message: 'This name is already in use, choose different nickname',
 		};
 	}
-	if (userWithTheSameNickName && userWithTheSameNickName.id === user.id) {
-		return {
-			message: 'You cant change your name to your current name.',
-		};
-	}
+
 	try {
 		user.name = name;
 		user.website = website;
 		user.bio = sanitizedBio;
 		user.sex = sex;
+		user.showInSuggestions = !!showInSuggestions;
 		await user.save();
 	} catch (e) {
 		return {

@@ -21,7 +21,8 @@
 	}
 	input,
 	textarea,
-	select {
+	select,
+	.suggestions {
 		border-radius: var(--radius-light);
 		border: var(--border-light);
 		padding: 1rem;
@@ -44,8 +45,14 @@
 		color: var(--text-color);
 		opacity: 0.8;
 	}
+	.suggestions {
+		h3 {
+			font-size: 1.4rem;
+		}
+		display: flex;
+	}
 	button {
-		margin-top: 1rem;
+		margin-top: 3rem;
 		background-color: var(--primary-button);
 		width: 30%;
 		align-self: flex-end;
@@ -65,6 +72,7 @@
 			opacity: 0.4;
 		}
 	}
+
 	.result {
 		margin-top: 3rem;
 		text-align: center;
