@@ -33,14 +33,21 @@ const EditProfileForm: React.FC<EditProfileFormProps> = (props) => {
 		const name = e.target.name;
 		const value = e.target.value;
 
-		if (name === 'bio') {
-			setBio(value);
-		} else if (name === 'sex') {
-			setSex(value as 'man' | 'woman' | 'other');
-		} else if (name === 'website') {
-			setWebsite(value);
-		} else if (name === 'name') {
-			setNick(value);
+		switch (name) {
+			case 'bio':
+				setBio(value);
+				break;
+			case 'sex':
+				setSex(value as 'man' | 'woman' | 'other');
+				break;
+			case 'website':
+				setWebsite(value);
+				break;
+			case 'name':
+				setNick(value);
+				break;
+			default:
+				break;
 		}
 
 		setIsFormTouched(true);
