@@ -12,13 +12,11 @@ interface PostTileProps {
 	author: string;
 	commenting: boolean;
 	hideLikesCount: boolean;
-	archived: boolean;
 }
 
 const PostTile: React.FC<PostTileProps> = ({
 	postId,
 	hideLikesCount,
-	archived,
 	commenting,
 	likes,
 	comments,

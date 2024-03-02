@@ -24,6 +24,7 @@ interface PostPageProps {
 	author: { name: string; id: string; image: string; imageType: string };
 	likes: string[] | [];
 	images: string | string[];
+	showLikes: boolean;
 	isUserLikingPost: boolean;
 	isUserSavedPost: boolean;
 	isUserAuthor: boolean;
@@ -118,7 +119,12 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 					isUserLikingPost={isUserLikingPost}
 					isUserSavedPost={props.isUserSavedPost}
 				/>
-				<PostLikes likes={likesCount} date={props.date} />
+				<PostLikes
+					likes={likesCount}
+					date={props.date}
+					showLikes={props.showLikes}
+					isUserAuthor={props.isUserAuthor}
+				/>
 
 				{props.commenting && (
 					<PostAddComment

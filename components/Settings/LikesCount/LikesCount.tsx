@@ -15,7 +15,7 @@ const LikesCount: React.FC<LikesCountProps> = (props) => {
 	const [isShowLikes, setIsShowLikes] = useState(props.showLikes);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const handleSwitchToggle = async (e: any) => {
+	const handleSwitchToggle = async () => {
 		setIsLoading(true);
 		let currentShowLikes = props.showLikes;
 		try {
@@ -28,7 +28,7 @@ const LikesCount: React.FC<LikesCountProps> = (props) => {
 	};
 	return (
 		<div className={classes.box}>
-			<span>Hide the numbers of likes and shares</span>
+			<span>Show the numbers of likes and shares</span>
 			<label htmlFor="theme" className={styles.label}>
 				<div className={styles.switch}>
 					{isLoading ? (
