@@ -37,9 +37,7 @@ const SettingsNavbar = () => {
 
 	return (
 		<div className={classes.box}>
-			<div>
-				<h1>Settings</h1>
-			</div>
+			<h2>Settings</h2>
 
 			<div className={classes.options}>
 				{settingsLinks.map((l) => (

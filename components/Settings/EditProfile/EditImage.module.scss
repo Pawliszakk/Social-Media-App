@@ -12,15 +12,15 @@
 		align-items: center;
 		cursor: pointer;
 		span {
-			margin-left: 1em;
+			margin-left: 0.5em;
 			font-weight: bold;
-			font-size: 1.4rem;
+			font-size: 1.2rem;
 		}
 	}
-
 	button {
+		margin-left: 0.5em;
 		color: #fff;
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		background-color: var(--primary-button);
 		padding: 0.5em 1em;
 		border: none;
@@ -37,6 +37,18 @@
 	}
 	form {
 		display: none;
+	}
+
+	@media (min-width: 400px) {
+		.image {
+			span {
+				margin-left: 1em;
+				font-size: 1.4rem;
+			}
+		}
+		button {
+			font-size: 1.4rem;
+		}
 	}
 }
 .note {

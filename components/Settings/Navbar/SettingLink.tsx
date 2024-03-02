@@ -21,7 +21,7 @@ const SettingLink: React.FC<SettingLinkProps> = (props) => {
 			className={`${classes.link} ${isActive ? classes.active : ''}`}
 			href={props.href}
 		>
-			{props.icon} {props.text}
+			{props.icon} <span>{props.text}</span>
 		</Link>
 	);
 };

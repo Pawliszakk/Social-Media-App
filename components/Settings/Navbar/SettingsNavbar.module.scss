@@ -1,15 +1,32 @@
-@media (min-width: 768px) {
-	.box {
-		padding: 2rem;
+.box {
+	position: fixed;
+	background-color: var(--primary-background);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 40px;
+	border-bottom: var(--border-light);
+
+	h2 {
+		display: none;
+	}
+	.options {
 		display: flex;
+	}
+	@media (min-width: 768px) {
+		position: static;
 		justify-content: flex-start;
-		align-items: center;
 		flex-direction: column;
+		padding: 2rem;
 		border-right: var(--border-light);
+		border-bottom: none;
 		min-height: 100vh;
 		width: 200px;
+		h2 {
+			display: block;
+		}
 		.options {
-			display: flex;
 			justify-content: center;
 			flex-direction: column;
 		}
