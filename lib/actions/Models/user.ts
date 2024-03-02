@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
 	sex: { type: String, required: true, default: 'other' },
 	website: { type: String, required: false, default: '' },
 	private: { type: Boolean, required: true, default: false },
+	showLikes: { type: Boolean, required: false, default: true },
 	date: { type: String, required: true },
 	theme: { type: String, required: true, default: 'light' },
 	provider: { type: String, required: true },
