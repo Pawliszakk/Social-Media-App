@@ -25,5 +25,12 @@ export default async function ProfilePage({
 		authorName = name;
 	}
 
-	return <Posts posts={savedPosts} authorName={authorName} />;
+	return (
+		<Posts
+			posts={savedPosts}
+			authorName={authorName}
+			userId={user?.userId}
+			showLikes={user?.showLikes}
+		/>
+	);
 }

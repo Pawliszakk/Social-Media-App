@@ -13,6 +13,8 @@ interface PostComponentProps {
 	likes: string[] | [];
 	isUserLikingPost: boolean;
 	isUserSavedPost: boolean;
+	isUserAuthor: boolean;
+	showLikes: boolean;
 	likePost: (postId: string, userId: string) => void;
 	unLikePost: (postId: string, userId: string) => void;
 	savePost: (postId: string, userId: string) => void;
@@ -52,7 +54,12 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 				isUserLikingPost={isUserLikingPost}
 				isUserSavedPost={props.isUserSavedPost}
 			/>
-			<PostLikes likes={likesCount} date={props.date} />
+			<PostLikes
+				likes={likesCount}
+				date={props.date}
+				showLikes={props.showLikes}
+				isUserAuthor={props.isUserAuthor}
+			/>
 		</>
 	);
 };

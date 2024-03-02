@@ -91,6 +91,8 @@ export default async function Home({
 								savePost={savePost}
 								isUserSavedPost={!!isUserSavedPost}
 								date={post.date}
+								isUserAuthor={isUserAuthor}
+								showLikes={user?.showLikes}
 								likes={post.likes.map((like: string) => like.toString())}
 							/>
 

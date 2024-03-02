@@ -20,7 +20,12 @@ const archivePage = async () => {
 
 			<h2>Your archived posts</h2>
 			<p>Archived posts will only be visible to you unless you share them.</p>
-			<Posts posts={posts} authorName={`${authorName}`} />
+			<Posts
+				posts={posts}
+				authorName={`${authorName}`}
+				userId={user?.userId}
+				showLikes={user?.showLikes}
+			/>
 		</div>
 	);
 };
