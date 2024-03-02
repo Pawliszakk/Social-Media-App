@@ -12,6 +12,8 @@ interface PostTileProps {
 	author: string;
 	commenting: boolean;
 	hideLikesCount: boolean;
+	isUserAuthor: boolean;
+	showLikes: boolean;
 }
 
 const PostTile: React.FC<PostTileProps> = ({
@@ -22,6 +24,8 @@ const PostTile: React.FC<PostTileProps> = ({
 	comments,
 	image,
 	author,
+	isUserAuthor,
+	showLikes,
 }) => {
 	return (
 		<div className={classes.tile}>
@@ -34,9 +38,11 @@ const PostTile: React.FC<PostTileProps> = ({
 				/>
 				{!hideLikesCount && (
 					<div className={classes.shadow}>
-						<div>
-							<FaHeart /> <span>{likes.length}</span>
-						</div>
+						{isUserAuthor || (!isUserAuthor && showLikes) ? (
+							<div>
+								<FaHeart /> <span>{likes.length}</span>
+							</div>
+						) : null}
 						{commenting && (
 							<div>
 								<FaComment /> <span>{comments.length}</span>
@@ -48,5 +54,4 @@ const PostTile: React.FC<PostTileProps> = ({
 		</div>
 	);
 };
-
 export default PostTile;

@@ -4,6 +4,8 @@ import PostsBox from './PostsBox';
 interface PostsProps {
 	authorName: string;
 	posts: string[] | [];
+	userId: string;
+	showLikes: boolean;
 }
 
 const Posts: React.FC<PostsProps> = (props) => {
@@ -12,19 +14,23 @@ const Posts: React.FC<PostsProps> = (props) => {
 			{props.posts.length === 0 || !props.posts ? (
 				<p>We found no posts.</p>
 			) : (
-				props.posts.map((p: any) => (
-					<PostTile
-						key={p.id}
-						postId={p.id}
-						likes={p.likes}
-						comments={p.comments}
-						image={p.image}
-						author={p.author}
-						commenting={p.commenting}
-						hideLikesCount={p.hideLikesCount}
-						archived={p.archived}
-					/>
-				))
+				props.posts.map((p: any) => {
+					const isUserAuthor = p.author.toString() === props.userId;
+					return (
+						<PostTile
+							key={p.id}
+							postId={p.id}
+							likes={p.likes}
+							comments={p.comments}
+							image={p.image}
+							author={p.author}
+							commenting={p.commenting}
+							hideLikesCount={p.hideLikesCount}
+							showLikes={props.showLikes}
+							isUserAuthor={!!isUserAuthor}
+						/>
+					);
+				})
 			)}
 		</PostsBox>
 	);

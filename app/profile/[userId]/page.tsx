@@ -37,7 +37,12 @@ export default async function ProfilePage({
 		<>
 			{!isUserBlockingProfile &&
 			(isUserAllowedToViewPosts || isLoggedUserProfile) ? (
-				<Posts posts={profilePosts} authorName={authorName} />
+				<Posts
+					posts={profilePosts}
+					authorName={authorName}
+					userId={user?.userId}
+					showLikes={user?.showLikes}
+				/>
 			) : isUserBlockingProfile ? null : (
 				<PrivateProfileFallback />
 			)}
