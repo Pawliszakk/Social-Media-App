@@ -1,12 +1,12 @@
 import Appearance from '@/components/Settings/Appearanace/Appearance';
 import SettingPageBox from '@/components/Settings/SettingPageBox';
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
+import { getUserData } from '@/lib/actions/utils/getUserData';
 
 export default async function AppearancePage() {
-	const { session, user } = await getSessionData();
+	const { session, user } = await getUserData('theme');
 
-	const isDark = user?.theme === 'dark';
-	const userId = user?.userId;
+	const isDark = user.theme === 'dark';
+	const userId = user.id;
 
 	return (
 		<SettingPageBox

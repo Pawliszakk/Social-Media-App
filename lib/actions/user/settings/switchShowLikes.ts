@@ -2,16 +2,14 @@
 
 import { revalidatePath } from 'next/cache';
 import { User } from '../../Models/user';
-import { getSessionData } from '../../utils/getSessionData';
+import { getUserData } from '../../utils/getUserData';
 
 export async function switchShowLikes() {
-	const session = await getSessionData();
+	const userData = await getUserData();
 
 	let user;
 	try {
-		user = await User.findOne({ _id: session?.user?.userId }).select(
-			'showLikes'
-		);
+		user = await User.findOne({ _id: userData.user.id }).select('showLikes');
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}

@@ -1,21 +1,30 @@
 import { getPostById } from '@/lib/actions/post/getPostById';
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import { permanentRedirect } from 'next/navigation';
 
 import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 import { savePost } from '@/lib/actions/post/savePost';
 import PostPage from '@/components/Post/PostPage/PostPage';
+import { getUserData } from '@/lib/actions/utils/getUserData';
 
 const postPage = async ({ params }: { params: { postId: string } }) => {
-	const { session, user } = await getSessionData();
+	const { session, user } = await getUserData(
+		'blockedUsers',
+		'name',
+		'image',
+		'imageType',
+		'likedPosts',
+		'following',
+		'savedPosts'
+	);
+
 	if (!session) {
 		permanentRedirect('/auth/login');
 	}
 
 	const { post, isUserAllowedToView, isUserAuthor } = await getPostById(
 		params.postId,
-		user?.userId,
-		user?.blockedUsers
+		user.id,
+		user.blockedUsers
 	);
 	if (!isUserAllowedToView) {
 		permanentRedirect(`/profile/${post.author.id}`);

@@ -1,5 +1,4 @@
 import { User } from '../Models/user';
-import { connectToDatabase } from '../utils/connectToDatabase';
 
 export async function getProfile(userId: string) {
 	let user;

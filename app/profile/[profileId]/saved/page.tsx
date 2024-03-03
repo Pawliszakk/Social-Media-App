@@ -1,26 +1,26 @@
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import Posts from '@/components/Profile/Posts/Posts';
 import { permanentRedirect } from 'next/navigation';
 import { getSavedPosts } from '@/lib/actions/user/getSavedPosts';
+import { getUserData } from '@/lib/actions/utils/getUserData';
 
 export default async function ProfilePage({
 	params,
 }: {
-	params: { userId: string };
+	params: { profileId: string };
 }) {
-	const { session, user } = await getSessionData();
+	const { session, user } = await getUserData('showLikes');
 
-	const { userId } = params;
-
-	const isLoggedUserProfile = userId === user?.userId;
+	const { profileId } = params;
+	
+	const isLoggedUserProfile = profileId === user.id;
 
 	if (!isLoggedUserProfile) {
-		permanentRedirect(`/profile/${userId}`);
+		permanentRedirect(`/profile/${profileId}`);
 	}
 	let savedPosts;
 	let authorName;
 	if (isLoggedUserProfile) {
-		const { posts, name } = await getSavedPosts(userId);
+		const { posts, name } = await getSavedPosts(profileId);
 		savedPosts = posts;
 		authorName = name;
 	}
@@ -29,8 +29,8 @@ export default async function ProfilePage({
 		<Posts
 			posts={savedPosts}
 			authorName={authorName}
-			userId={user?.userId}
-			showLikes={user?.showLikes}
+			userId={user.id}
+			showLikes={user.showLikes}
 		/>
 	);
 }

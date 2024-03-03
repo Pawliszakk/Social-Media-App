@@ -5,17 +5,10 @@ import { User } from '../Models/user';
 import { connectToDatabase } from '../utils/connectToDatabase';
 import mongoose from 'mongoose';
 import { Post } from '../Models/post';
-import { getDate } from '../utils/getDate';
-const { v4: uuidv4 } = require('uuid');
 import xss from 'xss';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { S3 } from '@aws-sdk/client-s3';
 import { uploadImage } from '../utils/uploadImage';
-
-const s3 = new S3({
-	region: 'eu-central-1',
-});
 
 export async function createPost(prevState: any, formData: any) {
 	const session = await getServerSession();

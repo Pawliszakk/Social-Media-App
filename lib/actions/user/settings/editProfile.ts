@@ -2,11 +2,11 @@
 
 import xss from 'xss';
 import { User } from '../../Models/user';
-import { getSessionData } from '../../utils/getSessionData';
 import { revalidatePath } from 'next/cache';
+import { getUserData } from '../../utils/getUserData';
 
 export async function editProfile(prevState: any, formData: any) {
-	const session = await getSessionData();
+	const userData = await getUserData();
 
 	const name = formData.get('name');
 	const website = formData.get('website');
@@ -25,9 +25,7 @@ export async function editProfile(prevState: any, formData: any) {
 
 	let user;
 	try {
-		user = await User.findOne({ _id: session.user?.userId }).select(
-			'name bio sex'
-		);
+		user = await User.findOne({ _id: userData.user.id }).select('name bio sex');
 	} catch (e) {
 		return {
 			message:

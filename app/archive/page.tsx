@@ -4,16 +4,16 @@ import { getArchivedPosts } from '@/lib/actions/user/getArchivedPosts';
 import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import Link from 'next/link';
 import { IoIosArrowRoundBack } from 'react-icons/io';
+import { getUserData } from '@/lib/actions/utils/getUserData';
 
 const archivePage = async () => {
-	const { session, user } = await getSessionData();
+	const { session, user } = await getUserData('name');
 
-	const authorName = user?.name;
-
-	const { posts } = await getArchivedPosts(user?.userId);
+	const { posts } = await getArchivedPosts(user.id);
+	
 	return (
 		<div className={classes.box}>
-			<Link href={`/profile/${user?.userId}`}>
+			<Link href={`/profile/${user.id}`}>
 				<IoIosArrowRoundBack />
 				Go back
 			</Link>
@@ -22,8 +22,8 @@ const archivePage = async () => {
 			<p>Archived posts will only be visible to you unless you share them.</p>
 			<Posts
 				posts={posts}
-				authorName={`${authorName}`}
-				userId={user?.userId}
+				authorName={user.name}
+				userId={user.id}
 				showLikes={user?.showLikes}
 			/>
 		</div>

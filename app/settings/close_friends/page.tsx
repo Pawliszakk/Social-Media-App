@@ -1,12 +1,12 @@
 import CloseFriend from '@/components/Settings/CloseFriends/CloseFriend';
 import SettingPageBox from '@/components/Settings/SettingPageBox';
 import getFollowedUsers from '@/lib/actions/user/settings/getFollowedUsers';
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
+import { getUserData } from '@/lib/actions/utils/getUserData';
 
 export default async function SettingsPage() {
-	const { session, user } = await getSessionData();
+	const { session, user } = await getUserData('closeFriends, following');
 
-	const { closeFriends, following } = await getFollowedUsers(user?.userId);
+	const { closeFriends, following } = await getFollowedUsers(user.id);
 
 	const transformedFollowing = following.map((profile: any) => {
 		const isUserCloseFriend = closeFriends.find(
@@ -45,7 +45,7 @@ export default async function SettingsPage() {
 							name={profile.name}
 							profileId={profile.id}
 							isCloseFriend={profile.isCloseFriend}
-							userId={user?.userId}
+							userId={user.id}
 						/>
 					);
 				})

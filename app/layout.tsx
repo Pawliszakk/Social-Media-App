@@ -3,9 +3,8 @@ import './globals.css';
 import classes from './layout.module.scss';
 import ActionBar from '@/components/Nav/ActionBar';
 import NextAuthProvider from '@/components/Auth/NextAuthProvider';
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import Footer from '@/components/Footer/Footer';
-import seedDatabase from '@/lib/actions/utils/seedDatabase';
+import { getUserData } from '@/lib/actions/utils/getUserData';
 
 export const metadata: Metadata = {
 	title: 'Social Media App',
@@ -17,7 +16,14 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const { session, user } = await getSessionData();
+	const { session, user } = await getUserData(
+		'theme',
+		'name',
+		'image',
+		'id',
+		'imageType'
+	);
+
 	return (
 		<html lang="en">
 			<body data-theme={user ? user.theme : ''}>
@@ -27,7 +33,7 @@ export default async function RootLayout({
 						<ActionBar
 							name={user.name}
 							image={user.image}
-							userId={user.userId}
+							userId={user.id}
 							imageType={user.imageType}
 						/>
 					)}

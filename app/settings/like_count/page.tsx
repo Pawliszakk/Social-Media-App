@@ -1,11 +1,12 @@
 import LikesCount from '@/components/Settings/LikesCount/LikesCount';
 import SettingPageBox from '@/components/Settings/SettingPageBox';
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
+import { getUserData } from '@/lib/actions/utils/getUserData';
 
 export default async function SettingsPage() {
-	const { session, user } = await getSessionData();
-	const userId = user?.userId;
-	const showLikes = user?.showLikes;
+	const { session, user } = await getUserData('showLikes');
+
+	const userId = user.id;
+	const showLikes = user.showLikes;
 	return (
 		<SettingPageBox
 			name="Number of likes and shares"

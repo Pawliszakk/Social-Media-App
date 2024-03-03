@@ -1,7 +1,6 @@
 import ProfileInfo from '@/components/Profile/ProfileInfo';
 import getLoggedUserProfile from '@/lib/actions/user/getLoggedUserProfile';
 import { getProfile } from '@/lib/actions/user/getProfile';
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import {
 	FOLLOWING,
 	NOTFOLLOWING,
@@ -10,19 +9,25 @@ import {
 import classes from './layout.module.scss';
 import PostsLinks from '@/components/Profile/Posts/PostsLinks';
 import { permanentRedirect } from 'next/navigation';
+import { getUserData } from '@/lib/actions/utils/getUserData';
 
 export default async function RootLayout({
 	children,
 	params,
 }: {
-	params: { userId: string };
+	params: { profileId: string };
 	children: React.ReactNode;
 }) {
-	const { session, user } = await getSessionData();
+	const { session, user } = await getUserData(
+		'blockedUsers',
+		'sentFollowRequests',
+		'closeFriends'
+	);
 
-	const { userId } = params;
+	const { profileId } = params;
 
-	const isLoggedUserProfile = userId === user?.userId;
+	const isLoggedUserProfile = profileId === user?.id;
+
 	let profile: any;
 
 	if (isLoggedUserProfile) {
@@ -30,9 +35,9 @@ export default async function RootLayout({
 			throw new Error('Authorization failed');
 		}
 
-		profile = await getLoggedUserProfile(userId);
+		profile = await getLoggedUserProfile(profileId);
 	} else {
-		profile = await getProfile(userId);
+		profile = await getProfile(profileId);
 	}
 	if (!profile) {
 		throw new Error('Sorry, that site is unreachable');
@@ -40,7 +45,7 @@ export default async function RootLayout({
 	const isUserFollowingProfile = profile.followers.find(
 		(id: string) => user!.userId
 	);
-	const isUserBlockingProfile = user?.blockedUsers.find(
+	const isUserBlockingProfile = user.blockedUsers.find(
 		(id: string) => id.toString() === profile.id
 	);
 
@@ -52,11 +57,11 @@ export default async function RootLayout({
 		permanentRedirect('/');
 	}
 
-	const isProfileRequestedToFollow = user?.sentFollowRequests.find(
+	const isProfileRequestedToFollow = user.sentFollowRequests.find(
 		(el: any) => el.reciever.toString() === profile.id
 	);
 
-	const isProfileCloseFriend = user?.closeFriends.find(
+	const isProfileCloseFriend = user.closeFriends.find(
 		(id: string) => id.toString() === profile.id
 	);
 
@@ -82,7 +87,7 @@ export default async function RootLayout({
 				profileId={profile._id.toString()}
 				isLoggedUserProfile={isLoggedUserProfile}
 				isUserFollowingProfile={!!isUserFollowingProfile}
-				userId={user?.userId}
+				userId={user.id}
 				isProfilePrivate={profile.private}
 				followingStatus={followingStatus}
 				imageType={profile.imageType}
