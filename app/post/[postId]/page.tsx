@@ -37,7 +37,6 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 		image: post.author.image,
 		imageType: post.author.imageType,
 	};
-	console.log(user.showLikes);
 	return (
 		<PostPage
 			images={post.image}

@@ -78,7 +78,7 @@ export async function createPost(prevState: any, formData: any) {
 		hideLikesCount: !!hideLikesCount,
 		description: sanitizedDescription,
 		image: fileName,
-		date: getDate(),
+		date: new Date().getTime(),
 	});
 
 	try {

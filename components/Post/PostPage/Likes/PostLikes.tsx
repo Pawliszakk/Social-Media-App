@@ -1,13 +1,16 @@
+import { transformPostDate } from '@/lib/helpers/transformPostDate';
 import classes from './PostLikes.module.scss';
 
 interface PostLikesProps {
-	date: string;
+	date: number;
 	likes: number;
 	showLikes: boolean;
 	isUserAuthor: boolean;
 }
 
 const PostLikes: React.FC<PostLikesProps> = (props) => {
+	const dateToDisplay = transformPostDate(props.date);
+
 	return (
 		<div className={classes.likes}>
 			{props.isUserAuthor || (!props.isUserAuthor && props.showLikes) ? (
@@ -18,7 +21,9 @@ const PostLikes: React.FC<PostLikesProps> = (props) => {
 				<p>Likes count hidden on your account</p>
 			)}
 
-			<p className={classes.date}>{props.date}</p>
+			<p suppressHydrationWarning={true} className={classes.date}>
+				{dateToDisplay}
+			</p>
 		</div>
 	);
 };

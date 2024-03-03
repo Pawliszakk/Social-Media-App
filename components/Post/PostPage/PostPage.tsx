@@ -19,7 +19,7 @@ import PostSettings from '../Settings/PostSettings';
 interface PostPageProps {
 	postId: string;
 	userId: string;
-	date: string;
+	date: number;
 	description: string;
 	author: { name: string; id: string; image: string; imageType: string };
 	likes: string[] | [];

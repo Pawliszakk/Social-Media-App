@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Spinner from '@/components/UI/Spinner';
 import ProfileImage from '@/components/UI/User/ProfileImage';
+import { transformPostDate } from '@/lib/helpers/transformPostDate';
 
 interface PostAuthorProps {
 	children: React.ReactNode;
 	image: string;
 	imageType: string;
 	name: string;
-	date: string;
+	date: number;
 	authorId: string;
 	userId: string;
 	isUserAuthor: boolean;
@@ -21,6 +22,7 @@ interface PostAuthorProps {
 
 const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
+
 	const spanClickHandler = async () => {
 		setIsLoading(true);
 		if (props.isUserFollowingAuthor) {
@@ -54,7 +56,9 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 						)}
 					</span>
 				)}
-				<span>{props.date}</span>
+				<span suppressHydrationWarning={true}>
+					{transformPostDate(props.date)}
+				</span>
 			</div>
 			{props.children}
 		</div>
