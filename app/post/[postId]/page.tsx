@@ -54,7 +54,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 			likePost={likePost}
 			unLikePost={unLikePost}
 			postId={post.id}
-			userId={user.userId}
+			userId={user.id}
 			savePost={savePost}
 			isUserSavedPost={!!isUserSavedPost}
 			date={post.date}

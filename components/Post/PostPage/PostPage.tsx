@@ -58,7 +58,6 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 			props.unLikePost(props.postId, props.userId);
 		}
 	};
-
 	return (
 		<div className={classes.box}>
 			<PostImages
