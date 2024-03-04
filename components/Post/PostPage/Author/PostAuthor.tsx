@@ -35,13 +35,15 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 	return (
 		<div className={classes.author}>
 			<div className={classes.user}>
-				<Link href={`/profile/${props.authorId}`} className={classes.image}>
-					<ProfileImage
-						image={props.image}
-						name={props.name}
-						imageType={props.imageType}
-					/>
-				</Link>
+				<ProfileImage
+					image={props.image}
+					name={props.name}
+					imageType={props.imageType}
+					profileId={props.authorId}
+					isUserFollowingProfile={props.isUserFollowingAuthor}
+					isUserAuthor={props.isUserAuthor}
+					snippet
+				/>
 				<Link href={`/profile/${props.authorId}`}>
 					<span>{props.name}</span>
 				</Link>

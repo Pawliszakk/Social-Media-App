@@ -11,6 +11,7 @@
 	--text-light: rgba(0, 0, 0, 0.7);
 	--text-normal: rgb(0, 0, 0);
 	--option-hover: rgb(239, 239, 239);
+	--option-hover-darker: rgb(200, 200, 200);
 	--avatar-border: 3px solid rgba(0, 0, 0, 0.5);
 	--radius-light: 5px;
 	--radius-medium: 10px;
