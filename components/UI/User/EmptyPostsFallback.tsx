@@ -12,7 +12,7 @@ const EmptyPostsFallback: React.FC<EmptyPostsFallbackProps> = ({ name }) => {
 				<IoCameraOutline />
 			</div>
 			<span>No posts yet.</span>
-			<p>When {name} shares photos and reels, you'll see them here.</p>
+			<p>When {name} shares photos and reels, you&apos;ll see them here.</p>
 		</div>
 	);
 };
