@@ -56,8 +56,8 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 						)}
 					</span>
 				)}
-				<span suppressHydrationWarning={true}>
-					{transformPostDate(props.date)}
+				<span className={classes.date} suppressHydrationWarning={true}>
+					• {transformPostDate(props.date)}
 				</span>
 			</div>
 			{props.children}

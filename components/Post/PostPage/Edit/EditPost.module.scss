@@ -76,3 +76,15 @@
 		}
 	}
 }
+.textarea {
+	position: relative;
+	textarea {
+		width: 90%;
+		min-height: 200px;
+	}
+	span {
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+	}
+}

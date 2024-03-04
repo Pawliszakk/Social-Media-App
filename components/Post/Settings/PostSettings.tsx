@@ -157,6 +157,7 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 							images={images}
 							authorName={authorName}
 							onClose={closeSettingsHandler}
+							postId={postId}
 						/>
 					)}
 				</SettingsBox>

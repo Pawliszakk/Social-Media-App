@@ -32,7 +32,7 @@ const PostDescription: React.FC<PostDescriptionProps> = (props) => {
 					)}
 					<p>
 						<Link href={`/profile/${props.authorId}`}>{props.authorName}</Link>{' '}
-						description
+						{props.description}
 					</p>
 				</div>
 			)}
