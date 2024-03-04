@@ -6,6 +6,7 @@ import Spinner from '../UI/Spinner';
 import Counters from './Counters';
 import ProfileSettings from './ProfileSettings';
 import {
+	BLOCKING,
 	FOLLOWING,
 	NOTFOLLOWING,
 	REQUESTED,
@@ -24,6 +25,7 @@ interface ProfileActionsProps {
 	followingStatus: any;
 	follow: () => any;
 	unFollow: () => any;
+	unBlock: () => any;
 	deleteFollowRequest: () => any;
 }
 
@@ -61,7 +63,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 					setFollowingStatus(res.status);
 					setFollowers((prev) => prev + 1);
 				} else {
-					setFollowingStatus(res.status);
+					location.reload();
 				}
 			}
 		} else if (followingStatus === REQUESTED) {
@@ -75,6 +77,15 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 			if (res.ok) {
 				setFollowingStatus(res.status);
 			}
+		} else if (followingStatus === BLOCKING) {
+			let res;
+			try {
+				res = await props.unBlock();
+			} catch (e) {
+				setIsLoading(false);
+				return;
+			}
+			location.reload();
 		}
 
 		setIsLoading(false);
@@ -92,6 +103,8 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 		case REQUESTED:
 			buttonMessage = 'Requested';
 			break;
+		case BLOCKING:
+			buttonMessage = 'Unblock';
 	}
 
 	return (

@@ -27,7 +27,8 @@ export default async function Home({
 		'following',
 		'likedPosts',
 		'savedPosts',
-		'showLikes'
+		'showLikes',
+		'blockedUsers'
 	);
 	if (!session) {
 		permanentRedirect('/auth/login');

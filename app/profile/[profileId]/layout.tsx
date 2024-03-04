@@ -2,6 +2,7 @@ import ProfileInfo from '@/components/Profile/ProfileInfo';
 import getLoggedUserProfile from '@/lib/actions/user/getLoggedUserProfile';
 import { getProfile } from '@/lib/actions/user/getProfile';
 import {
+	BLOCKING,
 	FOLLOWING,
 	NOTFOLLOWING,
 	REQUESTED,
@@ -74,6 +75,9 @@ export default async function RootLayout({
 	}
 	if (!!isProfileRequestedToFollow) {
 		followingStatus = REQUESTED;
+	}
+	if (isUserBlockingProfile) {
+		followingStatus = BLOCKING;
 	}
 
 	return (

@@ -17,14 +17,25 @@ export async function getPosts(
 		throw new Error('Failed to fetch posts');
 	}
 	const filteredPosts = posts.filter((post) => {
+
 		const isAuthorNotPrivate = !post.author.private;
+
 		const isNotArchived = !post.archive;
-		const isNotBlockedUser = !post.author.blockedUsers.find((id: string) => {
-			return id.toString() === userId;
+		
+		const isAuthorBlockingUser = !post.author.blockedUsers.find(
+			(id: string) => {
+				return id.toString() === userId;
+			}
+		);
+		const isUserBlockingAuthor = userBlockedProfiles.find((id: string) => {
+			return id.toString() === post.author.id;
 		});
 
 		const shouldIncludePost =
-			isAuthorNotPrivate && isNotArchived && isNotBlockedUser;
+			isAuthorNotPrivate &&
+			isNotArchived &&
+			isAuthorBlockingUser &&
+			!isUserBlockingAuthor;
 
 		return shouldIncludePost ? post : null;
 	});

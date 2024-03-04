@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { User } from '../Models/user';
+import { unFollowUser } from './followUser';
 
 export async function blockUser(userId: string, userToBlockId: string) {
 	let user;
@@ -20,6 +21,7 @@ export async function blockUser(userId: string, userToBlockId: string) {
 	}
 	try {
 		user.blockedUsers.push(userToBlockId);
+		await unFollowUser(userId, userToBlockId);
 		await user.save();
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
@@ -41,5 +43,6 @@ export async function unBlockUser(userId: string, userToUnBlockId: string) {
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
+
 	revalidatePath('/', 'layout');
 }

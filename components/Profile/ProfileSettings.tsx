@@ -38,10 +38,12 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 			case BLOCK:
 				await blockUser(userId, profileId);
 				setIsSettings(false);
+				location.reload();
 				break;
 			case UNBLOCK:
 				await unBlockUser(userId, profileId);
 				setIsSettings(false);
+				location.reload();
 				break;
 			case ADD_CLOSE_FRIEND:
 				await addCloseFriend(userId, profileId);

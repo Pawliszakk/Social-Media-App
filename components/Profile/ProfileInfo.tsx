@@ -5,6 +5,7 @@ import classes from './ProfileInfo.module.scss';
 import LoggedUserImage from './LoggedUserImage';
 import ProfileImage from '../UI/User/ProfileImage';
 import ProfileBio from './ProfileBio';
+import { unBlockUser } from '@/lib/actions/user/blockUser';
 interface ProfileInfoProps {
 	name: string;
 	profileId: string;
@@ -40,6 +41,11 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 		const res = await deleteFollowRequest(props.userId, props.profileId);
 		return res;
 	};
+	const unBlockHandler = async () => {
+		'use server';
+		const res = await unBlockUser(props.userId, props.profileId);
+		return res;
+	};
 	return (
 		<div className={classes.box}>
 			{props.isLoggedUserProfile ? (
@@ -68,6 +74,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = (props) => {
 					postsLength={props.posts.length}
 					follow={followHandler}
 					unFollow={unFollowHandler}
+					unBlock={unBlockHandler}
 					deleteFollowRequest={deleteRequestHandler}
 					profileId={props.profileId}
 					followingStatus={props.followingStatus}
