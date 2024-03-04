@@ -1,17 +1,25 @@
-.post {
-	margin: auto;
-	max-width: 600px;
-	color: var(--text-normal);
-	.addComment {
-		textarea {
-			border: none;
-			padding: 0.5em 0 0.5em 0;
+.box {
+	margin-top: 5rem;
+	.post {
+		margin: auto;
+		max-width: 600px;
+		color: var(--text-normal);
+		.addComment {
+			textarea {
+				border: none;
+				padding: 0.5em 0 0.5em 0;
+			}
+		}
+		.comments {
+			p {
+				margin: 1em 0;
+				color: var(--text-light);
+			}
 		}
 	}
-	.comments {
-		p {
-			margin: 1em 0;
-			color: var(--text-light);
-		}
+	@media (min-width: 1200px) {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
 	}
 }

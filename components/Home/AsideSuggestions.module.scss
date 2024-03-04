@@ -1,0 +1,50 @@
+.aside {
+	display: none;
+	background-color: var(--primary-background);
+	width: 300px;
+	padding: 1rem;
+	margin: 0 5rem;
+
+	.user {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		a {
+			margin-left: 0.5em;
+			font-size: 1.2rem;
+			text-decoration: none;
+			color: var(--text-color);
+		}
+	}
+	.suggestions {
+		width: 100%;
+		margin-top: 2rem;
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			span {
+				font-size: 1.4rem;
+				color: var(--text-color);
+				opacity: 0.6;
+				font-weight: bold;
+			}
+			a {
+				text-decoration: none;
+				font-size: 1.2rem;
+				color: tomato;
+				&:hover {
+					opacity: 0.7;
+				}
+			}
+		}
+	}
+	@media (min-width: 1200px) {
+		display: block;
+	}
+	@media (min-width: 1400px) {
+		display: block;
+		width: 380px;
+		padding: 2rem;
+	}
+}

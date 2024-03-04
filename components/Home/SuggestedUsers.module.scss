@@ -1,0 +1,42 @@
+.users {
+	margin-top: 2rem;
+	.user {
+		padding: 0.8rem 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.name {
+				color: var(--text-color);
+
+				margin-left: 1em;
+				a {
+					text-decoration: none;
+					font-weight: bold;
+					color: var(--text-color);
+					font-size: 1.2rem;
+				}
+				span {
+					display: block;
+					opacity: 0.6;
+					font-size: 1.2rem;
+				}
+			}
+		}
+	}
+	.button {
+		button {
+			font-size: 1.4rem;
+			color: var(--primary-button);
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			&:hover {
+				color: var(--primary-button-hover);
+			}
+		}
+	}
+}

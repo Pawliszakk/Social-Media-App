@@ -43,7 +43,7 @@ const ProfileImage: React.FC<ProfileImageProps> = (props) => {
 		<div
 			className={classes.box}
 			onMouseEnter={handleMouseEnter}
-			// onMouseLeave={handleMouseLeave}
+			onMouseLeave={handleMouseLeave}
 		>
 			{props.profileId ? (
 				<Link href={`/profile/${props.profileId}`}>

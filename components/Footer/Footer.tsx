@@ -1,10 +1,16 @@
 import classes from './Footer.module.scss';
 
-const Footer = () => {
+interface FooterProps {
+	aside?: boolean;
+}
+
+const Footer: React.FC<FooterProps> = (props) => {
 	const year = new Date().getFullYear();
 
 	return (
-		<footer className={classes.footer}>
+		<footer
+			className={`${classes.footer} ${props.aside ? classes.aside : null}`}
+		>
 			<a href="https://pawliszakdev.com" target="_blank" rel="noopener">
 				Author
 			</a>
@@ -21,7 +27,7 @@ const Footer = () => {
 			<a href="https://todo-app-full-stack-dun.vercel.app/" target="_blank">
 				Task Pro App
 			</a>
-			<p>pawliszakDev {year} </p>
+			<p>&copy; pawliszakDev {year} </p>
 		</footer>
 	);
 };
