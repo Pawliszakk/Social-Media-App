@@ -4,4 +4,8 @@
 		border-radius: var(--radius-circle);
 		object-fit: cover;
 	}
+	a {
+		color: var(--text-color);
+		text-decoration: none;
+	}
 }

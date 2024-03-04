@@ -17,5 +17,7 @@ export async function getSuggestedUsers() {
 		(u: any) => u.id.toString() !== user.id.toString()
 	);
 
+	// const usersNotFollowedByUser;
+
 	return usersWithoutLoggedUser;
 }

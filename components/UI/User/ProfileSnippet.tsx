@@ -2,6 +2,7 @@ import Link from 'next/link';
 import ProfileImage from './ProfileImage';
 import classes from './ProfileSnippet.module.scss';
 import Image from 'next/image';
+import EmptyPostsFallback from './EmptyPostsFallback';
 
 interface ProfileSnippetProps {
 	user: {
@@ -23,6 +24,8 @@ interface ProfileSnippetProps {
 
 const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 	const { user, profileId } = props;
+
+	const arePostsEmpty = user.latestPosts.length === 0 || !user.latestPosts;
 
 	return (
 		<div className={classes.box}>
@@ -52,16 +55,20 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 				</div>
 			</div>
 			<div className={classes.posts}>
-				{user.latestPosts.map((post: { image: string; id: string }) => (
-					<Link href={`/post/${post.id}`} key={post.id}>
-						<Image
-							src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${post.image}`}
-							width={120}
-							height={120}
-							alt={`${user.name} post`}
-						/>
-					</Link>
-				))}
+				{arePostsEmpty ? (
+					<EmptyPostsFallback name={user.name} />
+				) : (
+					user.latestPosts.map((post: { image: string; id: string }) => (
+						<Link href={`/post/${post.id}`} key={post.id}>
+							<Image
+								src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${post.image}`}
+								width={120}
+								height={120}
+								alt={`${user.name} post`}
+							/>
+						</Link>
+					))
+				)}
 			</div>
 			<div className={classes.actions}>
 				{props.isUserAuthor ? (

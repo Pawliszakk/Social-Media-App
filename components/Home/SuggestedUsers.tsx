@@ -22,6 +22,7 @@ const SuggestedUsers = async () => {
 								imageType={user.imageType}
 								name={user.name}
 								profileId={user.id.toString()}
+                                snippet
 							/>
 							<div className={classes.name}>
 								<Link href={`/profile/${user.id}`}>{user.name}</Link>
