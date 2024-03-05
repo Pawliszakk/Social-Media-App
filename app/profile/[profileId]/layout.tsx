@@ -1,16 +1,13 @@
-import ProfileInfo from '@/components/Profile/ProfileInfo';
-import getLoggedUserProfile from '@/lib/actions/user/getLoggedUserProfile';
-import { getProfile } from '@/lib/actions/user/getProfile';
-import {
-	BLOCKING,
-	FOLLOWING,
-	NOTFOLLOWING,
-	REQUESTED,
-} from '@/lib/constants/followingStatus';
 import classes from './layout.module.scss';
 import PostsLinks from '@/components/Profile/Posts/PostsLinks';
-import { permanentRedirect } from 'next/navigation';
-import { getUserData } from '@/lib/actions/utils/getUserData';
+import { getProfileData } from '@/lib/actions/utils/profile/getProfileData';
+import ProfileActions from '@/components/Profile/ProfileActions';
+import LoggedUserImage from '@/components/Profile/LoggedUserImage';
+import ProfileImage from '@/components/UI/User/ProfileImage';
+import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
+import { deleteFollowRequest } from '@/lib/actions/user/sendFollowRequest';
+import { unBlockUser } from '@/lib/actions/user/blockUser';
+import ProfileBio from '@/components/Profile/ProfileBio';
 
 export default async function RootLayout({
 	children,
@@ -19,87 +16,79 @@ export default async function RootLayout({
 	params: { profileId: string };
 	children: React.ReactNode;
 }) {
-	const { session, user } = await getUserData(
-		'blockedUsers',
-		'sentFollowRequests',
-		'closeFriends'
-	);
-
 	const { profileId } = params;
+	const {
+		userId,
+		profile,
+		isLoggedUserProfile,
+		isUserFollowingProfile,
+		followingStatus,
+		isUserBlockingProfile,
+		isProfileCloseFriend,
+	} = await getProfileData(profileId);
 
-	const isLoggedUserProfile = profileId === user?.id;
-
-	let profile: any;
-
-	if (isLoggedUserProfile) {
-		if (!session) {
-			throw new Error('Authorization failed');
-		}
-
-		profile = await getLoggedUserProfile(profileId);
-	} else {
-		profile = await getProfile(profileId);
-	}
-	if (!profile) {
-		throw new Error('Sorry, that site is unreachable');
-	}
-	const isUserFollowingProfile = profile.followers.find(
-		(id: string) => user!.userId
-	);
-	const isUserBlockingProfile = user.blockedUsers.find(
-		(id: string) => id.toString() === profile.id
-	);
-
-	const isUserBlockedByProfile = profile.blockedUsers.find(
-		(id: string) => id.toString() === user!.userId
-	);
-
-	if (isUserBlockedByProfile && !isLoggedUserProfile) {
-		permanentRedirect('/');
-	}
-
-	const isProfileRequestedToFollow = user.sentFollowRequests.find(
-		(el: any) => el.reciever.toString() === profile.id
-	);
-
-	const isProfileCloseFriend = user.closeFriends.find(
-		(id: string) => id.toString() === profile.id
-	);
-
-	let followingStatus;
-	if (isUserFollowingProfile) {
-		followingStatus = FOLLOWING;
-	}
-	if (!isUserFollowingProfile) {
-		followingStatus = NOTFOLLOWING;
-	}
-	if (!!isProfileRequestedToFollow) {
-		followingStatus = REQUESTED;
-	}
-	if (isUserBlockingProfile) {
-		followingStatus = BLOCKING;
-	}
+	const followHandler = async () => {
+		'use server';
+		const res = await followUser(userId, profileId);
+		return res;
+	};
+	const unFollowHandler = async () => {
+		'use server';
+		const res = await unFollowUser(userId, profileId);
+		return res;
+	};
+	const deleteRequestHandler = async () => {
+		'use server';
+		const res = await deleteFollowRequest(userId, profileId);
+		return res;
+	};
+	const unBlockHandler = async () => {
+		'use server';
+		const res = await unBlockUser(userId, profileId);
+		return res;
+	};
 
 	return (
 		<div className={classes.box}>
-			<ProfileInfo
-				name={profile.name}
-				image={profile.image}
-				posts={profile.posts}
-				followers={profile.followers}
-				following={profile.following}
-				profileId={profile._id.toString()}
-				isLoggedUserProfile={isLoggedUserProfile}
-				isUserFollowingProfile={!!isUserFollowingProfile}
-				userId={user.id}
-				isProfilePrivate={profile.private}
-				followingStatus={followingStatus}
-				imageType={profile.imageType}
-				isBlocked={!!isUserBlockingProfile}
-				isCloseFriend={!!isProfileCloseFriend}
-				bio={profile.bio}
-				website={profile.website}
-			/>
+			<div className={classes.profile}>
+				{isLoggedUserProfile ? (
+					<LoggedUserImage
+						image={profile.image}
+						name={profile.name}
+						imageType={profile.imageType}
+						userId={profile.userId}
+					/>
+				) : (
+					<ProfileImage
+						image={profile.image}
+						name={profile.name}
+						imageType={profile.imageType}
+						profile
+					/>
+				)}
+
+				<div className={classes.info}>
+					<ProfileActions
+						name={profile.name}
+						isLoggedUserProfile={isLoggedUserProfile}
+						isUserFollowingProfile={!!isUserFollowingProfile}
+						followersLength={profile.followers.length}
+						followingLength={profile.following.length}
+						postsLength={profile.posts.length}
+						follow={followHandler}
+						unFollow={unFollowHandler}
+						unBlock={unBlockHandler}
+						deleteFollowRequest={deleteRequestHandler}
+						profileId={profile.id}
+						followingStatus={followingStatus}
+						userId={userId}
+						isBlocked={isUserBlockingProfile}
+						isCloseFriend={isProfileCloseFriend}
+					/>
+
+					<ProfileBio bio={profile.bio} website={profile.website} />
+				</div>
+			</div>
 
 			<div className={classes.divider}></div>
 

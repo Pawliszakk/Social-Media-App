@@ -33,7 +33,6 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [followingStatus, setFollowingStatus] = useState(props.followingStatus);
 	const [followers, setFollowers] = useState(props.followersLength);
-
 	const followHandler = async () => {
 		setIsLoading(true);
 		if (followingStatus === FOLLOWING) {

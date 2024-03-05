@@ -7,7 +7,7 @@ export async function getSuggestedUsers() {
 	const { session, user } = await getUserData('following');
 	let users;
 	try {
-		users = await User.find({ showInSuggestions: true })
+		users = await User.find({ _id: { $nin: user.following } })
 			.select('name image imageType')
 			.limit(5);
 	} catch (e) {
@@ -16,8 +16,5 @@ export async function getSuggestedUsers() {
 	const usersWithoutLoggedUser = users.filter(
 		(u: any) => u.id.toString() !== user.id.toString()
 	);
-
-	// const usersNotFollowedByUser;
-
 	return usersWithoutLoggedUser;
 }
