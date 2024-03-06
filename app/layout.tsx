@@ -5,6 +5,7 @@ import ActionBar from '@/components/Nav/ActionBar';
 import NextAuthProvider from '@/components/Auth/NextAuthProvider';
 import Footer from '@/components/Footer/Footer';
 import { getUserData } from '@/lib/actions/utils/getUserData';
+import seedDatabase from '@/lib/actions/utils/seedDatabase';
 
 export const metadata: Metadata = {
 	title: 'Social Media App',

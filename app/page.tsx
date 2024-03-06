@@ -39,7 +39,7 @@ export default async function Home() {
 
 	return (
 		<div className={classes.box}>
-			<div>
+			<div className={classes.posts}>
 				<PostsVariant />
 
 				<Suspense fallback={<PostFallback />}>
