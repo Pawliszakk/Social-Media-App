@@ -1,0 +1,10 @@
+.button {
+	font-size: 1.4rem;
+	color: var(--primary-button);
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	&:hover {
+		color: var(--primary-button-hover);
+	}
+}

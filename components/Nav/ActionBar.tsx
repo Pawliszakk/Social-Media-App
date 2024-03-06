@@ -40,7 +40,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 	return (
 		<header className={classes.header}>
 			<div className={classes.logo}>
-				<h1>Logo aplikacji</h1>
+				<h1>Instagram</h1>
 			</div>
 
 			<nav>

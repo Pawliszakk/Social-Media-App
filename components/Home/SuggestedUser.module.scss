@@ -9,32 +9,39 @@
 		align-items: center;
 		.name {
 			color: var(--text-color);
-
+			font-size: 1.2rem;
 			margin-left: 1em;
 			a {
 				text-decoration: none;
 				font-weight: bold;
 				color: var(--text-color);
-				font-size: 1.2rem;
 			}
 			span {
 				display: block;
 				opacity: 0.6;
-				font-size: 1.2rem;
 				margin-top: 0.2em;
 			}
 		}
 	}
 }
-.button {
-	button {
-		font-size: 1.4rem;
-		color: var(--primary-button);
-		background-color: transparent;
-		border: none;
-		cursor: pointer;
+
+.follow {
+	font-size: 1.4rem;
+	color: var(--primary-button);
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	&:hover {
+		color: var(--primary-button-hover);
+	}
+	&.button {
+		background-color: var(--primary-button);
+		border-radius: var(--radius-medium);
+		padding: 0.5em 1em;
+		color: #fff;
+		transition: background-color 0.3s;
 		&:hover {
-			color: var(--primary-button-hover);
+			background-color: var(--primary-button-hover);
 		}
 	}
 }

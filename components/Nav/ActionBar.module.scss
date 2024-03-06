@@ -7,7 +7,9 @@
 	border-top: var(--border-light);
 	background-color: var(--primary-background);
 	.logo {
+		text-align: center;
 		display: none;
+		color: var(--text-normal);
 	}
 	nav {
 		display: flex;
@@ -33,6 +35,7 @@
 		.logo {
 			display: block;
 			padding-top: 1rem;
+			font-size: 2rem;
 		}
 		nav {
 			margin-top: 10vh;

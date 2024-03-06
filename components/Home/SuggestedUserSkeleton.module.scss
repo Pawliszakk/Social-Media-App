@@ -1,0 +1,32 @@
+.box {
+	height: 70px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	.info {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.image {
+		height: 50px;
+		width: 50px;
+		animation: var(--skeleton-loading);
+		border-radius: var(--radius-circle);
+	}
+	.name {
+		margin-top: 0.5em;
+		margin-left: 1em;
+		width: 100px;
+		height: 15px;
+		animation: var(--skeleton-loading);
+		border-radius: var(--radius-medium);
+	}
+	button {
+		width: 70px;
+		height: 30px;
+		border-radius: var(--radius-medium);
+		border: none;
+		animation: var(--skeleton-loading);
+	}
+}

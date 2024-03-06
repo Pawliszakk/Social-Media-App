@@ -1,0 +1,17 @@
+.links {
+	border-bottom: var(--border-light);
+	padding: 1rem 0;
+
+	a {
+		text-decoration: none;
+		color: var(--text-normal);
+		font-weight: bold;
+		font-size: 1.6rem;
+		margin-right: 1em;
+		opacity: 0.4;
+
+		&.active {
+			opacity: 1;
+		}
+	}
+}

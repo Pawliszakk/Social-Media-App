@@ -5,16 +5,21 @@
 	padding: 1rem;
 	margin: 0 5rem;
 	color: var(--text-normal);
-	.user {
+	.box {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: space-between;
 		align-items: center;
-		a {
-			margin-left: 0.5em;
-			font-size: 1.2rem;
-			text-decoration: none;
-			font-weight: bold;
-			color: var(--text-color);
+		.user {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			a {
+				margin-left: 0.5em;
+				font-size: 1.2rem;
+				text-decoration: none;
+				font-weight: bold;
+				color: var(--text-color);
+			}
 		}
 	}
 	.suggestions {
@@ -32,7 +37,7 @@
 			}
 			a {
 				text-decoration: none;
-				font-size: 1.2rem;
+				font-size: 1.4rem;
 				color: tomato;
 				&:hover {
 					opacity: 0.7;

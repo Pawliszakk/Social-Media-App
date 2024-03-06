@@ -18,6 +18,9 @@ interface SuggestedUserProps {
 	name: string;
 	imageType: string;
 	userId: string;
+	button?: boolean;
+	followersLength?: number;
+	followers?: boolean;
 }
 
 const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
@@ -30,7 +33,6 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 		setFollowingStatus(res.status);
 		setIsLoading(false);
 	};
-
 	let buttonMessage;
 
 	switch (followingStatus) {
@@ -58,15 +60,23 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 				<div className={classes.name}>
 					<Link href={`/profile/${props.id}`}>{props.name}</Link>
 					<span>suggested for you</span>
+					{props.followers ? (
+						<span>{props.followersLength} followers</span>
+					) : null}
 				</div>
 			</div>
-			<div className={classes.button}>
-				{isLoading ? (
-					<Spinner />
-				) : (
-					<button onClick={followHandler}>{buttonMessage}</button>
-				)}
-			</div>
+			{isLoading ? (
+				<Spinner />
+			) : (
+				<button
+					className={`${classes.follow} ${
+						props.button ? classes.button : null
+					}`}
+					onClick={followHandler}
+				>
+					{buttonMessage}
+				</button>
+			)}
 		</div>
 	);
 };

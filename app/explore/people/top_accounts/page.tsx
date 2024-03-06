@@ -1,18 +1,18 @@
-import { getSuggestedUsers } from '@/lib/actions/user/getSuggestedUsers';
-import classes from './page.module.scss';
+import { getTopUsers } from '@/lib/actions/user/getTopUsers';
 import SuggestedUser from '@/components/Home/SuggestedUser';
 
-const ExplorePeoplePage = async () => {
-	const { userId, users } = await getSuggestedUsers(50);
-
+const TopAccounts = async () => {
+	const { userId, users } = await getTopUsers();
 	return (
 		<>
+			{' '}
 			{users.map(
 				(user: {
 					image: string;
 					id: string;
 					imageType: string;
 					name: string;
+					followers: number;
 				}) => {
 					return (
 						<SuggestedUser
@@ -22,6 +22,8 @@ const ExplorePeoplePage = async () => {
 							imageType={user.imageType}
 							name={user.name}
 							userId={userId}
+							followersLength={user.followers}
+							followers
 							button
 						/>
 					);
@@ -31,4 +33,4 @@ const ExplorePeoplePage = async () => {
 	);
 };
 
-export default ExplorePeoplePage;
+export default TopAccounts;
