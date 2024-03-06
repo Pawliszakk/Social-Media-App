@@ -58,6 +58,7 @@ export default async function Home() {
 							const isUserSavedPost = user.savedPosts.find(
 								(id: string) => id.toString() === post.id
 							);
+
 							return (
 								<article className={classes.post} key={post.id}>
 									<PostAuthor

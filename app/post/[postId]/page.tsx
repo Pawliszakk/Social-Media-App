@@ -1,51 +1,19 @@
-import { getPostById } from '@/lib/actions/post/getPostById';
-import { permanentRedirect } from 'next/navigation';
-
 import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 import { savePost } from '@/lib/actions/post/savePost';
 import PostPage from '@/components/Post/PostPage/PostPage';
-import { getUserData } from '@/lib/actions/utils/getUserData';
+import { getPostData } from '@/lib/actions/utils/post/getPostData';
 
 const postPage = async ({ params }: { params: { postId: string } }) => {
-	const { session, user } = await getUserData(
-		'blockedUsers',
-		'name',
-		'image',
-		'imageType',
-		'likedPosts',
-		'following',
-		'savedPosts'
-	);
+	const {
+		user,
+		post,
+		isUserLikingPost,
+		isUserAuthor,
+		isUserFollowingAuthor,
+		isUserSavedPost,
+		author,
+	} = await getPostData(params.postId);
 
-	if (!session) {
-		permanentRedirect('/auth/login');
-	}
-
-	const { post, isUserAllowedToView, isUserAuthor } = await getPostById(
-		params.postId,
-		user.id,
-		user.blockedUsers
-	);
-	if (!isUserAllowedToView) {
-		permanentRedirect(`/profile/${post.author.id}`);
-	}
-
-	const isUserLikingPost = user.likedPosts.find(
-		(id: string) => id.toString() === post.id
-	);
-	const isUserFollowingAuthor = user.following.find(
-		(id: string) => id.toString() === post.author.id
-	);
-
-	const isUserSavedPost = user.savedPosts.find(
-		(id: string) => id.toString() === post.id
-	);
-	const author = {
-		name: post.author.name,
-		id: post.author._id.toString(),
-		image: post.author.image,
-		imageType: post.author.imageType,
-	};
 	return (
 		<PostPage
 			images={post.image}
@@ -62,11 +30,11 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 			isUserAuthor={!!isUserAuthor}
 			isUserFollowingAuthor={!!isUserFollowingAuthor}
 			commenting={post.commenting}
-			showLikes={user?.showLikes}
+			showLikes={user.showLikes}
 			user={{
 				name: user.name,
 				image: user.image,
-				userId: user.userId,
+				userId: user.id,
 				imageType: user.imageType,
 			}}
 			description={post.description}

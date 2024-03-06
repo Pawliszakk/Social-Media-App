@@ -1,16 +1,15 @@
 import Posts from '@/components/Profile/Posts/Posts';
 import classes from './page.module.scss';
 import { getArchivedPosts } from '@/lib/actions/user/getArchivedPosts';
-import { getSessionData } from '@/lib/actions/utils/getSessionData';
 import Link from 'next/link';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { getUserData } from '@/lib/actions/utils/getUserData';
 
 const archivePage = async () => {
-	const { session, user } = await getUserData('name');
+	const { session, user } = await getUserData('name', 'showLikes');
 
 	const { posts } = await getArchivedPosts(user.id);
-	
+
 	return (
 		<div className={classes.box}>
 			<Link href={`/profile/${user.id}`}>
@@ -24,7 +23,7 @@ const archivePage = async () => {
 				posts={posts}
 				authorName={user.name}
 				userId={user.id}
-				showLikes={user?.showLikes}
+				showLikes={user.showLikes}
 			/>
 		</div>
 	);
