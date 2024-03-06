@@ -24,7 +24,7 @@ export async function followUser(userId: string, userToFollowId: string) {
 	}
 
 	const isUserToFollowAlreadyFollowed = userToFollow.followers.find(
-		(id: string) => userId
+		(id: string) => id.toString() === userId
 	);
 	if (userToFollow.private) {
 		return await sendFollowRequest(userId, userToFollowId);

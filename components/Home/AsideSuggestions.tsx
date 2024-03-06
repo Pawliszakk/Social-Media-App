@@ -51,7 +51,7 @@ const AsideSuggestions: React.FC<AsideSuggestionsProps> = async (props) => {
 									image={fetchedUser.image}
 									imageType={fetchedUser.imageType}
 									name={fetchedUser.name}
-									userId={props.userId}
+									userId={userId}
 								/>
 							);
 						}

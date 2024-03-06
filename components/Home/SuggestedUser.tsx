@@ -26,7 +26,6 @@ interface SuggestedUserProps {
 const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 	const [followingStatus, setFollowingStatus] = useState(NOTFOLLOWING);
 	const [isLoading, setIsLoading] = useState(false);
-
 	const followHandler = async () => {
 		setIsLoading(true);
 		const res = await followUser(props.userId, props.id);
