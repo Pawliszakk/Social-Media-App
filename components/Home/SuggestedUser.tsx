@@ -32,17 +32,17 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 		setFollowingStatus(res.status);
 		setIsLoading(false);
 	};
-	let buttonMessage;
+	let btnMsg;
 
 	switch (followingStatus) {
 		case FOLLOWING:
-			buttonMessage = 'Following';
+			btnMsg = 'Following';
 			break;
 		case NOTFOLLOWING:
-			buttonMessage = 'Follow';
+			btnMsg = 'Follow';
 			break;
 		case REQUESTED:
-			buttonMessage = 'Requested';
+			btnMsg = 'Requested';
 			break;
 	}
 
@@ -73,7 +73,7 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 					}`}
 					onClick={followHandler}
 				>
-					{buttonMessage}
+					{btnMsg}
 				</button>
 			)}
 		</div>
