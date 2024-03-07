@@ -2,7 +2,7 @@ import Link from 'next/link';
 import ProfileImage from './ProfileImage';
 import classes from './ProfileSnippet.module.scss';
 import Image from 'next/image';
-import EmptyPostsFallback from './EmptyPostsFallback';
+import EmptyPostsFallback from '@/components/Profile/Posts/EmptyPostsFallback';
 
 interface ProfileSnippetProps {
 	user: {

@@ -40,9 +40,52 @@ const SettingsNavbar = () => {
 			<h2>Settings</h2>
 
 			<div className={classes.options}>
-				{settingsLinks.map((l) => (
-					<SettingLink key={l.href} href={l.href} icon={l.icon} text={l.text} />
-				))}
+				<p>How you use app</p>
+				<SettingLink
+					key="edit"
+					href="edit"
+					icon={<FaUserEdit />}
+					text="Edit profile"
+				/>
+				<p>What you see</p>
+				<SettingLink
+					key="like_count"
+					href="like_count"
+					icon={<LuHeartOff />}
+					text="Like counts"
+				/>
+				<SettingLink
+					key="appearance"
+					href="appearance"
+					icon={<MdOutlineLightMode />}
+					text="Switch appearance"
+				/>
+				<p>Who can see your content</p>
+				<SettingLink
+					key="privacy"
+					href="privacy"
+					icon={<IoLockClosedOutline />}
+					text="Account privacy"
+				/>
+				<SettingLink
+					key="blocked_accounts"
+					href="blocked_accounts"
+					icon={<MdOutlineDoNotDisturbAlt />}
+					text="Blocked accounts"
+				/>
+				<SettingLink
+					key="close_friends"
+					href="close_friends"
+					icon={<GiAlliedStar />}
+					text="Close friends"
+				/>
+				<p>How others can interact with you</p>
+				<SettingLink
+					key="comments"
+					href="comments"
+					icon={<FiMessageCircle />}
+					text="Comments"
+				/>
 			</div>
 		</div>
 	);

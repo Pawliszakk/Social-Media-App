@@ -1,5 +1,7 @@
 import PostTile from '@/components/Post/Tile/PostTile';
 import PostsBox from './PostsBox';
+import { IoCameraOutline } from 'react-icons/io5';
+import EmptyPostsFallback from './EmptyPostsFallback';
 
 interface PostsProps {
 	authorName: string;
@@ -12,7 +14,7 @@ const Posts: React.FC<PostsProps> = (props) => {
 	return (
 		<PostsBox>
 			{props.posts.length === 0 || !props.posts ? (
-				<p>We found no posts.</p>
+				<EmptyPostsFallback profile name="" />
 			) : (
 				props.posts.map((p: any) => {
 					const isUserAuthor = p.author.toString() === props.userId;

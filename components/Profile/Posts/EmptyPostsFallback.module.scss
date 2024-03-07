@@ -30,4 +30,14 @@
 		opacity: 0.5;
 		max-width: 65ch;
 	}
+	&.profile {
+		margin-top: 2rem;
+		.icon {
+			width: 100px;
+			height: 100px;
+			svg {
+				font-size: 5rem;
+			}
+		}
+	}
 }
