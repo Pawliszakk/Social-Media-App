@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { getSnippetUserData } from '@/lib/actions/user/getSnippetUserData';
 import ProfileSnippet from '@/components/Profile/Snippet/ProfileSnippet';
 interface ProfileImageProps {
+	userId: string;
 	image: string | null | undefined;
 	imageType: string | null | undefined;
 	name: string | null | undefined;
@@ -75,6 +76,7 @@ const ProfileImage: React.FC<ProfileImageProps> = (props) => {
 			{isHover && fetchedUser && (
 				<Suspense fallback={<p>Loading</p>}>
 					<ProfileSnippet
+						userId={props.userId}
 						user={fetchedUser}
 						profileId={props.profileId}
 						isUserFollowingProfile={props.isUserFollowingProfile}

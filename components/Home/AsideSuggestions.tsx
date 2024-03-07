@@ -26,7 +26,7 @@ const AsideSuggestions: React.FC<AsideSuggestionsProps> = async (props) => {
 						name={props.name}
 						profileId={props.userId}
 					/>
-					<Link href={`/profile/${props.userId}`}>Pawliszakk</Link>
+					<Link href={`/profile/${props.userId}`}>{props.name}</Link>
 				</div>
 				<Logout />
 			</div>

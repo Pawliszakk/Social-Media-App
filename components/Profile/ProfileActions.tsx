@@ -90,20 +90,20 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 		setIsLoading(false);
 	};
 
-	let buttonMessage;
+	let btnMsg;
 
 	switch (followingStatus) {
 		case FOLLOWING:
-			buttonMessage = 'Unfollow';
+			btnMsg = 'Unfollow';
 			break;
 		case NOTFOLLOWING:
-			buttonMessage = 'Follow';
+			btnMsg = 'Follow';
 			break;
 		case REQUESTED:
-			buttonMessage = 'Requested';
+			btnMsg = 'Requested';
 			break;
 		case BLOCKING:
-			buttonMessage = 'Unblock';
+			btnMsg = 'Unblock';
 	}
 
 	return (
@@ -120,11 +120,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 							onClick={followHandler}
 							disabled={isLoading}
 						>
-							{isLoading ? (
-								<Spinner className={classes.spinner} />
-							) : (
-								buttonMessage
-							)}
+							{isLoading ? <Spinner className={classes.spinner} /> : btnMsg}
 						</button>
 						<ProfileSettings
 							isBlocked={props.isBlocked}

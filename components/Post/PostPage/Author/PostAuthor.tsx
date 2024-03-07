@@ -36,6 +36,7 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 		<div className={classes.author}>
 			<div className={classes.user}>
 				<ProfileImage
+					userId={props.userId}
 					image={props.image}
 					name={props.name}
 					imageType={props.imageType}
