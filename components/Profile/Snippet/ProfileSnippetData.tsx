@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import ProfileImage from './ProfileImage';
-import classes from './ProfileSnippet.module.scss';
+import ProfileImage from '@/components/UI/User/ProfileImage';
 import Image from 'next/image';
-import EmptyPostsFallback from '@/components/Profile/Posts/EmptyPostsFallback';
+import EmptyPostsFallback from '../Posts/EmptyPostsFallback';
+import Link from 'next/link';
+import classes from './ProfileSnippetData.module.scss';
 
-interface ProfileSnippetProps {
+interface ProfileSnippetDataProps {
 	user: {
 		name: string;
 		image: string;
@@ -18,17 +18,14 @@ interface ProfileSnippetProps {
 		}[];
 	};
 	profileId: string | undefined;
-	isUserFollowingProfile: boolean | undefined;
-	isUserAuthor: boolean | undefined;
 }
 
-const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
+const ProfileSnippetData: React.FC<ProfileSnippetDataProps> = (props) => {
 	const { user, profileId } = props;
-
 	const arePostsEmpty = user.latestPosts.length === 0 || !user.latestPosts;
 
 	return (
-		<div className={classes.box}>
+		<>
 			<div className={classes.user}>
 				<ProfileImage
 					profileId={profileId}
@@ -70,17 +67,8 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 					))
 				)}
 			</div>
-			<div className={classes.actions}>
-				{props.isUserAuthor ? (
-					<Link href="/settings/edit">Edit Profile</Link>
-				) : props.isUserFollowingProfile ? (
-					<button>unfollow</button>
-				) : (
-					<button className={classes.cta}>Follow</button>
-				)}
-			</div>
-		</div>
+		</>
 	);
 };
 
-export default ProfileSnippet;
+export default ProfileSnippetData;

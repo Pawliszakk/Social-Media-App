@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import classes from './ProfileImage.module.scss';
 import { Suspense, useState } from 'react';
-import ProfileSnippet from './ProfileSnippet';
 import Link from 'next/link';
 import { getSnippetUserData } from '@/lib/actions/user/getSnippetUserData';
+import ProfileSnippet from '@/components/Profile/Snippet/ProfileSnippet';
 interface ProfileImageProps {
 	image: string | null | undefined;
 	imageType: string | null | undefined;

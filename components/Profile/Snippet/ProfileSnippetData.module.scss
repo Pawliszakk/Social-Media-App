@@ -1,0 +1,36 @@
+.user {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	.name {
+		font-size: 1.6rem;
+		margin-left: 0.5em;
+		font-weight: bold;
+	}
+}
+.counters {
+	margin: 2rem 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	.counter {
+		span {
+			font-size: 1.4rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+		.number {
+			font-weight: bold;
+		}
+	}
+}
+.posts {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	img {
+		border-radius: 0;
+	}
+}
