@@ -2,31 +2,40 @@
 
 import { User } from '../Models/user';
 
-export async function getSnippetUserData(profileId: string | undefined) {
-	let user;
+export async function getSnippetUserData(
+	profileId: string | undefined,
+	userId: string | undefined
+) {
+	let profile;
 	try {
-		user = await User.findOne({ _id: profileId })
-			.select('name image imageType followers following posts')
+		profile = await User.findOne({ _id: profileId })
+			.select(
+				'name image imageType followers following posts recievedFollowRequests private'
+			)
 			.populate('posts');
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
-	const latestPosts = user.posts.reverse().slice(0, 3);
+	const latestPosts = profile.posts.reverse().slice(0, 3);
 	const postsWithIdAndImage = latestPosts.map((post: any) => ({
 		id: post._id.toString(),
 		image: post.image,
 	}));
-	const postsLength = user.posts.length;
-	const followersLength = user.followers.length;
-	const followingLength = user.following.length;
-
+	const isRequestedToFollow = profile.recievedFollowRequests.find(
+		(id: string) => id.toString() === userId
+	);
+	const postsLength = profile.posts.length;
+	const followersLength = profile.followers.length;
+	const followingLength = profile.following.length;
 	return {
-		name: user.name,
-		image: user.image,
-		imageType: user.imageType,
+		name: profile.name,
+		image: profile.image,
+		imageType: profile.imageType,
+		private: profile.private,
 		postsLength,
 		followersLength,
+		isRequestedToFollow: !!isRequestedToFollow,
 		followingLength,
 		latestPosts: postsWithIdAndImage,
 	};

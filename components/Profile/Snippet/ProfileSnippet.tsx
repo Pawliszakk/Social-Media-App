@@ -20,6 +20,7 @@ interface ProfileSnippetProps {
 		postsLength: number;
 		followersLength: number;
 		followingLength: number;
+		isRequestedToFollow: boolean;
 		latestPosts: {
 			id: string;
 			image: string;
@@ -33,9 +34,12 @@ interface ProfileSnippetProps {
 const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [followingStatus, setFollowingStatus] = useState(
-		props.isUserFollowingProfile ? FOLLOWING : NOTFOLLOWING
+		props.isUserFollowingProfile
+			? props.user.isRequestedToFollow
+				? REQUESTED
+				: FOLLOWING
+			: NOTFOLLOWING
 	);
-
 	const followHandler = async () => {
 		setIsLoading(true);
 		if (followingStatus === FOLLOWING) {
@@ -96,6 +100,7 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 
 	return (
 		<div className={classes.box}>
+			{/* DODAĆ CZY USER IS ALLOWED TO VIEW POSTS! */}
 			<ProfileSnippetData user={props.user} profileId={props.profileId} />
 
 			<div className={classes.actions}>

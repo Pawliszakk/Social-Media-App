@@ -16,7 +16,6 @@ export default async function ProfilePage({
 		profilePosts,
 		authorName,
 	} = await getProfilePageData(profileId);
-
 	return (
 		<>
 			{!isUserBlockingProfile &&

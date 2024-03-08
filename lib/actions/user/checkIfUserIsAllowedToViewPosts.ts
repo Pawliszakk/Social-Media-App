@@ -25,11 +25,10 @@ export async function checkIfUserIsAllowedToViewPosts(
 	const isUserBlockingProfile = user.blockedUsers.find(
 		(id: string) => id.toString() === profile.id
 	);
-
 	const isUserFollowingProfile = profile.followers.find((id: string) => userId);
 
 	const isUserAllowedToViewPosts =
-		!profile.private || isUserFollowingProfile || !isUserBlockingProfile;
+		!profile.private || isUserFollowingProfile || !!isUserBlockingProfile;
 
 	return {
 		isUserAllowedToViewPosts,
