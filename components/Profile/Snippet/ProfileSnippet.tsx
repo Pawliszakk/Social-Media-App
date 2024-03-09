@@ -101,7 +101,6 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 
 	return (
 		<div className={classes.box}>
-			{/* DODAĆ CZY USER IS ALLOWED TO VIEW POSTS! */}
 			<ProfileSnippetData
 				user={props.user}
 				profileId={props.profileId}

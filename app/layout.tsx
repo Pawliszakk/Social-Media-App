@@ -24,7 +24,6 @@ export default async function RootLayout({
 		'id',
 		'imageType'
 	);
-
 	return (
 		<html lang="en">
 			<body data-theme={user ? user.theme : ''}>

@@ -6,7 +6,10 @@
 	align-items: center;
 	flex-direction: column;
 	color: var(--text-normal);
+	padding: 2rem;
+	border: var(--border-light);
 	text-align: center;
+	width: 100%;
 	.icon {
 		width: 70px;
 		height: 70px;

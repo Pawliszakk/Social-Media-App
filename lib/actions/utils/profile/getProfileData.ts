@@ -12,6 +12,7 @@ import getLoggedUserProfile from '../../user/getLoggedUserProfile';
 import { getProfile } from '../../user/getProfile';
 
 export async function getProfileData(profileId: string) {
+	//ZPOPULOWAĆ SENTFOLLOWREQUESTS USERA ZEBY MOZNA BYLO SIE DOWIEDZIEC CZY JEST REQUESTED
 	const { session, user } = await getUserData(
 		'blockedUsers',
 		'sentFollowRequests',
@@ -38,7 +39,7 @@ export async function getProfileData(profileId: string) {
 		(id: string) => user.id
 	);
 	const isUserBlockingProfile = user.blockedUsers.find(
-		(id: string) => id.toString() === profile.id
+		(id: string) => id.toString() === profileId
 	);
 
 	const isUserBlockedByProfile = profile.blockedUsers.find(
@@ -48,13 +49,13 @@ export async function getProfileData(profileId: string) {
 	if (isUserBlockedByProfile && !isLoggedUserProfile) {
 		permanentRedirect('/');
 	}
-
+	//TO JEST ID REQUESTA A NIE RECIEVERA TEGO REQUESTAAA!!!
 	const isProfileRequestedToFollow = user.sentFollowRequests.find(
-		(el: any) => el.reciever.toString() === profile.id
+		(el: any) => el.reciever.toString() === profileId
 	);
 
 	const isProfileCloseFriend = user.closeFriends.find(
-		(id: string) => id.toString() === profile.id
+		(id: string) => id.toString() === profileId
 	);
 	let followingStatus;
 	if (isUserFollowingProfile) {
@@ -69,7 +70,6 @@ export async function getProfileData(profileId: string) {
 	if (isUserBlockingProfile) {
 		followingStatus = BLOCKING;
 	}
-
 	return {
 		profile,
 		isLoggedUserProfile,
