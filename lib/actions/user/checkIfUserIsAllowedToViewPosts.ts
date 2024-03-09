@@ -1,17 +1,13 @@
 'use server';
 
 import { User } from '../Models/user';
+import { getUserData } from '../utils/getUserData';
 
 export async function checkIfUserIsAllowedToViewPosts(
 	userId: string,
 	profileId: string
 ) {
-	let user;
-	try {
-		user = await User.findOne({ _id: userId }).select('blockedUsers');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
+	const { session, user } = await getUserData('blockedUsers');
 
 	let profile: any;
 	try {
@@ -25,7 +21,9 @@ export async function checkIfUserIsAllowedToViewPosts(
 	const isUserBlockingProfile = user.blockedUsers.find(
 		(id: string) => id.toString() === profile.id
 	);
-	const isUserFollowingProfile = profile.followers.find((id: string) => userId);
+	const isUserFollowingProfile = profile.followers.find(
+		(id: string) => user.id
+	);
 
 	const isUserAllowedToViewPosts =
 		!profile.private || isUserFollowingProfile || !!isUserBlockingProfile;

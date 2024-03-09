@@ -1,11 +1,10 @@
 'use server';
 
 import { User } from '../Models/user';
+import { getUserData } from '../utils/getUserData';
+import { checkIfUserIsAllowedToViewPosts } from './checkIfUserIsAllowedToViewPosts';
 
-export async function getSnippetUserData(
-	profileId: string | undefined,
-	userId: string | undefined
-) {
+export async function getSnippetUserData(profileId: string, userId: string) {
 	let profile;
 	try {
 		profile = await User.findOne({ _id: profileId })
@@ -28,6 +27,9 @@ export async function getSnippetUserData(
 	const postsLength = profile.posts.length;
 	const followersLength = profile.followers.length;
 	const followingLength = profile.following.length;
+
+	const { isUserAllowedToViewPosts, isUserBlockingProfile } =
+		await checkIfUserIsAllowedToViewPosts(userId, profileId);
 	return {
 		name: profile.name,
 		image: profile.image,
@@ -38,5 +40,6 @@ export async function getSnippetUserData(
 		isRequestedToFollow: !!isRequestedToFollow,
 		followingLength,
 		latestPosts: postsWithIdAndImage,
+		isUserAllowedToViewPosts: !!isUserAllowedToViewPosts,
 	};
 }

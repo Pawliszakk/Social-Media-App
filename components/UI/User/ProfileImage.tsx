@@ -7,10 +7,10 @@ import Link from 'next/link';
 import { getSnippetUserData } from '@/lib/actions/user/getSnippetUserData';
 import ProfileSnippet from '@/components/Profile/Snippet/ProfileSnippet';
 interface ProfileImageProps {
-	userId: string;
 	image: string | null | undefined;
 	imageType: string | null | undefined;
 	name: string | null | undefined;
+	userId?: string;
 	profile?: boolean;
 	profileId?: string;
 	isUserFollowingProfile?: boolean;
@@ -27,8 +27,8 @@ const ProfileImage: React.FC<ProfileImageProps> = (props) => {
 			setIsHover(true);
 			try {
 				const userData = await getSnippetUserData(
-					props.profileId,
-					props.userId
+					`${props.profileId}`,
+					`${props.userId}`
 				);
 				setFetchedUser(userData);
 			} catch (e) {
@@ -43,6 +43,7 @@ const ProfileImage: React.FC<ProfileImageProps> = (props) => {
 	if (props.profile) {
 		size = 200;
 	}
+
 	return (
 		<div
 			className={classes.box}
@@ -79,7 +80,7 @@ const ProfileImage: React.FC<ProfileImageProps> = (props) => {
 			{isHover && fetchedUser && (
 				<Suspense fallback={<p>Loading</p>}>
 					<ProfileSnippet
-						userId={props.userId}
+						userId={`${props.userId}`}
 						user={fetchedUser}
 						profileId={props.profileId}
 						isUserFollowingProfile={props.isUserFollowingProfile}

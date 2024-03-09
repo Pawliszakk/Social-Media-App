@@ -1,8 +1,8 @@
 import { CiLock } from 'react-icons/ci';
 import classes from './PrivateProfileFallback.module.scss';
-const PrivateProfileFallback = () => {
+const PrivateProfileFallback = ({ classname }: { classname?: string }) => {
 	return (
-		<div className={classes.private}>
+		<div className={`${classes.private} ${classname ? classname : null}`}>
 			<div className={classes.icon}>
 				<CiLock />
 			</div>

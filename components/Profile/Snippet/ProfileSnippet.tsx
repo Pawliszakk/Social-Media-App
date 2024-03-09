@@ -21,6 +21,7 @@ interface ProfileSnippetProps {
 		followersLength: number;
 		followingLength: number;
 		isRequestedToFollow: boolean;
+		isUserAllowedToViewPosts: boolean;
 		latestPosts: {
 			id: string;
 			image: string;
@@ -101,7 +102,11 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 	return (
 		<div className={classes.box}>
 			{/* DODAĆ CZY USER IS ALLOWED TO VIEW POSTS! */}
-			<ProfileSnippetData user={props.user} profileId={props.profileId} />
+			<ProfileSnippetData
+				user={props.user}
+				profileId={props.profileId}
+				isUserAllowedToViewPosts={props.user.isUserAllowedToViewPosts}
+			/>
 
 			<div className={classes.actions}>
 				{props.isUserAuthor ? (

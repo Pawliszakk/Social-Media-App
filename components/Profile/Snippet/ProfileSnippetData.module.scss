@@ -30,6 +30,10 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	.privateFallback {
+		margin: 0 auto;
+		width: 100%;
+	}
 	a {
 		img {
 			border-radius: 0;

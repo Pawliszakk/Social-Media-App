@@ -3,6 +3,7 @@ import Image from 'next/image';
 import EmptyPostsFallback from '../Posts/EmptyPostsFallback';
 import Link from 'next/link';
 import classes from './ProfileSnippetData.module.scss';
+import PrivateProfileFallback from '../Posts/PrivateProfileFallback';
 
 interface ProfileSnippetDataProps {
 	user: {
@@ -18,12 +19,12 @@ interface ProfileSnippetDataProps {
 		}[];
 	};
 	profileId: string | undefined;
+	isUserAllowedToViewPosts: boolean;
 }
 
 const ProfileSnippetData: React.FC<ProfileSnippetDataProps> = (props) => {
 	const { user, profileId } = props;
 	const arePostsEmpty = user.latestPosts.length === 0 || !user.latestPosts;
-
 	return (
 		<>
 			<div className={classes.user}>
@@ -52,19 +53,23 @@ const ProfileSnippetData: React.FC<ProfileSnippetDataProps> = (props) => {
 				</div>
 			</div>
 			<div className={classes.posts}>
-				{arePostsEmpty ? (
-					<EmptyPostsFallback name={user.name} />
+				{props.isUserAllowedToViewPosts ? (
+					arePostsEmpty ? (
+						<EmptyPostsFallback name={user.name} />
+					) : (
+						user.latestPosts.map((post: { image: string; id: string }) => (
+							<Link href={`/post/${post.id}`} key={post.id}>
+								<Image
+									src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${post.image}`}
+									width={120}
+									height={120}
+									alt={`${user.name} post`}
+								/>
+							</Link>
+						))
+					)
 				) : (
-					user.latestPosts.map((post: { image: string; id: string }) => (
-						<Link href={`/post/${post.id}`} key={post.id}>
-							<Image
-								src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${post.image}`}
-								width={120}
-								height={120}
-								alt={`${user.name} post`}
-							/>
-						</Link>
-					))
+					<PrivateProfileFallback classname={classes.privateFallback} />
 				)}
 			</div>
 		</>
