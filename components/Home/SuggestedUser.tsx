@@ -50,6 +50,7 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 		<div className={classes.user} key={props.id}>
 			<div className={classes.image}>
 				<ProfileImage
+					userId={props.userId}
 					image={props.image}
 					imageType={props.imageType}
 					name={props.name}

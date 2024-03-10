@@ -37,7 +37,7 @@ export async function followUser(userId: string, userToFollowId: string) {
 		await userToFollow.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e) {
-		throw new Error(`${e}`);
+		throw new Error(`e`);
 	}
 
 	revalidatePath('/', 'layout');
