@@ -5,14 +5,7 @@ import { getUserData } from '@/lib/actions/utils/getUserData';
 
 export default async function SettingsPage() {
 	const { session, user } = await getUserData(
-		'website',
-		'bio',
-		'sex',
-		'name',
-		'showInSuggestions',
-		'image',
-		'imageType',
-		'name'
+		'website bio sex name showInSuggestions image imageType name'
 	);
 
 	return (

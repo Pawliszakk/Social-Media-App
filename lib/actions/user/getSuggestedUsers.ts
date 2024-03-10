@@ -16,5 +16,6 @@ export async function getSuggestedUsers(limit: number) {
 	const usersWithoutLoggedUser = users.filter(
 		(u: any) => u.id.toString() !== user.id.toString()
 	);
+	console.log(users);
 	return { userId: user.id, users: usersWithoutLoggedUser };
 }

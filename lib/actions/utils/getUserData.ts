@@ -5,7 +5,7 @@ import { User } from '../Models/user';
 import { connectToDatabase } from './connectToDatabase';
 import { permanentRedirect } from 'next/navigation';
 
-export const getUserData = async (...args: string[]) => {
+export const getUserData = async (select?: string, populate?: string) => {
 	const session = await getServerSession();
 	if (!session) {
 		return { session: null, user: null };
@@ -15,17 +15,20 @@ export const getUserData = async (...args: string[]) => {
 
 	await connectToDatabase();
 
-	const selectFields = args.join(' ');
-
+	const selectField = select?.trim().length === 0 || !select ? 'null' : select;
+	const populateField = populate?.trim().length === 0 ? null : populate;
 	let user;
 	try {
-		user = await User.findOne({ email }).select(
-			args.length === 0 ? 'null' : selectFields
-		);
+		if (!!populateField) {
+			user = await User.findOne({ email })
+				.select(selectField)
+				.populate(`${populateField}`);
+		} else {
+			user = await User.findOne({ email }).select(selectField);
+		}
 	} catch (e) {
 		permanentRedirect('/');
 	}
-
 	if (!user) {
 		throw new Error('Something went wrong, please try again later');
 	}

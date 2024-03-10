@@ -4,7 +4,7 @@ import getFollowedUsers from '@/lib/actions/user/settings/getFollowedUsers';
 import { getUserData } from '@/lib/actions/utils/getUserData';
 
 export default async function SettingsPage() {
-	const { session, user } = await getUserData('closeFriends, following');
+	const { session, user } = await getUserData('closeFriends following');
 
 	const { closeFriends, following } = await getFollowedUsers(user.id);
 

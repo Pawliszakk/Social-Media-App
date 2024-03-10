@@ -21,14 +21,7 @@ import AsideSuggestions from '@/components/Home/AsideSuggestions';
 
 export default async function Home() {
 	const { session, user } = await getUserData(
-		'following',
-		'likedPosts',
-		'savedPosts',
-		'showLikes',
-		'blockedUsers',
-		'image',
-		'name',
-		'imageType'
+		'following likedPosts savedPosts showLikes blockedUsers image name imageType'
 	);
 	if (!session) {
 		permanentRedirect('/auth/login');

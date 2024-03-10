@@ -17,6 +17,7 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }) {
 	const { profileId } = params;
+
 	const {
 		userId,
 		profile,

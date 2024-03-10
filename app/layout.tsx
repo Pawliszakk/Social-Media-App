@@ -17,13 +17,8 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const { session, user } = await getUserData(
-		'theme',
-		'name',
-		'image',
-		'id',
-		'imageType'
-	);
+	const { session, user } = await getUserData('theme name image id imageType');
+
 	return (
 		<html lang="en">
 			<body data-theme={user ? user.theme : ''}>

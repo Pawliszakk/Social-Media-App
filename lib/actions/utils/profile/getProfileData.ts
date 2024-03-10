@@ -13,10 +13,14 @@ import { getProfile } from '../../user/getProfile';
 
 export async function getProfileData(profileId: string) {
 	//ZPOPULOWAĆ SENTFOLLOWREQUESTS USERA ZEBY MOZNA BYLO SIE DOWIEDZIEC CZY JEST REQUESTED
+
+	// const { session, user } = await getUserData(
+	// 	'blockedUsers sentFollowRequests closeFriends',
+	// 	'sentFollowRequest'
+	// );
 	const { session, user } = await getUserData(
-		'blockedUsers',
-		'sentFollowRequests',
-		'closeFriends'
+		'blockedUsers sentFollowRequests closeFriends',
+		'sentFollowRequests'
 	);
 
 	const isLoggedUserProfile = profileId === user?.id;
@@ -49,7 +53,8 @@ export async function getProfileData(profileId: string) {
 	if (isUserBlockedByProfile && !isLoggedUserProfile) {
 		permanentRedirect('/');
 	}
-	//TO JEST ID REQUESTA A NIE RECIEVERA TEGO REQUESTAAA!!!
+
+	console.log(user.sentFollowRequests);
 	const isProfileRequestedToFollow = user.sentFollowRequests.find(
 		(el: any) => el.reciever.toString() === profileId
 	);
@@ -70,6 +75,7 @@ export async function getProfileData(profileId: string) {
 	if (isUserBlockingProfile) {
 		followingStatus = BLOCKING;
 	}
+
 	return {
 		profile,
 		isLoggedUserProfile,

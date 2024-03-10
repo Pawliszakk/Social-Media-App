@@ -16,7 +16,7 @@ export async function followUser(userId: string, userToFollowId: string) {
 			'followers private'
 		);
 	} catch (e) {
-		throw new Error(e);
+		throw new Error(`${e}`);
 	}
 	const isUserToFollowAlreadyFollowed = userToFollow.followers.find(
 		(id: string) => id.toString() === userId
@@ -37,14 +37,12 @@ export async function followUser(userId: string, userToFollowId: string) {
 		await userToFollow.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e) {
-		throw new Error(e);
+		throw new Error(`${e}`);
 	}
 
 	revalidatePath('/', 'layout');
 	return { ok: true, status: FOLLOWING };
 }
-
-
 
 export async function unFollowUser(userId: string, userToUnfollowId: string) {
 	let user;

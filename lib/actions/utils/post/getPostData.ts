@@ -6,14 +6,7 @@ import { getUserData } from '../getUserData';
 
 export async function getPostData(postId: string) {
 	const { session, user } = await getUserData(
-		'blockedUsers',
-		'name',
-		'image',
-		'imageType',
-		'likedPosts',
-		'following',
-		'savedPosts',
-		'showLikes'
+		'blockedUsers name image imageType likedPosts following savedPosts showLikes'
 	);
 
 	if (!session) {

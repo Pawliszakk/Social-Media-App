@@ -1,7 +1,6 @@
 'use server';
 
 import { User } from '../Models/user';
-import { getUserData } from '../utils/getUserData';
 import { checkIfUserIsAllowedToViewPosts } from './checkIfUserIsAllowedToViewPosts';
 
 export async function getSnippetUserData(profileId: string, userId: string) {
