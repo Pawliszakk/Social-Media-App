@@ -54,7 +54,6 @@ export async function getProfileData(profileId: string) {
 		permanentRedirect('/');
 	}
 
-	console.log(user.sentFollowRequests);
 	const isProfileRequestedToFollow = user.sentFollowRequests.find(
 		(el: any) => el.reciever.toString() === profileId
 	);

@@ -14,11 +14,10 @@ interface AsideSuggestionsProps {
 }
 
 const AsideSuggestions: React.FC<AsideSuggestionsProps> = async (props) => {
-	const { userId, users } = await getSuggestedUsers(5);
+	const { userId, users } = await getSuggestedUsers(6);
 	return (
 		<aside className={classes.aside}>
 			<div className={classes.box}>
-				{' '}
 				<div className={classes.user}>
 					<ProfileImage
 						image={props.image}
