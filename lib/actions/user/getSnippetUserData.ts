@@ -1,16 +1,19 @@
 'use server';
 
 import { User } from '../Models/user';
+import { getUserData } from '../utils/getUserData';
 import { checkIfUserIsAllowedToViewPosts } from './checkIfUserIsAllowedToViewPosts';
 
 export async function getSnippetUserData(profileId: string, userId: string) {
+	const { session, user } = await getUserData();
+
 	let profile;
 	try {
 		profile = await User.findOne({ _id: profileId })
 			.select(
 				'name image imageType followers following posts recievedFollowRequests private'
 			)
-			.populate('posts');
+			.populate('posts recievedFollowRequests');
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
@@ -20,15 +23,16 @@ export async function getSnippetUserData(profileId: string, userId: string) {
 		id: post._id.toString(),
 		image: post.image,
 	}));
+
 	const isRequestedToFollow = profile.recievedFollowRequests.find(
-		(id: string) => id.toString() === userId
+		(request: { requester: string }) => request.requester.toString() === user.id
 	);
 	const postsLength = profile.posts.length;
 	const followersLength = profile.followers.length;
 	const followingLength = profile.following.length;
 
 	const { isUserAllowedToViewPosts, isUserBlockingProfile } =
-		await checkIfUserIsAllowedToViewPosts(userId, profileId);
+		await checkIfUserIsAllowedToViewPosts(user.id, profileId);
 	return {
 		name: profile.name,
 		image: profile.image,

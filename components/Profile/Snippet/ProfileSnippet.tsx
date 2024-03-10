@@ -36,11 +36,12 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [followingStatus, setFollowingStatus] = useState(
 		props.isUserFollowingProfile
-			? props.user.isRequestedToFollow
-				? REQUESTED
-				: FOLLOWING
+			? FOLLOWING
+			: props.user.isRequestedToFollow
+			? REQUESTED
 			: NOTFOLLOWING
 	);
+//BRAK USER ID PROVIDED
 	const followHandler = async () => {
 		setIsLoading(true);
 		if (followingStatus === FOLLOWING) {

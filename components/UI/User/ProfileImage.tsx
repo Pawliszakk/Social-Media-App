@@ -21,7 +21,6 @@ interface ProfileImageProps {
 const ProfileImage: React.FC<ProfileImageProps> = (props) => {
 	const [isHover, setIsHover] = useState(false);
 	const [fetchedUser, setFetchedUser] = useState<any>(null);
-
 	const handleMouseEnter = async () => {
 		if (props.snippet) {
 			setIsHover(true);
