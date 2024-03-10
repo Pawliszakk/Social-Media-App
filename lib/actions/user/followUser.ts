@@ -7,7 +7,7 @@ import { sendFollowRequest } from './sendFollowRequest';
 import { FOLLOWING, NOTFOLLOWING } from '@/lib/constants/followingStatus';
 import { getUserData } from '../utils/getUserData';
 
-export async function followUser(userId: string, userToFollowId: string) {
+export async function followUser(userToFollowId: string) {
 	const { session, user } = await getUserData('following');
 
 	let userToFollow;
@@ -19,16 +19,16 @@ export async function followUser(userId: string, userToFollowId: string) {
 		throw new Error(`${e}`);
 	}
 	const isUserToFollowAlreadyFollowed = userToFollow.followers.find(
-		(id: string) => id.toString() === userId
+		(id: string) => id.toString() === user.id
 	);
 	if (userToFollow.private) {
-		return await sendFollowRequest(userId, userToFollowId);
+		return await sendFollowRequest(user.id, userToFollowId);
 	}
 	if (!!isUserToFollowAlreadyFollowed) {
 		throw new Error('User is already followed');
 	}
 	user.following.push(userToFollowId);
-	userToFollow.followers.push(userId);
+	userToFollow.followers.push(user.id);
 
 	try {
 		const sess = await mongoose.startSession();
@@ -44,13 +44,8 @@ export async function followUser(userId: string, userToFollowId: string) {
 	return { ok: true, status: FOLLOWING };
 }
 
-export async function unFollowUser(userId: string, userToUnfollowId: string) {
-	let user;
-	try {
-		user = await User.findOne({ _id: userId }).select('following');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
+export async function unFollowUser(userToUnfollowId: string) {
+	const { session, user } = await getUserData('following');
 
 	let userToUnfollow;
 	try {
@@ -61,7 +56,7 @@ export async function unFollowUser(userId: string, userToUnfollowId: string) {
 		throw new Error('Something went wrong, please try again later');
 	}
 	const isUserToUnfollowAlreadyUnFollowed = userToUnfollow.followers.find(
-		(id: string) => userId
+		(id: string) => user.id
 	);
 	if (!isUserToUnfollowAlreadyUnFollowed) {
 		return { ok: true, message: 'requested' };
@@ -73,7 +68,7 @@ export async function unFollowUser(userId: string, userToUnfollowId: string) {
 		(id: string) => id.toString() !== userToUnfollowId
 	);
 	userToUnfollow.followers = userToUnfollow.followers.filter(
-		(id: string) => id.toString() !== userId
+		(id: string) => id.toString() !== user.id
 	);
 
 	try {

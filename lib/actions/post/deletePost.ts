@@ -2,21 +2,16 @@
 
 import mongoose from 'mongoose';
 import { Post } from '../Models/post';
-import { User } from '../Models/user';
 import { revalidatePath } from 'next/cache';
 import { permanentRedirect } from 'next/navigation';
 import deleteImage from '../utils/deleteImage';
+import { getUserData } from '../utils/getUserData';
 
-export async function deletePost(postId: string, userId: string) {
+export async function deletePost(postId: string) {
+	const { session, user } = await getUserData('posts');
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId });
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
-	let user;
-	try {
-		user = await User.findOne({ _id: userId });
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}

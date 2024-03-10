@@ -15,6 +15,9 @@ import SettingsBox from '@/components/UI/Settings/SettingsBox';
 import AccountAbout from '@/components/UI/Settings/AccountAbout';
 import Setting from '@/components/UI/Settings/Setting';
 import EditPost from '../PostPage/Edit/EditPost';
+import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
+import { deletePost } from '@/lib/actions/post/deletePost';
+import { archivePost } from '@/lib/actions/post/archivePost';
 interface PostSettingsProps {
 	postId: string;
 	authorId: string;
@@ -27,28 +30,20 @@ interface PostSettingsProps {
 	isUserAuthor: boolean;
 	commenting: boolean;
 	hideLikesCount: boolean;
-	deletePost: (postId: string, userId: string) => void;
 	switchCommenting: (postId: string, userId: string) => void;
 	switchLiking: (postId: string, userId: string) => void;
-	archivePost: (postId: string, userId: string) => void;
-	followUser: (userId: string, userToFollowId: string) => void;
-	unFollowUser: (userId: string, userToUnFollowId: string) => void;
 }
 
 const PostSettings: React.FC<PostSettingsProps> = ({
 	isUserAuthor,
 	isUserFollowingAuthor,
-	deletePost,
 	switchCommenting,
 	switchLiking,
-	archivePost,
 	postId,
 	authorId,
 	userId,
 	commenting,
 	hideLikesCount,
-	followUser,
-	unFollowUser,
 	images,
 	authorName,
 	userImage,
@@ -61,7 +56,7 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 	const handleClick = async (action: string) => {
 		switch (action) {
 			case DELETE:
-				deletePost(postId, userId);
+				deletePost(postId);
 				break;
 			case EDIT:
 				setIsEditComponent(true);
@@ -75,14 +70,14 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 				setIsSettings(false);
 				break;
 			case ARCHIVE:
-				archivePost(postId, userId);
+				archivePost(postId);
 				break;
 			case UNFOLLOW:
-				await unFollowUser(userId, authorId);
+				await unFollowUser(authorId);
 				setIsSettings(false);
 				break;
 			case FOLLOW:
-				await followUser(userId, authorId);
+				await followUser(authorId);
 				setIsSettings(false);
 				break;
 			case ABOUT:

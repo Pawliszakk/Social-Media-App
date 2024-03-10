@@ -25,10 +25,7 @@ const ProfileImage: React.FC<ProfileImageProps> = (props) => {
 		if (props.snippet) {
 			setIsHover(true);
 			try {
-				const userData = await getSnippetUserData(
-					`${props.profileId}`,
-					`${props.userId}`
-				);
+				const userData = await getSnippetUserData(`${props.profileId}`);
 				setFetchedUser(userData);
 			} catch (e) {
 				setIsHover(false);

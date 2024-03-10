@@ -30,12 +30,12 @@ export default async function RootLayout({
 
 	const followHandler = async () => {
 		'use server';
-		const res = await followUser(userId, profileId);
+		const res = await followUser(profileId);
 		return res;
 	};
 	const unFollowHandler = async () => {
 		'use server';
-		const res = await unFollowUser(userId, profileId);
+		const res = await unFollowUser(profileId);
 		return res;
 	};
 	const deleteRequestHandler = async () => {

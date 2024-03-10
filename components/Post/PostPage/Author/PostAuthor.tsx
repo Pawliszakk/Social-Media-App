@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Spinner from '@/components/UI/Spinner';
 import ProfileImage from '@/components/UI/User/ProfileImage';
 import { transformPostDate } from '@/lib/helpers/transformPostDate';
+import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 
 interface PostAuthorProps {
 	children: React.ReactNode;
@@ -16,8 +17,6 @@ interface PostAuthorProps {
 	userId: string;
 	isUserAuthor: boolean;
 	isUserFollowingAuthor: boolean;
-	followUser: (userId: string, userToFollow: string) => void;
-	unFollowUser: (userId: string, userToFollow: string) => void;
 }
 
 const PostAuthor: React.FC<PostAuthorProps> = (props) => {
@@ -26,9 +25,9 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 	const spanClickHandler = async () => {
 		setIsLoading(true);
 		if (props.isUserFollowingAuthor) {
-			await props.unFollowUser(props.userId, props.authorId);
+			await unFollowUser(props.authorId);
 		} else {
-			await props.followUser(props.userId, props.authorId);
+			await followUser(props.authorId);
 		}
 		setIsLoading(false);
 	};

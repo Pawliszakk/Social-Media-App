@@ -28,7 +28,7 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const followHandler = async () => {
 		setIsLoading(true);
-		const res = await followUser(props.userId, props.id);
+		const res = await followUser(props.id);
 		setFollowingStatus(res.status);
 		setIsLoading(false);
 	};

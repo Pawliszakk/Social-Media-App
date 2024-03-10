@@ -41,13 +41,13 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 			? REQUESTED
 			: NOTFOLLOWING
 	);
-//BRAK USER ID PROVIDED
+	//BRAK USER ID PROVIDED
 	const followHandler = async () => {
 		setIsLoading(true);
 		if (followingStatus === FOLLOWING) {
 			let res;
 			try {
-				res = await unFollowUser(props.userId, `${props.profileId}`);
+				res = await unFollowUser(`${props.profileId}`);
 			} catch (e) {
 				setIsLoading(false);
 				return;
@@ -60,7 +60,7 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 		} else if (followingStatus === NOTFOLLOWING) {
 			let res;
 			try {
-				res = await followUser(props.userId, `${props.profileId}`);
+				res = await followUser(`${props.profileId}`);
 			} catch (e) {
 				setIsLoading(false);
 				return;

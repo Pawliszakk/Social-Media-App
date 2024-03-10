@@ -44,16 +44,10 @@ const ActionBar: React.FC<ActionBarProps> = ({
 			</div>
 
 			<nav>
-				{menuOptions.map((option, i) => (
+				{menuOptions.map((option) => (
 					<ActionBarOption
-						key={i}
-						href={option.href}
-						icon={option.icon}
-						text={option.text}
-						avatar={option.avatar}
-						image={option.image}
-						name={option.name}
-						logout={option.logout}
+						key={option.text}
+						option={option}
 						imageType={imageType}
 					/>
 				))}

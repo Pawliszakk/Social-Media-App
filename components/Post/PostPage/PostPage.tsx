@@ -7,11 +7,8 @@ import PostAuthor from './Author/PostAuthor';
 import PostComments from './Comments/PostComments';
 import PostLikes from './Likes/PostLikes';
 import PostAddComment from './Comments/PostAddComment';
-import { deletePost } from '@/lib/actions/post/deletePost';
 import { switchLiking } from '@/lib/actions/post/switchLiking';
-import { archivePost } from '@/lib/actions/post/archivePost';
 import { switchCommenting } from '@/lib/actions/post/switchCommenting';
-import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 import PostDescription from './Description/PostDescription';
 import PostActions from './Actions/PostActions';
 import PostSettings from '../Settings/PostSettings';
@@ -74,8 +71,6 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 					imageType={props.author.imageType}
 					date={props.date}
 					authorId={props.author.id}
-					followUser={followUser}
-					unFollowUser={unFollowUser}
 					isUserFollowingAuthor={props.isUserFollowingAuthor}
 					isUserAuthor={props.isUserAuthor}
 					userId={props.userId}
@@ -83,17 +78,13 @@ const PostPage: React.FC<PostPageProps> = (props) => {
 					<PostSettings
 						isUserFollowingAuthor={props.isUserFollowingAuthor}
 						isUserAuthor={props.isUserAuthor}
-						deletePost={deletePost}
 						switchCommenting={switchCommenting}
-						archivePost={archivePost}
 						postId={props.postId}
 						userId={props.userId}
 						commenting={props.commenting}
 						hideLikesCount={props.hideLikesCount}
 						switchLiking={switchLiking}
 						authorId={props.author.id}
-						followUser={followUser}
-						unFollowUser={unFollowUser}
 						images={props.images}
 						authorName={props.author.name}
 						userImage={props.author.image}

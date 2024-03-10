@@ -4,7 +4,7 @@ import { User } from '../Models/user';
 import { getUserData } from '../utils/getUserData';
 import { checkIfUserIsAllowedToViewPosts } from './checkIfUserIsAllowedToViewPosts';
 
-export async function getSnippetUserData(profileId: string, userId: string) {
+export async function getSnippetUserData(profileId: string) {
 	const { session, user } = await getUserData();
 
 	let profile;
@@ -18,7 +18,10 @@ export async function getSnippetUserData(profileId: string, userId: string) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
-	const latestPosts = profile.posts.reverse().slice(0, 3);
+	const filteredPosts = profile.posts.filter((post: any) => !post.archived);
+
+	const latestPosts = filteredPosts.reverse().slice(0, 3);
+
 	const postsWithIdAndImage = latestPosts.map((post: any) => ({
 		id: post._id.toString(),
 		image: post.image,
@@ -27,12 +30,13 @@ export async function getSnippetUserData(profileId: string, userId: string) {
 	const isRequestedToFollow = profile.recievedFollowRequests.find(
 		(request: { requester: string }) => request.requester.toString() === user.id
 	);
-	const postsLength = profile.posts.length;
+
+	const postsLength = filteredPosts.length;
 	const followersLength = profile.followers.length;
 	const followingLength = profile.following.length;
 
 	const { isUserAllowedToViewPosts, isUserBlockingProfile } =
-		await checkIfUserIsAllowedToViewPosts(user.id, profileId);
+		await checkIfUserIsAllowedToViewPosts(user.id.toString(), profileId);
 	return {
 		name: profile.name,
 		image: profile.image,

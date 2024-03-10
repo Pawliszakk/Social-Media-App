@@ -7,26 +7,22 @@ import classes from './ActionBarOption.module.scss';
 import LogoutBtn from '../Auth/Buttons/Logout';
 
 interface ActionBarOptionProps {
-	icon: React.ReactNode;
-	imageType?: string;
-	href?: string;
-	text: string;
-	name?: string | null | undefined;
-	image?: string | null | undefined;
-	avatar?: boolean;
-	logout?: boolean;
+	option: {
+		icon: React.ReactNode;
+		href?: string;
+		text: string;
+		name?: string | null | undefined;
+		image?: string | null | undefined;
+		avatar?: boolean;
+		logout?: boolean;
+	};
+	imageType: string;
 }
 
-const ActionBarOption: React.FC<ActionBarOptionProps> = ({
-	href,
-	icon,
-	text,
-	avatar,
-	logout,
-	image,
-	name,
-	imageType,
-}) => {
+const ActionBarOption: React.FC<ActionBarOptionProps> = (props) => {
+	const { option, imageType } = props;
+	const { href, icon, text, avatar, logout, image, name } = option;
+
 	const pathname = usePathname();
 	let active;
 	if (pathname === href) {

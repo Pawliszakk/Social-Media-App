@@ -3,7 +3,11 @@ import { User } from '../Models/user';
 export const getLoggedUserProfile = async (userId: string) => {
 	let user;
 	try {
-		user = await User.findOne({ _id: userId });
+		user = await User.findOne({ _id: userId }).populate({
+			path: 'posts',
+			match: { archived: false },
+			select: '_id',
+		});
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}

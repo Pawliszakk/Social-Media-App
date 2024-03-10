@@ -9,11 +9,8 @@ import classes from './page.module.scss';
 import { savePost } from '@/lib/actions/post/savePost';
 import PostComponent from '@/components/Post/HomePost/PostComponent';
 import PostAuthor from '@/components/Post/PostPage/Author/PostAuthor';
-import { deletePost } from '@/lib/actions/post/deletePost';
 import { switchCommenting } from '@/lib/actions/post/switchCommenting';
 import { switchLiking } from '@/lib/actions/post/switchLiking';
-import { archivePost } from '@/lib/actions/post/archivePost';
-import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 import PostSettings from '@/components/Post/Settings/PostSettings';
 import NoPostsFallback from '@/components/Post/HomePost/NoPostsFallback';
 import { getUserData } from '@/lib/actions/utils/getUserData';
@@ -62,24 +59,18 @@ export default async function Home() {
 										date={post.date}
 										isUserFollowingAuthor={!!isUserFollowingAuthor}
 										isUserAuthor={isUserAuthor}
-										followUser={followUser}
-										unFollowUser={unFollowUser}
 										imageType={post.author.imageType}
 									>
 										<PostSettings
 											isUserFollowingAuthor={!!isUserFollowingAuthor}
 											isUserAuthor={!!isUserAuthor}
-											deletePost={deletePost}
 											switchCommenting={switchCommenting}
 											switchLiking={switchLiking}
-											archivePost={archivePost}
 											postId={post.id.toString()}
 											userId={user.id}
 											commenting={post.commenting}
 											hideLikesCount={post.hideLikesCount}
 											authorId={post.author.id}
-											followUser={followUser}
-											unFollowUser={unFollowUser}
 											userImage={post.author.image}
 											userImageType={post.author.userImageType}
 											images={post.image}

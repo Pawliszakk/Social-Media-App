@@ -4,7 +4,10 @@ export async function getProfile(userId: string) {
 	let user;
 	try {
 		user = await User.findOne({ _id: userId })
-			.populate('posts')
+			.populate({
+				path: 'posts',
+				match: { archived: false },
+			})
 			.select(
 				'-email -password -provider -theme -__v -sex -savedPosts -closeFriends -likedPosts'
 			);
