@@ -1,16 +1,10 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { User } from '../Models/user';
+import { getUserData } from '../utils/getUserData';
 
-export async function addCloseFriend(userId: string, profileId: string) {
-	let user;
-
-	try {
-		user = await User.findOne({ _id: userId }).select('closeFriends');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
+export async function addCloseFriend(profileId: string) {
+	const { session, user } = await getUserData('closeFriends');
 
 	const isProfileAlreadyCloseFriend = user.closeFriends.find(
 		(id: string) => id.toString() === profileId
@@ -30,13 +24,8 @@ export async function addCloseFriend(userId: string, profileId: string) {
 	revalidatePath('/', 'layout');
 }
 
-export async function removeCloseFriend(userId: string, profileId: string) {
-	let user;
-	try {
-		user = await User.findOne({ _id: userId }).select('closeFriends');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
+export async function removeCloseFriend(profileId: string) {
+	const { session, user } = await getUserData('closeFriends');
 
 	const isProfileCloseFriend = user.closeFriends.find(
 		(id: string) => id.toString() === profileId

@@ -12,12 +12,6 @@ import getLoggedUserProfile from '../../user/getLoggedUserProfile';
 import { getProfile } from '../../user/getProfile';
 
 export async function getProfileData(profileId: string) {
-	//ZPOPULOWAĆ SENTFOLLOWREQUESTS USERA ZEBY MOZNA BYLO SIE DOWIEDZIEC CZY JEST REQUESTED
-
-	// const { session, user } = await getUserData(
-	// 	'blockedUsers sentFollowRequests closeFriends',
-	// 	'sentFollowRequest'
-	// );
 	const { session, user } = await getUserData(
 		'blockedUsers sentFollowRequests closeFriends',
 		'sentFollowRequests'

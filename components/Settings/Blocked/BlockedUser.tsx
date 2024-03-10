@@ -7,18 +7,21 @@ import Setting from '@/components/UI/Settings/Setting';
 import { unBlockUser } from '@/lib/actions/user/blockUser';
 
 interface BlockedUserProps {
-	userId: string;
-	profileId: string;
-	image: string;
-	imageType: string;
-	name: string;
+	user: {
+		id: string;
+		image: string;
+		imageType: string;
+		name: string;
+	};
 }
 
 const BlockedUser: React.FC<BlockedUserProps> = (props) => {
 	const [isModal, setIsModal] = useState(false);
 
+	const { user } = props;
+
 	const unBlockHandler = async () => {
-		await unBlockUser(props.userId, props.profileId);
+		await unBlockUser(user.id);
 		setIsModal(false);
 	};
 
@@ -26,22 +29,22 @@ const BlockedUser: React.FC<BlockedUserProps> = (props) => {
 		<div className={classes.box}>
 			<div className={classes.user}>
 				<ProfileImage
-					image={props.image}
-					imageType={props.imageType}
-					name={props.name}
+					image={user.image}
+					imageType={user.imageType}
+					name={user.name}
 				/>
-				<span>{props.name}</span>
+				<span>{user.name}</span>
 			</div>
 			<button onClick={() => setIsModal(true)}>Unblock</button>
 
 			{isModal && (
 				<SettingsBox onClose={() => setIsModal(false)}>
 					<div className={classes.note}>
-						<span>Unblock {props.name}?</span>
+						<span>Unblock {user.name}?</span>
 						<p>
-							{props.name} will now be able to see your posts, follow and
-							message you on Instagram. They won&apos;t be notified that you
-							unblocked them.
+							{user.name} will now be able to see your posts, follow and message
+							you on Instagram. They won&apos;t be notified that you unblocked
+							them.
 						</p>
 					</div>
 					<ul>

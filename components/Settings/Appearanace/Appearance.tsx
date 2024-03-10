@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import styles from '@/components/UI/SwitchInput.module.scss';
 
 interface AppearanceProps {
-	userId: string;
 	isDark: boolean;
 }
 
@@ -21,7 +20,7 @@ const Appearance: React.FC<AppearanceProps> = (props) => {
 	};
 	useEffect(() => {
 		const changeAppearance = setTimeout(() => {
-			appearanceChange(isDark ? 'dark' : 'light', props.userId);
+			appearanceChange(isDark ? 'dark' : 'light');
 		}, 500);
 
 		return () => clearTimeout(changeAppearance);

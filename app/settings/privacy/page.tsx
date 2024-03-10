@@ -11,7 +11,7 @@ export default async function SettingsPage() {
 			paragraph="When your account is public, your profile and posts can be seen by anyone, on or off Instagram, even if they don't have an Instagram account.
 			When your account is private, only the followers you approve can see what you share, including your photos or videos on hashtag and location pages, and your followers and following lists"
 		>
-			<Privacy isPrivate={user.private} userId={user.id} />
+			<Privacy isPrivate={user.private} />
 		</SettingPageBox>
 	);
 }

@@ -1,14 +1,15 @@
 import Posts from '@/components/Profile/Posts/Posts';
 import classes from './page.module.scss';
-import { getArchivedPosts } from '@/lib/actions/user/getArchivedPosts';
 import Link from 'next/link';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { getUserData } from '@/lib/actions/utils/getUserData';
 
 const archivePage = async () => {
-	const { session, user } = await getUserData('name', 'showLikes');
+	const { session, user } = await getUserData('name showLikes posts', 'posts');
 
-	const { posts } = await getArchivedPosts(user.id);
+	const archivedPosts = user.posts
+		.filter((post: any) => post.archived)
+		.reverse();
 
 	return (
 		<div className={classes.box}>
@@ -20,7 +21,7 @@ const archivePage = async () => {
 			<h2>Your archived posts</h2>
 			<p>Archived posts will only be visible to you unless you share them.</p>
 			<Posts
-				posts={posts}
+				posts={archivedPosts}
 				authorName={user.name}
 				userId={user.id}
 				showLikes={user.showLikes}

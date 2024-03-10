@@ -17,18 +17,21 @@ export const getUserData = async (select?: string, populate?: string) => {
 
 	const selectField = select?.trim().length === 0 || !select ? 'null' : select;
 	const populateField = populate?.trim().length === 0 ? null : populate;
+
 	let user;
 	try {
 		if (!!populateField) {
 			user = await User.findOne({ email })
 				.select(selectField)
-				.populate(`${populateField}`);
+				.populate(populateField);
 		} else {
 			user = await User.findOne({ email }).select(selectField);
 		}
 	} catch (e) {
+		console.error(e);
 		permanentRedirect('/');
 	}
+	
 	if (!user) {
 		throw new Error('Something went wrong, please try again later');
 	}

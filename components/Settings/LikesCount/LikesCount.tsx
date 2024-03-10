@@ -7,7 +7,6 @@ import { switchShowLikes } from '@/lib/actions/user/settings/switchShowLikes';
 import Spinner from '@/components/UI/Spinner';
 
 interface LikesCountProps {
-	userId: string;
 	showLikes: boolean;
 }
 

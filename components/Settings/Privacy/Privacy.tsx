@@ -8,7 +8,6 @@ import { MdOutlinePhotoLibrary } from 'react-icons/md';
 import styles from '@/components/UI/SwitchInput.module.scss';
 
 interface PrivacyProps {
-	userId: string;
 	isPrivate: boolean;
 }
 
@@ -17,7 +16,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
 	const [message, setMessage] = useState<null | string>(null);
 
 	const handlePrivacyChange = async () => {
-		const res = await privacyChange(!props.isPrivate, props.userId);
+		const res = await privacyChange(!props.isPrivate);
 		setMessage(res.message);
 		setIsModal(false);
 	};

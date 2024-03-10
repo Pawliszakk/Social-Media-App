@@ -12,7 +12,7 @@ export async function getProfilePageData(profileId: string) {
 	let isUserAllowedToViewPosts;
 	let isUserBlockingProfile;
 	if (!isLoggedUserProfile) {
-		const res = await checkIfUserIsAllowedToViewPosts(user.id, profileId);
+		const res = await checkIfUserIsAllowedToViewPosts(profileId);
 
 		isUserAllowedToViewPosts = res.isUserAllowedToViewPosts;
 

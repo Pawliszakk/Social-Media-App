@@ -8,7 +8,6 @@ import deleteCurrentAvatar from '@/lib/actions/user/deleteCurrentAvatar';
 import { changeProfileImage } from '@/lib/actions/user/changeProfileImage';
 
 interface EditImageProps {
-	userId: string;
 	image: string;
 	imageType: string;
 	name: string | null | undefined;
@@ -18,7 +17,7 @@ const EditImage: React.FC<EditImageProps> = (props) => {
 	const [isModal, setIsModal] = useState(false);
 
 	const deletePhotoHandler = async () => {
-		await deleteCurrentAvatar(props.userId);
+		await deleteCurrentAvatar();
 		setIsModal(false);
 	};
 

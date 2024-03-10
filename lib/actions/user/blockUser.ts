@@ -1,16 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { User } from '../Models/user';
 import { unFollowUser } from './followUser';
+import { getUserData } from '../utils/getUserData';
 
-export async function blockUser(userId: string, userToBlockId: string) {
-	let user;
-	try {
-		user = await User.findOne({ _id: userId }).select('blockedUsers');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
+export async function blockUser(userToBlockId: string) {
+	const { session, user } = await getUserData('blockedUsers');
 
 	const isUserAlreadyBlocked = user.blockedUsers.find(
 		(id: string) => id.toString() === userToBlockId
@@ -21,20 +16,16 @@ export async function blockUser(userId: string, userToBlockId: string) {
 	}
 	try {
 		user.blockedUsers.push(userToBlockId);
-		await unFollowUser(userId, userToBlockId);
+		await unFollowUser(userToBlockId);
 		await user.save();
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
 	revalidatePath('/', 'layout');
 }
-export async function unBlockUser(userId: string, userToUnBlockId: string) {
-	let user;
-	try {
-		user = await User.findOne({ _id: userId }).select('blockedUsers');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
+export async function unBlockUser(userToUnBlockId: string) {
+	const { session, user } = await getUserData('blockedUsers');
+
 	try {
 		user.blockedUsers = user.blockedUsers.filter(
 			(id: string) => id.toString() !== userToUnBlockId

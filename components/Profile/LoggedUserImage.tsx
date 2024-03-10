@@ -32,7 +32,7 @@ const LoggedUserImage: React.FC<LoggedUserImageProps> = (props) => {
 	};
 
 	const deletePhotoHandler = async () => {
-		await deleteCurrentAvatar(props.userId);
+		await deleteCurrentAvatar();
 		setIsModal(false);
 	};
 

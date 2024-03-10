@@ -1,15 +1,10 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { User } from '../Models/user';
+import { getUserData } from '../utils/getUserData';
 
-export default async function deleteCurrentAvatar(userId: string) {
-	let user;
-	try {
-		user = await User.findOne({ _id: userId }).select('image imageType');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
+export default async function deleteCurrentAvatar() {
+	const { session, user } = await getUserData('image imageType');
 
 	user.image = '/assets/defaultUser.jpg';
 	user.imageType = 'provider';

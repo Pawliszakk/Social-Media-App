@@ -1,9 +1,9 @@
 import { User } from '../Models/user';
 
-export async function getProfile(userId: string) {
+export async function getProfile(profileId: string) {
 	let user;
 	try {
-		user = await User.findOne({ _id: userId })
+		user = await User.findOne({ _id: profileId })
 			.populate({
 				path: 'posts',
 				match: { archived: false },

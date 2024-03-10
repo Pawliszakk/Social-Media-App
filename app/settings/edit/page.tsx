@@ -13,7 +13,6 @@ export default async function SettingsPage() {
 			<EditImage
 				image={user.image}
 				imageType={user.imageType}
-				userId={user.userId}
 				name={user.name}
 			/>
 			<EditProfileForm

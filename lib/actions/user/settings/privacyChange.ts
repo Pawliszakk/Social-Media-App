@@ -1,15 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { User } from '../../Models/user';
+import { getUserData } from '../../utils/getUserData';
 
-export async function privacyChange(privacy: boolean, userId: string) {
-	let user;
-	try {
-		user = await User.findOne({ _id: userId }).select('private');
-	} catch (e) {
-		return { message: 'Something went wrong, please try again later' };
-	}
+export async function privacyChange(privacy: boolean) {
+	const { session, user } = await getUserData('private');
+
 	try {
 		user.private = privacy;
 		await user.save();

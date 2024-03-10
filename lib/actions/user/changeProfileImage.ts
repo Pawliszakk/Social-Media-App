@@ -1,13 +1,12 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { User } from '../Models/user';
 import { uploadImage } from '../utils/uploadImage';
 import deleteImage from '../utils/deleteImage';
 import { getUserData } from '../utils/getUserData';
 
 export async function changeProfileImage(formData: any) {
-	const userData = await getUserData();
+	const { session, user } = await getUserData('image imageType');
 
 	const image = formData.get('image');
 
@@ -15,14 +14,6 @@ export async function changeProfileImage(formData: any) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
-	let user;
-	try {
-		user = await User.findOne({ _id: userData.user.id }).select(
-			'image imageType'
-		);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
 	try {
 		const fileName = await uploadImage(image);
 

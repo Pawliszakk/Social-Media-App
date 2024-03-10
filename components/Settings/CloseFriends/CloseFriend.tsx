@@ -10,25 +10,26 @@ import {
 import Spinner from '@/components/UI/Spinner';
 
 interface CloseFriendProps {
-	image: string;
-	imageType: string;
-	name: string;
-	profileId: string;
-	userId: string;
-	isCloseFriend: boolean;
+	user: {
+		image: string;
+		imageType: string;
+		name: string;
+		id: string;
+		isCloseFriend: boolean;
+	};
 }
 
 const CloseFriend: React.FC<CloseFriendProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
-
+	const { user } = props;
 	const closeFriendsHandler = async () => {
 		setIsLoading(true);
 
 		try {
-			if (props.isCloseFriend) {
-				await removeCloseFriend(props.userId, props.profileId);
+			if (user.isCloseFriend) {
+				await removeCloseFriend(user.id);
 			} else {
-				await addCloseFriend(props.userId, props.profileId);
+				await addCloseFriend(user.id);
 			}
 		} catch (e) {
 			setIsLoading(false);
@@ -46,16 +47,16 @@ const CloseFriend: React.FC<CloseFriendProps> = (props) => {
 		>
 			<div className={classes.user}>
 				<ProfileImage
-					name={props.name}
-					image={props.image}
-					imageType={props.imageType}
+					name={user.name}
+					image={user.image}
+					imageType={user.imageType}
 				/>
-				<span>{props.name}</span>
+				<span>{user.name}</span>
 			</div>
 			<div>
 				<input
 					type="checkbox"
-					checked={props.isCloseFriend}
+					checked={user.isCloseFriend}
 					onChange={() => {}}
 				/>
 			</div>

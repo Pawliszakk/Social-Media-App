@@ -45,7 +45,7 @@ export default async function RootLayout({
 	};
 	const unBlockHandler = async () => {
 		'use server';
-		const res = await unBlockUser(userId, profileId);
+		const res = await unBlockUser(profileId);
 		return res;
 	};
 

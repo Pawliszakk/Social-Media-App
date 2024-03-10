@@ -6,6 +6,7 @@ export default async function SettingsPage() {
 	const { session, user } = await getUserData();
 
 	const blockedUsers = await getBlockedUsers(user.id);
+	console.log(blockedUsers);
 	return (
 		<SettingPageBox
 			name="Blocked accounts"
@@ -16,18 +17,14 @@ export default async function SettingsPage() {
 					You haven&apos;t blocked anyone yet.
 				</p>
 			) : (
-				blockedUsers.map((blockedUser: any) => {
-					return (
-						<BlockedUser
-							key={blockedUser.id}
-							name={blockedUser.name}
-							image={blockedUser.image}
-							imageType={blockedUser.imageType}
-							profileId={blockedUser.id}
-							userId={user.id}
-						/>
-					);
-				})
+				blockedUsers.map(
+					(blockedUser: {
+						id: string;
+						image: string;
+						imageType: string;
+						name: string;
+					}) => <BlockedUser key={blockedUser.id} user={blockedUser} />
+				)
 			)}
 		</SettingPageBox>
 	);

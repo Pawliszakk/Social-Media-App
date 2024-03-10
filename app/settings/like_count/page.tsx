@@ -5,14 +5,12 @@ import { getUserData } from '@/lib/actions/utils/getUserData';
 export default async function SettingsPage() {
 	const { session, user } = await getUserData('showLikes');
 
-	const userId = user.id;
-	const showLikes = user.showLikes;
 	return (
 		<SettingPageBox
 			name="Number of likes and shares"
 			paragraph="On Instagram, the number of likes of posts and rolls from other accounts will be hidden. You can hide the number of likes of your posts and rolls."
 		>
-			<LikesCount userId={userId} showLikes={!!showLikes} />
+			<LikesCount showLikes={!!user.showLikes} />
 		</SettingPageBox>
 	);
 }

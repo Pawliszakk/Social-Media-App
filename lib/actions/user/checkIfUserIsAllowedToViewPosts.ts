@@ -3,10 +3,7 @@
 import { User } from '../Models/user';
 import { getUserData } from '../utils/getUserData';
 
-export async function checkIfUserIsAllowedToViewPosts(
-	userId: string,
-	profileId: string
-) {
+export async function checkIfUserIsAllowedToViewPosts(profileId: string) {
 	const { session, user } = await getUserData('blockedUsers');
 
 	let profile: any;

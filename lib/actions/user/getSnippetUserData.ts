@@ -36,7 +36,7 @@ export async function getSnippetUserData(profileId: string) {
 	const followingLength = profile.following.length;
 
 	const { isUserAllowedToViewPosts, isUserBlockingProfile } =
-		await checkIfUserIsAllowedToViewPosts(user.id.toString(), profileId);
+		await checkIfUserIsAllowedToViewPosts(profileId);
 	return {
 		name: profile.name,
 		image: profile.image,

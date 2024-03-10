@@ -36,19 +36,15 @@ export default async function SettingsPage() {
 					We found no users you are currently following.
 				</p>
 			) : (
-				transformedFollowing.map((profile: any) => {
-					return (
-						<CloseFriend
-							key={profile.id}
-							image={profile.image}
-							imageType={profile.imageType}
-							name={profile.name}
-							profileId={profile.id}
-							isCloseFriend={profile.isCloseFriend}
-							userId={user.id}
-						/>
-					);
-				})
+				transformedFollowing.map(
+					(profile: {
+						image: string;
+						imageType: string;
+						name: string;
+						id: string;
+						isCloseFriend: boolean;
+					}) => <CloseFriend key={profile.id} user={profile} />
+				)
 			)}
 		</SettingPageBox>
 	);
