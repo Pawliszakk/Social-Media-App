@@ -5,43 +5,47 @@ import { FaHeart } from 'react-icons/fa';
 import { FaComment } from 'react-icons/fa';
 
 interface PostTileProps {
-	post: {
-		id: string;
-		likes: string[] | [];
-		comments: string[] | [];
-		image: string;
-		author: string;
-		commenting: boolean;
-		hideLikesCount: boolean;
-	};
+	postId: string;
+	likes: string[] | [];
+	comments: string[] | [];
+	image: string;
+	author: string;
+	commenting: boolean;
+	hideLikesCount: boolean;
 	isUserAuthor: boolean;
 	showLikes: boolean;
 }
 
 const PostTile: React.FC<PostTileProps> = ({
-	post,
+	postId,
+	likes,
+	comments,
+	image,
+	author,
+	commenting,
+	hideLikesCount,
 	isUserAuthor,
 	showLikes,
 }) => {
 	return (
 		<div className={classes.tile}>
-			<Link href={`/post/${post.id}`}>
+			<Link href={`/post/${postId}`}>
 				<Image
-					src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${post.image}`}
+					src={`https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${image}`}
 					width={300}
 					height={300}
-					alt={`${post.author} post`}
+					alt={`${author} post`}
 				/>
-				{!post.hideLikesCount && (
+				{!hideLikesCount && (
 					<div className={classes.shadow}>
 						{isUserAuthor || (!isUserAuthor && showLikes) ? (
 							<div>
-								<FaHeart /> <span>{post.likes.length}</span>
+								<FaHeart /> <span>{likes.length}</span>
 							</div>
 						) : null}
-						{post.commenting && (
+						{commenting && (
 							<div>
-								<FaComment /> <span>{post.comments.length}</span>
+								<FaComment /> <span>{comments.length}</span>
 							</div>
 						)}
 					</div>
