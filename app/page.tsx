@@ -114,12 +114,7 @@ export default async function Home() {
 					)}
 				</Suspense>
 			</div>
-			<AsideSuggestions
-				image={user.image}
-				imageType={user.imageType}
-				name={user.name}
-				userId={user.id}
-			/>
+			<AsideSuggestions user={user} />
 		</div>
 	);
 }

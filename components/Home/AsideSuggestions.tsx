@@ -6,26 +6,28 @@ import SuggestedUser from './SuggestedUser';
 import { getSuggestedUsers } from '@/lib/actions/user/getSuggestedUsers';
 import Logout from './Logout';
 
-interface AsideSuggestionsProps {
-	image: string;
-	imageType: string;
-	name: string;
-	userId: string;
+interface AsideSuggestionsuser {
+	user: {
+		id: string;
+		image: string;
+		imageType: string;
+		name: string;
+	};
 }
 
-const AsideSuggestions: React.FC<AsideSuggestionsProps> = async (props) => {
+const AsideSuggestions: React.FC<AsideSuggestionsuser> = async ({ user }) => {
 	const { userId, users } = await getSuggestedUsers(6);
 	return (
 		<aside className={classes.aside}>
 			<div className={classes.box}>
 				<div className={classes.user}>
 					<ProfileImage
-						image={props.image}
-						imageType={props.imageType}
-						name={props.name}
-						profileId={props.userId}
+						image={user.image}
+						imageType={user.imageType}
+						name={user.name}
+						profileId={user.id}
 					/>
-					<Link href={`/profile/${props.userId}`}>{props.name}</Link>
+					<Link href={`/profile/${user.id}`}>{user.name}</Link>
 				</div>
 				<Logout />
 			</div>
