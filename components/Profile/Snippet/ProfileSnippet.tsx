@@ -10,6 +10,7 @@ import {
 import Spinner from '@/components/UI/Spinner';
 import { deleteFollowRequest } from '@/lib/actions/user/sendFollowRequest';
 import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
+import { getProfileActionsButtonMessage } from '@/lib/helpers/getFollowButtonMessage';
 
 interface ProfileSnippetProps {
 	userId: string;
@@ -41,7 +42,7 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 			? REQUESTED
 			: NOTFOLLOWING
 	);
-	//BRAK USER ID PROVIDED
+	
 	const followHandler = async () => {
 		setIsLoading(true);
 		if (followingStatus === FOLLOWING) {
@@ -87,18 +88,7 @@ const ProfileSnippet: React.FC<ProfileSnippetProps> = (props) => {
 		setIsLoading(false);
 	};
 
-	let btnMsg;
-	switch (followingStatus) {
-		case FOLLOWING:
-			btnMsg = 'Unfollow';
-			break;
-		case NOTFOLLOWING:
-			btnMsg = 'Follow';
-			break;
-		case REQUESTED:
-			btnMsg = 'Requested';
-			break;
-	}
+	const btnMsg = getProfileActionsButtonMessage(followingStatus);
 
 	return (
 		<div className={classes.box}>

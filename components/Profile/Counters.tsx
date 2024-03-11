@@ -11,7 +11,8 @@ const Counters: React.FC<CountersProps> = (props) => {
 		<div className={classes.data}>
 			<div>
 				<p>
-					<span>{props.postsLength}</span> posts
+					<span>{props.postsLength}</span>{' '}
+					{props.postsLength === 1 ? 'post' : 'posts'}
 				</p>
 			</div>
 			<div>

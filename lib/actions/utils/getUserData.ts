@@ -4,14 +4,11 @@ import { getServerSession } from 'next-auth';
 import { User } from '../Models/user';
 import { connectToDatabase } from './connectToDatabase';
 import { permanentRedirect } from 'next/navigation';
-const mongoose = require('mongoose');
+import { followRequest } from '../Models/followRequest';
 
-const followRequestSchema = new mongoose.Schema({
-	requester: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
-	reciever: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
-	date: { type: String, required: true },
-	status: { type: String, default: 'pending' },
-});
+
+
+// mongoose.model('followRequest', followRequestSchema);
 //MissingSchemaError: Schema hasn't been registered for model "followRequest".
 
 export const getUserData = async (select?: string, populate?: string) => {

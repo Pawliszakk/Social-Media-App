@@ -11,6 +11,9 @@ import {
 	NOTFOLLOWING,
 	REQUESTED,
 } from '@/lib/constants/followingStatus';
+import { getProfileActionsButtonMessage } from '@/lib/helpers/getFollowButtonMessage';
+import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
+import { unBlockUser } from '@/lib/actions/user/blockUser';
 interface ProfileActionsProps {
 	profileId: string;
 	userId: string;
@@ -23,9 +26,6 @@ interface ProfileActionsProps {
 	followersLength: number;
 	followingLength: number;
 	followingStatus: any;
-	follow: () => any;
-	unFollow: () => any;
-	unBlock: () => any;
 	deleteFollowRequest: () => any;
 }
 
@@ -33,12 +33,13 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [followingStatus, setFollowingStatus] = useState(props.followingStatus);
 	const [followers, setFollowers] = useState(props.followersLength);
+
 	const followHandler = async () => {
 		setIsLoading(true);
 		if (followingStatus === FOLLOWING) {
 			let res;
 			try {
-				res = await props.unFollow();
+				res = await unFollowUser(props.profileId);
 			} catch (e) {
 				setIsLoading(false);
 				return;
@@ -49,10 +50,11 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 					setFollowers((prev) => prev - 1);
 				}
 			}
-		} else if (followingStatus === NOTFOLLOWING) {
+		}
+		if (followingStatus === NOTFOLLOWING) {
 			let res;
 			try {
-				res = await props.follow();
+				res = await followUser(props.profileId);
 			} catch (e) {
 				setIsLoading(false);
 				return;
@@ -65,7 +67,8 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 					location.reload();
 				}
 			}
-		} else if (followingStatus === REQUESTED) {
+		}
+		if (followingStatus === REQUESTED) {
 			let res;
 			try {
 				res = await props.deleteFollowRequest();
@@ -76,10 +79,11 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 			if (res.ok) {
 				setFollowingStatus(res.status);
 			}
-		} else if (followingStatus === BLOCKING) {
+		}
+		if (followingStatus === BLOCKING) {
 			let res;
 			try {
-				res = await props.unBlock();
+				res = await unBlockUser(props.profileId);
 			} catch (e) {
 				setIsLoading(false);
 				return;
@@ -90,21 +94,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 		setIsLoading(false);
 	};
 
-	let btnMsg;
-
-	switch (followingStatus) {
-		case FOLLOWING:
-			btnMsg = 'Unfollow';
-			break;
-		case NOTFOLLOWING:
-			btnMsg = 'Follow';
-			break;
-		case REQUESTED:
-			btnMsg = 'Requested';
-			break;
-		case BLOCKING:
-			btnMsg = 'Unblock';
-	}
+	const btnMsg = getProfileActionsButtonMessage(followingStatus);
 
 	return (
 		<>

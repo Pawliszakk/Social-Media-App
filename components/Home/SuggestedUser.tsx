@@ -5,12 +5,9 @@ import classes from './SuggestedUser.module.scss';
 import ProfileImage from '../UI/User/ProfileImage';
 import { followUser } from '@/lib/actions/user/followUser';
 import { useState } from 'react';
-import {
-	FOLLOWING,
-	NOTFOLLOWING,
-	REQUESTED,
-} from '@/lib/constants/followingStatus';
+import { NOTFOLLOWING } from '@/lib/constants/followingStatus';
 import Spinner from '../UI/Spinner';
+import { getSuggestedButtonMessage } from '@/lib/helpers/getFollowButtonMessage';
 
 interface SuggestedUserProps {
 	id: string;
@@ -32,19 +29,8 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 		setFollowingStatus(res.status);
 		setIsLoading(false);
 	};
-	let btnMsg;
 
-	switch (followingStatus) {
-		case FOLLOWING:
-			btnMsg = 'Following';
-			break;
-		case NOTFOLLOWING:
-			btnMsg = 'Follow';
-			break;
-		case REQUESTED:
-			btnMsg = 'Requested';
-			break;
-	}
+	const btnMsg = getSuggestedButtonMessage(followingStatus);
 
 	return (
 		<div className={classes.user} key={props.id}>
