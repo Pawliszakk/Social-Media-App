@@ -9,32 +9,6 @@ import { FiMessageCircle } from 'react-icons/fi';
 import { MdOutlineLightMode } from 'react-icons/md';
 import SettingLink from './SettingLink';
 const SettingsNavbar = () => {
-	const settingsLinks = [
-		{ href: 'edit', icon: <FaUserEdit />, text: 'Edit profile' },
-		{
-			href: 'privacy',
-			icon: <IoLockClosedOutline />,
-			text: 'Account privacy',
-		},
-		{
-			href: 'blocked_accounts',
-			icon: <MdOutlineDoNotDisturbAlt />,
-			text: 'Blocked accounts',
-		},
-		{ href: 'like_count', icon: <LuHeartOff />, text: 'Like counts' },
-		{
-			href: 'close_friends',
-			icon: <GiAlliedStar />,
-			text: 'Close friends',
-		},
-		{ href: 'comments', icon: <FiMessageCircle />, text: 'Comments' },
-		{
-			href: 'appearance',
-			icon: <MdOutlineLightMode />,
-			text: 'Switch appearance',
-		},
-	];
-
 	return (
 		<div className={classes.box}>
 			<h2>Settings</h2>
