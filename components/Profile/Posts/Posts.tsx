@@ -21,13 +21,7 @@ const Posts: React.FC<PostsProps> = (props) => {
 					return (
 						<PostTile
 							key={p.id}
-							postId={p.id}
-							likes={p.likes}
-							comments={p.comments}
-							image={p.image}
-							author={p.author}
-							commenting={p.commenting}
-							hideLikesCount={p.hideLikesCount}
+							post={{ ...p }}
 							showLikes={props.showLikes}
 							isUserAuthor={!!isUserAuthor}
 						/>

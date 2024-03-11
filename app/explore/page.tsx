@@ -17,13 +17,14 @@ export default async function ExplorePage() {
 						return (
 							<PostTile
 								key={p.id}
-								postId={p.id}
-								likes={p.likes}
-								comments={p.comments}
-								image={p.image}
-								author={p.author}
-								commenting={p.commenting}
-								hideLikesCount={p.hideLikesCount}
+								// postId={p.id}
+								// likes={p.likes}
+								// comments={p.comments}
+								// image={p.image}
+								// author={p.author}
+								// commenting={p.commenting}
+								// hideLikesCount={p.hideLikesCount}
+								post={{ ...p }}
 								isUserAuthor={isUserAuthor}
 								showLikes={user.showLikes}
 							/>
