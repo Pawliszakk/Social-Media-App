@@ -12,116 +12,114 @@ import { switchCommenting } from '@/lib/actions/post/switchCommenting';
 import PostDescription from './Description/PostDescription';
 import PostActions from './Actions/PostActions';
 import PostSettings from '../Settings/PostSettings';
+import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 
 interface PostPageProps {
-	postId: string;
-	userId: string;
-	date: number;
-	description: string;
+	post: {
+		images: string | string[];
+		id: string;
+		date: number;
+		hideLikesCount: boolean;
+		description: string;
+		commenting: boolean;
+		likes: string[] | [];
+	};
 	author: { name: string; id: string; image: string; imageType: string };
-	likes: string[] | [];
-	images: string | string[];
-	showLikes: boolean;
-	isUserLikingPost: boolean;
-	isUserSavedPost: boolean;
-	isUserAuthor: boolean;
-	isUserFollowingAuthor: boolean;
-	commenting: boolean;
-	hideLikesCount: boolean;
-	unLikePost: (postId: string, userId: string) => void;
-	savePost: (postId: string, userId: string) => void;
-	likePost: (postId: string, userId: string) => void;
+
 	user: {
-		name: string | null | undefined;
-		image: string | null | undefined;
-		userId: string | null | undefined;
-		imageType: string | null | undefined;
+		name: string;
+		image: string;
+		id: string;
+		imageType: string;
+		showLikes: boolean;
+		isUserLikingPost: boolean;
+		isUserSavedPost: boolean;
+		isUserAuthor: boolean;
+		isUserFollowingAuthor: boolean;
 	};
 }
 
-const PostPage: React.FC<PostPageProps> = (props) => {
-	const [likesCount, setLikesCount] = useState(props.likes.length);
+const PostPage: React.FC<PostPageProps> = ({ post, author, user }) => {
+	const [likesCount, setLikesCount] = useState(post.likes.length);
 	const [isUserLikingPost, setIsUserLikingPost] = useState(
-		props.isUserLikingPost
+		user.isUserLikingPost
 	);
 	const likePostHandler = () => {
 		if (!isUserLikingPost) {
 			setLikesCount((prev) => prev + 1);
 			setIsUserLikingPost(true);
-			props.likePost(props.postId, props.userId);
+			likePost(post.id);
 		} else {
 			setLikesCount((prev) => prev - 1);
 			setIsUserLikingPost(false);
-			props.unLikePost(props.postId, props.userId);
+			unLikePost(post.id);
 		}
 	};
 	return (
 		<div className={classes.box}>
 			<PostImages
-				images={props.images}
-				authorName={props.author.name}
+				images={post.images}
+				authorName={author.name}
 				isUserLikingPost={isUserLikingPost}
 				likePost={likePostHandler}
 			/>
 
 			<div className={classes.panel}>
 				<PostAuthor
-					name={props.author.name}
-					image={props.author.image}
-					imageType={props.author.imageType}
-					date={props.date}
-					authorId={props.author.id}
-					isUserFollowingAuthor={props.isUserFollowingAuthor}
-					isUserAuthor={props.isUserAuthor}
-					userId={props.userId}
+					name={author.name}
+					image={author.image}
+					imageType={author.imageType}
+					date={post.date}
+					authorId={author.id}
+					isUserFollowingAuthor={user.isUserFollowingAuthor}
+					isUserAuthor={user.isUserAuthor}
+					userId={user.id}
 				>
 					<PostSettings
-						isUserFollowingAuthor={props.isUserFollowingAuthor}
-						isUserAuthor={props.isUserAuthor}
+						isUserFollowingAuthor={user.isUserFollowingAuthor}
+						isUserAuthor={user.isUserAuthor}
 						switchCommenting={switchCommenting}
-						postId={props.postId}
-						userId={props.userId}
-						commenting={props.commenting}
-						hideLikesCount={props.hideLikesCount}
+						postId={post.id}
+						userId={user.id}
+						commenting={post.commenting}
+						hideLikesCount={post.hideLikesCount}
 						switchLiking={switchLiking}
-						authorId={props.author.id}
-						images={props.images}
-						authorName={props.author.name}
-						userImage={props.author.image}
-						userImageType={props.author.imageType}
+						authorId={author.id}
+						images={post.images}
+						authorName={author.name}
+						userImage={author.image}
+						userImageType={author.imageType}
 					/>
 				</PostAuthor>
 				<PostDescription
-					image={props.author.image}
-					description={props.description}
-					authorId={props.author.id}
-					authorName={props.author.name}
-					imageType={props.author.imageType}
+					image={author.image}
+					description={post.description}
+					authorId={author.id}
+					authorName={author.name}
+					imageType={author.imageType}
 				/>
 
-				<PostComments isCommenting={props.commenting} />
+				<PostComments isCommenting={post.commenting} />
 
 				<PostActions
 					likePost={likePostHandler}
-					savePost={props.savePost}
-					userId={props.userId}
-					postId={props.postId}
+					postId={post.id}
 					isUserLikingPost={isUserLikingPost}
-					isUserSavedPost={props.isUserSavedPost}
+					isUserSavedPost={user.isUserSavedPost}
 				/>
 				<PostLikes
 					likes={likesCount}
-					date={props.date}
-					showLikes={props.showLikes}
-					isUserAuthor={props.isUserAuthor}
+					date={post.date}
+					showLikes={user.showLikes}
+					isUserAuthor={user.isUserAuthor}
 				/>
 
-				{props.commenting && (
+				{post.commenting && (
 					<PostAddComment
-						name={props.user.name}
-						image={props.user.image}
-						userId={props.user.userId}
-						imageType={props.user.imageType}
+						name={user.name}
+						image={user.image}
+						userId={user.id}
+						imageType={user.imageType}
 					/>
 				)}
 			</div>

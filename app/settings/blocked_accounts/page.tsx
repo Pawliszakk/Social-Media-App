@@ -6,14 +6,13 @@ export default async function SettingsPage() {
 	const { session, user } = await getUserData();
 
 	const blockedUsers = await getBlockedUsers(user.id);
-	console.log(blockedUsers);
 	return (
 		<SettingPageBox
 			name="Blocked accounts"
 			paragraph="You can block people anytime from their profiles."
 		>
 			{!blockedUsers || blockedUsers.length === 0 ? (
-				<p style={{ textAlign: 'center', margin: '2rem' }}>
+				<p style={{ textAlign: 'center', margin: '2rem auto', width: '100%' }}>
 					You haven&apos;t blocked anyone yet.
 				</p>
 			) : (

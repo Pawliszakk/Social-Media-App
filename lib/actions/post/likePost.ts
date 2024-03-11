@@ -4,17 +4,14 @@ import { revalidatePath } from 'next/cache';
 import { Post } from '../Models/post';
 import { User } from '../Models/user';
 import mongoose from 'mongoose';
+import { getUserData } from '../utils/getUserData';
 
-export async function likePost(postId: string, userId: string) {
+export async function likePost(postId: string) {
+	const { session, user } = await getUserData('likedPosts');
+
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId });
-	} catch (e) {
-		throw new Error('Failed to like a post');
-	}
-	let user;
-	try {
-		user = await User.findOne({ _id: userId });
 	} catch (e) {
 		throw new Error('Failed to like a post');
 	}
@@ -24,7 +21,7 @@ export async function likePost(postId: string, userId: string) {
 	}
 
 	const isUserAlreadyLiking = post.likes.find(
-		(id: string) => id.toString() === userId
+		(id: string) => id.toString() === user.id.toString()
 	);
 	if (isUserAlreadyLiking) {
 		return;
@@ -32,7 +29,7 @@ export async function likePost(postId: string, userId: string) {
 	try {
 		const sess = await mongoose.startSession();
 		sess.startTransaction();
-		post.likes.push(userId);
+		post.likes.push(user.id.toString());
 		await post.save({ session: sess });
 		user.likedPosts.push(postId);
 		await user.save({ session: sess });
@@ -41,28 +38,25 @@ export async function likePost(postId: string, userId: string) {
 		throw new Error(e.message);
 	}
 
-	revalidatePath(`/post/${postId}`);
+	revalidatePath('/', 'layout');
 }
 
-export async function unLikePost(postId: string, userId: string) {
+export async function unLikePost(postId: string) {
+	const { session, user } = await getUserData('likedPosts');
+
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId });
 	} catch (e) {
 		throw new Error('Failed to like a post');
 	}
-	let user;
-	try {
-		user = await User.findOne({ _id: userId });
-	} catch (e) {
-		throw new Error('Failed to like a post');
-	}
+
 	if (!post || !user) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
 	const updatedPostsLikes = post.likes.filter(
-		(id: string) => id.toString() !== userId
+		(id: string) => id.toString() !== user.id.toString()
 	);
 
 	const updatedUserLikedPosts = user.likedPosts.filter(
@@ -81,5 +75,5 @@ export async function unLikePost(postId: string, userId: string) {
 		throw new Error(e.message);
 	}
 
-	revalidatePath(`/post/${postId}`);
+	revalidatePath('/', 'layout');
 }

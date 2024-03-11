@@ -4,13 +4,13 @@ import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { FiMessageCircle } from 'react-icons/fi';
 import { useState } from 'react';
 import { MdOutlineCollectionsBookmark } from 'react-icons/md';
+import Link from 'next/link';
+import { savePost } from '@/lib/actions/post/savePost';
 interface PostActionsProps {
-	userId: string;
 	postId: string;
 	isUserLikingPost: boolean;
 	isUserSavedPost: boolean;
 	likePost: () => void;
-	savePost: (postId: string, userId: string) => void;
 }
 
 const PostActions: React.FC<PostActionsProps> = (props) => {
@@ -27,7 +27,7 @@ const PostActions: React.FC<PostActionsProps> = (props) => {
 			if (!isSavingDisabled) {
 				setIsSavingDisabled(true);
 				setIsSaved((prev) => !prev);
-				await props.savePost(props.postId, props.userId);
+				await savePost(props.postId);
 				setIsSavingDisabled(false);
 			}
 		} catch (error) {
@@ -45,7 +45,9 @@ const PostActions: React.FC<PostActionsProps> = (props) => {
 					{props.isUserLikingPost ? <FaHeart /> : <FaRegHeart />}
 				</div>
 
-				<FiMessageCircle />
+				<Link href={`/post/${props.postId}`}>
+					<FiMessageCircle />
+				</Link>
 			</div>
 			<div className={isSaved ? classes.saved : ''}>
 				<MdOutlineCollectionsBookmark onClick={handleSaveClick} />

@@ -1,5 +1,3 @@
-import { likePost, unLikePost } from '@/lib/actions/post/likePost';
-import { savePost } from '@/lib/actions/post/savePost';
 import PostPage from '@/components/Post/PostPage/PostPage';
 import { getPostData } from '@/lib/actions/utils/post/getPostData';
 
@@ -13,32 +11,30 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 		isUserSavedPost,
 		author,
 	} = await getPostData(params.postId);
-
+	console.log(author);
 	return (
 		<PostPage
-			images={post.image}
+			post={{
+				images: post.image,
+				id: post.id,
+				date: post.date,
+				description: post.description,
+				hideLikesCount: post.hideLikesCount,
+				commenting: post.commenting,
+				likes: post.likes.map((like: string) => like.toString()),
+			}}
 			author={author}
-			isUserLikingPost={!!isUserLikingPost}
-			likePost={likePost}
-			unLikePost={unLikePost}
-			postId={post.id}
-			userId={user.id}
-			savePost={savePost}
-			isUserSavedPost={!!isUserSavedPost}
-			date={post.date}
-			likes={post.likes.map((like: string) => like.toString())}
-			isUserAuthor={!!isUserAuthor}
-			isUserFollowingAuthor={!!isUserFollowingAuthor}
-			commenting={post.commenting}
-			showLikes={user.showLikes}
 			user={{
 				name: user.name,
 				image: user.image,
-				userId: user.id,
+				id: user.id,
 				imageType: user.imageType,
+				showLikes: user.showLikes,
+				isUserLikingPost,
+				isUserSavedPost,
+				isUserAuthor,
+				isUserFollowingAuthor,
 			}}
-			description={post.description}
-			hideLikesCount={post.hideLikesCount}
 		/>
 	);
 };

@@ -1,15 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { User } from '../Models/user';
+import { getUserData } from '../utils/getUserData';
 
-export async function savePost(postId: string, userId: string) {
-	let user;
-	try {
-		user = await User.findOne({ _id: userId });
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
-	}
+export async function savePost(postId: string) {
+	const { session, user } = await getUserData('savedPosts');
+
 	const isPostAlreadySaved = user.savedPosts.find(
 		(id: string) => id.toString() === postId
 	);
@@ -35,5 +31,5 @@ export async function savePost(postId: string, userId: string) {
 		}
 	}
 
-	revalidatePath(`/post/${postId}`);
+	revalidatePath('/', 'layout');
 }

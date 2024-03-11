@@ -41,10 +41,10 @@ export async function getPostData(postId: string) {
 	return {
 		user,
 		post,
-		isUserLikingPost,
-		isUserAuthor,
-		isUserFollowingAuthor,
-		isUserSavedPost,
+		isUserLikingPost: !!isUserLikingPost,
+		isUserAuthor: !!isUserAuthor,
+		isUserFollowingAuthor: !!isUserFollowingAuthor,
+		isUserSavedPost: !!isUserSavedPost,
 		author,
 	};
 }

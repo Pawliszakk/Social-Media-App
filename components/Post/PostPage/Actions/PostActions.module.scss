@@ -10,6 +10,9 @@
 	div {
 		display: flex;
 	}
+	a {
+		color: var(--text-normal);
+	}
 	.liked {
 		color: rgb(205, 49, 21);
 		animation: scaleUp 0.3s ease-in-out;
