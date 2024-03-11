@@ -3,25 +3,25 @@ import { useState } from 'react';
 import PostImages from '../PostPage/Images/PostImages';
 import PostLikes from '../PostPage/Likes/PostLikes';
 import PostActions from '../PostPage/Actions/PostActions';
+import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 
 interface PostComponentProps {
+	post: {
+		id: string;
+		images: string | string[];
+		date: number;
+		likes: string[] | [];
+	};
 	authorName: string;
-	postId: string;
-	userId: string;
-	date: string;
-	images: string | string[];
-	likes: string[] | [];
 	isUserLikingPost: boolean;
 	isUserSavedPost: boolean;
 	isUserAuthor: boolean;
 	showLikes: boolean;
-	likePost: (postId: string, userId: string) => void;
-	unLikePost: (postId: string, userId: string) => void;
-	savePost: (postId: string, userId: string) => void;
 }
 
 const PostComponent: React.FC<PostComponentProps> = (props) => {
-	const [likesCount, setLikesCount] = useState(props.likes.length);
+	const { post } = props;
+	const [likesCount, setLikesCount] = useState(post.likes.length);
 	const [isUserLikingPost, setIsUserLikingPost] = useState(
 		props.isUserLikingPost
 	);
@@ -30,33 +30,31 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 		if (!isUserLikingPost) {
 			setLikesCount((prev) => prev + 1);
 			setIsUserLikingPost(true);
-			props.likePost(props.postId, props.userId);
+			likePost(post.id);
 		} else {
 			setLikesCount((prev) => prev - 1);
 			setIsUserLikingPost(false);
-			props.unLikePost(props.postId, props.userId);
+			unLikePost(post.id);
 		}
 	};
 
 	return (
 		<>
 			<PostImages
-				images={props.images}
+				images={post.images}
 				authorName={props.authorName}
 				isUserLikingPost={isUserLikingPost}
 				likePost={likePostHandler}
 			/>
 			<PostActions
 				likePost={likePostHandler}
-				savePost={props.savePost}
-				userId={props.userId}
-				postId={props.postId}
+				postId={post.id}
 				isUserLikingPost={isUserLikingPost}
 				isUserSavedPost={props.isUserSavedPost}
 			/>
 			<PostLikes
 				likes={likesCount}
-				date={props.date}
+				date={post.date}
 				showLikes={props.showLikes}
 				isUserAuthor={props.isUserAuthor}
 			/>

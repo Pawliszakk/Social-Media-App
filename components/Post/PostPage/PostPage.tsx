@@ -7,8 +7,6 @@ import PostAuthor from './Author/PostAuthor';
 import PostComments from './Comments/PostComments';
 import PostLikes from './Likes/PostLikes';
 import PostAddComment from './Comments/PostAddComment';
-import { switchLiking } from '@/lib/actions/post/switchLiking';
-import { switchCommenting } from '@/lib/actions/post/switchCommenting';
 import PostDescription from './Description/PostDescription';
 import PostActions from './Actions/PostActions';
 import PostSettings from '../Settings/PostSettings';
@@ -24,7 +22,7 @@ interface PostPageProps {
 		commenting: boolean;
 		likes: string[] | [];
 	};
-	author: { name: string; id: string; image: string; imageType: string };
+	author: { id: string; name: string; image: string; imageType: string };
 
 	user: {
 		name: string;
@@ -58,45 +56,29 @@ const PostPage: React.FC<PostPageProps> = ({ post, author, user }) => {
 	return (
 		<div className={classes.box}>
 			<PostImages
-				images={post.images}
 				authorName={author.name}
+				images={post.images}
 				isUserLikingPost={isUserLikingPost}
 				likePost={likePostHandler}
 			/>
 
 			<div className={classes.panel}>
 				<PostAuthor
-					name={author.name}
-					image={author.image}
-					imageType={author.imageType}
+					author={{ ...author }}
 					date={post.date}
-					authorId={author.id}
 					isUserFollowingAuthor={user.isUserFollowingAuthor}
 					isUserAuthor={user.isUserAuthor}
 					userId={user.id}
 				>
 					<PostSettings
-						isUserFollowingAuthor={user.isUserFollowingAuthor}
-						isUserAuthor={user.isUserAuthor}
-						switchCommenting={switchCommenting}
-						postId={post.id}
-						userId={user.id}
-						commenting={post.commenting}
-						hideLikesCount={post.hideLikesCount}
-						switchLiking={switchLiking}
-						authorId={author.id}
-						images={post.images}
-						authorName={author.name}
-						userImage={author.image}
-						userImageType={author.imageType}
+						user={{ ...user }}
+						post={{ ...post }}
+						author={{ ...author }}
 					/>
 				</PostAuthor>
 				<PostDescription
-					image={author.image}
 					description={post.description}
-					authorId={author.id}
-					authorName={author.name}
-					imageType={author.imageType}
+					author={{ ...author }}
 				/>
 
 				<PostComments isCommenting={post.commenting} />
@@ -114,14 +96,7 @@ const PostPage: React.FC<PostPageProps> = ({ post, author, user }) => {
 					isUserAuthor={user.isUserAuthor}
 				/>
 
-				{post.commenting && (
-					<PostAddComment
-						name={user.name}
-						image={user.image}
-						userId={user.id}
-						imageType={user.imageType}
-					/>
-				)}
+				{post.commenting && <PostAddComment user={{ ...user }} />}
 			</div>
 		</div>
 	);

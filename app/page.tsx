@@ -4,13 +4,9 @@ import { Suspense } from 'react';
 import { permanentRedirect } from 'next/navigation';
 import PostFallback from '@/components/Post/HomePost/PostFallback';
 import PostDescription from '@/components/Post/PostPage/Description/PostDescription';
-import { likePost, unLikePost } from '@/lib/actions/post/likePost';
 import classes from './page.module.scss';
-import { savePost } from '@/lib/actions/post/savePost';
 import PostComponent from '@/components/Post/HomePost/PostComponent';
 import PostAuthor from '@/components/Post/PostPage/Author/PostAuthor';
-import { switchCommenting } from '@/lib/actions/post/switchCommenting';
-import { switchLiking } from '@/lib/actions/post/switchLiking';
 import PostSettings from '@/components/Post/Settings/PostSettings';
 import NoPostsFallback from '@/components/Post/HomePost/NoPostsFallback';
 import { getUserData } from '@/lib/actions/utils/getUserData';
@@ -36,7 +32,7 @@ export default async function Home() {
 					{arePostsEmpty ? (
 						<NoPostsFallback />
 					) : (
-						posts.map((post) => {
+						posts.map((post: any) => {
 							const isUserAuthor = post.author.id === user.id;
 							const isUserFollowingAuthor = user.following.find(
 								(id: string) => id.toString() === post.author.id
@@ -48,55 +44,51 @@ export default async function Home() {
 							const isUserSavedPost = user.savedPosts.find(
 								(id: string) => id.toString() === post.id
 							);
+							const postAuthor = {
+								id: post.author.id.toString(),
+								name: post.author.name,
+								image: post.author.image,
+								imageType: post.author.imageType,
+							};
+							const postValues = {
+								id: post.id,
+								date: post.date,
+								commenting: post.commenting,
+								hideLikesCount: post.hideLikesCount,
+								images: post.image,
+								likes: post.likes,
+							};
 
 							return (
 								<article className={classes.post} key={post.id}>
 									<PostAuthor
-										image={post.author.image}
-										name={post.author.name}
-										authorId={post.author.id}
+										author={postAuthor}
 										userId={user.id}
 										date={post.date}
 										isUserFollowingAuthor={!!isUserFollowingAuthor}
-										isUserAuthor={isUserAuthor}
-										imageType={post.author.imageType}
+										isUserAuthor={!!isUserAuthor}
 									>
 										<PostSettings
-											isUserFollowingAuthor={!!isUserFollowingAuthor}
-											isUserAuthor={!!isUserAuthor}
-											switchCommenting={switchCommenting}
-											switchLiking={switchLiking}
-											postId={post.id.toString()}
-											userId={user.id}
-											commenting={post.commenting}
-											hideLikesCount={post.hideLikesCount}
-											authorId={post.author.id}
-											userImage={post.author.image}
-											userImageType={post.author.userImageType}
-											images={post.image}
-											authorName={post.author.name}
+											user={{
+												isUserFollowingAuthor: !!isUserFollowingAuthor,
+												isUserAuthor: !!isUserAuthor,
+											}}
+											post={postValues}
+											author={postAuthor}
 										/>
 									</PostAuthor>
 									<PostComponent
-										images={post.image}
+										post={postValues}
 										authorName={post.author.name}
 										isUserLikingPost={!!isUserLikingPost}
-										likePost={likePost}
-										unLikePost={unLikePost}
-										postId={post.id}
-										userId={user.id}
-										savePost={savePost}
 										isUserSavedPost={!!isUserSavedPost}
-										date={post.date}
-										isUserAuthor={isUserAuthor}
+										isUserAuthor={!!isUserAuthor}
 										showLikes={user.showLikes}
-										likes={post.likes.map((like: string) => like.toString())}
 									/>
 
 									<PostDescription
 										description={post.description}
-										authorName={post.author.name}
-										authorId={post.author.id}
+										author={postAuthor}
 										home
 									/>
 

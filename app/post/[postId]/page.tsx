@@ -11,7 +11,6 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 		isUserSavedPost,
 		author,
 	} = await getPostData(params.postId);
-	console.log(author);
 	return (
 		<PostPage
 			post={{

@@ -9,11 +9,13 @@ import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 
 interface PostAuthorProps {
 	children: React.ReactNode;
-	image: string;
-	imageType: string;
-	name: string;
+	author: {
+		id: string;
+		name: string;
+		image: string;
+		imageType: string;
+	};
 	date: number;
-	authorId: string;
 	userId: string;
 	isUserAuthor: boolean;
 	isUserFollowingAuthor: boolean;
@@ -22,12 +24,13 @@ interface PostAuthorProps {
 const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 
+	const { author } = props;
 	const spanClickHandler = async () => {
 		setIsLoading(true);
 		if (props.isUserFollowingAuthor) {
-			await unFollowUser(props.authorId);
+			await unFollowUser(author.id);
 		} else {
-			await followUser(props.authorId);
+			await followUser(author.id);
 		}
 		setIsLoading(false);
 	};
@@ -36,16 +39,16 @@ const PostAuthor: React.FC<PostAuthorProps> = (props) => {
 			<div className={classes.user}>
 				<ProfileImage
 					userId={props.userId}
-					image={props.image}
-					name={props.name}
-					imageType={props.imageType}
-					profileId={props.authorId}
+					image={author.image}
+					name={author.name}
+					imageType={author.imageType}
+					profileId={author.id}
 					isUserFollowingProfile={props.isUserFollowingAuthor}
 					isUserAuthor={props.isUserAuthor}
 					snippet
 				/>
-				<Link href={`/profile/${props.authorId}`}>
-					<span>{props.name}</span>
+				<Link href={`/profile/${author.id}`}>
+					<span>{author.name}</span>
 				</Link>
 				{!props.isUserAuthor && (
 					<span onClick={spanClickHandler} className={classes.followSpan}>

@@ -18,66 +18,56 @@ import EditPost from '../PostPage/Edit/EditPost';
 import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 import { deletePost } from '@/lib/actions/post/deletePost';
 import { archivePost } from '@/lib/actions/post/archivePost';
+import { switchCommenting } from '@/lib/actions/post/switchCommenting';
+import { switchLiking } from '@/lib/actions/post/switchLiking';
 interface PostSettingsProps {
-	postId: string;
-	authorId: string;
-	images: string | string[];
-	authorName: string;
-	userImage: string;
-	userImageType: string;
-	userId: string;
-	isUserFollowingAuthor: boolean;
-	isUserAuthor: boolean;
-	commenting: boolean;
-	hideLikesCount: boolean;
-	switchCommenting: (postId: string, userId: string) => void;
-	switchLiking: (postId: string, userId: string) => void;
+	author: {
+		id: string;
+		name: string;
+		image: string;
+		imageType: string;
+	};
+	post: {
+		id: string;
+		commenting: boolean;
+		hideLikesCount: boolean;
+		images: string | string[];
+	};
+	user: { isUserFollowingAuthor: boolean; isUserAuthor: boolean };
 }
 
-const PostSettings: React.FC<PostSettingsProps> = ({
-	isUserAuthor,
-	isUserFollowingAuthor,
-	switchCommenting,
-	switchLiking,
-	postId,
-	authorId,
-	userId,
-	commenting,
-	hideLikesCount,
-	images,
-	authorName,
-	userImage,
-	userImageType,
-}) => {
+const PostSettings: React.FC<PostSettingsProps> = ({ user, author, post }) => {
 	const [isSettings, setIsSettings] = useState(false);
 	const [isAboutComponent, setIsAboutComponent] = useState(false);
 	const [isEditComponent, setIsEditComponent] = useState(false);
 
+	const { isUserAuthor, isUserFollowingAuthor } = user;
+
 	const handleClick = async (action: string) => {
 		switch (action) {
 			case DELETE:
-				deletePost(postId);
+				deletePost(post.id);
 				break;
 			case EDIT:
 				setIsEditComponent(true);
 				break;
 			case SWITCH_LIKE_COUNT:
-				await switchLiking(postId, userId);
+				await switchLiking(post.id);
 				setIsSettings(false);
 				break;
 			case SWITCH_COMMENTING:
-				await switchCommenting(postId, userId);
+				await switchCommenting(post.id);
 				setIsSettings(false);
 				break;
 			case ARCHIVE:
-				archivePost(postId);
+				archivePost(post.id);
 				break;
 			case UNFOLLOW:
-				await unFollowUser(authorId);
+				await unFollowUser(author.id);
 				setIsSettings(false);
 				break;
 			case FOLLOW:
-				await followUser(authorId);
+				await followUser(author.id);
 				setIsSettings(false);
 				break;
 			case ABOUT:
@@ -112,10 +102,14 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 									</Setting>
 									<Setting onClick={() => handleClick(EDIT)}>Edit</Setting>
 									<Setting onClick={() => handleClick(SWITCH_LIKE_COUNT)}>
-										{hideLikesCount ? 'Show likes count' : 'Hide likes count'}
+										{post.hideLikesCount
+											? 'Show likes count'
+											: 'Hide likes count'}
 									</Setting>
 									<Setting onClick={() => handleClick(SWITCH_COMMENTING)}>
-										{commenting ? 'Turn off commenting' : 'Turn on commenting'}
+										{post.commenting
+											? 'Turn off commenting'
+											: 'Turn on commenting'}
 									</Setting>
 									<Setting onClick={() => handleClick(ARCHIVE)}>
 										Archive
@@ -143,16 +137,16 @@ const PostSettings: React.FC<PostSettingsProps> = ({
 						</ul>
 					)}
 					{isAboutComponent && (
-						<AccountAbout userId={authorId} onClose={closeSettingsHandler} />
+						<AccountAbout userId={author.id} onClose={closeSettingsHandler} />
 					)}
 					{isEditComponent && (
 						<EditPost
-							userImageType={userImageType}
-							userImage={userImage}
-							images={images}
-							authorName={authorName}
+							userImageType={author.imageType}
+							userImage={author.image}
+							images={post.images}
+							authorName={author.name}
 							onClose={closeSettingsHandler}
-							postId={postId}
+							postId={post.id}
 						/>
 					)}
 				</SettingsBox>

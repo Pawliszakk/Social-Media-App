@@ -4,15 +4,18 @@ import Link from 'next/link';
 import ProfileImage from '@/components/UI/User/ProfileImage';
 
 interface PostDescriptionProps {
-	image?: string;
-	imageType?: string;
-	authorName: string;
-	authorId: string;
+	author: {
+		image?: string;
+		imageType?: string;
+		name: string;
+		id: string;
+	};
 	description: string;
 	home?: boolean;
 }
 
 const PostDescription: React.FC<PostDescriptionProps> = (props) => {
+	const { author } = props;
 	return (
 		<>
 			{props.description !== '' && (
@@ -22,16 +25,16 @@ const PostDescription: React.FC<PostDescriptionProps> = (props) => {
 					}`}
 				>
 					{!props.home && (
-						<Link href={`/profile/${props.authorId}`}>
+						<Link href={`/profile/${author.id}`}>
 							<ProfileImage
-								image={props.image}
-								imageType={props.imageType}
-								name={props.authorName}
+								image={author.image}
+								imageType={author.imageType}
+								name={author.name}
 							/>
 						</Link>
 					)}
 					<p>
-						<Link href={`/profile/${props.authorId}`}>{props.authorName}</Link>{' '}
+						<Link href={`/profile/${author.id}`}>{author.name}</Link>{' '}
 						{props.description}
 					</p>
 				</div>
