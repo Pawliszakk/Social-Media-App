@@ -16,9 +16,13 @@
 	}
 	.users {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 		align-items: center;
 		flex-direction: column;
-		min-height: 200px;
+		max-height: 300px;
+		overflow-y: scroll;
+		.spinner {
+			margin-top: 3rem;
+		}
 	}
 }

@@ -133,6 +133,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 				)}
 			</div>
 			<Counters
+				userId={props.userId}
 				isPrivate={props.isPrivate}
 				isUserFollowingProfile={props.isUserFollowingProfile}
 				isLoggedUserProfile={props.isLoggedUserProfile}

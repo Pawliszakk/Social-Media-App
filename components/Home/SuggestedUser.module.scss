@@ -3,6 +3,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	width: 90%;
 	.image {
 		display: flex;
 		justify-content: center;
@@ -34,14 +35,28 @@
 	&:hover {
 		color: var(--primary-button-hover);
 	}
+
 	&.button {
 		background-color: var(--primary-button);
 		border-radius: var(--radius-medium);
 		padding: 0.5em 1em;
 		color: #fff;
 		transition: background-color 0.3s;
+		min-width: 100px;
 		&:hover {
 			background-color: var(--primary-button-hover);
 		}
+	}
+	&.gray {
+		background-color: var(--option-hover);
+		color: var(--text-normal);
+		font-weight: bold;
+		&:hover {
+			background-color: var(--option-hover-darker);
+		}
+	}
+	&.removed {
+		pointer-events: none;
+		cursor: not-allowed;
 	}
 }

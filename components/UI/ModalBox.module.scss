@@ -1,11 +1,10 @@
 .settings {
 	width: 90%;
 	max-width: 500px;
-	overflow: hidden;
 	background-color: var(--primary-background);
 	border-radius: var(--radius-medium);
 	color: var(--text-light);
-	z-index: 200; 
+	z-index: 200;
 	&.edit {
 		max-width: 900px;
 		margin: 2rem 0;

@@ -5,6 +5,7 @@ import { IoMdClose } from 'react-icons/io';
 import Spinner from '../Spinner';
 import SuggestedUser from '@/components/Home/SuggestedUser';
 interface UsersListProps {
+	userId: string;
 	profileId: string;
 	onClose: () => void;
 	followers?: boolean;
@@ -28,7 +29,6 @@ const UsersList: React.FC<UsersListProps> = (props) => {
 
 		fetchUserData();
 	}, [props.profileId]);
-	console.log(users);
 	return (
 		<ModalBox onClose={props.onClose} classname={classes.box}>
 			<h3>
@@ -38,17 +38,25 @@ const UsersList: React.FC<UsersListProps> = (props) => {
 			<div className={classes.users}>
 				{users &&
 					users.length !== 0 &&
-					users.map((user: any) => (
-						<SuggestedUser
-							key={user._id}
-							id={user._id}
-							image={user.image}
-							name={user.name}
-							imageType={user.imageType}
-							userId="123"
-						/>
-					))}
-				{!users && <Spinner />}
+					users.map((user: any) => {
+						return (
+							<SuggestedUser
+								key={user._id}
+								id={user._id}
+								image={user.image}
+								name={user.name}
+								imageType={user.imageType}
+								followingStatus={user.followingStatus}
+								userId={props.userId}
+								button
+								isLoggedUser={user._id.toString() === props.userId}
+								isLoggedUserFollowers={
+									props.followers && props.profileId === props.userId
+								}
+							/>
+						);
+					})}
+				{!users && <Spinner className={classes.spinner} />}
 			</div>
 		</ModalBox>
 	);

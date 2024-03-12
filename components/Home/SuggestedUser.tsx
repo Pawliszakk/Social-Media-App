@@ -3,11 +3,16 @@
 import Link from 'next/link';
 import classes from './SuggestedUser.module.scss';
 import ProfileImage from '../UI/User/ProfileImage';
-import { followUser } from '@/lib/actions/user/followUser';
+import { followUser, unFollowUser } from '@/lib/actions/user/followUser';
 import { useState } from 'react';
-import { NOTFOLLOWING } from '@/lib/constants/followingStatus';
+import {
+	FOLLOWING,
+	NOTFOLLOWING,
+	REQUESTED,
+} from '@/lib/constants/followingStatus';
 import Spinner from '../UI/Spinner';
 import { getSuggestedButtonMessage } from '@/lib/helpers/getFollowButtonMessage';
+import { removeFollower } from '@/lib/actions/user/removeFollower';
 
 interface SuggestedUserProps {
 	id: string;
@@ -18,19 +23,40 @@ interface SuggestedUserProps {
 	button?: boolean;
 	followersLength?: number;
 	followers?: boolean;
+	followingStatus?: string;
+	isLoggedUser?: boolean;
+	isLoggedUserFollowers?: boolean;
 }
 
 const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
-	const [followingStatus, setFollowingStatus] = useState(NOTFOLLOWING);
+	const [followingStatus, setFollowingStatus] = useState(
+		props.followingStatus ? props.followingStatus : NOTFOLLOWING
+	);
+	const [isFollowerRemoved, setIsFollowerRemoved] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const followHandler = async () => {
 		setIsLoading(true);
-		const res = await followUser(props.id);
+
+		if (followingStatus === NOTFOLLOWING) {
+			const res = await followUser(props.id);
+			setFollowingStatus(res.status);
+		}
+
+		if (followingStatus === FOLLOWING) {
+			const res = await unFollowUser(props.id);
+			setFollowingStatus(`${res.status}`);
+		}
+
+		setIsLoading(false);
+	};
+	const removeFollowerHandler = async () => {
+		setIsLoading(true);
+		const res = await removeFollower(props.id);
 		setFollowingStatus(res.status);
+		setIsFollowerRemoved(true);
 		setIsLoading(false);
 	};
 	const btnMsg = getSuggestedButtonMessage(followingStatus);
-
 	return (
 		<div className={classes.user} key={props.id}>
 			<div className={classes.image}>
@@ -52,11 +78,22 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 			</div>
 			{isLoading ? (
 				<Spinner />
+			) : props.isLoggedUser ? (
+				<div></div>
+			) : props.isLoggedUserFollowers ? (
+				<button
+					className={`${classes.follow} ${classes.button} ${classes.gray} ${
+						isFollowerRemoved ? classes.removed : null
+					}`}
+					onClick={removeFollowerHandler}
+				>
+					{isFollowerRemoved ? 'Removed' : 'Remove'}
+				</button>
 			) : (
 				<button
 					className={`${classes.follow} ${
 						props.button ? classes.button : null
-					}`}
+					} ${followingStatus === REQUESTED ? classes.gray : null}`}
 					onClick={followHandler}
 				>
 					{btnMsg}

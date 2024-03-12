@@ -5,6 +5,7 @@ import { useState } from 'react';
 import UsersList from '../UI/User/UsersList';
 
 interface CountersProps {
+	userId: string;
 	isUserFollowingProfile: boolean;
 	isLoggedUserProfile: boolean;
 	isBlocked: boolean;
@@ -63,6 +64,7 @@ const Counters: React.FC<CountersProps> = (props) => {
 			</div>
 			{isFollowersModal && (
 				<UsersList
+					userId={props.userId}
 					onClose={() => setIsFollowersModal(false)}
 					profileId={props.profileId}
 					followers
@@ -70,6 +72,7 @@ const Counters: React.FC<CountersProps> = (props) => {
 			)}
 			{isFollowingModal && (
 				<UsersList
+					userId={props.userId}
 					onClose={() => setIsFollowingModal(false)}
 					profileId={props.profileId}
 				/>
