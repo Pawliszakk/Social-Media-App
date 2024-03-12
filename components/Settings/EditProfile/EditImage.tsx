@@ -2,10 +2,10 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import classes from './EditImage.module.scss';
 import ProfileImage from '@/components/UI/User/ProfileImage';
-import SettingsBox from '@/components/UI/Settings/SettingsBox';
 import Setting from '@/components/UI/Settings/Setting';
 import deleteCurrentAvatar from '@/lib/actions/user/deleteCurrentAvatar';
 import { changeProfileImage } from '@/lib/actions/user/changeProfileImage';
+import ModalBox from '@/components/UI/ModalBox';
 
 interface EditImageProps {
 	image: string;
@@ -62,7 +62,7 @@ const EditImage: React.FC<EditImageProps> = (props) => {
 			</div>
 
 			{isModal && (
-				<SettingsBox onClose={() => setIsModal(false)}>
+				<ModalBox onClose={() => setIsModal(false)}>
 					<div className={classes.note}>
 						<span>Change profile photo</span>
 					</div>
@@ -75,7 +75,7 @@ const EditImage: React.FC<EditImageProps> = (props) => {
 						</Setting>
 						<Setting onClick={() => setIsModal(false)}>Cancel</Setting>
 					</ul>
-				</SettingsBox>
+				</ModalBox>
 			)}
 		</>
 	);

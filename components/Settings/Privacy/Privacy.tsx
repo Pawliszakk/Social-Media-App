@@ -2,10 +2,10 @@
 import classes from './Privacy.module.scss';
 import { privacyChange } from '@/lib/actions/user/settings/privacyChange';
 import { useState } from 'react';
-import SettingsBox from '@/components/UI/Settings/SettingsBox';
 import Setting from '@/components/UI/Settings/Setting';
 import { MdOutlinePhotoLibrary } from 'react-icons/md';
 import styles from '@/components/UI/SwitchInput.module.scss';
+import ModalBox from '@/components/UI/ModalBox';
 
 interface PrivacyProps {
 	isPrivate: boolean;
@@ -40,7 +40,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
 					</label>
 				</div>
 				{isModal && (
-					<SettingsBox onClose={() => setIsModal(false)}>
+					<ModalBox onClose={() => setIsModal(false)}>
 						<div className={classes.note}>
 							<p>
 								<MdOutlinePhotoLibrary /> Only your followers will be able to
@@ -55,7 +55,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
 								Cancel
 							</Setting>
 						</ul>
-					</SettingsBox>
+					</ModalBox>
 				)}
 			</div>
 

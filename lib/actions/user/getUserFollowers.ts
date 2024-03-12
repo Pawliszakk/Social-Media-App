@@ -3,6 +3,8 @@
 import { User } from '../Models/user';
 
 export async function getUserFollowers(profileId: string) {
+
+	//DODAĆ CHECK CZY AKTUALNY USER OBSERWUJE TEGO USERA
 	let profile;
 
 	try {

@@ -29,7 +29,6 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 		setFollowingStatus(res.status);
 		setIsLoading(false);
 	};
-
 	const btnMsg = getSuggestedButtonMessage(followingStatus);
 
 	return (

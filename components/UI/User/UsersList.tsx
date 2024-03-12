@@ -3,6 +3,7 @@ import ModalBox from '../ModalBox';
 import classes from './UsersList.module.scss';
 import { IoMdClose } from 'react-icons/io';
 import Spinner from '../Spinner';
+import SuggestedUser from '@/components/Home/SuggestedUser';
 interface UsersListProps {
 	profileId: string;
 	onClose: () => void;
@@ -27,7 +28,7 @@ const UsersList: React.FC<UsersListProps> = (props) => {
 
 		fetchUserData();
 	}, [props.profileId]);
-
+	console.log(users);
 	return (
 		<ModalBox onClose={props.onClose} classname={classes.box}>
 			<h3>
@@ -37,7 +38,16 @@ const UsersList: React.FC<UsersListProps> = (props) => {
 			<div className={classes.users}>
 				{users &&
 					users.length !== 0 &&
-					users.map((user: any) => <p>{user.name}</p>)}
+					users.map((user: any) => (
+						<SuggestedUser
+							key={user._id}
+							id={user._id}
+							image={user.image}
+							name={user.name}
+							imageType={user.imageType}
+							userId="123"
+						/>
+					))}
 				{!users && <Spinner />}
 			</div>
 		</ModalBox>

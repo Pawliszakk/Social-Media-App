@@ -2,9 +2,9 @@
 import ProfileImage from '@/components/UI/User/ProfileImage';
 import classes from './BlockedUser.module.scss';
 import { useState } from 'react';
-import SettingsBox from '@/components/UI/Settings/SettingsBox';
 import Setting from '@/components/UI/Settings/Setting';
 import { unBlockUser } from '@/lib/actions/user/blockUser';
+import ModalBox from '@/components/UI/ModalBox';
 
 interface BlockedUserProps {
 	user: {
@@ -38,7 +38,7 @@ const BlockedUser: React.FC<BlockedUserProps> = (props) => {
 			<button onClick={() => setIsModal(true)}>Unblock</button>
 
 			{isModal && (
-				<SettingsBox onClose={() => setIsModal(false)}>
+				<ModalBox onClose={() => setIsModal(false)}>
 					<div className={classes.note}>
 						<span>Unblock {user.name}?</span>
 						<p>
@@ -53,7 +53,7 @@ const BlockedUser: React.FC<BlockedUserProps> = (props) => {
 						</Setting>
 						<Setting onClick={() => setIsModal(false)}>Cancel</Setting>
 					</ul>
-				</SettingsBox>
+				</ModalBox>
 			)}
 		</div>
 	);
