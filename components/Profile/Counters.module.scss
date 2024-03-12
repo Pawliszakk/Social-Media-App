@@ -3,6 +3,12 @@
 	justify-content: space-around;
 	align-items: center;
 	max-width: 300px;
+	.counter {
+		cursor: pointer;
+		&.disabled {
+			pointer-events: none;
+		}
+	}
 	p {
 		display: flex;
 		justify-content: center;

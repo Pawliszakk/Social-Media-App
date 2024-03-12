@@ -34,14 +34,14 @@ export default async function Home() {
 					) : (
 						posts.map((post: any) => {
 							const isUserAuthor = post.author.id === user.id;
-							const isUserFollowingAuthor = user.following.find(
+							const isUserFollowingAuthor = !!user.following.find(
 								(id: string) => id.toString() === post.author.id
 							);
-							const isUserLikingPost = user.likedPosts.find(
+							const isUserLikingPost = !!user.likedPosts.find(
 								(id: string) => id.toString() === post.id
 							);
 
-							const isUserSavedPost = user.savedPosts.find(
+							const isUserSavedPost = !!user.savedPosts.find(
 								(id: string) => id.toString() === post.id
 							);
 							const postAuthor = {
@@ -51,27 +51,26 @@ export default async function Home() {
 								imageType: post.author.imageType,
 							};
 							const postValues = {
-								id: post.id,
+								id: post.id.toString(),
 								date: post.date,
 								commenting: post.commenting,
 								hideLikesCount: post.hideLikesCount,
 								images: post.image,
-								likes: post.likes,
+								likes: post.likes.map((id: string) => id.toString()),
 							};
-
 							return (
 								<article className={classes.post} key={post.id}>
 									<PostAuthor
 										author={postAuthor}
 										userId={user.id}
 										date={post.date}
-										isUserFollowingAuthor={!!isUserFollowingAuthor}
-										isUserAuthor={!!isUserAuthor}
+										isUserFollowingAuthor={isUserFollowingAuthor}
+										isUserAuthor={isUserAuthor}
 									>
 										<PostSettings
 											user={{
-												isUserFollowingAuthor: !!isUserFollowingAuthor,
-												isUserAuthor: !!isUserAuthor,
+												isUserFollowingAuthor,
+												isUserAuthor,
 											}}
 											post={postValues}
 											author={postAuthor}
@@ -80,9 +79,9 @@ export default async function Home() {
 									<PostComponent
 										post={postValues}
 										authorName={post.author.name}
-										isUserLikingPost={!!isUserLikingPost}
-										isUserSavedPost={!!isUserSavedPost}
-										isUserAuthor={!!isUserAuthor}
+										isUserLikingPost={isUserLikingPost}
+										isUserSavedPost={isUserSavedPost}
+										isUserAuthor={isUserAuthor}
 										showLikes={user.showLikes}
 									/>
 

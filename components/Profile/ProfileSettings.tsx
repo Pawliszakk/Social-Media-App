@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import SettingsButton from '../UI/Settings/SettingsButton';
-import SettingsBox from '../UI/Settings/SettingsBox';
 import Setting from '../UI/Settings/Setting';
 import AccountAbout from '../UI/Settings/AccountAbout';
 import {
@@ -17,6 +16,7 @@ import {
 	addCloseFriend,
 	removeCloseFriend,
 } from '@/lib/actions/user/addCloseFriend';
+import ModalBox from '../UI/ModalBox';
 interface ProfileSettingsProps {
 	profileId: string;
 	userId: string;
@@ -62,7 +62,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 		<>
 			<SettingsButton onClick={() => setIsSettings(true)} />
 			{isSettings && (
-				<SettingsBox onClose={() => setIsSettings(false)}>
+				<ModalBox onClose={() => setIsSettings(false)}>
 					{!isAboutComponent && (
 						<ul>
 							{props.isBlocked ? (
@@ -99,7 +99,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = (props) => {
 							}}
 						/>
 					)}
-				</SettingsBox>
+				</ModalBox>
 			)}
 		</>
 	);

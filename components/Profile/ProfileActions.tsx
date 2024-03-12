@@ -22,6 +22,7 @@ interface ProfileActionsProps {
 	isUserFollowingProfile: boolean;
 	isBlocked: boolean;
 	isCloseFriend: boolean;
+	isPrivate: boolean;
 	postsLength: number;
 	followersLength: number;
 	followingLength: number;
@@ -93,7 +94,6 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 
 		setIsLoading(false);
 	};
-
 	const btnMsg = getProfileActionsButtonMessage(followingStatus);
 
 	return (
@@ -133,6 +133,11 @@ const ProfileActions: React.FC<ProfileActionsProps> = (props) => {
 				)}
 			</div>
 			<Counters
+				isPrivate={props.isPrivate}
+				isUserFollowingProfile={props.isUserFollowingProfile}
+				isLoggedUserProfile={props.isLoggedUserProfile}
+				isBlocked={props.isBlocked}
+				profileId={props.profileId}
 				followersLength={followers}
 				postsLength={props.postsLength}
 				followingLength={props.followingLength}

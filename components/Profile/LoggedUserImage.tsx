@@ -3,9 +3,9 @@ import { ChangeEvent, useRef, useState } from 'react';
 import { changeProfileImage } from '@/lib/actions/user/changeProfileImage';
 import classes from './LoggedUserImage.module.scss';
 import ProfileImage from '../UI/User/ProfileImage';
-import SettingsBox from '../UI/Settings/SettingsBox';
 import Setting from '../UI/Settings/Setting';
 import deleteCurrentAvatar from '@/lib/actions/user/deleteCurrentAvatar';
+import ModalBox from '../UI/ModalBox';
 interface LoggedUserImageProps {
 	image: string;
 	name: string;
@@ -55,7 +55,7 @@ const LoggedUserImage: React.FC<LoggedUserImageProps> = (props) => {
 				/>
 			</form>
 			{isModal && (
-				<SettingsBox onClose={() => setIsModal(false)}>
+				<ModalBox onClose={() => setIsModal(false)}>
 					<div className={classes.note}>
 						<span>Change profile photo</span>
 					</div>
@@ -68,7 +68,7 @@ const LoggedUserImage: React.FC<LoggedUserImageProps> = (props) => {
 						</Setting>
 						<Setting onClick={() => setIsModal(false)}>Cancel</Setting>
 					</ul>
-				</SettingsBox>
+				</ModalBox>
 			)}
 		</div>
 	);

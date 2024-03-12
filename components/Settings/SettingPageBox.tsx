@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import classes from './SettingPageBox.module.scss';
 
 interface SettingPageBoxProps {

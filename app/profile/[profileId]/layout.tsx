@@ -31,7 +31,6 @@ export default async function RootLayout({
 		const res = await deleteFollowRequest(userId, profileId);
 		return res;
 	};
-
 	return (
 		<div className={classes.box}>
 			<div className={classes.profile}>
@@ -65,6 +64,7 @@ export default async function RootLayout({
 						userId={userId}
 						isBlocked={isUserBlockingProfile}
 						isCloseFriend={isProfileCloseFriend}
+						isPrivate={profile.private}
 					/>
 
 					<ProfileBio bio={profile.bio} website={profile.website} />

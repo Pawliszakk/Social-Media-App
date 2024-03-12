@@ -1,17 +1,16 @@
 import Portal from '@/lib/Portal/Portal';
-import classes from './SettingsBox.module.scss';
+import classes from './ModalBox.module.scss';
 import { motion } from 'framer-motion';
 import Backdrop from '@/components/UI/Backdrop';
 
-const SettingsBox = ({
-	children,
-	onClose,
-	edit,
-}: {
+interface ModalBoxProps {
 	children: React.ReactNode;
 	onClose: () => void;
 	edit?: boolean;
-}) => {
+	classname?: string;
+}
+
+const ModalBox: React.FC<ModalBoxProps> = (props) => {
 	const divClickHandler = (
 		e: React.MouseEvent<HTMLLIElement | HTMLDivElement>
 	) => {
@@ -20,17 +19,19 @@ const SettingsBox = ({
 
 	return (
 		<Portal>
-			<Backdrop onClose={onClose}>
+			<Backdrop onClose={props.onClose}>
 				<motion.div
 					animate={{ scale: [1.5, 1], opacity: [0, 1] }}
-					className={`${classes.settings} ${edit ? classes.edit : ''}`}
+					className={`${classes.settings} ${props.edit ? classes.edit : ''} ${
+						props.classname ? props.classname : null
+					}`}
 					onClick={divClickHandler}
 				>
-					{children}
+					{props.children}
 				</motion.div>
 			</Backdrop>
 		</Portal>
 	);
 };
 
-export default SettingsBox;
+export default ModalBox;

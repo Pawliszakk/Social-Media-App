@@ -20,7 +20,7 @@ const AccountAbout: React.FC<AccountAboutProps> = ({ userId, onClose }) => {
 
 	useEffect(() => {
 		const fetchUserData = async () => {
-			const res = await fetch(`/api/user/?userId=${userId}`);
+			const res = await fetch(`/api/user/account_about/?userId=${userId}`);
 			const fetchedUserData = await res.json();
 			if (res.ok) {
 				setUserData(fetchedUserData);

@@ -11,7 +11,6 @@ import {
 	ABOUT,
 } from '@/lib/constants/settingsActions';
 import SettingsButton from '@/components/UI/Settings/SettingsButton';
-import SettingsBox from '@/components/UI/Settings/SettingsBox';
 import AccountAbout from '@/components/UI/Settings/AccountAbout';
 import Setting from '@/components/UI/Settings/Setting';
 import EditPost from '../PostPage/Edit/EditPost';
@@ -20,6 +19,7 @@ import { deletePost } from '@/lib/actions/post/deletePost';
 import { archivePost } from '@/lib/actions/post/archivePost';
 import { switchCommenting } from '@/lib/actions/post/switchCommenting';
 import { switchLiking } from '@/lib/actions/post/switchLiking';
+import ModalBox from '@/components/UI/ModalBox';
 interface PostSettingsProps {
 	author: {
 		id: string;
@@ -92,7 +92,7 @@ const PostSettings: React.FC<PostSettingsProps> = ({ user, author, post }) => {
 		<>
 			<SettingsButton onClick={() => setIsSettings(true)} />
 			{isSettings && (
-				<SettingsBox edit={isEditComponent} onClose={closeSettingsHandler}>
+				<ModalBox edit={isEditComponent} onClose={closeSettingsHandler}>
 					{!isAboutComponent && !isEditComponent && (
 						<ul>
 							{isUserAuthor && (
@@ -149,7 +149,7 @@ const PostSettings: React.FC<PostSettingsProps> = ({ user, author, post }) => {
 							postId={post.id}
 						/>
 					)}
-				</SettingsBox>
+				</ModalBox>
 			)}
 		</>
 	);

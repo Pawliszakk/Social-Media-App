@@ -33,14 +33,14 @@ export async function getProfileData(profileId: string) {
 	if (!profile) {
 		throw new Error('Sorry, that site is unreachable');
 	}
-	const isUserFollowingProfile = profile.followers.find(
+	const isUserFollowingProfile = !!profile.followers.find(
 		(id: string) => user.id
 	);
-	const isUserBlockingProfile = user.blockedUsers.find(
+	const isUserBlockingProfile = !!user.blockedUsers.find(
 		(id: string) => id.toString() === profileId
 	);
 
-	const isUserBlockedByProfile = profile.blockedUsers.find(
+	const isUserBlockedByProfile = !!profile.blockedUsers.find(
 		(id: string) => id.toString() === user.id
 	);
 
@@ -48,11 +48,11 @@ export async function getProfileData(profileId: string) {
 		permanentRedirect('/');
 	}
 
-	const isProfileRequestedToFollow = user.sentFollowRequests.find(
+	const isProfileRequestedToFollow = !!user.sentFollowRequests.find(
 		(el: any) => el.reciever.toString() === profileId
 	);
 
-	const isProfileCloseFriend = user.closeFriends.find(
+	const isProfileCloseFriend = !!user.closeFriends.find(
 		(id: string) => id.toString() === profileId
 	);
 	let followingStatus;
@@ -62,7 +62,7 @@ export async function getProfileData(profileId: string) {
 	if (!isUserFollowingProfile) {
 		followingStatus = NOTFOLLOWING;
 	}
-	if (!!isProfileRequestedToFollow) {
+	if (isProfileRequestedToFollow) {
 		followingStatus = REQUESTED;
 	}
 	if (isUserBlockingProfile) {
