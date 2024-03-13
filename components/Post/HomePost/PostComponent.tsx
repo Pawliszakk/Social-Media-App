@@ -12,6 +12,7 @@ interface PostComponentProps {
 		date: number;
 		likes: string[] | [];
 	};
+	userId: string;
 	authorName: string;
 	isUserLikingPost: boolean;
 	isUserSavedPost: boolean;
@@ -25,7 +26,6 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 	const [isUserLikingPost, setIsUserLikingPost] = useState(
 		props.isUserLikingPost
 	);
-
 	const likePostHandler = () => {
 		if (!isUserLikingPost) {
 			setLikesCount((prev) => prev + 1);
@@ -53,6 +53,8 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
 				isUserSavedPost={props.isUserSavedPost}
 			/>
 			<PostLikes
+				userId={props.userId}
+				postId={props.post.id}
 				likes={likesCount}
 				date={post.date}
 				showLikes={props.showLikes}

@@ -77,6 +77,7 @@ export default async function Home() {
 										/>
 									</PostAuthor>
 									<PostComponent
+										userId={user.id}
 										post={postValues}
 										authorName={post.author.name}
 										isUserLikingPost={isUserLikingPost}

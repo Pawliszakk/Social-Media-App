@@ -90,6 +90,8 @@ const PostPage: React.FC<PostPageProps> = ({ post, author, user }) => {
 					isUserSavedPost={user.isUserSavedPost}
 				/>
 				<PostLikes
+					userId={user.id}
+					postId={post.id}
 					likes={likesCount}
 					date={post.date}
 					showLikes={user.showLikes}
