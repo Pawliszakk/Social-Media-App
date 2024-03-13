@@ -6,4 +6,7 @@
 	padding: 1rem;
 	cursor: pointer;
 	color: var(--text-normal);
+	&:hover {
+		opacity: 0.5;
+	}
 }

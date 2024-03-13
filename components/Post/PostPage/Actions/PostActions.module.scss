@@ -6,6 +6,9 @@
 		font-size: 3rem;
 		margin: 0.5rem 0.3em;
 		cursor: pointer;
+		&:hover {
+			opacity: 0.5;
+		}
 	}
 	div {
 		display: flex;
