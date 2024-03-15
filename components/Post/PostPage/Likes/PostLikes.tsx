@@ -23,10 +23,14 @@ interface PostLikesProps {
 
 const PostLikes: React.FC<PostLikesProps> = (props) => {
 	const [isLikesModal, setIsLikesModal] = useState(false);
-	const showModalHandler = () => setIsLikesModal(true);
+	const showModalHandler = () => {
+		if (props.likes > 0) {
+			setIsLikesModal(true);
+		}
+	};
 	const closeModalHandler = () => setIsLikesModal(false);
-
 	const dateToDisplay = transformPostDate(props.date);
+	console.log(props.likes === 0);
 	return (
 		<div className={classes.likes}>
 			{props.isUserAuthor || (!props.isUserAuthor && props.showLikes) ? (
@@ -53,7 +57,12 @@ const PostLikes: React.FC<PostLikesProps> = (props) => {
 						</p>
 					</div>
 				) : (
-					<p className={classes.likeParagraph} onClick={showModalHandler}>
+					<p
+						className={`${classes.likeParagraph} ${
+							props.likes === 0 ? classes.emptyLikes : null
+						}`}
+						onClick={showModalHandler}
+					>
 						<span>{props.likes}</span> Likes
 					</p>
 				)

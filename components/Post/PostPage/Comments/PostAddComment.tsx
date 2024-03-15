@@ -29,24 +29,27 @@ const PostAddComment: React.FC<PostAddCommentProps> = ({ user, postId }) => {
 		e.preventDefault();
 		setIsLoading(true);
 		await addComment(postId, comment);
+		setComment('');
 		setIsLoading(false);
 	};
 	return (
 		<div className={classes.add}>
-			<ProfileImage
-				image={user.image}
-				name={user.name}
-				imageType={user.imageType}
-			/>
 			<form onSubmit={handleSubmit}>
 				<div className={classes.commentBox}>
-					<textarea
-						name="comment"
-						id="comment"
-						value={comment}
-						onChange={handleTextareaChange}
-						placeholder="Add a comment..."
-					></textarea>
+					<div>
+						<ProfileImage
+							image={user.image}
+							name={user.name}
+							imageType={user.imageType}
+						/>
+						<textarea
+							name="comment"
+							id="comment"
+							value={comment}
+							onChange={handleTextareaChange}
+							placeholder="Add a comment..."
+						></textarea>
+					</div>
 					{isLoading ? (
 						<Spinner />
 					) : (

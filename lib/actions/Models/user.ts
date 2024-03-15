@@ -17,6 +17,9 @@ const UserSchema = new mongoose.Schema({
 	showInSuggestions: { type: Boolean, required: false, default: true },
 	posts: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Post' }],
 	likedPosts: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Post' }],
+	likedComments: [
+		{ type: mongoose.Types.ObjectId, required: true, ref: 'Comment' },
+	],
 	followers: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
 	following: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
 	closeFriends: [

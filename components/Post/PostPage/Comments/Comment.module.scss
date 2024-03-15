@@ -39,6 +39,10 @@
 			}
 			span {
 				cursor: pointer;
+				&.empty {
+					cursor: auto;
+					pointer-events: none;
+				}
 			}
 			button {
 				font-size: 1.1rem;

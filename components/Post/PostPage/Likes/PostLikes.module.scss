@@ -19,6 +19,7 @@
 			color: var(--text-normal);
 			font-weight: bold;
 		}
+
 		span {
 			cursor: pointer;
 			font-weight: bold;
@@ -32,5 +33,9 @@
 	}
 	.likeParagraph {
 		cursor: pointer;
+		&.emptyLikes {
+			cursor: auto;
+			pointer-events: none;
+		}
 	}
 }

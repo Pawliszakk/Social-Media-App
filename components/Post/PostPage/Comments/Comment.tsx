@@ -25,10 +25,24 @@ interface CommentProps {
 const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
 	const [isLikesModal, setIsLikesModal] = useState(false);
 
-	const showLikesHandler = () => setIsLikesModal(true);
+	const showLikesHandler = () => {
+		if (comment.likes > 0) {
+			setIsLikesModal(true);
+		}
+	};
 	const closeLikesHandler = () => setIsLikesModal(false);
 
 	const transformedDate = transformPostDate(+comment.date);
+
+	const likeCommentHandler = async () => {
+		//CHECK IF COMMENT IS ALREARY LIKED
+		const isAlreadyLiked = false;
+		if (isAlreadyLiked) {
+			console.log('bede unlikowac');
+		} else {
+			console.log('bede likowac');
+		}
+	};
 
 	return (
 		<>
@@ -49,14 +63,19 @@ const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
 						<p>{comment.content}</p>
 					</div>
 					<div className={classes.actions}>
-						<span className={classes.date}>{transformedDate}</span>
-						<span onClick={showLikesHandler}>
+						<span suppressHydrationWarning={true} className={classes.date}>
+							{transformedDate}
+						</span>
+						<span
+							onClick={showLikesHandler}
+							className={`${comment.likes === 0 ? classes.empty : null}`}
+						>
 							{comment.likes} {comment.likes === 1 ? 'like' : 'likes'}
 						</span>
 						<button>Reply</button>
 					</div>
 				</div>
-				<div className={classes.like}>
+				<div className={classes.like} onClick={likeCommentHandler}>
 					<FaRegHeart />
 				</div>
 			</div>
