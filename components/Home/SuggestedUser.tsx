@@ -93,7 +93,9 @@ const SuggestedUser: React.FC<SuggestedUserProps> = (props) => {
 				<button
 					className={`${classes.follow} ${
 						props.button ? classes.button : null
-					} ${followingStatus === REQUESTED ? classes.gray : null}`}
+					} ${followingStatus === REQUESTED ? classes.gray : null} ${
+						followingStatus === FOLLOWING ? classes.gray : null
+					}`}
 					onClick={followHandler}
 				>
 					{btnMsg}
