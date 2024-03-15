@@ -1,4 +1,4 @@
-
+import { useEffect } from 'react';
 import classes from './PostComments.module.scss';
 
 interface PostCommentsProps {

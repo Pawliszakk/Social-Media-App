@@ -3,7 +3,27 @@
 	img {
 		border-radius: var(--radius-circle);
 	}
+	.commentBox {
+		margin-top: 1em;
+		align-items: flex-start;
+		display: flex;
+		gap: 3px;
+	}
 	textarea {
-		margin-left: 1em;
+		position: relative;
+		margin: 0;
+		width: 100%;
+		resize: none;
+		min-height: 50px;
+		border: none;
+		&:focus {
+			outline: none;
+		}
+	}
+	button {
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		color: var(--primary-button);
 	}
 }

@@ -1,17 +1,15 @@
 'use server';
 
-import { getServerSession } from 'next-auth';
-import { User } from '../Models/user';
-import { connectToDatabase } from '../utils/connectToDatabase';
 import mongoose from 'mongoose';
 import { Post } from '../Models/post';
 import xss from 'xss';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { uploadImage } from '../utils/uploadImage';
+import { getUserData } from '../utils/getUserData';
 
 export async function createPost(prevState: any, formData: any) {
-	const session = await getServerSession();
+	const { session, user } = await getUserData('posts');
 
 	const description = formData.get('description');
 	const image = formData.get('image');
@@ -29,30 +27,6 @@ export async function createPost(prevState: any, formData: any) {
 		return {
 			message:
 				'Please provide shorter description of your post. Maximum is 200 characters',
-		};
-	}
-	if (!session) {
-		return {
-			message: 'Something went wrong, please try again later',
-		};
-	}
-
-	await connectToDatabase();
-
-	const email = session?.user?.email;
-
-	let user;
-	try {
-		user = await User.findOne({ email });
-	} catch (e) {
-		return {
-			message: 'Something went wrong, please try again later',
-		};
-	}
-
-	if (!user) {
-		return {
-			message: 'Something went wrong, please try again later',
 		};
 	}
 

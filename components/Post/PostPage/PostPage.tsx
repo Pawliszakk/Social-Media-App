@@ -106,7 +106,9 @@ const PostPage: React.FC<PostPageProps> = ({ post, author, user }) => {
 					hideLikesCount={post.hideLikesCount}
 				/>
 
-				{post.commenting && <PostAddComment user={{ ...user }} />}
+				{post.commenting && (
+					<PostAddComment postId={post.id} user={{ ...user }} />
+				)}
 			</div>
 		</div>
 	);
