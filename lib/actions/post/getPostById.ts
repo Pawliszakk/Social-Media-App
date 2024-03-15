@@ -1,6 +1,7 @@
 import { permanentRedirect } from 'next/navigation';
 import { Post } from '../Models/post';
 import { getLikesSnippet } from './getLikesSnippet';
+const comment = require('../Models/comment');
 
 export async function getPostById(
 	postId: string,
@@ -9,14 +10,24 @@ export async function getPostById(
 ) {
 	let post: any;
 	try {
-		post = await Post.findOne({ _id: postId }).populate(
-			'author',
-			'id name image private imageType blockedUsers'
-		);
+		post = await Post.findOne({ _id: postId }).populate({
+			path: 'author',
+			select: 'id name image private imageType blockedUsers',
+		});
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
+	if (post.commenting) {
+		try {
+			await post.populate({
+				path: 'comments',
+				populate: { path: 'author', select: 'name image imageType' },
+			});
+		} catch (e) {
+			throw new Error('Something went wrong, please try again later');
+		}
+	}
 	const isProfileBlockedByUser = userBlockedProfiles.find(
 		(id: string) => id.toString() === post.author.id
 	);

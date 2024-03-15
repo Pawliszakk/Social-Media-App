@@ -1,0 +1,57 @@
+.box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: 0 1em;
+	color: var(--text-normal);
+
+	.image {
+		img {
+			border-radius: 50%;
+			cursor: pointer;
+		}
+	}
+	.comment {
+		margin: 0.5em auto 0 0.5em;
+		align-self: flex-start;
+		.content {
+			font-size: 1.1rem;
+			display: flex;
+			a {
+				font-weight: bold;
+				text-decoration: none;
+				color: var(--text-normal);
+			}
+		}
+		.actions {
+			margin-top: 0.5em;
+			font-size: 1.1rem;
+			opacity: 0.6;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+			font-weight: bold;
+			.date {
+				font-weight: normal;
+				cursor: auto;
+			}
+			span {
+				cursor: pointer;
+			}
+			button {
+				font-size: 1.1rem;
+				cursor: pointer;
+				background-color: transparent;
+				border: none;
+				font-weight: bold;
+			}
+		}
+	}
+	.like {
+		cursor: pointer;
+		font-size: 1.2rem;
+		padding: 1em;
+	}
+}

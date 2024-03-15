@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	border-top: var(--border-light);
 	svg {
 		font-size: 3rem;
 		margin: 0.5rem 0.3em;

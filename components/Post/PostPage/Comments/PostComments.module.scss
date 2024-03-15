@@ -1,6 +1,9 @@
 .comments {
-	min-height: 150px;
+	min-height: 250px;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
+	flex-direction: column;
+	gap: 1em;
+	padding: 1em;
 }

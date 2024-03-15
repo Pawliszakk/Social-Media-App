@@ -1,14 +1,38 @@
-import { useEffect } from 'react';
+import Comment from './Comment';
 import classes from './PostComments.module.scss';
 
 interface PostCommentsProps {
 	isCommenting: boolean;
+	userId: string;
+	comments:
+		| {
+				name: string;
+				id: string;
+				image: string;
+				imageType: string;
+		  }[]
+		| string[];
 }
 
-const PostComments: React.FC<PostCommentsProps> = ({ isCommenting }) => {
+const PostComments: React.FC<PostCommentsProps> = ({
+	isCommenting,
+	comments,
+	userId,
+}) => {
+	const areCommentsEmpty = comments.length === 0 || !comments;
 	return (
 		<div className={classes.comments}>
-			{isCommenting ? <h1>Comments Available</h1> : <h1>Comments Blocked</h1>}
+			{isCommenting ? (
+				areCommentsEmpty ? (
+					<p>No one commented this post yet.</p>
+				) : (
+					comments.map((comment: any) => (
+						<Comment userId={userId} comment={comment} key={comment.id} />
+					))
+				)
+			) : (
+				<h1>Comments Blocked</h1>
+			)}
 		</div>
 	);
 };

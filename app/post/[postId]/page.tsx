@@ -21,6 +21,21 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 				description: post.description,
 				hideLikesCount: post.hideLikesCount,
 				commenting: post.commenting,
+				comments: post.comments.map((comment: any) => {
+					return {
+						id: comment.id.toString(),
+						author: {
+							id: comment.author.id.toString(),
+							name: comment.author.name,
+							image: comment.author.image,
+							imageType: comment.author.imageType,
+						},
+						content: comment.content,
+						date: comment.date,
+						answers: comment.answers,
+						likes: comment.likes.length,
+					};
+				}),
 				likes: post.likes.map((like: string) => like.toString()),
 				likesSnippet,
 			}}
