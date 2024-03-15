@@ -16,6 +16,7 @@ interface ProfileImageProps {
 	isUserFollowingProfile?: boolean;
 	isUserAuthor?: boolean;
 	snippet?: boolean;
+	onClick?: () => void;
 }
 
 const ProfileImage: React.FC<ProfileImageProps> = (props) => {

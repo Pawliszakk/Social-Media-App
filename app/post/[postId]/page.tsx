@@ -10,6 +10,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 		isUserFollowingAuthor,
 		isUserSavedPost,
 		author,
+		likesSnippet,
 	} = await getPostData(params.postId);
 	return (
 		<PostPage
@@ -21,6 +22,7 @@ const postPage = async ({ params }: { params: { postId: string } }) => {
 				hideLikesCount: post.hideLikesCount,
 				commenting: post.commenting,
 				likes: post.likes.map((like: string) => like.toString()),
+				likesSnippet,
 			}}
 			author={author}
 			user={{

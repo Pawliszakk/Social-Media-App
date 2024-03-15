@@ -1,5 +1,6 @@
 import { permanentRedirect } from 'next/navigation';
 import { Post } from '../Models/post';
+import { getLikesSnippet } from './getLikesSnippet';
 
 export async function getPostById(
 	postId: string,
@@ -23,6 +24,10 @@ export async function getPostById(
 		(id: string) => id.toString() === userId
 	);
 
+	let likesSnippet = null;
+	if (post.likes.length >= 3) {
+		likesSnippet = await getLikesSnippet(postId);
+	}
 	if (isProfileBlockedByUser) {
 		permanentRedirect(`/profile/${post.author.id}`);
 	}
@@ -38,5 +43,5 @@ export async function getPostById(
 	if (isUserAuthor) {
 		isUserAllowedToView = true;
 	}
-	return { post, isUserAllowedToView, isUserAuthor };
+	return { post, isUserAllowedToView, isUserAuthor, likesSnippet };
 }

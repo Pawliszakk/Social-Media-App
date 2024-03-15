@@ -1,7 +1,28 @@
 .likes {
+	color: var(--text-normal);
+	.images {
+		display: flex;
+		align-items: center;
+		margin-left: 1em;
+		img {
+			cursor: pointer;
+			width: 20px;
+			height: 20px;
+			margin: 0 -2px;
+		}
+	}
 	margin: 1rem 0;
 	p {
-		font-weight: bold;
+		a {
+			position: relative;
+			text-decoration: none;
+			color: var(--text-normal);
+			font-weight: bold;
+		}
+		span {
+			cursor: pointer;
+			font-weight: bold;
+		}
 		font-size: 1.4rem;
 		margin: 1rem 0;
 		margin-left: 0.5em;

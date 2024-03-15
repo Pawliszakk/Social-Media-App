@@ -2,6 +2,8 @@ import { transformPostDate } from '@/lib/helpers/transformPostDate';
 import classes from './PostLikes.module.scss';
 import { useState } from 'react';
 import LikesModal from './LikesModal';
+import ProfileImage from '@/components/UI/User/ProfileImage';
+import Link from 'next/link';
 
 interface PostLikesProps {
 	postId: string;
@@ -10,6 +12,13 @@ interface PostLikesProps {
 	likes: number;
 	showLikes: boolean;
 	isUserAuthor: boolean;
+	hideLikesCount: boolean;
+	likesSnippet: {
+		name: string;
+		id: string;
+		image: string;
+		imageType: string;
+	}[];
 }
 
 const PostLikes: React.FC<PostLikesProps> = (props) => {
@@ -21,9 +30,33 @@ const PostLikes: React.FC<PostLikesProps> = (props) => {
 	return (
 		<div className={classes.likes}>
 			{props.isUserAuthor || (!props.isUserAuthor && props.showLikes) ? (
-				<p className={classes.likeParagraph} onClick={showModalHandler}>
-					<span>{props.likes}</span> Likes
-				</p>
+				props.likes >= 3 && props.likesSnippet ? (
+					<div className={classes.images}>
+						{props.likesSnippet!.map((user: any) => (
+							<ProfileImage
+								image={user.image}
+								imageType={user.imageType}
+								name={user.name}
+								key={user.id}
+								profileId={user.id}
+							/>
+						))}
+						<p>
+							Liked by{' '}
+							<Link href={`/profile/${props.likesSnippet[0].id}`}>
+								{props.likesSnippet[0].name}
+							</Link>{' '}
+							and{' '}
+							<span onClick={showModalHandler}>
+								{props.hideLikesCount ? '' : props.likes - 1} others
+							</span>
+						</p>
+					</div>
+				) : (
+					<p className={classes.likeParagraph} onClick={showModalHandler}>
+						<span>{props.likes}</span> Likes
+					</p>
+				)
 			) : (
 				<p>Likes count hidden on your account</p>
 			)}

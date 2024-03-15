@@ -21,6 +21,12 @@ interface PostPageProps {
 		description: string;
 		commenting: boolean;
 		likes: string[] | [];
+		likesSnippet: {
+			name: string;
+			id: string;
+			image: string;
+			imageType: string;
+		}[];
 	};
 	author: { id: string; name: string; image: string; imageType: string };
 
@@ -96,6 +102,8 @@ const PostPage: React.FC<PostPageProps> = ({ post, author, user }) => {
 					date={post.date}
 					showLikes={user.showLikes}
 					isUserAuthor={user.isUserAuthor}
+					likesSnippet={post.likesSnippet}
+					hideLikesCount={post.hideLikesCount}
 				/>
 
 				{post.commenting && <PostAddComment user={{ ...user }} />}
