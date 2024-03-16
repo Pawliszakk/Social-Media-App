@@ -53,6 +53,7 @@ export async function getPostById(
 		// console.log(commentsWithLikingStatus);
 		// post.comments = commentsWithLikingStatus;
 		//PRZEKAZAC DANE DO FRONTU DOBRZE, NIE ZMIENIAJA SIE POST.COMMENTS OD TAK NIESTETY
+		//
 	}
 	const isProfileBlockedByUser = userBlockedProfiles.find(
 		(id: string) => id.toString() === post.author.id
