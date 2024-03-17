@@ -9,15 +9,22 @@ interface CommentSettingsProps {
 }
 
 const CommentSettings: React.FC<CommentSettingsProps> = (props) => {
-	const handleDeleteCommentHandler = async () => {
+	const deleteCommentHandler = async () => {
 		await deleteComment(props.commentId);
-		// props.onClose();
+		props.onClose();
 	};
-
+	const reportCommentHandler = async () => {
+		console.log('REPORTING COMMENT ');
+	};
 	return (
 		<ModalBox onClose={props.onClose}>
 			<ul>
-				<Setting red onClick={handleDeleteCommentHandler}>
+				<Setting
+					red
+					onClick={
+						props.isUserAuthor ? deleteCommentHandler : reportCommentHandler
+					}
+				>
 					{props.isUserAuthor ? 'Delete' : 'Report'}
 				</Setting>
 				<Setting onClick={props.onClose}>Cancel</Setting>

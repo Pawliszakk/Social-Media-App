@@ -34,7 +34,7 @@ const LikesModal: React.FC<LikesModalProps> = (props) => {
 				<IoMdClose onClick={props.onClose} />
 			</h3>
 			<div className={classes.users}>
-				{/* {users &&
+				{users &&
 					users.length !== 0 &&
 					users.map((user: any) => {
 						return (
@@ -48,13 +48,10 @@ const LikesModal: React.FC<LikesModalProps> = (props) => {
 								userId={props.userId}
 								button
 								isLoggedUser={user._id.toString() === props.userId}
-								isLoggedUserFollowers={
-									props.followers && props.profileId === props.userId
-								}
 							/>
 						);
 					})}
-				{!users && <Spinner className={classes.spinner} />} */}
+				{!users && <Spinner className={classes.spinner} />}
 			</div>
 		</ModalBox>
 	);

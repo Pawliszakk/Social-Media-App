@@ -3,19 +3,37 @@
 	img {
 		border-radius: var(--radius-circle);
 	}
+	&.home {
+		padding: 0;
+		margin-left: 0.5em;
+	}
 	.commentBox {
 		margin-top: 1em;
 		align-items: flex-start;
 		display: flex;
+		justify-content: space-between;
 		gap: 3px;
+		.image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			img {
+				width: 40px;
+				height: 40px;
+			}
+		}
+		&.home {
+			justify-content: space-between;
+			margin-top: 0;
+		}
 	}
 	textarea {
 		position: relative;
 		margin: 0;
 		width: 100%;
 		resize: none;
-		min-height: 50px;
 		border: none;
+		margin-left: 1em;
 		&:focus {
 			outline: none;
 		}

@@ -11,6 +11,8 @@ import PostSettings from '@/components/Post/Settings/PostSettings';
 import NoPostsFallback from '@/components/Post/HomePost/NoPostsFallback';
 import { getUserData } from '@/lib/actions/utils/getUserData';
 import AsideSuggestions from '@/components/Home/AsideSuggestions';
+import PostAddComment from '@/components/Post/PostPage/Comments/PostAddComment';
+import CommentsLink from '@/components/Post/HomePost/CommentsLink';
 
 export default async function Home() {
 	const { session, user } = await getUserData(
@@ -92,21 +94,21 @@ export default async function Home() {
 										home
 									/>
 
-									<div className={classes.comments}>
-										<p>View all {post.comments.length} comments</p>
-									</div>
+									<CommentsLink
+										commentsLength={post.comments.length}
+										postId={post.id.toString()}
+									/>
 
-									<div className={classes.addComment}>
-										<form action="">
-											<textarea
-												name=""
-												id=""
-												// cols="30"
-												// rows="1"
-												placeholder="Add comment..."
-											></textarea>
-										</form>
-									</div>
+									<PostAddComment
+										postId={post.id.toString()}
+										user={{
+											image: user.image,
+											imageType: user.imageType,
+											name: user.name,
+											id: user.id.toString(),
+										}}
+										home
+									/>
 									<hr />
 								</article>
 							);

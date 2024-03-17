@@ -62,7 +62,7 @@ const PostLikes: React.FC<PostLikesProps> = (props) => {
 						}`}
 						onClick={showModalHandler}
 					>
-						<span>{props.likes}</span> Likes
+						<span>{props.likes}</span> {props.likes === 1 ? 'like' : 'likes'}
 					</p>
 				)
 			) : (

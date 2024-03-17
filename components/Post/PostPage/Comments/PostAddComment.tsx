@@ -1,3 +1,4 @@
+'use client';
 import Spinner from '@/components/UI/Spinner';
 import classes from './PostAddComment.module.scss';
 import ProfileImage from '@/components/UI/User/ProfileImage';
@@ -12,9 +13,14 @@ interface PostAddCommentProps {
 		name: string;
 		id: string;
 	};
+	home?: boolean;
 }
 
-const PostAddComment: React.FC<PostAddCommentProps> = ({ user, postId }) => {
+const PostAddComment: React.FC<PostAddCommentProps> = ({
+	user,
+	postId,
+	home,
+}) => {
 	const [comment, setComment] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -25,29 +31,40 @@ const PostAddComment: React.FC<PostAddCommentProps> = ({ user, postId }) => {
 		setComment(e.target.value);
 	};
 
-	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (
+		e: FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLTextAreaElement>
+	) => {
 		e.preventDefault();
 		setIsLoading(true);
 		await addComment(postId, comment);
 		setComment('');
 		setIsLoading(false);
 	};
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.key === 'Enter' && !e.shiftKey) {
+			e.preventDefault();
+			handleSubmit(e);
+		}
+	};
 	return (
-		<div className={classes.add}>
+		<div className={`${classes.add} ${home ? classes.home : null}`}>
 			<form onSubmit={handleSubmit}>
-				<div className={classes.commentBox}>
-					<div>
-						<ProfileImage
-							image={user.image}
-							name={user.name}
-							imageType={user.imageType}
-						/>
+				<div className={`${classes.commentBox} ${home ? classes.home : null}`}>
+					<div className={classes.image}>
+						{!home && (
+							<ProfileImage
+								image={user.image}
+								name={user.name}
+								imageType={user.imageType}
+							/>
+						)}
 						<textarea
 							name="comment"
 							id="comment"
 							value={comment}
 							onChange={handleTextareaChange}
 							placeholder="Add a comment..."
+							onKeyDown={handleKeyDown}
 						></textarea>
 					</div>
 					{isLoading ? (
