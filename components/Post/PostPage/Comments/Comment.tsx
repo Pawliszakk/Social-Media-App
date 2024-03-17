@@ -5,49 +5,78 @@ import Link from 'next/link';
 import { transformPostDate } from '@/lib/helpers/transformPostDate';
 import { useState } from 'react';
 import LikesModal from './LikesModal';
+import { FaHeart } from 'react-icons/fa';
+import {
+	likeComment,
+	unLikeComment,
+} from '@/lib/actions/post/comments/likeComment';
+import SettingsButton from '@/components/UI/Settings/SettingsButton';
+import CommentSettings from './CommentSettings';
 interface CommentProps {
 	userId: string;
 	comment: {
+		name: string;
 		id: string;
+		image: string;
+		imageType: string;
+		answers: string[] | [];
+		likes: number;
+		isUserLikingComment: boolean;
+		date: string;
+		content: string;
 		author: {
 			name: string;
 			id: string;
 			image: string;
 			imageType: string;
 		};
-		content: string;
-		date: string;
-		answers: string[];
-		likes: number;
 	};
 }
 
 const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
 	const [isLikesModal, setIsLikesModal] = useState(false);
-
+	const [likes, setLikes] = useState(comment.likes);
+	const [isUserLikingComment, setIsUserLikingComment] = useState(
+		comment.isUserLikingComment
+	);
+	const [isSettingsModal, setIsSettingsModal] = useState(false);
+	const isUserAuthor = comment.author.id === userId;
 	const showLikesHandler = () => {
-		if (comment.likes > 0) {
+		if (likes > 0) {
 			setIsLikesModal(true);
 		}
 	};
 	const closeLikesHandler = () => setIsLikesModal(false);
 
+	const showSettingsHandler = () => setIsSettingsModal(true);
+	const hideSettingsHandler = () => setIsSettingsModal(false);
+
 	const transformedDate = transformPostDate(+comment.date);
 
+	const doubleClickHandler = async () => {
+		if (!isUserLikingComment) {
+			setLikes((prev) => prev + 1);
+			setIsUserLikingComment(true);
+			await likeComment(comment.id);
+		}
+	};
+
 	const likeCommentHandler = async () => {
-		//CHECK IF COMMENT IS ALREARY LIKED
-		const isAlreadyLiked = false;
-		if (isAlreadyLiked) {
-			console.log('bede unlikowac');
+		if (isUserLikingComment) {
+			setLikes((prev) => prev - 1);
+			setIsUserLikingComment(false);
+			await unLikeComment(comment.id);
 		} else {
-			console.log('bede likowac');
+			setLikes((prev) => prev + 1);
+			setIsUserLikingComment(true);
+			await likeComment(comment.id);
 		}
 	};
 
 	return (
 		<>
 			{' '}
-			<div className={classes.box}>
+			<div className={classes.box} onDoubleClick={doubleClickHandler}>
 				{/* <ProfileImage /> */}
 				<div className={classes.image}>
 					<Image
@@ -68,15 +97,24 @@ const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
 						</span>
 						<span
 							onClick={showLikesHandler}
-							className={`${comment.likes === 0 ? classes.empty : null}`}
+							className={`${likes === 0 ? classes.empty : null}`}
 						>
-							{comment.likes} {comment.likes === 1 ? 'like' : 'likes'}
+							{likes} {likes === 1 ? 'like' : 'likes'}
 						</span>
 						<button>Reply</button>
+						<SettingsButton
+							className={classes.settingsButton}
+							onClick={showSettingsHandler}
+						/>
 					</div>
 				</div>
-				<div className={classes.like} onClick={likeCommentHandler}>
-					<FaRegHeart />
+				<div
+					className={`${classes.like} ${
+						isUserLikingComment ? classes.liked : ''
+					}`}
+					onClick={likeCommentHandler}
+				>
+					{isUserLikingComment ? <FaHeart /> : <FaRegHeart />}
 				</div>
 			</div>
 			{isLikesModal && (
@@ -84,6 +122,13 @@ const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
 					onClose={closeLikesHandler}
 					commentId={comment.id}
 					userId={userId}
+				/>
+			)}
+			{isSettingsModal && (
+				<CommentSettings
+					onClose={hideSettingsHandler}
+					commentId={comment.id}
+					isUserAuthor={isUserAuthor}
 				/>
 			)}
 		</>

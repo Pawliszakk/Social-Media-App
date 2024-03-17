@@ -10,6 +10,15 @@ interface PostCommentsProps {
 				id: string;
 				image: string;
 				imageType: string;
+				answers: string[] | [];
+				likes: number;
+				isUserLikingComment: boolean;
+				author: {
+					name: string;
+					id: string;
+					image: string;
+					imageType: string;
+				};
 		  }[]
 		| string[];
 }

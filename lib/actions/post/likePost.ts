@@ -2,7 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 import { Post } from '../Models/post';
-import { User } from '../Models/user';
 import mongoose from 'mongoose';
 import { getUserData } from '../utils/getUserData';
 
@@ -11,7 +10,7 @@ export async function likePost(postId: string) {
 
 	let post;
 	try {
-		post = await Post.findOne({ _id: postId });
+		post = await Post.findOne({ _id: postId }).select('likes');
 	} catch (e) {
 		throw new Error('Failed to like a post');
 	}
@@ -46,9 +45,9 @@ export async function unLikePost(postId: string) {
 
 	let post;
 	try {
-		post = await Post.findOne({ _id: postId });
+		post = await Post.findOne({ _id: postId }).select('likes');
 	} catch (e) {
-		throw new Error('Failed to like a post');
+		throw new Error('Failed to unlike a post');
 	}
 
 	if (!post || !user) {

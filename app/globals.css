@@ -20,6 +20,7 @@
 	--primary-button-hover: rgb(35, 62, 215);
 	--divider-color: rgba(0, 0, 0, 0.2);
 	--skeleton-loading: skeleton-loading 1s linear infinite alternate;
+	--likeScaleAnimation: scaleUp 0.3s ease-in-out;
 }
 
 [data-theme='dark'] {
@@ -60,5 +61,16 @@ body {
 	}
 	to {
 		background-color: rgb(240, 243, 245);
+	}
+}
+@keyframes scaleUp {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.4);
+	}
+	100% {
+		transform: scale(1);
 	}
 }

@@ -19,20 +19,6 @@ interface PostPageProps {
 		date: number;
 		hideLikesCount: boolean;
 		description: string;
-		comments:
-			| {
-					name: string;
-					id: string;
-					image: string;
-					imageType: string;
-					author: {
-						name: string;
-						id: string;
-						image: string;
-						imageType: string;
-					};
-			  }[]
-			| string[];
 		commenting: boolean;
 		likes: string[] | [];
 		likesSnippet: {
@@ -42,6 +28,23 @@ interface PostPageProps {
 			imageType: string;
 		}[];
 	};
+	comments:
+		| {
+				name: string;
+				id: string;
+				image: string;
+				imageType: string;
+				answers: string[] | [];
+				isUserLikingComment: boolean;
+				likes: number;
+				author: {
+					name: string;
+					id: string;
+					image: string;
+					imageType: string;
+				};
+		  }[]
+		| string[];
 	author: { id: string; name: string; image: string; imageType: string };
 
 	user: {
@@ -57,7 +60,12 @@ interface PostPageProps {
 	};
 }
 
-const PostPage: React.FC<PostPageProps> = ({ post, author, user }) => {
+const PostPage: React.FC<PostPageProps> = ({
+	post,
+	author,
+	user,
+	comments,
+}) => {
 	const [likesCount, setLikesCount] = useState(post.likes.length);
 	const [isUserLikingPost, setIsUserLikingPost] = useState(
 		user.isUserLikingPost
@@ -103,7 +111,7 @@ const PostPage: React.FC<PostPageProps> = ({ post, author, user }) => {
 
 				<PostComments
 					isCommenting={post.commenting}
-					comments={post.comments}
+					comments={comments}
 					userId={user.id}
 				/>
 

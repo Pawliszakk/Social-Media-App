@@ -30,7 +30,6 @@ const PostLikes: React.FC<PostLikesProps> = (props) => {
 	};
 	const closeModalHandler = () => setIsLikesModal(false);
 	const dateToDisplay = transformPostDate(props.date);
-	console.log(props.likes === 0);
 	return (
 		<div className={classes.likes}>
 			{props.isUserAuthor || (!props.isUserAuthor && props.showLikes) ? (

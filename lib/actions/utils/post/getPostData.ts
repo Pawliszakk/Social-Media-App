@@ -13,7 +13,7 @@ export async function getPostData(postId: string) {
 		permanentRedirect('/auth/login');
 	}
 
-	const { post, isUserAllowedToView, isUserAuthor, likesSnippet } =
+	const { post, comments, isUserAllowedToView, isUserAuthor, likesSnippet } =
 		await getPostById(postId, user.id, user.blockedUsers);
 	if (!isUserAllowedToView) {
 		permanentRedirect(`/profile/${post.author.id}`);
@@ -38,6 +38,7 @@ export async function getPostData(postId: string) {
 	return {
 		user,
 		post,
+		comments,
 		isUserLikingPost: !!isUserLikingPost,
 		isUserAuthor: !!isUserAuthor,
 		isUserFollowingAuthor: !!isUserFollowingAuthor,

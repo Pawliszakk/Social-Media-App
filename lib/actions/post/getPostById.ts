@@ -20,7 +20,7 @@ export async function getPostById(
 	} catch (e) {
 		throw new Error('Something went wrong, please try again later');
 	}
-
+	let comments = [];
 	if (post.commenting) {
 		try {
 			await post.populate({
@@ -33,7 +33,7 @@ export async function getPostById(
 
 		const commentsWithLikingStatus = post.comments.map((comment: any) => {
 			const isUserLikingComment = !!user.likedComments.find(
-				(id: string) => id === comment.id.toString()
+				(id: string) => id.toString() === comment.id.toString()
 			);
 			return {
 				id: comment.id,
@@ -44,16 +44,13 @@ export async function getPostById(
 					imageType: comment.author.imageType,
 				},
 				content: comment.content,
-				likes: comment.likes,
+				likes: comment.likes.length,
 				date: comment.date,
 				answers: comment.answers,
 				isUserLikingComment,
 			};
 		});
-		// console.log(commentsWithLikingStatus);
-		// post.comments = commentsWithLikingStatus;
-		//PRZEKAZAC DANE DO FRONTU DOBRZE, NIE ZMIENIAJA SIE POST.COMMENTS OD TAK NIESTETY
-		//
+		comments = commentsWithLikingStatus.reverse();
 	}
 	const isProfileBlockedByUser = userBlockedProfiles.find(
 		(id: string) => id.toString() === post.author.id
@@ -81,5 +78,5 @@ export async function getPostById(
 	if (isUserAuthor) {
 		isUserAllowedToView = true;
 	}
-	return { post, isUserAllowedToView, isUserAuthor, likesSnippet };
+	return { post, comments, isUserAllowedToView, isUserAuthor, likesSnippet };
 }

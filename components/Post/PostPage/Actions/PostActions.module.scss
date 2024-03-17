@@ -19,22 +19,10 @@
 	}
 	.liked {
 		color: rgb(205, 49, 21);
-		animation: scaleUp 0.3s ease-in-out;
+		animation: var(--likeScaleAnimation);
 	}
 	.saved {
 		color: rgb(72, 108, 19);
-		animation: scaleUp 0.3s ease-in-out;
-	}
-}
-
-@keyframes scaleUp {
-	0% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.4);
-	}
-	100% {
-		transform: scale(1);
+		animation: var(--likeScaleAnimation);
 	}
 }

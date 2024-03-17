@@ -14,6 +14,10 @@
 	}
 	.comment {
 		margin: 0.5em auto 0 0.5em;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
 		align-self: flex-start;
 		.content {
 			font-size: 1.1rem;
@@ -23,6 +27,9 @@
 				text-decoration: none;
 				color: var(--text-normal);
 			}
+			p {
+				margin-left: 0.5em;
+			}
 		}
 		.actions {
 			margin-top: 0.5em;
@@ -31,6 +38,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			align-self: flex-start;
 			gap: 10px;
 			font-weight: bold;
 			.date {
@@ -51,11 +59,40 @@
 				border: none;
 				font-weight: bold;
 			}
+			.settingsButton {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 1.8rem;
+				padding: 0;
+				opacity: 0;
+			}
+			&:hover .settingsButton {
+				opacity: 1;
+			}
 		}
 	}
 	.like {
 		cursor: pointer;
 		font-size: 1.2rem;
 		padding: 1em;
+	}
+	.liked {
+		color: rgb(205, 49, 21);
+		animation: var(--likeScaleAnimation);
+	}
+	@media (min-width: 1400px) {
+		.comment {
+			margin: 1em auto 0 1em;
+			.content {
+				font-size: 1.4rem;
+			}
+			.actions {
+				font-size: 1.2rem;
+			}
+		}
+		.like {
+			font-size: 1.3rem;
+		}
 	}
 }

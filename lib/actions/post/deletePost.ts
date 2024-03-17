@@ -16,10 +16,10 @@ export async function deletePost(postId: string) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
-	const isPostUsersPost = user.posts.find(
+	const isUserAuthor = user.posts.find(
 		(id: string) => id.toString() === postId
 	);
-	if (!post || !user || !!!isPostUsersPost) {
+	if (!post || !user || !!!isUserAuthor) {
 		throw new Error('Something went wrong, please try again later');
 	}
 
@@ -31,7 +31,7 @@ export async function deletePost(postId: string) {
 		await deleteImage(post.image);
 		const sess = await mongoose.startSession();
 		sess.startTransaction();
-		await post.deleteOne();
+		await post.deleteOne({ session: sess });
 		user.posts = updatedUserPosts;
 		await user.save({ session: sess });
 		await sess.commitTransaction();
