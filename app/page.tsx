@@ -95,7 +95,7 @@ export default async function Home() {
 									/>
 
 									<CommentsLink
-										commentsLength={post.comments.length}
+										commentsLength={post.comments}
 										postId={post.id.toString()}
 									/>
 
