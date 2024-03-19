@@ -1,0 +1,25 @@
+.reply {
+	cursor: pointer;
+	margin-top: 0.5em;
+	margin-left: 3em;
+	opacity: 0.7;
+	font-size: 1.2rem;
+	display: flex;
+	align-items: center;
+
+	.line {
+		height: 1px;
+		width: 25px;
+		opacity: 0.7;
+		background-color: #000;
+	}
+	span {
+		margin-left: 1em;
+	}
+	.replies {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+}

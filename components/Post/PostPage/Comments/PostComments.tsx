@@ -6,10 +6,7 @@ interface PostCommentsProps {
 	userId: string;
 	comments:
 		| {
-				name: string;
 				id: string;
-				image: string;
-				imageType: string;
 				replies: number;
 				likes: number;
 				isUserLikingComment: boolean;

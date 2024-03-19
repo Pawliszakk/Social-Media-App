@@ -30,10 +30,7 @@ interface PostPageProps {
 	};
 	comments:
 		| {
-				name: string;
 				id: string;
-				image: string;
-				imageType: string;
 				replies: number;
 				isUserLikingComment: boolean;
 				likes: number;

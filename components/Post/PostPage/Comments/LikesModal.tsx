@@ -19,7 +19,6 @@ const LikesModal: React.FC<LikesModalProps> = (props) => {
 				`/api/post/comment/likes/?commentId=${props.commentId}`
 			);
 			const fetchedUsers = await res.json();
-			console.log(fetchedUsers);
 			if (res.ok) {
 				setUsers(fetchedUsers);
 			}

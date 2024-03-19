@@ -12,13 +12,11 @@ import {
 } from '@/lib/actions/post/comments/likeComment';
 import SettingsButton from '@/components/UI/Settings/SettingsButton';
 import CommentSettings from './CommentSettings';
+import Replies from './Replies';
 interface CommentProps {
 	userId: string;
 	comment: {
-		name: string;
 		id: string;
-		image: string;
-		imageType: string;
 		replies: number;
 		likes: number;
 		isUserLikingComment: boolean;
@@ -128,10 +126,7 @@ const Comment: React.FC<CommentProps> = ({ comment, userId, onReply }) => {
 					</div>
 				</div>
 				{comment.replies > 0 && (
-					<div className={classes.reply}>
-						<div className={classes.line}></div>
-						<span>View replies ({comment.replies})</span>
-					</div>
+					<Replies commentId={comment.id} repliesNumber={comment.replies} />
 				)}
 			</div>
 			{isLikesModal && (
