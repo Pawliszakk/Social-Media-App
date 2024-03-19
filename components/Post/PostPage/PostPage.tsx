@@ -34,7 +34,7 @@ interface PostPageProps {
 				id: string;
 				image: string;
 				imageType: string;
-				answers: string[] | [];
+				replies: number;
 				isUserLikingComment: boolean;
 				likes: number;
 				author: {
@@ -70,6 +70,14 @@ const PostPage: React.FC<PostPageProps> = ({
 	const [isUserLikingPost, setIsUserLikingPost] = useState(
 		user.isUserLikingPost
 	);
+	const [replyCommentData, setReplyCommentData] = useState<null | {
+		authorName: string;
+		commentId: string;
+	}>();
+
+	const replyingHandler = (authorName: string, commentId: string) =>
+		setReplyCommentData({ authorName, commentId });
+
 	const likePostHandler = () => {
 		if (!isUserLikingPost) {
 			setLikesCount((prev) => prev + 1);
@@ -113,6 +121,7 @@ const PostPage: React.FC<PostPageProps> = ({
 					isCommenting={post.commenting}
 					comments={comments}
 					userId={user.id}
+					onReply={replyingHandler}
 				/>
 
 				<PostActions
@@ -133,7 +142,11 @@ const PostPage: React.FC<PostPageProps> = ({
 				/>
 
 				{post.commenting && (
-					<PostAddComment postId={post.id} user={{ ...user }} />
+					<PostAddComment
+						replyCommentData={replyCommentData}
+						postId={post.id}
+						user={{ ...user }}
+					/>
 				)}
 			</div>
 		</div>

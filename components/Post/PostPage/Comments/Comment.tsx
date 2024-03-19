@@ -12,7 +12,6 @@ import {
 } from '@/lib/actions/post/comments/likeComment';
 import SettingsButton from '@/components/UI/Settings/SettingsButton';
 import CommentSettings from './CommentSettings';
-import { IoRemoveOutline } from 'react-icons/io5';
 interface CommentProps {
 	userId: string;
 	comment: {
@@ -20,7 +19,7 @@ interface CommentProps {
 		id: string;
 		image: string;
 		imageType: string;
-		answers: string[] | [];
+		replies: number;
 		likes: number;
 		isUserLikingComment: boolean;
 		date: string;
@@ -32,16 +31,19 @@ interface CommentProps {
 			imageType: string;
 		};
 	};
+	onReply: (authorName: string, commentId: string) => void;
 }
 
-const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
+const Comment: React.FC<CommentProps> = ({ comment, userId, onReply }) => {
 	const [isLikesModal, setIsLikesModal] = useState(false);
 	const [likes, setLikes] = useState(comment.likes);
 	const [isUserLikingComment, setIsUserLikingComment] = useState(
 		comment.isUserLikingComment
 	);
 	const [isSettingsModal, setIsSettingsModal] = useState(false);
+
 	const isUserAuthor = comment.author.id === userId;
+
 	const showLikesHandler = () => {
 		if (likes > 0) {
 			setIsLikesModal(true);
@@ -74,17 +76,24 @@ const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
 		}
 	};
 
+	const replyHandler = () => {
+		onReply(comment.author.name, comment.id);
+	};
+
 	return (
 		<>
 			<div className={classes.box1}>
 				<div className={classes.box} onDoubleClick={doubleClickHandler}>
-					{/* <ProfileImage /> */}
 					<div className={classes.image}>
 						<Image
-							src="/assets/defaultUser.JPG"
+							src={
+								comment.author.imageType === 'provider'
+									? `${comment.author.image}`
+									: `https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${comment.author.image}`
+							}
 							height={30}
 							width={30}
-							alt="Profile image of a user"
+							alt={`${comment.author.name} profile image`}
 						/>
 					</div>
 					<div className={classes.comment}>
@@ -102,7 +111,7 @@ const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
 							>
 								{likes} {likes === 1 ? 'like' : 'likes'}
 							</span>
-							<button>Reply</button>
+							<button onClick={replyHandler}>Reply</button>
 							<SettingsButton
 								className={classes.settingsButton}
 								onClick={showSettingsHandler}
@@ -118,10 +127,10 @@ const Comment: React.FC<CommentProps> = ({ comment, userId }) => {
 						{isUserLikingComment ? <FaHeart /> : <FaRegHeart />}
 					</div>
 				</div>
-				{!(comment.answers.length > 0) && (
+				{comment.replies > 0 && (
 					<div className={classes.reply}>
-						<IoRemoveOutline />{' '}
-						<span>View replies ({comment.answers.length})</span>
+						<div className={classes.line}></div>
+						<span>View replies ({comment.replies})</span>
 					</div>
 				)}
 			</div>

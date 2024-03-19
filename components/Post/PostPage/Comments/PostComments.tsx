@@ -10,7 +10,7 @@ interface PostCommentsProps {
 				id: string;
 				image: string;
 				imageType: string;
-				answers: string[] | [];
+				replies: number;
 				likes: number;
 				isUserLikingComment: boolean;
 				author: {
@@ -21,12 +21,14 @@ interface PostCommentsProps {
 				};
 		  }[]
 		| string[];
+	onReply: (authorName: string, commentId: string) => void;
 }
 
 const PostComments: React.FC<PostCommentsProps> = ({
 	isCommenting,
 	comments,
 	userId,
+	onReply,
 }) => {
 	const areCommentsEmpty = comments.length === 0 || !comments;
 	return (
@@ -36,7 +38,12 @@ const PostComments: React.FC<PostCommentsProps> = ({
 					<p>No one commented this post yet.</p>
 				) : (
 					comments.map((comment: any) => (
-						<Comment userId={userId} comment={comment} key={comment.id} />
+						<Comment
+							onReply={onReply}
+							userId={userId}
+							comment={comment}
+							key={comment.id}
+						/>
 					))
 				)
 			) : (

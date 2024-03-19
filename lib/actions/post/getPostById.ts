@@ -46,7 +46,7 @@ export async function getPostById(
 				content: comment.content,
 				likes: comment.likes.length,
 				date: comment.date,
-				answers: comment.answers,
+				replies: comment.replies.length,
 				isUserLikingComment,
 			};
 		});

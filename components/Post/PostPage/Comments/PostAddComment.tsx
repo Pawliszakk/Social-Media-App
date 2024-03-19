@@ -4,6 +4,7 @@ import classes from './PostAddComment.module.scss';
 import ProfileImage from '@/components/UI/User/ProfileImage';
 import { addComment } from '@/lib/actions/post/comments/addComment';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { addReply } from '@/lib/actions/post/comments/addReply';
 
 interface PostAddCommentProps {
 	postId: string;
@@ -13,13 +14,15 @@ interface PostAddCommentProps {
 		name: string;
 		id: string;
 	};
+	replyCommentData?: { authorName: string; commentId: string } | null;
 	home?: boolean;
 }
 
 const PostAddComment: React.FC<PostAddCommentProps> = ({
 	user,
-	postId,
 	home,
+	postId,
+	replyCommentData,
 }) => {
 	const [comment, setComment] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +39,11 @@ const PostAddComment: React.FC<PostAddCommentProps> = ({
 	) => {
 		e.preventDefault();
 		setIsLoading(true);
-		await addComment(postId, comment);
+		if (!!replyCommentData) {
+			await addReply(replyCommentData.commentId, comment);
+		} else {
+			await addComment(postId, comment);
+		}
 		setComment('');
 		setIsLoading(false);
 	};
@@ -63,7 +70,11 @@ const PostAddComment: React.FC<PostAddCommentProps> = ({
 							id="comment"
 							value={comment}
 							onChange={handleTextareaChange}
-							placeholder="Add a comment..."
+							placeholder={
+								!!replyCommentData
+									? `Replying to ${replyCommentData.authorName}...`
+									: 'Add a comment...'
+							}
 							onKeyDown={handleKeyDown}
 						></textarea>
 					</div>
@@ -71,7 +82,11 @@ const PostAddComment: React.FC<PostAddCommentProps> = ({
 						<Spinner />
 					) : (
 						!isCommentEmpty &&
-						!isCommentTooLarge && <button type="submit">Post</button>
+						!isCommentTooLarge && (
+							<button type="submit">
+								{!!replyCommentData ? 'Reply' : 'Post'}
+							</button>
+						)
 					)}
 				</div>
 				{isCommentTooLarge && (
