@@ -7,7 +7,7 @@ import { FaComment } from 'react-icons/fa';
 interface PostTileProps {
 	postId: string;
 	likes: string[] | [];
-	comments: string[] | [];
+	comments: number;
 	image: string;
 	author: string;
 	commenting: boolean;
@@ -45,7 +45,7 @@ const PostTile: React.FC<PostTileProps> = ({
 						) : null}
 						{commenting && (
 							<div>
-								<FaComment /> <span>{comments.length}</span>
+								<FaComment /> <span>{comments}</span>
 							</div>
 						)}
 					</div>
