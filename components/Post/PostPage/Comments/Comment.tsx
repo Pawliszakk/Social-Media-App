@@ -96,7 +96,9 @@ const Comment: React.FC<CommentProps> = ({ comment, userId, onReply }) => {
 					</div>
 					<div className={classes.comment}>
 						<div className={classes.content}>
-							<Link href="/">{comment.author.name}</Link>
+							<Link href={`/profile/${comment.author.id}`}>
+								{comment.author.name}
+							</Link>
 							<p>{comment.content}</p>
 						</div>
 						<div className={classes.actions}>
@@ -126,7 +128,11 @@ const Comment: React.FC<CommentProps> = ({ comment, userId, onReply }) => {
 					</div>
 				</div>
 				{comment.replies > 0 && (
-					<Replies commentId={comment.id} repliesNumber={comment.replies} />
+					<Replies
+						userId={userId}
+						commentId={comment.id}
+						repliesNumber={comment.replies}
+					/>
 				)}
 			</div>
 			{isLikesModal && (

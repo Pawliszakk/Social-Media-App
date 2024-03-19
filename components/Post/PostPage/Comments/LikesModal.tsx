@@ -6,7 +6,8 @@ import ModalBox from '@/components/UI/ModalBox';
 import Spinner from '@/components/UI/Spinner';
 interface LikesModalProps {
 	userId: string;
-	commentId: string;
+	commentId?: string;
+	replyId?: string;
 	onClose: () => void;
 }
 
@@ -15,9 +16,10 @@ const LikesModal: React.FC<LikesModalProps> = (props) => {
 
 	useEffect(() => {
 		const fetchUserData = async () => {
-			const res = await fetch(
-				`/api/post/comment/likes/?commentId=${props.commentId}`
-			);
+			const URL = props.commentId
+				? `/api/post/comment/likes/?commentId=${props.commentId}`
+				: `/api/post/comment/reply/likes?replyId=${props.replyId}`;
+			const res = await fetch(URL);
 			const fetchedUsers = await res.json();
 			if (res.ok) {
 				setUsers(fetchedUsers);

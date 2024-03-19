@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import classes from './Replies.module.scss';
 import Spinner from '@/components/UI/Spinner';
 import Reply from './Reply';
@@ -6,9 +6,14 @@ import Reply from './Reply';
 interface RepliesProps {
 	repliesNumber: number;
 	commentId: string;
+	userId: string;
 }
 
-const Replies: React.FC<RepliesProps> = ({ repliesNumber, commentId }) => {
+const Replies: React.FC<RepliesProps> = ({
+	repliesNumber,
+	commentId,
+	userId,
+}) => {
 	const [replies, setReplies] = useState<null | []>(null);
 	const [showReplies, setShowReplies] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +22,9 @@ const Replies: React.FC<RepliesProps> = ({ repliesNumber, commentId }) => {
 		if (showReplies) {
 			setShowReplies(false);
 		} else {
-			setIsLoading(true);
+			if (!replies) {
+				setIsLoading(true);
+			}
 			setShowReplies(true);
 			const res = await fetch(
 				`/api/post/comment/replies/?commentId=${commentId}`
@@ -33,22 +40,27 @@ const Replies: React.FC<RepliesProps> = ({ repliesNumber, commentId }) => {
 	};
 
 	return (
-		<div className={classes.reply} onClick={repliesHandler}>
-			<div className={classes.line}></div>
-			{showReplies ? (
-				<>
-					<div className={classes.replies}>
-						<span>Hide replies</span>
-						{isLoading && <Spinner />}
-
-						{replies &&
-							replies.length > 0 &&
-							replies.map((reply) => <Reply reply={reply} />)}
-					</div>
-				</>
-			) : (
-				<span>View replies ({repliesNumber})</span>
-			)}
+		<div className={classes.box}>
+			<div className={classes.buttons}>
+				<div className={classes.line} onClick={repliesHandler}></div>
+				{showReplies ? (
+					<>
+						<span className={classes.hide} onClick={repliesHandler}>
+							Hide replies {isLoading && <Spinner />}
+						</span>
+					</>
+				) : (
+					<span onClick={repliesHandler}>View replies ({repliesNumber})</span>
+				)}
+			</div>
+			<div className={classes.replies}>
+				{showReplies &&
+					replies &&
+					replies.length > 0 &&
+					replies.map((reply: any) => (
+						<Reply key={reply.id} reply={reply} userId={userId} />
+					))}
+			</div>
 		</div>
 	);
 };

@@ -1,16 +1,24 @@
 import ModalBox from '@/components/UI/ModalBox';
 import Setting from '@/components/UI/Settings/Setting';
 import { deleteComment } from '@/lib/actions/post/comments/deleteComment';
+import { deleteReply } from '@/lib/actions/post/comments/deleteReply';
 
 interface CommentSettingsProps {
 	onClose: () => void;
-	commentId: string;
+	commentId?: string;
+	replyId?: string;
 	isUserAuthor: boolean;
 }
 
 const CommentSettings: React.FC<CommentSettingsProps> = (props) => {
 	const deleteCommentHandler = async () => {
-		await deleteComment(props.commentId);
+		if (props.commentId) {
+			await deleteComment(props.commentId);
+		}
+		if (props.replyId) {
+			await deleteReply(props.replyId);
+		}
+
 		props.onClose();
 	};
 	const reportCommentHandler = async () => {
