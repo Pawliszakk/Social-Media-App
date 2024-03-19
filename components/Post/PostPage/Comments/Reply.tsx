@@ -7,8 +7,10 @@ import { useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import CommentSettings from './CommentSettings';
 import LikesModal from './LikesModal';
+import { likeReply, unLikeReply } from '@/lib/actions/post/comments/LikeReply';
 
 interface ReplyProps {
+	commentId: string;
 	userId: string;
 	reply: {
 		id: string;
@@ -24,7 +26,7 @@ interface ReplyProps {
 		};
 	};
 }
-const Reply: React.FC<ReplyProps> = ({ reply, userId }) => {
+const Reply: React.FC<ReplyProps> = ({ reply, userId, commentId }) => {
 	const [isLikesModal, setIsLikesModal] = useState(false);
 	const [likes, setLikes] = useState(reply.likes.length);
 	const [isUserLikingReply, setIsUserLikingReply] = useState(
@@ -32,34 +34,31 @@ const Reply: React.FC<ReplyProps> = ({ reply, userId }) => {
 	);
 	const [isSettingsModal, setIsSettingsModal] = useState(false);
 
+	const showLikesHandler = () => setIsLikesModal(true);
 	const closeLikesHandler = () => setIsLikesModal(false);
 
 	const showSettingsHandler = () => setIsSettingsModal(true);
 	const hideSettingsHandler = () => setIsSettingsModal(false);
 	const isUserAuthor = reply.author.id === userId;
-
-	const doubleClickHandler = () => {
-		if (isUserLikingReply) {
-			console.log('unlikeReply');
-		} else {
-			console.log('likeReply');
+	const doubleClickHandler = async () => {
+		if (!isUserLikingReply) {
+			setLikes((prev) => prev + 1);
+			setIsUserLikingReply(true);
+			await likeReply(reply.id);
 		}
 	};
-	const showLikesHandler = () => {
-		console.log('showLikes');
-	};
+
 	const likeReplyHandler = async () => {
 		if (isUserLikingReply) {
 			setLikes((prev) => prev - 1);
 			setIsUserLikingReply(false);
-			console.log('unlike comment');
+			await unLikeReply(reply.id);
 		} else {
 			setLikes((prev) => prev + 1);
 			setIsUserLikingReply(true);
-			console.log('like comment');
+			await likeReply(reply.id);
 		}
 	};
-
 	const transformedDate = transformPostDate(+reply.date);
 	return (
 		<>
@@ -86,10 +85,10 @@ const Reply: React.FC<ReplyProps> = ({ reply, userId }) => {
 							{transformedDate}
 						</span>
 						<span
-							onClick={showLikesHandler}
 							className={`${likes === 0 ? classes.empty : null}`}
+							onClick={showLikesHandler}
 						>
-							{reply.likes.length} {reply.likes.length === 1 ? 'like' : 'likes'}
+							{likes} {likes === 1 ? 'like' : 'likes'}
 						</span>
 						{/* <button onClick={ReplyHandler}>Reply</button> */}
 						<SettingsButton
@@ -100,11 +99,11 @@ const Reply: React.FC<ReplyProps> = ({ reply, userId }) => {
 				</div>
 				<div
 					className={`${classes.like} ${
-						reply.isUserLikingReply ? classes.liked : ''
+						isUserLikingReply ? classes.liked : ''
 					}`}
 					onClick={likeReplyHandler}
 				>
-					{reply.isUserLikingReply ? <FaHeart /> : <FaRegHeart />}
+					{isUserLikingReply ? <FaHeart /> : <FaRegHeart />}
 				</div>
 			</div>
 			{isLikesModal && (
@@ -116,6 +115,7 @@ const Reply: React.FC<ReplyProps> = ({ reply, userId }) => {
 			)}
 			{isSettingsModal && (
 				<CommentSettings
+					commentId={commentId}
 					onClose={hideSettingsHandler}
 					replyId={reply.id}
 					isUserAuthor={isUserAuthor}

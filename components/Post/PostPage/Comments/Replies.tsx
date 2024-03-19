@@ -58,7 +58,12 @@ const Replies: React.FC<RepliesProps> = ({
 					replies &&
 					replies.length > 0 &&
 					replies.map((reply: any) => (
-						<Reply key={reply.id} reply={reply} userId={userId} />
+						<Reply
+							key={reply.id}
+							reply={reply}
+							userId={userId}
+							commentId={commentId}
+						/>
 					))}
 			</div>
 		</div>

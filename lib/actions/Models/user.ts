@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
 	likedComments: [
 		{ type: mongoose.Types.ObjectId, required: true, ref: 'Comment' },
 	],
+	likedReplies: [
+		{ type: mongoose.Types.ObjectId, required: true, ref: 'CommentReply' },
+	],
 	followers: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
 	following: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
 	closeFriends: [

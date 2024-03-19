@@ -18,7 +18,7 @@ const LikesModal: React.FC<LikesModalProps> = (props) => {
 		const fetchUserData = async () => {
 			const URL = props.commentId
 				? `/api/post/comment/likes/?commentId=${props.commentId}`
-				: `/api/post/comment/reply/likes?replyId=${props.replyId}`;
+				: `/api/post/comment/replies/likes?replyId=${props.replyId}`;
 			const res = await fetch(URL);
 			const fetchedUsers = await res.json();
 			if (res.ok) {
