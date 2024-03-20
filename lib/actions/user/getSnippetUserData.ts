@@ -3,6 +3,7 @@
 import { User } from '../Models/user';
 import { getUserData } from '../utils/getUserData';
 import { checkIfUserIsAllowedToViewPosts } from './checkIfUserIsAllowedToViewPosts';
+const followRequest = require('../Models/followRequest');
 
 export async function getSnippetUserData(profileId: string) {
 	const { session, user } = await getUserData();
