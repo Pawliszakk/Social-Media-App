@@ -6,11 +6,8 @@
 	left: 0;
 	border-top: var(--border-light);
 	background-color: var(--primary-background);
-	.logo {
-		text-align: center;
-		display: none;
-		color: var(--text-normal);
-	}
+	transition: width 0.3s;
+	z-index: 20;
 	nav {
 		display: flex;
 		justify-content: space-around;
@@ -32,17 +29,18 @@
 
 	@media (min-width: 1200px) {
 		width: 300px;
-		.logo {
-			display: block;
-			padding-top: 1rem;
-			font-size: 2rem;
-		}
 		nav {
 			margin-top: 10vh;
 			display: flex;
 			height: 50%;
 			align-items: flex-start;
 			padding: 0 2em;
+		}
+		&.search {
+			span {
+				display: none;
+			}
+			width: 70px;
 		}
 	}
 	@media (min-width: 1400px) {

@@ -15,21 +15,25 @@ interface ActionBarOptionProps {
 		image?: string | null | undefined;
 		avatar?: boolean;
 		logout?: boolean;
+		search?: boolean;
 	};
+	isSearch: boolean;
+	onSearch: () => void;
 	imageType: string;
 }
 
 const ActionBarOption: React.FC<ActionBarOptionProps> = (props) => {
-	const { option, imageType } = props;
-	const { href, icon, text, avatar, logout, image, name } = option;
+	const { option, imageType, onSearch, isSearch } = props;
+	const { href, icon, text, avatar, logout, image, name, search } = option;
 
 	const pathname = usePathname();
 	let active;
 	if (pathname === href) {
 		active = true;
 	}
-	const classNames = `${classes.option} ${active ? classes.active : null}`;
-
+	const classNames = `${classes.option} ${active ? classes.active : null}  ${
+		!isSearch ? classes.search : null
+	}`;
 	const isAvatarChanged = imageType === 'provider';
 
 	const avatarToShow: string = !isAvatarChanged
@@ -58,9 +62,16 @@ const ActionBarOption: React.FC<ActionBarOptionProps> = (props) => {
 	}
 	if (logout) {
 		return (
-			<LogoutBtn className={classes.option}>
+			<LogoutBtn className={classNames}>
 				{icon} <span>{text}</span>
 			</LogoutBtn>
+		);
+	}
+	if (search) {
+		return (
+			<button onClick={onSearch} className={classNames}>
+				{icon} <span>Search</span>
+			</button>
 		);
 	}
 };

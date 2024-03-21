@@ -1,0 +1,12 @@
+.logo {
+	text-align: center;
+	display: none;
+	color: var(--text-normal);
+	@media (min-width: 1200px) {
+		.logo {
+			display: block;
+			padding-top: 1rem;
+			font-size: 2rem;
+		}
+	}
+}
