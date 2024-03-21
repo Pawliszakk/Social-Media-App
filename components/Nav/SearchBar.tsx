@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from 'react';
+import { ChangeEvent, RefObject, useEffect, useState } from 'react';
 import classes from './SearchBar.module.scss';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { SlMagnifier } from 'react-icons/sl';
@@ -11,12 +11,15 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = (props) => {
 	const [isFocus, setIsFocus] = useState(false);
+	const [inputValue, setInputValue] = useState('');
 
-	const focusHandler = () => {
-		if (isFocus) {
-			setIsFocus(false);
-		} else {
-			setIsFocus(true);
+	const focusHandler = () => (isFocus ? setIsFocus(false) : setIsFocus(true));
+
+	const onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		setInputValue(e.target.value);
+		if (inputValue && inputValue.trim().length !== 0) {
+			console.log('git');
+			//fetch Request
 		}
 	};
 
@@ -54,6 +57,8 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 							placeholder={'Search...'}
 							onFocus={focusHandler}
 							onBlur={focusHandler}
+							onChange={onInputChangeHandler}
+							value={inputValue}
 						/>
 						<button type="reset">
 							<IoMdCloseCircle />
