@@ -27,6 +27,7 @@
 				padding-left: 2.4em;
 				border: none;
 				outline: none;
+				color: var(--text-normal);
 			}
 			button {
 				display: none;
@@ -39,6 +40,9 @@
 				transform: translateY(-50%);
 				font-size: 2rem;
 				cursor: pointer;
+				svg {
+					color: var(--text-normal);
+				}
 			}
 			.icon {
 				position: absolute;
@@ -75,6 +79,10 @@
 		justify-content: center;
 		align-items: flex-start;
 		flex-direction: column;
+		overflow-y: scroll;
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	}
 	.loading {
 		width: 100%;

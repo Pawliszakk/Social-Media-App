@@ -5,6 +5,7 @@ import { SlMagnifier } from 'react-icons/sl';
 import { motion } from 'framer-motion';
 import SearchedUser from './SearchedUser';
 import Spinner from '../UI/Spinner';
+import SearchedUsersSkeleton from './SearchedUsersSkeleton';
 
 interface SearchBarProps {
 	onClose: () => void;
@@ -47,8 +48,6 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 		};
 	}, []);
 
-console.log(fetchedUsers);
-
 	return (
 		<motion.div
 			className={classes.box}
@@ -88,14 +87,17 @@ console.log(fetchedUsers);
 			</div>
 			{!isLoading && (
 				<div className={classes.users}>
-					{!isLoading &&
-						fetchedUsers.length >= 1 &&
+					{fetchedUsers.length >= 1 &&
 						fetchedUsers?.map((user: any) => (
 							<SearchedUser key={user.id} user={user} />
 						))}
 				</div>
 			)}
-			<div className={classes.loading}>{isLoading && <Spinner />}</div>
+			{isLoading && (
+				<div className={classes.users}>
+					<SearchedUsersSkeleton />
+				</div>
+			)}
 		</motion.div>
 	);
 };

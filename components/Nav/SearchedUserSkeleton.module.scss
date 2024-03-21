@@ -1,0 +1,22 @@
+.user {
+	height: 70px;
+	width: 100%;
+	padding: 0.8rem 1rem;
+	display: flex;
+	align-items: center;
+	.image {
+		width: 50px;
+		height: 50px;
+		background-color: red;
+		border-radius: var(--radius-circle);
+		animation: var(--skeleton-loading);
+	}
+	.name {
+		background-color: red;
+		height: 15px;
+		width: 80px;
+		margin-left: 0.5em;
+		border-radius: var(--radius-medium);
+		animation: var(--skeleton-loading);
+	}
+}
