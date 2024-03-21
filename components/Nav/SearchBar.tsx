@@ -47,6 +47,8 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 		};
 	}, []);
 
+console.log(fetchedUsers);
+
 	return (
 		<motion.div
 			className={classes.box}
@@ -89,7 +91,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 					{!isLoading &&
 						fetchedUsers.length >= 1 &&
 						fetchedUsers?.map((user: any) => (
-							<SearchedUser key={user._id} user={user} />
+							<SearchedUser key={user.id} user={user} />
 						))}
 				</div>
 			)}

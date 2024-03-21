@@ -34,6 +34,8 @@
 		resize: none;
 		border: none;
 		margin-left: 1em;
+		background-color: var(--primary-background);
+		color: var(--text-normal);
 		&:focus {
 			outline: none;
 		}
