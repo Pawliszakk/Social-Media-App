@@ -1,10 +1,9 @@
-import { ChangeEvent, RefObject, useEffect, useState } from 'react';
+import { ChangeEvent, RefObject, useEffect, useRef, useState } from 'react';
 import classes from './SearchBar.module.scss';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { SlMagnifier } from 'react-icons/sl';
 import { motion } from 'framer-motion';
 import SearchedUser from './SearchedUser';
-import Spinner from '../UI/Spinner';
 import SearchedUsersSkeleton from './SearchedUsersSkeleton';
 
 interface SearchBarProps {
@@ -18,7 +17,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 	const [fetchedUsers, setFetchedUsers] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const focusHandler = () => (isFocus ? setIsFocus(false) : setIsFocus(true));
+	const focusHandler = () => setIsFocus((focus) => !focus);
 
 	const onInputChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
 		setIsLoading(true);
@@ -48,6 +47,8 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 		};
 	}, []);
 
+	const isInputEmpty = inputValue.trim().length === 0;
+
 	return (
 		<motion.div
 			className={classes.box}
@@ -63,13 +64,13 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 						<input
 							type="text"
 							name="search"
-							placeholder={'Search...'}
+							placeholder="Search..."
 							onFocus={focusHandler}
 							onBlur={focusHandler}
 							onChange={onInputChangeHandler}
 							value={inputValue}
 						/>
-						<button type="reset">
+						<button type="button">
 							<IoMdCloseCircle />
 						</button>
 						<div className={classes.icon}>
@@ -79,13 +80,10 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 				</div>
 			</div>
 			<div className={classes.results}>
-				{inputValue.trim().length === 0 ? (
-					<span>Recent</span>
-				) : (
-					<span>Searched Users</span>
-				)}
+				{isInputEmpty ? <span>Recent</span> : <span>Searched Users</span>}
 			</div>
-			{!isLoading && (
+			{isInputEmpty && <div>Recent users</div>}
+			{!isLoading && !isInputEmpty && (
 				<div className={classes.users}>
 					{fetchedUsers.length >= 1 &&
 						fetchedUsers?.map((user: any) => (
@@ -93,7 +91,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 						))}
 				</div>
 			)}
-			{isLoading && (
+			{isLoading && !isInputEmpty && (
 				<div className={classes.users}>
 					<SearchedUsersSkeleton />
 				</div>
