@@ -1,6 +1,5 @@
 'use server';
 
-import { permanentRedirect } from 'next/navigation';
 import { User } from '../Models/user';
 import { getDate } from '../utils/getDate';
 import { isUserInDatabase } from '../utils/isUserInDatabase';
@@ -38,8 +37,7 @@ export async function signUserByProvider(
 			throw new Error('Failed to create user, please try again later');
 		}
 		if (createdUser) {
-			return permanentRedirect('/');
-			// return createdUser;
+			return createdUser;
 		}
 	}
 }
