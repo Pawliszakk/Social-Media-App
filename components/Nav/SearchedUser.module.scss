@@ -1,0 +1,16 @@
+.user {
+	width: 100%;
+	padding: 0.8rem 1rem;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: var(--text-normal);
+	&:hover {
+		background-color: var(--option-hover);
+	}
+	span {
+		font-size: 1.4rem;
+		margin-left: 0.5em;
+		font-weight: bold;
+	}
+}

@@ -3,6 +3,8 @@ import classes from './SearchBar.module.scss';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { SlMagnifier } from 'react-icons/sl';
 import { motion } from 'framer-motion';
+import SearchedUser from './SearchedUser';
+import Spinner from '../UI/Spinner';
 
 interface SearchBarProps {
 	onClose: () => void;
@@ -12,15 +14,20 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = (props) => {
 	const [isFocus, setIsFocus] = useState(false);
 	const [inputValue, setInputValue] = useState('');
+	const [fetchedUsers, setFetchedUsers] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const focusHandler = () => (isFocus ? setIsFocus(false) : setIsFocus(true));
 
-	const onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+	const onInputChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+		setIsLoading(true);
 		setInputValue(e.target.value);
-		if (inputValue && inputValue.trim().length !== 0) {
-			console.log('git');
-			//fetch Request
+		const res = await fetch(`/api/search/?search=${e.target.value}`);
+		const fetchedUsers = await res.json();
+		if (res.ok) {
+			setFetchedUsers(fetchedUsers);
 		}
+		setIsLoading(false);
 	};
 
 	useEffect(() => {
@@ -39,6 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 			document.removeEventListener('click', handleClickOutside);
 		};
 	}, []);
+
 	return (
 		<motion.div
 			className={classes.box}
@@ -70,10 +78,22 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 				</div>
 			</div>
 			<div className={classes.results}>
-				<span>Recent</span>
-
-				<p>Wyniki wyszukiwan...</p>
+				{inputValue.trim().length === 0 ? (
+					<span>Recent</span>
+				) : (
+					<span>Searched Users</span>
+				)}
 			</div>
+			{!isLoading && (
+				<div className={classes.users}>
+					{!isLoading &&
+						fetchedUsers.length >= 1 &&
+						fetchedUsers?.map((user: any) => (
+							<SearchedUser key={user._id} user={user} />
+						))}
+				</div>
+			)}
+			<div className={classes.loading}>{isLoading && <Spinner />}</div>
 		</motion.div>
 	);
 };

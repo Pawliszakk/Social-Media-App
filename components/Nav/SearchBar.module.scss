@@ -64,10 +64,22 @@
 	.results {
 		padding: 1em 2em;
 		span {
-			margin: 2rem 0;
+			margin: 2rem;
 			display: block !important;
 			font-size: 1.6rem;
 			font-weight: bold;
 		}
+	}
+	.users {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		flex-direction: column;
+	}
+	.loading {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 }
