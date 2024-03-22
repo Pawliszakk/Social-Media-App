@@ -7,9 +7,30 @@
 		text-align: center;
 	}
 }
-.heading {
-	margin: 2rem;
-	display: block !important;
-	font-size: 1.6rem;
-	font-weight: bold;
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.heading {
+		margin: 2rem;
+		display: block !important;
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+	.clear {
+		margin: 1rem;
+		padding: 1rem;
+		border: none;
+		background-color: transparent;
+		color: var(--primary-button);
+		font-weight: bold;
+		cursor: pointer;
+		opacity: 0;
+		&.show {
+			opacity: 1;
+		}
+		&:hover {
+			color: var(--primary-button-hover);
+		}
+	}
 }

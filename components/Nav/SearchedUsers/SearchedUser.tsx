@@ -17,9 +17,9 @@ const SearchedUser: React.FC<SearchedUserProps> = ({
 	user,
 	closeSearchBar,
 }) => {
-	const addUserToRecentHandler = async () => {
+	const addUserToRecentHandler = () => {
 		closeSearchBar();
-		await addSearchedUserToRecent(user.id);
+		addSearchedUserToRecent(user.id);
 	};
 
 	return (

@@ -15,11 +15,11 @@ interface RecentSearchProps {
 }
 
 const RecentSearch: React.FC<RecentSearchProps> = ({ user, onDeleteUser }) => {
-	const handleRemoveUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleRemoveUser = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 
 		onDeleteUser(user.id);
-		await removeSearchedUserFromRecent(user.id);
+		removeSearchedUserFromRecent(user.id);
 	};
 
 	return (

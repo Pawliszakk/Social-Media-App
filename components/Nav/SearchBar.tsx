@@ -93,6 +93,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 								user={user}
 							/>
 						))}
+						{fetchedUsers.length === 0 && <p>No results.</p>}
 				</div>
 			)}
 			{isLoading && !isInputEmpty && (

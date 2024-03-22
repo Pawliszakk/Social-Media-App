@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import classes from './RecentSearches.module.scss';
 import RecentSearch from './RecentSearch';
 import SearchedUsersSkeleton from '../SearchedUsers/SearchedUsersSkeleton';
+import { clearRecentSearches } from '@/lib/actions/user/clearRecentSearches';
 
 const RecentSearches = () => {
 	const [recentSearches, setRecentSearches] = useState([]);
@@ -29,9 +30,25 @@ const RecentSearches = () => {
 		setRecentSearches(updatedRecentSearches);
 	};
 
+	const clearRecentHandler = () => {
+		setRecentSearches([]);
+		clearRecentSearches();
+	};
+
 	return (
 		<>
-			<span className={classes.heading}>Recent</span>
+			<div className={classes.header}>
+				<span className={classes.heading}>Recent</span>
+
+				<button
+					className={`${classes.clear} ${
+						recentSearches.length > 0 ? classes.show : null
+					}`}
+					onClick={clearRecentHandler}
+				>
+					Clear All
+				</button>
+			</div>
 
 			<div className={classes.box}>
 				{recentSearches.length === 0 && !isLoading && (
