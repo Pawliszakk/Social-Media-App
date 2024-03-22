@@ -27,7 +27,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 }) => {
 	const [isSearch, setIsSearch] = useState(true);
 	const menuOptions = [
-		{ href: '/', icon: <IoMdHome />, text: 'Home Page' },
+		{ href: '/', icon: <IoMdHome />, text: 'Home' },
 		{
 			icon: <IoSearchSharp />,
 			text: 'Search',
@@ -50,6 +50,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 
 	const showSearchHandler = () => setIsSearch(true);
 	const hideSearchHandler = () => setIsSearch(false);
+	
 	return (
 		<header
 			ref={actionBarRef}
@@ -67,7 +68,9 @@ const ActionBar: React.FC<ActionBarProps> = ({
 					/>
 				))}
 			</nav>
-			{isSearch && <SearchBar onClose={hideSearchHandler} actionBarRef={actionBarRef}/>}
+			{isSearch && (
+				<SearchBar onClose={hideSearchHandler} actionBarRef={actionBarRef} />
+			)}
 		</header>
 	);
 };

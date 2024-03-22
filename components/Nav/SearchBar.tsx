@@ -1,10 +1,11 @@
-import { ChangeEvent, RefObject, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, RefObject, useEffect, useState } from 'react';
 import classes from './SearchBar.module.scss';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { SlMagnifier } from 'react-icons/sl';
 import { motion } from 'framer-motion';
-import SearchedUser from './SearchedUser';
-import SearchedUsersSkeleton from './SearchedUsersSkeleton';
+import RecentSearches from './RecentSearches/RecentSearches';
+import SearchedUser from './SearchedUsers/SearchedUser';
+import SearchedUsersSkeleton from './SearchedUsers/SearchedUsersSkeleton';
 
 interface SearchBarProps {
 	onClose: () => void;
@@ -82,12 +83,16 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 			<div className={classes.results}>
 				{isInputEmpty ? <span>Recent</span> : <span>Searched Users</span>}
 			</div>
-			{isInputEmpty && <div>Recent users</div>}
+			{isInputEmpty && <RecentSearches />}
 			{!isLoading && !isInputEmpty && (
 				<div className={classes.users}>
 					{fetchedUsers.length >= 1 &&
 						fetchedUsers?.map((user: any) => (
-							<SearchedUser key={user.id} user={user} />
+							<SearchedUser
+								closeSearchBar={props.onClose}
+								key={user.id}
+								user={user}
+							/>
 						))}
 				</div>
 			)}

@@ -25,6 +25,9 @@ const UserSchema = new mongoose.Schema({
 	],
 	followers: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
 	following: [{ type: mongoose.Types.ObjectId, required: true, ref: 'User' }],
+	recentSearches: [
+		{ type: mongoose.Types.ObjectId, required: true, ref: 'User' },
+	],
 	closeFriends: [
 		{ type: mongoose.Types.ObjectId, required: true, ref: 'User' },
 	],
