@@ -25,7 +25,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 	userId,
 	imageType,
 }) => {
-	const [isSearch, setIsSearch] = useState(true);
+	const [isSearch, setIsSearch] = useState(false);
 	const menuOptions = [
 		{ href: '/', icon: <IoMdHome />, text: 'Home' },
 		{

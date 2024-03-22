@@ -65,14 +65,11 @@
 			}
 		}
 	}
-	.results {
-		padding: 1em 2em;
-		span {
-			margin: 2rem;
-			display: block !important;
-			font-size: 1.6rem;
-			font-weight: bold;
-		}
+	.heading {
+		margin: 2rem;
+		display: block !important;
+		font-size: 1.6rem;
+		font-weight: bold;
 	}
 	.users {
 		display: flex;

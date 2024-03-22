@@ -19,7 +19,7 @@ export async function getRecentSearches() {
 		name: user.name,
 		image: user.image,
 		imageType: user.imageType,
-	}));
+	})).reverse();
 
 	return transformedRecentSearches;
 }

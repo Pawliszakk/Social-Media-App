@@ -80,10 +80,9 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 					</form>
 				</div>
 			</div>
-			<div className={classes.results}>
-				{isInputEmpty ? <span>Recent</span> : <span>Searched Users</span>}
-			</div>
 			{isInputEmpty && <RecentSearches />}
+			
+			{!isInputEmpty && <span className={classes.heading}>Searched Users</span>}
 			{!isLoading && !isInputEmpty && (
 				<div className={classes.users}>
 					{fetchedUsers.length >= 1 &&
