@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useEffect, useState } from 'react';
+import { ChangeEvent, RefObject, useEffect, useRef, useState } from 'react';
 import classes from './SearchBar.module.scss';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { SlMagnifier } from 'react-icons/sl';
@@ -18,7 +18,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 	const [fetchedUsers, setFetchedUsers] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const focusHandler = () => setIsFocus((focus) => !focus);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const onInputChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
 		setIsLoading(true);
@@ -52,6 +52,16 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 		};
 	}, []);
 
+	const focusHandler = () => {
+		setIsFocus((focus) => !focus);
+	};
+
+	const resetInputHandler = () => {
+		setInputValue('');
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	};
 	const isInputEmpty = inputValue.trim().length === 0;
 
 	return (
@@ -73,9 +83,10 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 							onFocus={focusHandler}
 							onBlur={focusHandler}
 							onChange={onInputChangeHandler}
+							ref={inputRef}
 							value={inputValue}
 						/>
-						<button type="button">
+						<button type="button" onClick={resetInputHandler}>
 							<IoMdCloseCircle />
 						</button>
 						<div className={classes.icon}>

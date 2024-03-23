@@ -1,0 +1,16 @@
+.note {
+	padding: 3rem;
+	text-align: center;
+	color: var(--text-normal);
+	border-bottom: var(--border-light);
+	span {
+		font-weight: bold;
+		font-size: 2rem;
+	}
+	p {
+		opacity: 0.6;
+		font-size: 1.4rem;
+		max-width: 55ch;
+		margin-top: 1em;
+	}
+}

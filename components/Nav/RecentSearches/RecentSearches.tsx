@@ -3,10 +3,12 @@ import classes from './RecentSearches.module.scss';
 import RecentSearch from './RecentSearch';
 import SearchedUsersSkeleton from '../SearchedUsers/SearchedUsersSkeleton';
 import { clearRecentSearches } from '@/lib/actions/user/clearRecentSearches';
+import ClearRecentModal from './ClearRecentModal';
 
 const RecentSearches = () => {
 	const [recentSearches, setRecentSearches] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isClearModal, setIsClearModal] = useState(false);
 
 	useEffect(() => {
 		const fetchRecentSearchesHandler = async () => {
@@ -33,7 +35,11 @@ const RecentSearches = () => {
 	const clearRecentHandler = () => {
 		setRecentSearches([]);
 		clearRecentSearches();
+		setIsClearModal(false);
 	};
+	const showClearModal = () => setIsClearModal(true);
+	const hideClearModal = () => setIsClearModal(false);
+
 	return (
 		<>
 			<div className={classes.header}>
@@ -43,7 +49,7 @@ const RecentSearches = () => {
 					className={`${classes.clear} ${
 						recentSearches.length > 0 ? classes.show : null
 					}`}
-					onClick={clearRecentHandler}
+					onClick={showClearModal}
 				>
 					Clear All
 				</button>
@@ -63,6 +69,12 @@ const RecentSearches = () => {
 						/>
 					))}
 			</div>
+			{isClearModal && (
+				<ClearRecentModal
+					onClose={hideClearModal}
+					onClear={clearRecentHandler}
+				/>
+			)}
 		</>
 	);
 };

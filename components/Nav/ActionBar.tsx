@@ -69,9 +69,9 @@ const ActionBar: React.FC<ActionBarProps> = ({
 						/>
 					))}
 				</nav>
-			{isSearch && (
-				<SearchBar onClose={hideSearchHandler} actionBarRef={actionBarRef} />
-			)}
+				{isSearch && (
+					<SearchBar onClose={hideSearchHandler} actionBarRef={actionBarRef} />
+				)}
 			</header>
 		</>
 	);

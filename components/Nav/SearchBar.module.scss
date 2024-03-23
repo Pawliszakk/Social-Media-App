@@ -33,11 +33,10 @@
 					color: var(--text-normal);
 				}
 				button {
-					display: none;
 					position: absolute;
 					background-color: transparent;
 					border: none;
-					opacity: 0.4;
+					opacity: 0;
 					right: 12px;
 					top: 50%;
 					transform: translateY(-50%);
@@ -57,7 +56,7 @@
 				}
 				&.focus {
 					button {
-						display: block;
+						opacity: 0.4;
 					}
 					input {
 						padding: 1em;
