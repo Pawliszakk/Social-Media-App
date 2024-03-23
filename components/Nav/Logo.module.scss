@@ -1,12 +1,14 @@
 .logo {
-	text-align: center;
 	display: none;
-	color: var(--text-normal);
 	@media (min-width: 1200px) {
-		.logo {
-			display: block;
-			padding-top: 1rem;
-			font-size: 2rem;
+		margin-left: 3rem;
+		display: block;
+		margin-top: 3rem;
+		a {
+			font-size: 3rem;
+			font-weight: bold;
+			color: var(--text-normal);
+			text-decoration: none;
 		}
 	}
 }

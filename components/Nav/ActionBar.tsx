@@ -50,7 +50,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 
 	const showSearchHandler = () => setIsSearch(true);
 	const hideSearchHandler = () => setIsSearch(false);
-	
+
 	return (
 		<header
 			ref={actionBarRef}
