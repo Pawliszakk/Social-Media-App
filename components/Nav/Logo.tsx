@@ -9,7 +9,9 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ isSearch }) => {
 	return (
 		<div className={`${classes.logo} ${isSearch ? classes.search : null}`}>
-			<Link href="/">{isSearch ? <FaInstagram /> : 'Instagram'}</Link>
+			<Link href="/">
+				<FaInstagram /> <span>Instagram</span>
+			</Link>
 		</div>
 	);
 };
