@@ -12,18 +12,21 @@ interface RecentSearchProps {
 		imageType: string;
 	};
 	onDeleteUser: (userId: string) => void;
+	onClose: () => void;
 }
 
-const RecentSearch: React.FC<RecentSearchProps> = ({ user, onDeleteUser }) => {
-	const handleRemoveUser = (e: React.MouseEvent<HTMLButtonElement>) => {
-		e.stopPropagation();
+const RecentSearch: React.FC<RecentSearchProps> = ({
+	user,
+	onDeleteUser,
+	onClose,
+}) => {
+	const handleRemoveUser = () => {
 		onDeleteUser(user.id);
 		removeSearchedUserFromRecent(user.id);
 	};
-
 	return (
 		<div className={classes.user}>
-			<Link href={`/profile/${user.id}`}>
+			<Link href={`/profile/${user.id}`} onClick={onClose}>
 				<ProfileImage
 					profileId={user.id}
 					name={user.name}
@@ -32,7 +35,7 @@ const RecentSearch: React.FC<RecentSearchProps> = ({ user, onDeleteUser }) => {
 				/>
 				<span>{user.name}</span>
 			</Link>
-			<button onClick={(e) => handleRemoveUser(e)}>
+			<button onClick={handleRemoveUser}>
 				<IoCloseOutline id={`user-${user.id}`} />
 			</button>
 		</div>

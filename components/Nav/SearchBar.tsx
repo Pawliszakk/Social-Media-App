@@ -39,6 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 				!props.actionBarRef.current.contains(e.target as Node)
 			) {
 				const elementId = (e.target as HTMLElement).id;
+				console.log(elementId);
 				if (elementId.includes('user-')) {
 					return;
 				}
@@ -95,7 +96,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 					</form>
 				</div>
 			</div>
-			{isInputEmpty && <RecentSearches />}
+			{isInputEmpty && <RecentSearches onClose={props.onClose} />}
 
 			{!isInputEmpty && <span className={classes.heading}>Searched Users</span>}
 			{!isLoading && !isInputEmpty && (

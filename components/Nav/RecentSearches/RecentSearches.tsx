@@ -5,7 +5,11 @@ import SearchedUsersSkeleton from '../SearchedUsers/SearchedUsersSkeleton';
 import { clearRecentSearches } from '@/lib/actions/user/clearRecentSearches';
 import ClearRecentModal from './ClearRecentModal';
 
-const RecentSearches = () => {
+interface RecentSearchesProps {
+	onClose: () => void;
+}
+
+const RecentSearches: React.FC<RecentSearchesProps> = (props) => {
 	const [recentSearches, setRecentSearches] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isClearModal, setIsClearModal] = useState(false);
@@ -63,6 +67,7 @@ const RecentSearches = () => {
 				{recentSearches.length > 0 &&
 					recentSearches.map((user: any) => (
 						<RecentSearch
+							onClose={props.onClose}
 							key={user.id}
 							onDeleteUser={deleteUserFromSearches}
 							user={user}
