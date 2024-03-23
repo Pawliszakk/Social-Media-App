@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import classes from './ActionBarOption.module.scss';
 import LogoutBtn from '../Auth/Buttons/Logout';
+import { useEffect, useState } from 'react';
 
 interface ActionBarOptionProps {
 	option: {
@@ -26,6 +27,8 @@ const ActionBarOption: React.FC<ActionBarOptionProps> = (props) => {
 	const { option, imageType, onSearch, isSearch } = props;
 	const { href, icon, text, avatar, logout, image, name, search } = option;
 
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
 	const pathname = usePathname();
 	let active;
 	if (pathname === href) {
@@ -35,6 +38,18 @@ const ActionBarOption: React.FC<ActionBarOptionProps> = (props) => {
 		!isSearch ? classes.search : null
 	}`;
 	const isAvatarChanged = imageType === 'provider';
+
+	const handleResize = () => {
+		const width = window.innerWidth;
+		setIsMobile(width < 768);
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	const avatarToShow: string = !isAvatarChanged
 		? `https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${image}`
@@ -69,9 +84,17 @@ const ActionBarOption: React.FC<ActionBarOptionProps> = (props) => {
 	}
 	if (search) {
 		return (
-			<button onClick={onSearch} className={classNames}>
-				{icon} <span>Search</span>
-			</button>
+			<>
+				{isMobile ? (
+					<Link className={classNames} href="/search">
+						{icon}
+					</Link>
+				) : (
+					<button onClick={onSearch} className={classNames}>
+						{icon} <span>Search</span>
+					</button>
+				)}
+			</>
 		);
 	}
 };

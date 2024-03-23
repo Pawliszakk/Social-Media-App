@@ -17,7 +17,6 @@ interface RecentSearchProps {
 const RecentSearch: React.FC<RecentSearchProps> = ({ user, onDeleteUser }) => {
 	const handleRemoveUser = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
-
 		onDeleteUser(user.id);
 		removeSearchedUserFromRecent(user.id);
 	};
@@ -34,7 +33,7 @@ const RecentSearch: React.FC<RecentSearchProps> = ({ user, onDeleteUser }) => {
 				<span>{user.name}</span>
 			</Link>
 			<button onClick={(e) => handleRemoveUser(e)}>
-				<IoCloseOutline />
+				<IoCloseOutline id={`user-${user.id}`} />
 			</button>
 		</div>
 	);

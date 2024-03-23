@@ -10,5 +10,8 @@
 			color: var(--text-normal);
 			text-decoration: none;
 		}
+		&.search {
+			margin-left: 2rem;
+		}
 	}
 }

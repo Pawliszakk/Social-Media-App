@@ -52,26 +52,28 @@ const ActionBar: React.FC<ActionBarProps> = ({
 	const hideSearchHandler = () => setIsSearch(false);
 
 	return (
-		<header
-			ref={actionBarRef}
-			className={` ${classes.header} ${isSearch ? classes.search : null}`}
-		>
-			<Logo />
-			<nav>
-				{menuOptions.map((option) => (
-					<ActionBarOption
-						key={option.text}
-						option={option}
-						imageType={imageType}
-						onSearch={isSearch ? hideSearchHandler : showSearchHandler}
-						isSearch={isSearch}
-					/>
-				))}
-			</nav>
+		<>
+			<header
+				ref={actionBarRef}
+				className={` ${classes.header} ${isSearch ? classes.search : null}`}
+			>
+				<Logo isSearch={isSearch} />
+				<nav>
+					{menuOptions.map((option) => (
+						<ActionBarOption
+							key={option.text}
+							option={option}
+							imageType={imageType}
+							onSearch={isSearch ? hideSearchHandler : showSearchHandler}
+							isSearch={isSearch}
+						/>
+					))}
+				</nav>
 			{isSearch && (
 				<SearchBar onClose={hideSearchHandler} actionBarRef={actionBarRef} />
 			)}
-		</header>
+			</header>
+		</>
 	);
 };
 

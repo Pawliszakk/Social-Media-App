@@ -34,7 +34,6 @@ const RecentSearches = () => {
 		setRecentSearches([]);
 		clearRecentSearches();
 	};
-
 	return (
 		<>
 			<div className={classes.header}>
