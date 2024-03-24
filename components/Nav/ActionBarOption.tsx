@@ -27,7 +27,7 @@ const ActionBarOption: React.FC<ActionBarOptionProps> = (props) => {
 	const { option, imageType, onSearch, isSearch } = props;
 	const { href, icon, text, avatar, logout, image, name, search } = option;
 
-	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+	const [isMobile, setIsMobile] = useState(false);
 
 	const pathname = usePathname();
 	let active;
