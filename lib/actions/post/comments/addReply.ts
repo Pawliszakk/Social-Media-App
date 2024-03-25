@@ -21,8 +21,8 @@ export async function addReply(commentId: string, content: string) {
 	let comment;
 	try {
 		comment = await Comment.findOne({ _id: commentId });
-	} catch (e) {
-		throw new Error('Something went wrong');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const createdReply = new CommentReply({
@@ -38,8 +38,8 @@ export async function addReply(commentId: string, content: string) {
 		comment.replies.push(createdReply._id);
 		await comment.save({ session: sess });
 		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error('Something went wrong');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

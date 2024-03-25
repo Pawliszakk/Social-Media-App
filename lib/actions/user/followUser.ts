@@ -15,8 +15,8 @@ export async function followUser(userToFollowId: string) {
 		userToFollow = await User.findOne({ _id: userToFollowId }).select(
 			'followers private'
 		);
-	} catch (e) {
-		throw new Error(`${e}`);
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	const isUserToFollowAlreadyFollowed = userToFollow.followers.find(
 		(id: string) => id.toString() === user.id
@@ -36,8 +36,8 @@ export async function followUser(userToFollowId: string) {
 		await user.save({ session: sess });
 		await userToFollow.save({ session: sess });
 		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error(`e`);
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');
@@ -52,8 +52,8 @@ export async function unFollowUser(userToUnfollowId: string) {
 		userToUnfollow = await User.findOne({ _id: userToUnfollowId }).select(
 			'followers'
 		);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	const isUserToUnfollowAlreadyUnFollowed = userToUnfollow.followers.find(
 		(id: string) => user.id
@@ -77,8 +77,8 @@ export async function unFollowUser(userToUnfollowId: string) {
 		await user.save({ session: sess });
 		await userToUnfollow.save({ session: sess });
 		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

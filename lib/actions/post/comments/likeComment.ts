@@ -11,8 +11,8 @@ export async function likeComment(commentId: string) {
 	let comment;
 	try {
 		comment = await Comment.findOne({ _id: commentId }).select('likes');
-	} catch (e) {
-		throw new Error('Failed to like a comment');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	if (!comment || !user) {
@@ -35,7 +35,7 @@ export async function likeComment(commentId: string) {
 		await user.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e: any) {
-		throw new Error(e.message);
+		throw new Error(e);
 	}
 	revalidatePath('/', 'layout');
 }
@@ -71,7 +71,7 @@ export async function unLikeComment(commentId: string) {
 		await user.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e: any) {
-		throw new Error(e.message);
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

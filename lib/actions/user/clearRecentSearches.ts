@@ -8,7 +8,7 @@ export async function clearRecentSearches() {
 	try {
 		user.recentSearches = [];
 		user.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 }

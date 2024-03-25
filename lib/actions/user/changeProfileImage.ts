@@ -24,8 +24,8 @@ export async function changeProfileImage(formData: any) {
 		user.image = fileName;
 		user.imageType = 'user';
 		await user.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

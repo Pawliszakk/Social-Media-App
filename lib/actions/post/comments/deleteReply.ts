@@ -12,8 +12,8 @@ export async function deleteReply(replyId: string, commentId: string) {
 	let reply;
 	try {
 		reply = await CommentReply.findOne({ _id: replyId }).select('author');
-	} catch (e) {
-		throw new Error('Failed to unlike a comment');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	let comment;
@@ -49,7 +49,7 @@ export async function deleteReply(replyId: string, commentId: string) {
 		await user.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e: any) {
-		throw new Error(e.message);
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

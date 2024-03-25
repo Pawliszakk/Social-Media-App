@@ -11,8 +11,8 @@ export async function likeReply(replyId: string) {
 	let reply;
 	try {
 		reply = await CommentReply.findOne({ _id: replyId }).select('likes');
-	} catch (e) {
-		throw new Error('Failed to like a comment');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	if (!reply || !user) {
@@ -35,7 +35,7 @@ export async function likeReply(replyId: string) {
 		await user.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e: any) {
-		throw new Error(e.message);
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');
@@ -72,7 +72,7 @@ export async function unLikeReply(replyId: string) {
 		await user.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e: any) {
-		throw new Error(e.message);
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

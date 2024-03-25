@@ -15,8 +15,8 @@ export async function getPosts(
 				select: 'id name image private imageType blockedUsers',
 			})
 			.populate({ path: 'comments', select: 'replies' });
-	} catch (e) {
-		throw new Error('Failed to fetch posts');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const filteredPosts = posts

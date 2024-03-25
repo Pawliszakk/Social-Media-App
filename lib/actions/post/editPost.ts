@@ -13,15 +13,14 @@ export async function editPost(postId: string, description: string) {
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId }).select('description');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
-
 	try {
 		post.description = description;
 		post.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	revalidatePath('/', 'layout');
 }

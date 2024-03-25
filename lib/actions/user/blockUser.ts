@@ -18,8 +18,8 @@ export async function blockUser(userToBlockId: string) {
 		user.blockedUsers.push(userToBlockId);
 		await unFollowUser(userToBlockId);
 		await user.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	revalidatePath('/', 'layout');
 }
@@ -31,8 +31,8 @@ export async function unBlockUser(userToUnBlockId: string) {
 			(id: string) => id.toString() !== userToUnBlockId
 		);
 		await user.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

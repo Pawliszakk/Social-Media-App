@@ -13,8 +13,8 @@ export async function removeFollower(userToRemoveId: string) {
 		userToRemove = await User.findOne({ _id: userToRemoveId }).select(
 			'following'
 		);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	user.closeFriends = user.closeFriends.filter(
 		(id: string) => id.toString() !== userToRemoveId
@@ -32,8 +32,8 @@ export async function removeFollower(userToRemoveId: string) {
 		await user.save({ session: sess });
 		await userToRemove.save({ session: sess });
 		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

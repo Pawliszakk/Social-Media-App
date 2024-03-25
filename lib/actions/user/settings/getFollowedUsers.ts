@@ -8,8 +8,8 @@ export default async function getFollowedUsers(userId: string) {
 		user = await User.findOne({ _id: userId })
 			.select('following closeFriends')
 			.populate('following', 'image imageType name');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	return { closeFriends: user.closeFriends, following: user.following };

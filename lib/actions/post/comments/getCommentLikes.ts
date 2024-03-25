@@ -22,8 +22,8 @@ export async function getCommentLikes(commentId: string) {
 				path: 'likes',
 				select: 'name image imageType followers',
 			});
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const likesWithFollowingStatus = comment.likes.map((like: any) => {

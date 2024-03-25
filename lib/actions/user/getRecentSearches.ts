@@ -10,16 +10,18 @@ export async function getRecentSearches() {
 			path: 'recentSearches',
 			select: 'name image imageType',
 		});
-	} catch (e) {
-		throw new Error('Something went wrong');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
-	const transformedRecentSearches = user.recentSearches.map((user: any) => ({
-		id: user.id.toString(),
-		name: user.name,
-		image: user.image,
-		imageType: user.imageType,
-	})).reverse();
+	const transformedRecentSearches = user.recentSearches
+		.map((user: any) => ({
+			id: user.id.toString(),
+			name: user.name,
+			image: user.image,
+			imageType: user.imageType,
+		}))
+		.reverse();
 
 	return transformedRecentSearches;
 }

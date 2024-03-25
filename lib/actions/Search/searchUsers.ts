@@ -7,8 +7,8 @@ export async function searchUsers(searchValue: string) {
 
 	try {
 		users = await User.find({}).select('name image imageType');
-	} catch (e) {
-		throw new Error('Fetching users failed, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const filteredUsers = users.filter((user: { name: string }) =>

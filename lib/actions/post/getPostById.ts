@@ -17,8 +17,8 @@ export async function getPostById(
 			path: 'author',
 			select: 'id name image private imageType blockedUsers',
 		});
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	let comments = [];
 	if (post.commenting) {
@@ -27,8 +27,8 @@ export async function getPostById(
 				path: 'comments',
 				populate: { path: 'author', select: 'name image imageType' },
 			});
-		} catch (e) {
-			throw new Error('Something went wrong, please try again later');
+		} catch (e: any) {
+			throw new Error(e);
 		}
 
 		const commentsWithLikingStatus = post.comments.map((comment: any) => {

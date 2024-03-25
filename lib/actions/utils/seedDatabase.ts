@@ -21,8 +21,8 @@ export default async function seedDatabase() {
 		await createUserByCredentials('test3', 'test3@example.com', 'Mocnehaslo1!');
 		await createUserByCredentials('test4', 'test4@example.com', 'Mocnehaslo1!');
 		await createUserByCredentials('test5', 'test5@example.com', 'Mocnehaslo1!');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	permanentRedirect('/auth/login');
 }

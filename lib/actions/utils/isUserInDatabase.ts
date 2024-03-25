@@ -7,8 +7,8 @@ export async function isUserInDatabase(email: string) {
 	let user;
 	try {
 		user = await User.findOne({ email });
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	if (!user) {
 		return false;

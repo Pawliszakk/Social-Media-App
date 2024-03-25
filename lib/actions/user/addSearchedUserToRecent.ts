@@ -16,7 +16,7 @@ export async function addSearchedUserToRecent(userId: string) {
 	try {
 		user.recentSearches.push(userId);
 		await user.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	}  catch (e: any) {
+		throw new Error(e);
 	}
 }

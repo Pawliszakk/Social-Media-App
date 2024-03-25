@@ -5,8 +5,8 @@ export const connectToDatabase = async () => {
 	let db;
 	try {
 		db = await mongoose.connect(URL);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	return db;
 };

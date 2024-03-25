@@ -8,8 +8,8 @@ export const getLoggedUserProfile = async (userId: string) => {
 			match: { archived: false },
 			select: '_id',
 		});
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	const filteredPosts = user.posts.filter((post: any) => !post.archived);
 	user.posts = filteredPosts.reverse();

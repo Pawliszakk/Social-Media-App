@@ -15,8 +15,8 @@ export async function sendFollowRequest(
 		requester = await User.findOne({ _id: requesterId }).select(
 			'sentFollowRequests'
 		);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	let reciever;
@@ -24,8 +24,8 @@ export async function sendFollowRequest(
 		reciever = await User.findOne({ _id: recieverId }).select(
 			'recievedFollowRequests'
 		);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const newRequest = new followRequest({
@@ -44,8 +44,8 @@ export async function sendFollowRequest(
 		await reciever.save({ session: sess });
 
 		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	return {
@@ -63,8 +63,8 @@ export async function deleteFollowRequest(
 		requester = await User.findOne({ _id: requesterId })
 			.select('sentFollowRequests')
 			.populate('sentFollowRequests');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	let reciever;
@@ -72,8 +72,8 @@ export async function deleteFollowRequest(
 		reciever = await User.findOne({ _id: recieverId }).select(
 			'recievedFollowRequests'
 		);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const followRequest = requester.sentFollowRequests.find(
@@ -95,8 +95,8 @@ export async function deleteFollowRequest(
 		await reciever.save({ session: sess });
 
 		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	return { ok: true, status: NOTFOLLOWING };

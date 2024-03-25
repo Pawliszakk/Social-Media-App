@@ -10,8 +10,8 @@ export async function getTopUsers() {
 		users = await User.find({ _id: { $nin: user.following } })
 			.select('name image imageType followers')
 			.limit(50);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	const usersWithoutLoggedUser = users.filter(
 		(u: any) => u.id.toString() !== user.id.toString()

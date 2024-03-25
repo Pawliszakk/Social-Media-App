@@ -22,8 +22,8 @@ export async function addComment(postId: string, comment: string) {
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId }).select('comments');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	const createdComment = new Comment({
 		author: user.id,
@@ -37,8 +37,8 @@ export async function addComment(postId: string, comment: string) {
 		post.comments.push(createdComment._id);
 		await post.save({ session: sess });
 		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	revalidatePath('/', 'layout');
 }

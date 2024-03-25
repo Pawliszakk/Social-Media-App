@@ -32,8 +32,8 @@ export async function showArchivedPost(postId: string) {
 
 	try {
 		await post.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

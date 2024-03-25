@@ -11,8 +11,8 @@ export async function checkIfUserIsAllowedToViewPosts(profileId: string) {
 		profile = await User.findOne({ _id: profileId }).select(
 			'followers private blockedUsers'
 		);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const isUserBlockingProfile = user.blockedUsers.find(

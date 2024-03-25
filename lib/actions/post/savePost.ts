@@ -19,15 +19,15 @@ export async function savePost(postId: string) {
 			user.savedPosts = updatedSavedPosts;
 
 			await user.save();
-		} catch (e) {
-			throw new Error('Something went wrong, please try again later');
+		} catch (e: any) {
+			throw new Error(e);
 		}
 	} else {
 		try {
 			user.savedPosts.push(postId);
 			await user.save();
-		} catch (e) {
-			throw new Error('Something went wrong, please try again later');
+		} catch (e: any) {
+			throw new Error(e);
 		}
 	}
 

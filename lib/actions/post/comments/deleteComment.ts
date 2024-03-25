@@ -10,8 +10,8 @@ export async function deleteComment(commentId: string) {
 	let comment;
 	try {
 		comment = await Comment.findOne({ _id: commentId }).select('author');
-	} catch (e) {
-		throw new Error('Failed to unlike a comment');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	if (!comment || !user) {
@@ -34,7 +34,7 @@ export async function deleteComment(commentId: string) {
 		await user.save({ session: sess });
 		await sess.commitTransaction();
 	} catch (e: any) {
-		throw new Error(e.message);
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

@@ -11,8 +11,8 @@ export async function likePost(postId: string) {
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId }).select('likes');
-	} catch (e) {
-		throw new Error('Failed to like a post');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	if (!post || !user) {
@@ -46,8 +46,8 @@ export async function unLikePost(postId: string) {
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId }).select('likes');
-	} catch (e) {
-		throw new Error('Failed to unlike a post');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	if (!post || !user) {

@@ -16,8 +16,8 @@ export async function getSuggestedUsers(limit: number) {
 		})
 			.select('name image imageType')
 			.limit(limit);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const usersWithoutLoggedUser = users.filter(

@@ -12,8 +12,8 @@ export async function deletePost(postId: string) {
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId });
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const isUserAuthor = user.posts.find(
@@ -35,8 +35,8 @@ export async function deletePost(postId: string) {
 		user.posts = updatedUserPosts;
 		await user.save({ session: sess });
 		await sess.commitTransaction();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

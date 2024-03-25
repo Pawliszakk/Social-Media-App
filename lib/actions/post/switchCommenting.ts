@@ -7,8 +7,8 @@ export async function switchCommenting(postId: string) {
 	let post;
 	try {
 		post = await Post.findOne({ _id: postId });
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	if (!post) {
@@ -19,8 +19,8 @@ export async function switchCommenting(postId: string) {
 
 	try {
 		await post.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath(`/`, 'layout');

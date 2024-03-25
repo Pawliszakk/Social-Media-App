@@ -11,8 +11,8 @@ export async function getProfile(profileId: string) {
 			.select(
 				'-email -password -provider -theme -__v -sex -savedPosts -closeFriends -likedPosts'
 			);
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 	const filteredPosts = user.posts.filter((post: any) => !post.archived);
 

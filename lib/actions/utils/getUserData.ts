@@ -31,7 +31,7 @@ export const getUserData = async (select?: string, populate?: string) => {
 			user = await User.findOne({ email }).select(selectField);
 		}
 	} catch (e) {
-		console.error(e);
+		console.log(e);
 		permanentRedirect('/');
 	}
 

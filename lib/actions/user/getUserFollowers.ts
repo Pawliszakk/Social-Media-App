@@ -23,9 +23,8 @@ export async function getUserFollowers(profileId: string) {
 				path: 'followers',
 				select: 'name image followers imageType',
 			});
-	} catch (e) {
-		console.log(e);
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const followersWithFollowingStatus = profile.followers.map(

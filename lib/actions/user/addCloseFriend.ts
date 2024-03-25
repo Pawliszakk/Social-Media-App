@@ -17,8 +17,8 @@ export async function addCloseFriend(profileId: string) {
 	try {
 		user.closeFriends.push(profileId);
 		await user.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	}  catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');
@@ -42,8 +42,8 @@ export async function removeCloseFriend(profileId: string) {
 	try {
 		user.closeFriends = updatedCloseFrieds;
 		await user.save();
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	}  catch (e: any) {
+		throw new Error(e);
 	}
 
 	revalidatePath('/', 'layout');

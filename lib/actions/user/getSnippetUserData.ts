@@ -15,8 +15,8 @@ export async function getSnippetUserData(profileId: string) {
 				'name image imageType followers following posts recievedFollowRequests private'
 			)
 			.populate('posts recievedFollowRequests');
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const filteredPosts = profile.posts.filter((post: any) => !post.archived);

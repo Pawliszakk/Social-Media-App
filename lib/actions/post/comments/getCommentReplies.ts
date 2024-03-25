@@ -18,8 +18,8 @@ export async function getCommentReplies(commentId: string) {
 					select: 'name image imageType',
 				},
 			});
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const replies = comment.replies.map((reply: any) => {

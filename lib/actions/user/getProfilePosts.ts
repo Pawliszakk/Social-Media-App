@@ -16,8 +16,8 @@ export async function getProfilePosts(profileId: string) {
 					path: 'comments',
 				},
 			});
-	} catch (e) {
-		throw new Error('Something went wrong, please try again later');
+	} catch (e: any) {
+		throw new Error(e);
 	}
 
 	const profilePosts = profile.posts
