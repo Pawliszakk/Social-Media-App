@@ -1,5 +1,7 @@
 import { User } from '../Models/user';
 
+const post = require('../Models/post');
+
 export const getLoggedUserProfile = async (userId: string) => {
 	let user;
 	try {
