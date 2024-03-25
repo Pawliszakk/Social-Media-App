@@ -16,9 +16,10 @@ export default function AuthLayout({
 		<main>
 			<div className={classes.box}>
 				<Image
-					src="/assets/ilustrations/authIlustration.JPG"
+					src="/assets/ilustrations/authIlustration.jpg"
 					width={600}
 					height={600}
+					priority={true}
 					alt="Ilustration of person trying to open big lock with a big key"
 				/>
 
