@@ -5,29 +5,28 @@ import {
 	NOTFOLLOWING,
 	REQUESTED,
 } from '@/lib/constants/followingStatus';
-import { User } from '../Models/user';
-import { getUserData } from '../utils/getUserData';
+import { getUserData } from '../../utils/getUserData';
+import { User } from '../../Models/user';
 
-export async function getUserFollowers(profileId: string) {
+export async function getUserFollowing(profileId: string) {
 	const { session, user } = await getUserData(
 		'following sentFollowRequests',
 		'sentFollowRequests'
 	);
-
 	let profile;
 
 	try {
 		profile = await User.findOne({ _id: profileId })
-			.select('followers')
+			.select('following')
 			.populate({
-				path: 'followers',
+				path: 'following',
 				select: 'name image followers imageType',
 			});
 	} catch (e: any) {
 		throw new Error(e);
 	}
 
-	const followersWithFollowingStatus = profile.followers.map(
+	const followingWithFollowingStatus: any = profile.following.map(
 		(follower: any) => {
 			const isFollowedByUser = !!follower.followers.find(
 				(id: string) => id.toString() === user.id.toString()
@@ -57,7 +56,7 @@ export async function getUserFollowers(profileId: string) {
 			};
 		}
 	);
-	const sortedFollowers = followersWithFollowingStatus.sort(
+	const sortedFollowing = followingWithFollowingStatus.sort(
 		(followerA: any, followerB: any) => {
 			if (followerA._id.toString() === user.id.toString()) {
 				return -1;
@@ -69,5 +68,5 @@ export async function getUserFollowers(profileId: string) {
 		}
 	);
 
-	return sortedFollowers;
+	return sortedFollowing;
 }

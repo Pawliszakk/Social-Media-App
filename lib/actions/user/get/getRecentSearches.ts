@@ -1,6 +1,7 @@
 'use server';
 
-import { getUserData } from '../utils/getUserData';
+import { getUserData } from "../../utils/getUserData";
+
 
 export async function getRecentSearches() {
 	const { session, user } = await getUserData('recentSearches');

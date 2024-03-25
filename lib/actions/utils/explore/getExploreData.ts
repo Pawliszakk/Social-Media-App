@@ -1,6 +1,6 @@
 'use server';
 
-import { getPosts } from '../../post/getPosts';
+import { getPosts } from '../../post/get/getPosts';
 import { getUserData } from '../getUserData';
 
 export async function getExploreData() {

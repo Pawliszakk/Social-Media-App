@@ -1,4 +1,4 @@
-import { getPostLikes } from '@/lib/actions/post/getPostLikes';
+import { getPostLikes } from '@/lib/actions/post/get/getPostLikes';
 
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);

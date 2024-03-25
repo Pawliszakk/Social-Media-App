@@ -1,5 +1,4 @@
-import { getSuggestedUsers } from '@/lib/actions/user/getSuggestedUsers';
-import classes from './page.module.scss';
+import { getSuggestedUsers } from '@/lib/actions/user/get/getSuggestedUsers';
 import SuggestedUser from '@/components/Home/SuggestedUser';
 
 const ExplorePeoplePage = async () => {

@@ -8,8 +8,8 @@ import {
 } from '@/lib/constants/followingStatus';
 import { getUserData } from '../getUserData';
 import { permanentRedirect } from 'next/navigation';
-import getLoggedUserProfile from '../../user/getLoggedUserProfile';
-import { getProfile } from '../../user/getProfile';
+import { getProfile } from '../../user/get/getProfile';
+import getLoggedUserProfile from '../../user/get/getLoggedUserProfile';
 
 export async function getProfileData(profileId: string) {
 	const { session, user } = await getUserData(

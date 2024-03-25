@@ -3,7 +3,7 @@ import ProfileImage from '../UI/User/ProfileImage';
 import classes from './AsideSuggestions.module.scss';
 import Footer from '../Footer/Footer';
 import SuggestedUser from './SuggestedUser';
-import { getSuggestedUsers } from '@/lib/actions/user/getSuggestedUsers';
+import { getSuggestedUsers } from '@/lib/actions/user/get/getSuggestedUsers';
 import Logout from './Logout';
 
 interface AsideSuggestionsuser {

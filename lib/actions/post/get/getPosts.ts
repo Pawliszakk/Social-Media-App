@@ -1,4 +1,5 @@
-import { Post } from '../Models/post';
+import { Post } from '../../Models/post';
+
 const Comment = require('@/lib/actions/Models/comment');
 const CommentReply = require('@/lib/actions/Models/commentReply');
 export async function getPosts(

@@ -5,8 +5,8 @@ import {
 	NOTFOLLOWING,
 	REQUESTED,
 } from '@/lib/constants/followingStatus';
-import { Post } from '../Models/post';
-import { getUserData } from '../utils/getUserData';
+import { getUserData } from '../../utils/getUserData';
+import { Post } from '../../Models/post';
 
 export async function getPostLikes(postId: string) {
 	const { session, user } = await getUserData(

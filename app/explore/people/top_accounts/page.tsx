@@ -1,4 +1,4 @@
-import { getTopUsers } from '@/lib/actions/user/getTopUsers';
+import { getTopUsers } from '@/lib/actions/user/get/getTopUsers';
 import SuggestedUser from '@/components/Home/SuggestedUser';
 
 const TopAccounts = async () => {

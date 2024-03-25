@@ -1,6 +1,6 @@
 'use server';
 
-import { Post } from '../Models/post';
+import { Post } from '../../Models/post';
 
 export async function getLikesSnippet(postId: string) {
 	let post;

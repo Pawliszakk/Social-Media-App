@@ -1,4 +1,4 @@
-import { User } from '../Models/user';
+import { User } from '../../Models/user';
 
 export async function getProfile(profileId: string) {
 	let user;

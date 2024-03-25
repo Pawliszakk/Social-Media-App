@@ -1,5 +1,5 @@
 import PostsVariant from '@/components/Home/PostsVariant';
-import { getPosts } from '@/lib/actions/post/getPosts';
+import { getPosts } from '@/lib/actions/post/get/getPosts';
 import { Suspense } from 'react';
 import { permanentRedirect } from 'next/navigation';
 import PostFallback from '@/components/Post/HomePost/PostFallback';

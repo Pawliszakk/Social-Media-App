@@ -1,8 +1,8 @@
 import { permanentRedirect } from 'next/navigation';
-import { Post } from '../Models/post';
+import { getUserData } from '../../utils/getUserData';
+import { Post } from '../../Models/post';
 import { getLikesSnippet } from './getLikesSnippet';
-import { getUserData } from '../utils/getUserData';
-const comment = require('../Models/comment');
+const comment = require('../../Models/comment');
 
 export async function getPostById(
 	postId: string,

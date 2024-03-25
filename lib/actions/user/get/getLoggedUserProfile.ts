@@ -1,6 +1,6 @@
-import { User } from '../Models/user';
+import { User } from '../../Models/user';
 
-const post = require('../Models/post');
+const post = require('../../Models/post');
 
 export const getLoggedUserProfile = async (userId: string) => {
 	let user;

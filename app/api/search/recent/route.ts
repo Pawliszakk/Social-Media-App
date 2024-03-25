@@ -1,4 +1,4 @@
-import { getRecentSearches } from '@/lib/actions/user/getRecentSearches';
+import { getRecentSearches } from '@/lib/actions/user/get/getRecentSearches';
 
 export async function GET(request: Request) {
 	const recentSearchedUsers = await getRecentSearches();

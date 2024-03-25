@@ -1,6 +1,7 @@
 'use server';
 
-import { User } from '../Models/user';
+import { User } from "../../Models/user";
+
 const Comment = require('@/lib/actions/Models/comment');
 const CommentReply = require('@/lib/actions/Models/commentReply');
 

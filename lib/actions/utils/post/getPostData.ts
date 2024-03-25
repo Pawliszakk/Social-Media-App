@@ -1,7 +1,7 @@
 'use server';
 
 import { permanentRedirect } from 'next/navigation';
-import { getPostById } from '../../post/getPostById';
+import { getPostById } from '../../post/get/getPostById';
 import { getUserData } from '../getUserData';
 
 export async function getPostData(postId: string) {

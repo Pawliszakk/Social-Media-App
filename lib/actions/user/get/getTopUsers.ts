@@ -1,7 +1,8 @@
 'use server';
 
-import { User } from '../Models/user';
-import { getUserData } from '../utils/getUserData';
+import { User } from "../../Models/user";
+import { getUserData } from "../../utils/getUserData";
+
 
 export async function getTopUsers() {
 	const { session, user } = await getUserData('following');

@@ -1,7 +1,7 @@
 'use server';
 
 import { checkIfUserIsAllowedToViewPosts } from '../../user/checkIfUserIsAllowedToViewPosts';
-import { getProfilePosts } from '../../user/getProfilePosts';
+import { getProfilePosts } from '../../user/get/getProfilePosts';
 import { getUserData } from '../getUserData';
 
 export async function getProfilePageData(profileId: string) {

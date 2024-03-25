@@ -1,4 +1,4 @@
-import { getLikesSnippet } from '@/lib/actions/post/getLikesSnippet';
+import { getLikesSnippet } from '@/lib/actions/post/get/getLikesSnippet';
 
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);

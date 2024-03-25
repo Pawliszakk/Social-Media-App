@@ -1,4 +1,4 @@
-import { getUserFollowers } from '@/lib/actions/user/getUserFollowers';
+import { getUserFollowers } from '@/lib/actions/user/get/getUserFollowers';
 
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
