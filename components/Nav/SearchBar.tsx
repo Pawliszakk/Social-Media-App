@@ -8,8 +8,9 @@ import SearchedUser from './SearchedUsers/SearchedUser';
 import SearchedUsersSkeleton from './SearchedUsers/SearchedUsersSkeleton';
 
 interface SearchBarProps {
-	onClose: () => void;
-	actionBarRef: RefObject<HTMLDivElement>;
+	onClose?: () => void;
+	actionBarRef?: RefObject<HTMLDivElement>;
+	page?: boolean;
 }
 
 const SearchBar: React.FC<SearchBarProps> = (props) => {
@@ -33,20 +34,23 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 
 	useEffect(() => {
 		const handleClickOutside = (e: MouseEvent) => {
-			if (
-				props.actionBarRef.current &&
-				e.target &&
-				!props.actionBarRef.current.contains(e.target as Node)
-			) {
-				const elementId = (e.target as HTMLElement).id;
-				console.log(elementId);
-				if (elementId.includes('user-')) {
-					return;
+			if (props.actionBarRef && props.onClose) {
+				if (
+					props.actionBarRef.current &&
+					e.target &&
+					!props.actionBarRef.current.contains(e.target as Node)
+				) {
+					const elementId = (e.target as HTMLElement).id;
+					if (elementId.includes('user-')) {
+						return;
+					}
+					props.onClose();
 				}
-				props.onClose();
 			}
 		};
-		document.addEventListener('click', handleClickOutside);
+		if (props.actionBarRef && props.onClose) {
+			document.addEventListener('click', handleClickOutside);
+		}
 
 		return () => {
 			document.removeEventListener('click', handleClickOutside);
@@ -72,10 +76,14 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 			animate={{ width: 350, opacity: 1 }}
 			transition={{ duration: 0.3 }}
 		>
-			<div className={classes.search}>
+			<div className={`${classes.search} ${props.page ? classes.page : null}`}>
 				<span>Search</span>
 
-				<div className={` ${classes.input} ${isFocus ? classes.focus : null}`}>
+				<div
+					className={` ${classes.input} ${isFocus ? classes.focus : null} ${
+						props.page ? classes.page : null
+					}`}
+				>
 					<form>
 						<input
 							type="text"
@@ -96,7 +104,9 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 					</form>
 				</div>
 			</div>
-			{isInputEmpty && <RecentSearches onClose={props.onClose} />}
+			{isInputEmpty && (
+				<RecentSearches page={props.page} onClose={props.onClose} />
+			)}
 
 			{!isInputEmpty && <span className={classes.heading}>Searched Users</span>}
 			{!isLoading && !isInputEmpty && (
@@ -104,6 +114,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 					{fetchedUsers.length >= 1 &&
 						fetchedUsers?.map((user: any) => (
 							<SearchedUser
+								page={props.page}
 								closeSearchBar={props.onClose}
 								key={user.id}
 								user={user}
@@ -113,7 +124,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 				</div>
 			)}
 			{isLoading && !isInputEmpty && (
-				<div className={classes.users}>
+				<div className={`${classes.users} ${props.page ? classes.page : null}`}>
 					<SearchedUsersSkeleton />
 				</div>
 			)}

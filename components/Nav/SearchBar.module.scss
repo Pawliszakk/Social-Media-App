@@ -1,5 +1,4 @@
 .box {
-	display: none;
 	@media (min-width: 768px) {
 		display: block;
 		position: absolute;
@@ -67,6 +66,7 @@
 				}
 			}
 		}
+
 		.heading {
 			margin: 2rem;
 			display: block !important;

@@ -6,7 +6,8 @@ import { clearRecentSearches } from '@/lib/actions/user/clearRecentSearches';
 import ClearRecentModal from './ClearRecentModal';
 
 interface RecentSearchesProps {
-	onClose: () => void;
+	onClose?: () => void;
+	page?: boolean;
 }
 
 const RecentSearches: React.FC<RecentSearchesProps> = (props) => {
@@ -46,7 +47,7 @@ const RecentSearches: React.FC<RecentSearchesProps> = (props) => {
 
 	return (
 		<>
-			<div className={classes.header}>
+			<div className={`${classes.header} ${props.page ? classes.page : null}`}>
 				<span className={classes.heading}>Recent</span>
 
 				<button
@@ -59,7 +60,7 @@ const RecentSearches: React.FC<RecentSearchesProps> = (props) => {
 				</button>
 			</div>
 
-			<div className={classes.box}>
+			<div className={`${classes.box} ${props.page ? classes.page : null}`}>
 				{recentSearches.length === 0 && !isLoading && (
 					<p>No recent searches.</p>
 				)}
@@ -67,6 +68,7 @@ const RecentSearches: React.FC<RecentSearchesProps> = (props) => {
 				{recentSearches.length > 0 &&
 					recentSearches.map((user: any) => (
 						<RecentSearch
+							page={props.page}
 							onClose={props.onClose}
 							key={user.id}
 							onDeleteUser={deleteUserFromSearches}

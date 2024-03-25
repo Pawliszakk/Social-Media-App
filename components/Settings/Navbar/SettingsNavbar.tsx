@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import classes from './SettingsNavbar.module.scss';
 import { FaUserEdit } from 'react-icons/fa';
 import { IoLockClosedOutline } from 'react-icons/io5';

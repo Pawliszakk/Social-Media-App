@@ -4,7 +4,8 @@ import ProfileImage from '@/components/UI/User/ProfileImage';
 import { addSearchedUserToRecent } from '@/lib/actions/user/addSearchedUserToRecent';
 
 interface SearchedUserProps {
-	closeSearchBar: () => void;
+	closeSearchBar?: () => void;
+	page?: boolean;
 	user: {
 		id: string;
 		name: string;
@@ -16,9 +17,12 @@ interface SearchedUserProps {
 const SearchedUser: React.FC<SearchedUserProps> = ({
 	user,
 	closeSearchBar,
+	page,
 }) => {
 	const addUserToRecentHandler = () => {
-		closeSearchBar();
+		if (closeSearchBar) {
+			closeSearchBar();
+		}
 		addSearchedUserToRecent(user.id);
 	};
 
@@ -26,7 +30,7 @@ const SearchedUser: React.FC<SearchedUserProps> = ({
 		<Link
 			onClick={addUserToRecentHandler}
 			href={`/profile/${user.id}`}
-			className={classes.user}
+			className={`${classes.user} ${page ? classes.page : null}`}
 		>
 			<ProfileImage
 				name={user.name}

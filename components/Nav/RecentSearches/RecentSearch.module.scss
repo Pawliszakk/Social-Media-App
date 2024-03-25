@@ -5,6 +5,9 @@
 	align-items: center;
 	justify-content: space-between;
 	text-decoration: none;
+	&.page {
+		border-radius: var(--radius-medium);
+	}
 	&:hover {
 		background-color: var(--option-hover);
 	}
@@ -26,6 +29,7 @@
 		border: none;
 		font-size: 2.8rem;
 		opacity: 0.6;
-		cursor: pointer;color: var(--text-normal);
+		cursor: pointer;
+		color: var(--text-normal);
 	}
 }

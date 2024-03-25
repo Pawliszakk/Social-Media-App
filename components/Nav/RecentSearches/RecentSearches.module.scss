@@ -1,5 +1,10 @@
 .box {
 	color: var(--text-normal);
+	&.page {
+		width: 80%;
+		margin: 3rem;
+		padding: 1rem;
+	}
 	p {
 		margin-top: 4rem;
 		font-size: 1.8rem;
@@ -11,6 +16,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	&.page {
+		justify-content: space-around;
+		width: 100%;
+	}
 	.heading {
 		margin: 2rem;
 		display: block !important;

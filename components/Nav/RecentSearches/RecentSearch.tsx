@@ -12,20 +12,22 @@ interface RecentSearchProps {
 		imageType: string;
 	};
 	onDeleteUser: (userId: string) => void;
-	onClose: () => void;
+	onClose?: () => void;
+	page?: boolean;
 }
 
 const RecentSearch: React.FC<RecentSearchProps> = ({
 	user,
 	onDeleteUser,
 	onClose,
+	page,
 }) => {
 	const handleRemoveUser = () => {
 		onDeleteUser(user.id);
 		removeSearchedUserFromRecent(user.id);
 	};
 	return (
-		<div className={classes.user}>
+		<div className={`${classes.user} ${page ? classes.page : null}`}>
 			<Link href={`/profile/${user.id}`} onClick={onClose}>
 				<ProfileImage
 					profileId={user.id}

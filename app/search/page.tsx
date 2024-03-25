@@ -1,7 +1,8 @@
-import classes from './page.module.scss';
+'use client';
+import SearchBar from '@/components/Nav/SearchBar';
 
 const SearchPage = () => {
-	return <div className={classes.box}>Search</div>;
+	return <SearchBar page />;
 };
 
 export default SearchPage;
