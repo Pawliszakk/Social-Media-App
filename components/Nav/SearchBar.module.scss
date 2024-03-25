@@ -1,4 +1,67 @@
 .box {
+	margin: 0 auto;
+	.heading {
+		margin: 2rem;
+		display: block !important;
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+	.search {
+		padding: 3em 2em;
+		border-bottom: var(--border-light);
+		span {
+			display: block !important;
+			font-size: 2.4rem;
+			font-weight: bold;
+		}
+		.input {
+			margin-top: 2.5rem;
+			position: relative;
+			input {
+				width: 280px;
+				border-radius: var(--radius-medium);
+				background-color: var(--option-hover);
+				padding: 1em;
+				padding-left: 2.4em;
+				border: none;
+				outline: none;
+				color: var(--text-normal);
+			}
+			button {
+				position: absolute;
+				background-color: transparent;
+				border: none;
+				opacity: 0;
+				right: 12px;
+				top: 50%;
+				transform: translateY(-50%);
+				font-size: 2rem;
+				cursor: pointer;
+				svg {
+					color: var(--text-normal);
+				}
+			}
+			.icon {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				left: 10px;
+				font-size: 1.6rem;
+				opacity: 0.6;
+			}
+			&.focus {
+				button {
+					opacity: 0.4;
+				}
+				input {
+					padding: 1em;
+				}
+				.icon {
+					display: none;
+				}
+			}
+		}
+	}
 	@media (min-width: 768px) {
 		display: block;
 		position: absolute;
@@ -11,62 +74,12 @@
 		border-right: var(--border-light);
 		z-index: 10;
 		.search {
-			padding: 3em 2em;
-			border-bottom: var(--border-light);
-			span {
-				display: block !important;
-				font-size: 2.4rem;
-				font-weight: bold;
-			}
 			.input {
-				margin-top: 2.5rem;
-				position: relative;
 				input {
 					width: 100%;
-					border-radius: var(--radius-medium);
-					background-color: var(--option-hover);
-					padding: 1em;
-					padding-left: 2.4em;
-					border: none;
-					outline: none;
-					color: var(--text-normal);
-				}
-				button {
-					position: absolute;
-					background-color: transparent;
-					border: none;
-					opacity: 0;
-					right: 12px;
-					top: 50%;
-					transform: translateY(-50%);
-					font-size: 2rem;
-					cursor: pointer;
-					svg {
-						color: var(--text-normal);
-					}
-				}
-				.icon {
-					position: absolute;
-					top: 50%;
-					transform: translateY(-50%);
-					left: 10px;
-					font-size: 1.6rem;
-					opacity: 0.6;
-				}
-				&.focus {
-					button {
-						opacity: 0.4;
-					}
-					input {
-						padding: 1em;
-					}
-					.icon {
-						display: none;
-					}
 				}
 			}
 		}
-
 		.heading {
 			margin: 2rem;
 			display: block !important;

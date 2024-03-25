@@ -46,11 +46,11 @@ const ActionBarOption: React.FC<ActionBarOptionProps> = (props) => {
 
 	useEffect(() => {
 		window.addEventListener('resize', handleResize);
+		handleResize();
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
-
 	const avatarToShow: string = !isAvatarChanged
 		? `https://next-14-aws-oskar-bucket.s3.eu-central-1.amazonaws.com/${image}`
 		: image!;
