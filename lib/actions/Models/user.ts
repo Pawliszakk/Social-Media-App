@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
 	email: { type: String, required: true },
 	name: { type: String, required: true },
 	bio: { type: String, required: false, default: '' },
-	image: { type: String, required: false, default: '/assets/defaultUser.jpg' },
+	image: { type: String, required: false, default: '/assets/defaultUser.JPG' },
 	imageType: { type: String, required: true, default: 'provider' },
 	sex: { type: String, required: true, default: 'other' },
 	website: { type: String, required: false, default: '' },
