@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 interface StoryIconProps {
 	user: {
+		id: string;
 		image: string;
 		imageType: string;
 		name: string;
@@ -14,7 +15,7 @@ interface StoryIconProps {
 const StoryIcon: React.FC<StoryIconProps> = ({ user, watched }) => {
 	return (
 		<Link
-			href="/stories/add"
+			href={`/stories/${user.id}`}
 			className={`${classes.icon} ${watched ? classes.watched : null}`}
 		>
 			<Image

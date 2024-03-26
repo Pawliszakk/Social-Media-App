@@ -3,6 +3,7 @@ import classes from './Stories.module.scss';
 import StoryIcon from './StoryIcon';
 interface StoriesProps {
 	user: {
+		id: string;
 		image: string;
 		imageType: string;
 		name: string;
