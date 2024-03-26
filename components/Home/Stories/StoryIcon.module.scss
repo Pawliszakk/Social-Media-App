@@ -1,0 +1,37 @@
+.icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	padding: 2px;
+	background: linear-gradient(
+		to right,
+		#405de6,
+		#5851db,
+		#833ab4,
+		#c13584,
+		#e1306c,
+		#fd1d1d,
+		#f56040,
+		#f77737,
+		#fcaf45,
+		#ffdc80,
+		#a0e515,
+		#05c073,
+		#5f27cd,
+		#341f97,
+		#0b0362
+	);
+	&.watched {
+		background: rgb(228, 224, 224);
+		img {
+			border: 2px solid var(--primary-background);
+		}
+	}
+	img {
+		border-radius: var(--radius-circle);
+		border: 2px solid var(--primary-background);
+	}
+}

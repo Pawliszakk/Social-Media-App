@@ -1,5 +1,6 @@
 import Author from './Author';
 import classes from './Stories.module.scss';
+import StoryIcon from './StoryIcon';
 interface StoriesProps {
 	user: {
 		image: string;
@@ -12,16 +13,16 @@ const Stories: React.FC<StoriesProps> = ({ user }) => {
 	return (
 		<div className={classes.box}>
 			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
-			<Author user={user} />
+			<StoryIcon watched={false} user={user} />
+			<StoryIcon watched={false} user={user} />
+			<StoryIcon watched={false} user={user} />
+			<StoryIcon watched={false} user={user} />
+			<StoryIcon watched={false} user={user} />
+			<StoryIcon watched={false} user={user} />
+			<StoryIcon watched={false} user={user} />
+			<StoryIcon watched user={user} />
+			<StoryIcon watched user={user} />
+			<StoryIcon watched user={user} />
 		</div>
 	);
 };
