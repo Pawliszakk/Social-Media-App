@@ -1,0 +1,20 @@
+.author {
+	position: relative;
+	img {
+		border-radius: var(--radius-circle);
+	}
+	.plus {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		width: 20px;
+		height: 20px;
+		display: flex;
+		border: 2px solid var(--primary-background);
+		justify-content: center;
+		align-items: center;
+		background-color: var(--primary-button);
+		border-radius: var(--radius-circle);
+		color: #fff;
+	}
+}

@@ -1,0 +1,9 @@
+.box {
+	display: flex;
+	align-items: center;
+	margin: 2rem auto;
+	padding: 0 1em;
+	gap: 2em;
+	overflow-x: scroll;
+	max-width: 600px;
+}

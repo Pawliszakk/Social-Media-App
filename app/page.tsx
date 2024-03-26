@@ -13,6 +13,7 @@ import { getUserData } from '@/lib/actions/utils/getUserData';
 import AsideSuggestions from '@/components/Home/AsideSuggestions';
 import PostAddComment from '@/components/Post/PostPage/Comments/PostAddComment';
 import CommentsLink from '@/components/Post/HomePost/CommentsLink';
+import Stories from '@/components/Home/Stories/Stories';
 
 export default async function Home() {
 	const { session, user } = await getUserData(
@@ -29,7 +30,7 @@ export default async function Home() {
 		<div className={classes.box}>
 			<div className={classes.posts}>
 				<PostsVariant />
-
+				<Stories user={user} />
 				<Suspense fallback={<PostFallback />}>
 					{arePostsEmpty ? (
 						<NoPostsFallback />

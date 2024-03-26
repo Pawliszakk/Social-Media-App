@@ -61,10 +61,13 @@ const RecentSearches: React.FC<RecentSearchesProps> = (props) => {
 			</div>
 
 			<div className={`${classes.box} ${props.page ? classes.page : null}`}>
+				
 				{recentSearches.length === 0 && !isLoading && (
 					<p>No recent searches.</p>
 				)}
+
 				{recentSearches.length === 0 && isLoading && <SearchedUsersSkeleton />}
+
 				{recentSearches.length > 0 &&
 					recentSearches.map((user: any) => (
 						<RecentSearch
