@@ -16,12 +16,6 @@ const Stories: React.FC<StoriesProps> = ({ user }) => {
 			<Author user={user} />
 			<StoryIcon watched={false} user={user} />
 			<StoryIcon watched={false} user={user} />
-			<StoryIcon watched={false} user={user} />
-			<StoryIcon watched={false} user={user} />
-			<StoryIcon watched={false} user={user} />
-			<StoryIcon watched={false} user={user} />
-			<StoryIcon watched={false} user={user} />
-			<StoryIcon watched user={user} />
 			<StoryIcon watched user={user} />
 			<StoryIcon watched user={user} />
 		</div>
