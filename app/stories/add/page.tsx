@@ -1,5 +1,5 @@
 const AddStoryPage = () => {
-	return <div>Add Sto</div>;
+	return <div>Add Story</div>;
 };
 
 export default AddStoryPage;
