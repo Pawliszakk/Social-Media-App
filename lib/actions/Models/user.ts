@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
 	password: { type: String, required: false },
 	showInSuggestions: { type: Boolean, required: false, default: true },
 	posts: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Post' }],
+	stories: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Story' }],
 	likedPosts: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Post' }],
 	likedComments: [
 		{ type: mongoose.Types.ObjectId, required: true, ref: 'Comment' },
