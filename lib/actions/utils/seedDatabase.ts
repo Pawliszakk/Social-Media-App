@@ -7,6 +7,7 @@ import { Post } from '../Models/post';
 import { User } from '../Models/user';
 import { createUserByCredentials } from '../login/createUserByCredentials';
 import { CommentReply } from '../Models/commentReply';
+import { Story } from '../Models/story';
 
 export default async function seedDatabase() {
 	try {
@@ -15,6 +16,7 @@ export default async function seedDatabase() {
 		await followRequest.deleteMany({});
 		await Post.deleteMany({});
 		await User.deleteMany({});
+		await Story.deleteMany({});
 
 		await createUserByCredentials('test1', 'test1@example.com', 'Mocnehaslo1!');
 		await createUserByCredentials('test2', 'test2@example.com', 'Mocnehaslo1!');
