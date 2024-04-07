@@ -15,8 +15,7 @@ interface StoriesProps {
 
 const Stories: React.FC<StoriesProps> = async ({ user }) => {
 	const stories = await getStories();
-	// const userStories = await getUserStories();a
-	console.log(stories);
+	// const userStories = await getUserStories();
 	return (
 		<div className={classes.box}>
 			<Author user={user} />

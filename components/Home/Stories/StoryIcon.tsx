@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import classes from './StoryIcon.module.scss';
 import Link from 'next/link';
-
 interface StoryIconProps {
 	user: {
 		_id: string;
@@ -13,11 +12,9 @@ interface StoryIconProps {
 }
 
 const StoryIcon: React.FC<StoryIconProps> = ({ user, watched }) => {
-	console.log(user);
 	return (
 		<Link
-			// href={`/stories/${user._id}`}
-			href="/"
+			href={`/stories/${user._id}`}
 			className={`${classes.icon} ${watched ? classes.watched : null}`}
 		>
 			<Image
