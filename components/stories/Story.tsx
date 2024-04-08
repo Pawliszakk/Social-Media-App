@@ -6,6 +6,7 @@ import ProfileImage from '../UI/User/ProfileImage';
 import Link from 'next/link';
 import { FaHeart } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
+import { transformPostDate } from '@/lib/helpers/transformPostDate';
 interface StoryProps {
 	story: {
 		id: string;
@@ -28,18 +29,30 @@ interface StoryProps {
 const Story: React.FC<StoryProps> = ({ story }) => {
 	const [isUserLikingStory, setIsUserLikingStory] = useState(false);
 
+	const likeHandler = () => {
+		if (isUserLikingStory) {
+			setIsUserLikingStory(false);
+		} else {
+			setIsUserLikingStory(true);
+		}
+	};
+
 	const { author } = story;
 
+	const transformedDate = transformPostDate(+story.date);
 	return (
 		<div className={classes.story}>
 			<div className={classes.actions}>
 				<div className={classes.author}>
-					<ProfileImage
-						image={author.image}
-						imageType={author.imageType}
-						name={author.name}
-					/>
+					<Link href={`/profile/${author.id}`}>
+						<ProfileImage
+							image={author.image}
+							imageType={author.imageType}
+							name={author.name}
+						/>
+					</Link>
 					<Link href={`/profile/${author.id}`}>{author.name}</Link>
+					<span>{transformedDate}</span>
 				</div>
 			</div>
 			<Image
@@ -49,10 +62,19 @@ const Story: React.FC<StoryProps> = ({ story }) => {
 				height={500}
 			/>
 			<div className={classes.bottom}>
-				<div className={classes.like}>
-					<FaRegHeart />
+				<div className={classes.input}>
+					<input type="text" placeholder={`Reply to ${author.name}...`} />
+				</div>
+				<div
+					className={`${classes.like} ${
+						isUserLikingStory ? classes.liked : null
+					}`}
+					onClick={likeHandler}
+				>
+					{isUserLikingStory ? <FaHeart /> : <FaRegHeart />}
 				</div>
 			</div>
+			<div className={classes.shadow}></div>
 		</div>
 	);
 };
