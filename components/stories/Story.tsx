@@ -25,7 +25,6 @@ interface StoryProps {
 //Zatrzymanie story
 //Czas po którym story się zmienia, kończy
 //Jak kończy to redirect na homepage
-//
 const Story: React.FC<StoryProps> = ({ story }) => {
 	const [isUserLikingStory, setIsUserLikingStory] = useState(false);
 
