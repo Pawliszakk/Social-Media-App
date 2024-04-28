@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import classes from './Story.module.scss';
 import Image from 'next/image';
@@ -25,6 +26,7 @@ interface StoryProps {
 //Zatrzymanie story
 //Czas po którym story się zmienia, kończy
 //Jak kończy to redirect na homepage
+
 const Story: React.FC<StoryProps> = ({ story }) => {
 	const [isUserLikingStory, setIsUserLikingStory] = useState(false);
 
