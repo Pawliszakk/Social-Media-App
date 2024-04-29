@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { FaHeart } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
 import { transformPostDate } from '@/lib/helpers/transformPostDate';
+
 interface StoryProps {
 	story: {
 		id: string;
