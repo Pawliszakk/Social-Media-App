@@ -24,6 +24,7 @@ interface StoryProps {
 }
 
 
+
 //Info czy user likuje już to stories
 //Na górze w nadrzędnym komponencie pasek które to jest story
 //Zatrzymanie story
