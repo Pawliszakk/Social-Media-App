@@ -29,6 +29,7 @@ interface StoryProps {
 
 
 
+
 //Na górze w nadrzędnym komponencie pasek które to jest story
 //Zatrzymanie story
 //Czas po którym story się zmienia, kończy
